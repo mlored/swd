@@ -1,0 +1,14 @@
+package com.sd.isp.dao.base;
+
+import java.util.List;
+
+import com.sd.isp.domain.base.BaseDomain;
+
+public interface IBaseDao<DOMAIN extends BaseDomain> {
+
+	public DOMAIN save(DOMAIN domain);
+
+	public DOMAIN getById(Integer domainId);
+
+	public List<DOMAIN> findAll();
+}
