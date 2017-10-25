@@ -1,2 +1,5 @@
 /target/
 /target-eclipse/
+/.slcache/
+/.idea/
+*.iml
