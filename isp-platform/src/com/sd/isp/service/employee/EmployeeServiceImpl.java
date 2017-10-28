@@ -46,7 +46,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		}
 
 		final EmployeeResult employeesResult = new EmployeeResult();
-		employeesResult.setClients(employees);
+		employeesResult.setEmployees(employees);
 		return employeesResult;
 	}
 

@@ -1,4 +1,4 @@
-package com.sd.isp.dto.employee;
+package com.sd.isp.dto.supplier;
 
 import java.util.List;
 
@@ -7,17 +7,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseResult;
 
-@XmlRootElement(name = "employeeResult")
-public class EmployeeResult extends BaseResult<EmployeeDTO> {
+@XmlRootElement(name = "supplierResult")
+public class SupplierResult extends BaseResult<SupplierDTO> {
 
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<EmployeeDTO> getClients() {
+	public List<SupplierDTO> getClients() {
 		return getList();
 	}
 
-	public void setEmployees(List<EmployeeDTO> dtos) {
+	public void setSuppliers(List<SupplierDTO> dtos) {
 		super.setList(dtos);
 	}
 }
