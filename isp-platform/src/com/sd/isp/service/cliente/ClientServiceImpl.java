@@ -54,10 +54,12 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	protected ClientDTO convertDomainToDto(ClientDomain domain) {
 		final ClientDTO client = new ClientDTO();
 		client.setId(domain.getId());
-		client.setFirstName(domain.getFirstName());
-		client.setLastName(domain.getLastName());
-		client.setDocument(domain.getDocument());
-		client.setCityId(domain.getCityId());
+		client.setName(domain.getName());
+		client.setSurName(domain.getSurName());
+		client.setRUC(domain.getRUC());
+		client.setCellphone(domain.getCellphone());
+		client.setAddress(domain.getAddress());
+		client.setType(domain.getType());
 		return client;
 	}
 
@@ -65,10 +67,12 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	protected ClientDomain convertDtoToDomain(ClientDTO dto) {
 		final ClientDomain client = new ClientDomain();
 		client.setId(dto.getId());
-		client.setFirstName(dto.getFirstName());
-		client.setLastName(dto.getLastName());
-		client.setDocument(dto.getDocument());
-		client.setCityId(dto.getCityId());
+		client.setName(dto.getName());
+		client.setSurName(dto.getSurName());
+		client.setRUC(dto.getRUC());
+		client.setCellphone(dto.getCellphone());
+		client.setAddress(dto.getAddress());
+		client.setType(dto.getType());
 		return client;
 	}
 

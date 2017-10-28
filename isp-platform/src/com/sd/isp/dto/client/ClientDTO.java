@@ -9,45 +9,65 @@ import com.sd.isp.dto.base.BaseDTO;
 public class ClientDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
-	private String _firstName;
-	private String _lastName;
-	private String _document;
-	private Integer _cityId;
+	private String _name;
+	private String _surName;
+	private String _RUC;
+	private Integer _cellphone;
+	private String _address;
+	private String _type;
 
 	@XmlElement
-	public String getFirstName() {
-		return _firstName;
+	public String getName() {
+		return _name;
 	}
 
-	public void setFirstName(String firstName) {
-		_firstName = firstName;
-	}
-
-	@XmlElement
-	public String getLastName() {
-		return _lastName;
-	}
-
-	public void setLastName(String lastName) {
-		_lastName = lastName;
+	public void setName(String Name) {
+		_name = Name;
 	}
 
 	@XmlElement
-	public String getDocument() {
-		return _document;
+	public String getSurName() {
+		return _surName;
 	}
 
-	public void setDocument(String document) {
-		_document = document;
+	public void setSurName(String surName) {
+		_surName = surName;
 	}
 
 	@XmlElement
-	public Integer getCityId() {
-		return _cityId;
+	public String getRUC() {
+		return _RUC;
 	}
 
-	public void setCityId(Integer cityId) {
-		_cityId = cityId;
+	public void setRUC(String RUC) {
+		_RUC = RUC;
+	}
+
+	@XmlElement
+	public Integer getCellphone() {
+		return _cellphone;
+	}
+
+	public void setCellphone(Integer cellphone) {
+		_cellphone = cellphone;
+	}
+	
+	@XmlElement
+	public String getAddress() {
+		return _address;
+	}
+
+	public void setAddress(String address) {
+		_address = address;
+	}
+	
+	@XmlElement
+	public String getType() {
+		return _type;
+	}
+
+	public void setType(String type) {
+		_type = type;
 	}
 
 }

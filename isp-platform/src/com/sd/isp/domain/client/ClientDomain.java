@@ -18,17 +18,23 @@ public class ClientDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
 
-	@Column(name = "firstName")
-	private String firstName;
+	@Column(name = "name")
+	private String name;
 
-	@Column(name = "lastName")
-	private String lastName;
+	@Column(name = "surName")
+	private String surName;
 
-	@Column(name = "document", unique = true)
-	private String document;
+	@Column(name = "RUC", unique = true)
+	private String RUC;
 
-	@Column(name = "cityId")
-	private Integer _cityId;
+	@Column(name = "cellphone")
+	private Integer cellphone;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "type")
+	private String type;
 
 	public Integer getId() {
 		return id;
@@ -38,35 +44,52 @@ public class ClientDomain extends BaseDomain {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String Name) {
+		this.name = Name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getSurName() {
+		return surName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setSurName(String surName) {
+		this.surName = surName;
 	}
 
-	public String getDocument() {
-		return document;
+	public String getRUC() {
+		return RUC;
 	}
 
-	public void setDocument(String document) {
-		this.document = document;
+	public void setRUC(String ruc) {
+		this.RUC = ruc;
 	}
 
-	public Integer getCityId() {
-		return _cityId;
+	public Integer getCellphone() {
+		return cellphone;
 	}
 
-	public void setCityId(Integer cityId) {
-		_cityId = cityId;
+	public void setCellphone(Integer cellphone) {
+		this.cellphone = cellphone;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }
+
