@@ -1,4 +1,4 @@
-package com.sd.isp.dto.employee;
+package com.sd.isp.dto.invoice;
 
 import java.util.List;
 
@@ -7,17 +7,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseResult;
 
-@XmlRootElement(name = "employeeResult")
-public class EmployeeResult extends BaseResult<EmployeeDTO> {
+@XmlRootElement(name = "invoiceResult")
+public class InvoiceResult extends BaseResult<InvoiceDTO> {
 
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<EmployeeDTO> getEmployees() {
+	public List<InvoiceDTO> getClients() {
 		return getList();
 	}
 
-	public void setEmployees(List<EmployeeDTO> dtos) {
+	public void setInvoices(List<InvoiceDTO> dtos) {
 		super.setList(dtos);
 	}
 }

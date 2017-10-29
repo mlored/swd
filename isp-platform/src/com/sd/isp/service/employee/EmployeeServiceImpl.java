@@ -31,9 +31,9 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	@Override
 	@Transactional
 	public EmployeeDTO getById(Integer id) {
-		final EmployeeDomain clientDomain = employeeDao.getById(id);
-		final EmployeeDTO clientDTO = convertDomainToDto(clientDomain);
-		return clientDTO;
+		final EmployeeDomain employeeDomain = employeeDao.getById(id);
+		final EmployeeDTO employeeDTO = convertDomainToDto(employeeDomain);
+		return employeeDTO;
 	}
 
 	@Override
