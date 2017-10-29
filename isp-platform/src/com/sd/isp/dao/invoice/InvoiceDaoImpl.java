@@ -33,5 +33,17 @@ public class InvoiceDaoImpl extends BaseDaoImpl<InvoiceDomain> implements IInvoi
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(InvoiceDomain.class);
 		return criteria.list();
 	}
+	
+	@Override
+	public InvoiceDomain updateById(Integer domainId, InvoiceDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InvoiceDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

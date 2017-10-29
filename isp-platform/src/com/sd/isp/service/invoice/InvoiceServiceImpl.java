@@ -49,6 +49,18 @@ public class InvoiceServiceImpl extends BaseServiceImpl<InvoiceDTO, InvoiceDomai
 		invoicesResult.setInvoices(invoices);
 		return invoicesResult;
 	}
+	
+	@Override
+	public InvoiceDTO updateById(Integer id, InvoiceDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InvoiceDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected InvoiceDTO convertDomainToDto(InvoiceDomain domain) {

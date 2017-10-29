@@ -34,4 +34,16 @@ public class InvoiceDetailsDaoImpl extends BaseDaoImpl<InvoiceDetailsDomain> imp
 		return criteria.list();
 	}
 
+	@Override
+	public InvoiceDetailsDomain updateById(Integer domainId, InvoiceDetailsDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InvoiceDetailsDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
