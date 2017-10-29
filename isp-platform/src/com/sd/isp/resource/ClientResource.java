@@ -1,13 +1,16 @@
 package com.sd.isp.resource;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
@@ -36,5 +39,18 @@ public class ClientResource {
 	@POST
 	public ClientDTO save(ClientDTO client) {
 		return clientService.save(client);
+	}
+	
+	@PUT
+	@Path("/{id}")
+    public ClientDTO updateById(@PathParam("id") Integer clientId, @RequestBody ClientDTO client) {
+        return clientService.updateById(clientId, client);
+    }
+	
+	@DELETE
+	@Path("/{id}")
+	@Produces("application/json")
+	public ClientDTO delete(@PathParam("id") Integer clientId) {
+		return clientService.delete(clientId);
 	}
 }
