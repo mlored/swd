@@ -31,7 +31,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CarDomain> findAll() {
-		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(CityDomain.class);
+		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(CarDomain.class);
 		return criteria.list();
 	}
 

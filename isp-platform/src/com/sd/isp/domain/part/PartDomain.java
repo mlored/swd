@@ -21,13 +21,13 @@ public class PartDomain extends BaseDomain {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable = true)
 	private String description;
 
 	@Column(name = "price")
 	private Integer price;
 
-	@Column(name = "quantity")
+	@Column(name = "quantity", nullable = true)
 	private Integer quantity;
 
 	public Integer getId() {
