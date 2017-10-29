@@ -43,7 +43,7 @@ public class CarResource {
 	@PUT
 	@Path("/{id}")
     public CarDTO updateById(@PathParam("id") Integer carId, @RequestBody CarDTO car) {
-        return null; //carService.update(carId, car);
+        return carService.updateById(carId, car);
     }
 	
 	@DELETE

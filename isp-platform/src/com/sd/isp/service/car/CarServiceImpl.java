@@ -51,8 +51,14 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	@Override
 	@Transactional
 	public CarDTO updateById(Integer id, CarDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final CarDomain newDomain = convertDtoToDomain(dto);
+		final CarDomain domain = carDao.getById(id);
+		domain.setMark(newDomain.getMark());
+		domain.setModel(newDomain.getModel());
+		domain.setColor(newDomain.getColor());
+		domain.setNumber(newDomain.getNumber());
+		final CarDomain carDomain = carDao.save(domain);
+		return convertDomainToDto(carDomain);
 	}
 
 	@Override
