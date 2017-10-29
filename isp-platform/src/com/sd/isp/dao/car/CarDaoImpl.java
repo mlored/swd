@@ -43,8 +43,9 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 
 	@Override
 	public CarDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		CarDomain domain = (CarDomain) sessionFactory.getCurrentSession().get(CarDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

@@ -49,12 +49,14 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	}
 	
 	@Override
+	@Transactional
 	public CarDTO updateById(Integer id, CarDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional
 	public CarDTO delete(Integer id) {
 		final CarDomain domain = carDao.delete(id);
 		return convertDomainToDto(domain);
