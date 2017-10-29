@@ -39,17 +39,17 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	@Override
 	@Transactional
 	public PartResult getAll() {
-		final List<PartDTO> clients = new ArrayList<>();
+		final List<PartDTO> parts = new ArrayList<>();
 		for (PartDomain domain : partDao.findAll()) {
-			final PartDTO client = convertDomainToDto(domain);
-			clients.add(client);
+			final PartDTO part = convertDomainToDto(domain);
+			parts.add(part);
 		}
 
-		final PartResult clientResult = new PartResult();
-		clientResult.setParts(clients);
-		return clientResult;
+		final PartResult partResult = new PartResult();
+		partResult.setParts(parts);
+		return partResult;
 	}
-
+	
 	@Override
 	protected PartDTO convertDomainToDto(PartDomain domain) {
 		final PartDTO part = new PartDTO();
