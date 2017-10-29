@@ -35,4 +35,16 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 		return criteria.list();
 	}
 
+	@Override
+	public CarDomain updateById(Integer domainId, CarDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CarDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

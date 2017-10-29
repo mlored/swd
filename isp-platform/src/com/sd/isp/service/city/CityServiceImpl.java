@@ -47,6 +47,18 @@ public class CityServiceImpl extends BaseServiceImpl<CityDTO, CityDomain, CityDa
 		cityResult.setCities(cities);
 		return cityResult;
 	}
+	
+	@Override
+	public CityDTO updateById(Integer id, CityDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CityDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected CityDTO convertDomainToDto(CityDomain domain) {

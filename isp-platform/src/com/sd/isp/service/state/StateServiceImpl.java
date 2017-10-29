@@ -64,4 +64,16 @@ public class StateServiceImpl extends BaseServiceImpl<StateDTO, StateDomain, Sta
 		return domain;
 	}
 
+	@Override
+	public StateDTO updateById(Integer id, StateDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StateDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

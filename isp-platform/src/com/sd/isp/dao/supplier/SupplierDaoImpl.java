@@ -34,4 +34,16 @@ public class SupplierDaoImpl extends BaseDaoImpl<SupplierDomain> implements ISup
 		return criteria.list();
 	}
 
+	@Override
+	public SupplierDomain updateById(Integer domainId, SupplierDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SupplierDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

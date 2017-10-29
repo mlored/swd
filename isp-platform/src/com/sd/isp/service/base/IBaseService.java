@@ -11,5 +11,9 @@ public interface IBaseService<DTO extends BaseDTO, DOMAIN extends BaseDomain, DA
 	public DTO getById(Integer id);
 
 	public R getAll();
+	
+	public DTO updateById(Integer id, DTO dto);
+
+	public DTO delete(Integer id);
 
 }

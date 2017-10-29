@@ -49,6 +49,18 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 		serviceResult.setService(services);
 		return serviceResult;
 	}
+	
+	@Override
+	public ServiceDTO updateById(Integer id, ServiceDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ServiceDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected ServiceDTO convertDomainToDto(ServiceDomain domain) {

@@ -39,5 +39,17 @@ public class PersonDaoImpl extends BaseDaoImpl<PersonDomain> implements IPersonD
 		return criteria.list();
 	}
 
+	@Override
+	public PersonDomain updateById(Integer domainId, PersonDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PersonDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 

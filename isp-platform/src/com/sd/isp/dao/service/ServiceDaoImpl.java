@@ -39,5 +39,17 @@ public class ServiceDaoImpl extends BaseDaoImpl<ServiceDomain> implements IServi
 		return criteria.list();
 	}
 
+	@Override
+	public ServiceDomain updateById(Integer domainId, ServiceDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ServiceDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 

@@ -34,4 +34,16 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 		return criteria.list();
 	}
 
+	@Override
+	public EmployeeDomain updateById(Integer domainId, EmployeeDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmployeeDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

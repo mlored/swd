@@ -49,6 +49,18 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 		partResult.setParts(parts);
 		return partResult;
 	}
+
+	@Override
+	public PartDTO updateById(Integer id, PartDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PartDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
 	protected PartDTO convertDomainToDto(PartDomain domain) {

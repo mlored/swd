@@ -34,4 +34,16 @@ public class CityDaoImpl extends BaseDaoImpl<CityDomain> implements ICityDao {
 		return criteria.list();
 	}
 
+	@Override
+	public CityDomain updateById(Integer domainId, CityDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CityDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

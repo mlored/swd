@@ -49,6 +49,18 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		employeesResult.setEmployees(employees);
 		return employeesResult;
 	}
+	
+	@Override
+	public EmployeeDTO updateById(Integer id, EmployeeDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmployeeDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected EmployeeDTO convertDomainToDto(EmployeeDomain domain) {

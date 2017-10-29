@@ -47,6 +47,18 @@ public class CountryServiceImpl extends BaseServiceImpl<CountryDTO, CountryDomai
 		countryResult.setCountries(countries);
 		return countryResult;
 	}
+	
+	@Override
+	public CountryDTO updateById(Integer id, CountryDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CountryDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected CountryDTO convertDomainToDto(CountryDomain domain) {

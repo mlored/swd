@@ -34,4 +34,16 @@ public class StateDaoImpl extends BaseDaoImpl<StateDomain> implements IStateDao 
 		return criteria.list();
 	}
 
+	@Override
+	public StateDomain updateById(Integer domainId, StateDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StateDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

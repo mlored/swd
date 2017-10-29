@@ -32,4 +32,16 @@ public class CountryDaoImpl extends BaseDaoImpl<CountryDomain> implements ICount
 		return criteria.list();
 	}
 
+	@Override
+	public CountryDomain updateById(Integer domainId, CountryDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CountryDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

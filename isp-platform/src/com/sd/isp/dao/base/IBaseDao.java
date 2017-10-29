@@ -11,4 +11,8 @@ public interface IBaseDao<DOMAIN extends BaseDomain> {
 	public DOMAIN getById(Integer domainId);
 
 	public List<DOMAIN> findAll();
+	
+	public DOMAIN updateById(Integer domainId, DOMAIN domain);
+	
+	public DOMAIN delete(Integer domainId);
 }

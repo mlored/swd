@@ -39,4 +39,16 @@ public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 		return criteria.list();
 	}
 
+	@Override
+	public PartDomain updateById(Integer domainId, PartDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PartDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

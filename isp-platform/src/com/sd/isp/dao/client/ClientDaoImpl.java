@@ -39,4 +39,16 @@ public class ClientDaoImpl extends BaseDaoImpl<ClientDomain> implements IClientD
 		return criteria.list();
 	}
 
+	@Override
+	public ClientDomain updateById(Integer domainId, ClientDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ClientDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

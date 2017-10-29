@@ -49,6 +49,18 @@ public class PersonServiceImpl extends BaseServiceImpl<PersonDTO, PersonDomain, 
 		personResult.setPersons(persons);
 		return personResult;
 	}
+	
+	@Override
+	public PersonDTO updateById(Integer id, PersonDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PersonDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected PersonDTO convertDomainToDto(PersonDomain domain) {

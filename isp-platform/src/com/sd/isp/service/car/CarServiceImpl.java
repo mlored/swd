@@ -47,6 +47,18 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 		carResult.setCars(cars);
 		return carResult;
 	}
+	
+	@Override
+	public CarDTO updateById(Integer id, CarDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CarDTO delete(Integer id) {
+		final CarDomain domain = carDao.delete(id);
+		return convertDomainToDto(domain);
+	}
 
 	@Override
 	protected CarDTO convertDomainToDto(CarDomain domain) {

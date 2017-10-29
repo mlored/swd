@@ -49,6 +49,18 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 		clientResult.setClients(clients);
 		return clientResult;
 	}
+	
+	@Override
+	public ClientDTO updateById(Integer id, ClientDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ClientDTO delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected ClientDTO convertDomainToDto(ClientDomain domain) {
