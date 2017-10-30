@@ -13,7 +13,7 @@ public class SupplierResult extends BaseResult<SupplierDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<SupplierDTO> getClients() {
+	public List<SupplierDTO> getSuppliers() {
 		return getList();
 	}
 

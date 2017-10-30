@@ -74,7 +74,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 		supplier.setId(domain.getId());
 		supplier.setName(domain.getName());
 		supplier.setSurName(domain.getSurName());
-		supplier.setRuc(domain.getRuc());
+		supplier.setRuc(domain.getRUC());
 		supplier.setAddress(domain.getAddress());
 		supplier.setType(domain.getType());
 		supplier.setCellphone(domain.getCellphone());
@@ -87,7 +87,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 		supplier.setId(dto.getId());
 		supplier.setName(dto.getName());
 		supplier.setSurName(dto.getSurName());
-		supplier.setRuc(dto.getRuc());
+		supplier.setRUC(dto.getRuc());
 		supplier.setAddress(dto.getAddress());
 		supplier.setType(dto.getType());
 		supplier.setCellphone(dto.getCellphone());

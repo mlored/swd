@@ -76,7 +76,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		employee.setId(domain.getId());
 		employee.setName(domain.getName());
 		employee.setSurName(domain.getSurName());
-		employee.setRuc(domain.getRuc());
+		employee.setRuc(domain.getRUC());
 		employee.setAddress(domain.getAddress());
 		employee.setType(domain.getType());
 		employee.setCellphone(domain.getCellphone());
@@ -89,7 +89,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		employee.setId(dto.getId());
 		employee.setName(dto.getName());
 		employee.setSurName(dto.getSurName());
-		employee.setRuc(dto.getRuc());
+		employee.setRUC(dto.getRuc());
 		employee.setAddress(dto.getAddress());
 		employee.setType(dto.getType());
 		employee.setCellphone(dto.getCellphone());

@@ -1,15 +1,16 @@
 package com.sd.isp.domain.invoice_details;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
+import com.sd.isp.domain.invoice.InvoiceDomain;
 
 @Entity
 @Table(name = "invoice_details")
@@ -25,6 +26,9 @@ public class InvoiceDetailsDomain extends BaseDomain {
 	
 	@Column(name = "price")
 	private Integer _price;
+	
+	@ManyToOne
+	private InvoiceDomain _invoice;
 	
 	public Integer getId() {
 		return id;

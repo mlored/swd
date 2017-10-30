@@ -22,20 +22,20 @@ public class PersonDomain extends BaseDomain {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "surName")
-	private String surName;
+	@Column(name = "surname", nullable = true)
+	private String surname;
 
 	@Column(name = "RUC", unique = true)
 	private String RUC;
 
-	@Column(name = "cellphone")
+	@Column(name = "cellphone" ,nullable = true)
 	private Integer cellphone;
 	
-	@Column(name = "address")
+	@Column(name = "address" ,nullable = true)
 	private String address;
 	
-	@Column(name = "type")
-	private String type;
+	@Column(name = "personType")
+	private String personType;
 
 	public Integer getId() {
 		return id;
@@ -54,11 +54,11 @@ public class PersonDomain extends BaseDomain {
 	}
 
 	public String getSurName() {
-		return surName;
+		return surname;
 	}
 
-	public void setSurName(String surName) {
-		this.surName = surName;
+	public void setSurName(String surname) {
+		this.surname = surname;
 	}
 
 	public String getRUC() {
@@ -86,11 +86,11 @@ public class PersonDomain extends BaseDomain {
 	}
 	
 	public String getType() {
-		return type;
+		return personType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String personType) {
+		this.personType = personType;
 	}
 }
 

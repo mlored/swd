@@ -14,7 +14,7 @@ public class ClientDTO extends BaseDTO {
 	private String _RUC;
 	private Integer _cellphone;
 	private String _address;
-	private String _type;
+	private String _personType;
 
 	@XmlElement
 	public String getName() {
@@ -63,11 +63,11 @@ public class ClientDTO extends BaseDTO {
 	
 	@XmlElement
 	public String getType() {
-		return _type;
+		return _personType;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public void setType(String personType) {
+		_personType = personType;
 	}
 
 }

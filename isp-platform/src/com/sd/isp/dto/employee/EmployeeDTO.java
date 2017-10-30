@@ -13,7 +13,7 @@ public class EmployeeDTO extends BaseDTO {
 	private String _surName;
 	private String _ruc;
 	private String _address;
-	private String _type;
+	private String _personType;
 	private Integer _cellphone;
 
 	@XmlElement
@@ -54,11 +54,11 @@ public class EmployeeDTO extends BaseDTO {
 	
 	@XmlElement
 	public String getType() {
-		return _type;
+		return _personType;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public void setType(String personType) {
+		_personType = personType;
 	}
 
 	@XmlElement

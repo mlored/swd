@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
+import com.sd.isp.domain.client.ClientDomain;
 
 @Entity
 @Table(name = "invoice")
@@ -31,6 +33,11 @@ public class InvoiceDomain extends BaseDomain {
 	
 	@Column(name = "total")
 	private Integer _total;
+	
+	
+	@ManyToOne
+	private ClientDomain _client;
+	
 	
 	public Integer getId() {
 		return id;
