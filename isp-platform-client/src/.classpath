@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/imgscalr-lib-4.2.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/imgscalr-lib-4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/imgscalr-lib-4.2-sources.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/isp-platform.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jackson-core-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jackson-jaxrs-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jackson-xc-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jersey-client.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jersey-client-1.14.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jersey-core-1.14.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jersey-json-1.14.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jersey-server-1.14.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jersey-servlet-1.14.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jettison-1.1.jar"/>
+	<classpathentry kind="lib" path="/home/adrian/Documentos/eclipse-workspace/swd/isp-platform-client/lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
