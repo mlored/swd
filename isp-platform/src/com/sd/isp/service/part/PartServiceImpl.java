@@ -52,14 +52,20 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	public PartDTO updateById(Integer id, PartDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final PartDomain newDomain = convertDtoToDomain(dto);
+		final PartDomain domain = partDao.getById(id);
+		domain.setName(newDomain.getName());
+		domain.setDescription(newDomain.getDescription());
+		domain.setPrice(newDomain.getPrice());
+		domain.setQuantity(newDomain.getQuantity());
+		final PartDomain partDomain = partDao.save(domain);
+		return convertDomainToDto(partDomain);
 	}
 
 	@Override
 	public PartDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		final PartDomain domain = partDao.delete(id);
+		return convertDomainToDto(domain);
 	}
 	
 	@Override

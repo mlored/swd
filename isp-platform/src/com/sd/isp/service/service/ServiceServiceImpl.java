@@ -52,14 +52,20 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	
 	@Override
 	public ServiceDTO updateById(Integer id, ServiceDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final ServiceDomain newDomain = convertDtoToDomain(dto);
+		final ServiceDomain domain = serviceDao.getById(id);
+		domain.setName(newDomain.getName());
+		domain.setDescription(newDomain.getDescription());
+		domain.setPrice(newDomain.getPrice());
+		domain.setQuantity(newDomain.getQuantity());
+		final ServiceDomain serviceDomain = serviceDao.save(domain);
+		return convertDomainToDto(serviceDomain);
 	}
 
 	@Override
 	public ServiceDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		final ServiceDomain domain = serviceDao.delete(id);
+		return convertDomainToDto(domain);
 	}
 
 	@Override

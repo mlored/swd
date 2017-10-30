@@ -52,14 +52,22 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	
 	@Override
 	public ClientDTO updateById(Integer id, ClientDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final ClientDomain newDomain = convertDtoToDomain(dto);
+		final ClientDomain domain = clientDao.getById(id);
+		domain.setName(newDomain.getName());
+		domain.setSurName(newDomain.getSurName());
+		domain.setRUC(newDomain.getRUC());
+		domain.setCellphone(newDomain.getCellphone());
+		domain.setAddress(newDomain.getAddress());
+		domain.setType(newDomain.getType());
+		final ClientDomain clientDomain = clientDao.save(domain);
+		return convertDomainToDto(clientDomain);
 	}
 
 	@Override
 	public ClientDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		final ClientDomain domain = clientDao.delete(id);
+		return convertDomainToDto(domain);
 	}
 
 	@Override

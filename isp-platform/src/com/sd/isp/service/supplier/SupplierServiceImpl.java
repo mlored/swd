@@ -52,14 +52,20 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	
 	@Override
 	public SupplierDTO updateById(Integer id, SupplierDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final SupplierDomain newDomain = convertDtoToDomain(dto);
+		final SupplierDomain domain = supplierDao.getById(id);
+		domain.setName(newDomain.getName());
+		domain.setSurName(newDomain.getSurName());
+		domain.setRuc(newDomain.getRuc());
+		domain.setAddress(newDomain.getAddress());
+		final SupplierDomain supplierDomain = supplierDao.save(domain);
+		return convertDomainToDto(supplierDomain);
 	}
 
 	@Override
 	public SupplierDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		final SupplierDomain domain = supplierDao.delete(id);
+		return convertDomainToDto(domain);
 	}
 
 	@Override

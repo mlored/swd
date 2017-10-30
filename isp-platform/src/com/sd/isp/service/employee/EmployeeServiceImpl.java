@@ -52,14 +52,22 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	
 	@Override
 	public EmployeeDTO updateById(Integer id, EmployeeDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final EmployeeDomain newDomain = convertDtoToDomain(dto);
+		final EmployeeDomain domain = employeeDao.getById(id);
+		domain.setName(newDomain.getName());
+		domain.setSurName(newDomain.getName());
+		domain.setRuc(newDomain.getRuc());
+		domain.setAddress(newDomain.getAddress());
+		domain.setType(newDomain.getType());
+		domain.setCellphone(newDomain.getCellphone());
+		final EmployeeDomain employeeDomain = employeeDao.save(domain);
+		return convertDomainToDto(employeeDomain);
 	}
 
 	@Override
 	public EmployeeDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		final EmployeeDomain domain = employeeDao.delete(id);
+		return convertDomainToDto(domain);
 	}
 
 	@Override

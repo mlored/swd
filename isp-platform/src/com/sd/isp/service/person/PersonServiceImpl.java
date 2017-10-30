@@ -52,14 +52,22 @@ public class PersonServiceImpl extends BaseServiceImpl<PersonDTO, PersonDomain, 
 	
 	@Override
 	public PersonDTO updateById(Integer id, PersonDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		final PersonDomain newDomain = convertDtoToDomain(dto);
+		final PersonDomain domain = personDao.getById(id);
+		domain.setName(newDomain.getName());
+		domain.setSurName(newDomain.getSurName());
+		domain.setRUC(newDomain.getRUC());
+		domain.setCellphone(newDomain.getCellphone());
+		domain.setAddress(newDomain.getAddress());
+		domain.setType(newDomain.getType());
+		final PersonDomain personDomain = personDao.save(domain);
+		return convertDomainToDto(personDomain);
 	}
 
 	@Override
 	public PersonDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		final PersonDomain domain = personDao.delete(id);
+		return convertDomainToDto(domain);
 	}
 
 	@Override
