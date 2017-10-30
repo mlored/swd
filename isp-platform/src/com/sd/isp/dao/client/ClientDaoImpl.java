@@ -47,8 +47,9 @@ public class ClientDaoImpl extends BaseDaoImpl<ClientDomain> implements IClientD
 
 	@Override
 	public ClientDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		ClientDomain domain = (ClientDomain) sessionFactory.getCurrentSession().get(ClientDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

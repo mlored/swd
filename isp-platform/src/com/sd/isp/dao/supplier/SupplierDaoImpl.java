@@ -42,8 +42,9 @@ public class SupplierDaoImpl extends BaseDaoImpl<SupplierDomain> implements ISup
 
 	@Override
 	public SupplierDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		SupplierDomain domain = (SupplierDomain) sessionFactory.getCurrentSession().get(SupplierDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

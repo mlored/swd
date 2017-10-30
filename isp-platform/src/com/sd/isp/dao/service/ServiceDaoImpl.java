@@ -47,8 +47,9 @@ public class ServiceDaoImpl extends BaseDaoImpl<ServiceDomain> implements IServi
 
 	@Override
 	public ServiceDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceDomain domain = (ServiceDomain) sessionFactory.getCurrentSession().get(ServiceDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

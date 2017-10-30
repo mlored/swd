@@ -56,7 +56,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		final EmployeeDomain domain = employeeDao.getById(id);
 		domain.setName(newDomain.getName());
 		domain.setSurName(newDomain.getName());
-		domain.setRuc(newDomain.getRuc());
+		domain.setRUC(newDomain.getRUC());
 		domain.setAddress(newDomain.getAddress());
 		domain.setType(newDomain.getType());
 		domain.setCellphone(newDomain.getCellphone());

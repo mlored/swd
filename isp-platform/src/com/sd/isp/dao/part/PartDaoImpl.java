@@ -47,8 +47,9 @@ public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 
 	@Override
 	public PartDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		PartDomain domain = (PartDomain) sessionFactory.getCurrentSession().get(PartDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

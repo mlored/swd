@@ -42,8 +42,9 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 
 	@Override
 	public EmployeeDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeDomain domain = (EmployeeDomain) sessionFactory.getCurrentSession().get(EmployeeDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

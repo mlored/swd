@@ -56,7 +56,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 		final SupplierDomain domain = supplierDao.getById(id);
 		domain.setName(newDomain.getName());
 		domain.setSurName(newDomain.getSurName());
-		domain.setRuc(newDomain.getRuc());
+		domain.setRUC(newDomain.getRUC());
 		domain.setAddress(newDomain.getAddress());
 		final SupplierDomain supplierDomain = supplierDao.save(domain);
 		return convertDomainToDto(supplierDomain);

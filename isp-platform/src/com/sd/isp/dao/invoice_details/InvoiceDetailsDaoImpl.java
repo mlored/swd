@@ -42,8 +42,9 @@ public class InvoiceDetailsDaoImpl extends BaseDaoImpl<InvoiceDetailsDomain> imp
 
 	@Override
 	public InvoiceDetailsDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		InvoiceDetailsDomain domain = (InvoiceDetailsDomain) sessionFactory.getCurrentSession().get(InvoiceDetailsDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

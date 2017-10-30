@@ -47,8 +47,9 @@ public class PersonDaoImpl extends BaseDaoImpl<PersonDomain> implements IPersonD
 
 	@Override
 	public PersonDomain delete(Integer domainId) {
-		// TODO Auto-generated method stub
-		return null;
+		PersonDomain domain = (PersonDomain) sessionFactory.getCurrentSession().get(PersonDomain.class, domainId);
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
 	}
 
 }

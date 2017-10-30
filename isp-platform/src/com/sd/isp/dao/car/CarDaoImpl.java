@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
 import com.sd.isp.domain.car.CarDomain;
-import com.sd.isp.domain.location.city.CityDomain;
 
 @Repository
 public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
