@@ -8,31 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.location.city.CityDomain;
+import com.sd.isp.domain.entry.EntryDomain;
 
-/*@Repository
-public class EntryDaoImpl extends BaseDaoImpl<CityDomain> implements IEntryDao {
+@Repository
+public class EntryDaoImpl extends BaseDaoImpl<EntryDomain> implements IEntryDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public CityDomain save(CityDomain domain) {
+	public EntryDomain save(EntryDomain domain) {
 		sessionFactory.getCurrentSession().saveOrUpdate(domain);
 		return domain;
 	}
 
 	@Override
-	public CityDomain getById(Integer domainId) {
-		return (CityDomain) sessionFactory.getCurrentSession().get(CityDomain.class, domainId);
+	public EntryDomain getById(Integer domainId) {
+		return (EntryDomain) sessionFactory.getCurrentSession().get(EntryDomain.class, domainId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<CityDomain> findAll() {
-		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(CityDomain.class);
+	public List<EntryDomain> findAll() {
+		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(EntryDomain.class);
 		return criteria.list();
 	}
 
+	@Override
+	public EntryDomain updateById(Integer domainId, EntryDomain domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EntryDomain delete(Integer domainId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
-*/

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.part.PartDomain;
+import com.sd.isp.domain.item.PartDomain;
 
 @Repository
 public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
