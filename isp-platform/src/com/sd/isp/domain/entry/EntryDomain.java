@@ -1,16 +1,21 @@
 package com.sd.isp.domain.entry;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
+import com.sd.isp.domain.car.CarDomain;
+import com.sd.isp.domain.client.ClientDomain;
 
 @Entity
-@Table(name = "cars")
+@Table(name = "entries")
 public class EntryDomain extends BaseDomain {
 
 	@Id
@@ -18,17 +23,20 @@ public class EntryDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
 
-	@Column(name = "mark")
-	private String mark;
+	@Column(name = "date")
+	private Date date;
 
-	@Column(name = "model", nullable = false)
-	private String model;
+	@Column(name = "diagnostic")
+	private String diagnostic;
 
 	@Column(name = "number", unique = true)
 	private Integer number;
-
-	@Column(name = "color")
-	private String color;
+	
+	@ManyToOne
+    private CarDomain carDomain;
+	
+	@ManyToOne
+    private ClientDomain clientDomain;
 
 	public Integer getId() {
 		return id;
@@ -38,20 +46,12 @@ public class EntryDomain extends BaseDomain {
 		this.id = id;
 	}
 
-	public String getMark() {
-		return mark;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public Integer getNumber() {
@@ -62,11 +62,12 @@ public class EntryDomain extends BaseDomain {
 		this.number = number;
 	}
 	
-	public String getColor() {
-		return color;
+	public String getDiagnostic() {
+		return diagnostic;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setDiagnostic(String diagnostic) {
+		this.diagnostic = diagnostic;
 	}
+	
 }
