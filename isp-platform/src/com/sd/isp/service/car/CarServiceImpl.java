@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.car.CarDaoImpl;
 import com.sd.isp.dao.car.ICarDao;
 import com.sd.isp.domain.car.CarDomain;
-import com.sd.isp.dto.location.car.CarDTO;
-import com.sd.isp.dto.location.car.CarResult;
+import com.sd.isp.dto.car.CarDTO;
+import com.sd.isp.dto.car.CarResult;
 import com.sd.isp.service.base.BaseServiceImpl;
 
 @Service

@@ -1,4 +1,4 @@
-package com.sd.isp.dto.location.car;
+package com.sd.isp.dto.car;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

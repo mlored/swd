@@ -1,4 +1,4 @@
-package com.sd.isp.dto.location.car;
+package com.sd.isp.dto.car;
 
 import java.util.List;
 

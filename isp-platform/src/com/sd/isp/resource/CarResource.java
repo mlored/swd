@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.sd.isp.dto.location.car.CarDTO;
-import com.sd.isp.dto.location.car.CarResult;
+import com.sd.isp.dto.car.CarDTO;
+import com.sd.isp.dto.car.CarResult;
 import com.sd.isp.service.car.ICarService;
 
 @Path("/car")
