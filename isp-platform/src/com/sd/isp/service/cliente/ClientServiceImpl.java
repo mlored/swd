@@ -59,7 +59,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 		domain.setRUC(newDomain.getRUC());
 		domain.setCellphone(newDomain.getCellphone());
 		domain.setAddress(newDomain.getAddress());
-		domain.setType(newDomain.getType());
 		final ClientDomain clientDomain = clientDao.save(domain);
 		return convertDomainToDto(clientDomain);
 	}
@@ -79,7 +78,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 		client.setRUC(domain.getRUC());
 		client.setCellphone(domain.getCellphone());
 		client.setAddress(domain.getAddress());
-		client.setType(domain.getType());
 		return client;
 	}
 
@@ -92,7 +90,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 		client.setRUC(dto.getRUC());
 		client.setCellphone(dto.getCellphone());
 		client.setAddress(dto.getAddress());
-		client.setType(dto.getType());
 		return client;
 	}
 

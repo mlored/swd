@@ -40,6 +40,7 @@ public class EntryDomain extends BaseDomain {
 	
 	@ManyToOne
     private ClientDomain clientDomain;
+
 	
 	@OneToMany(mappedBy = "entryDomain")
     private List<EntryDetailsDomain> entryDetailsDomains;

@@ -36,8 +36,14 @@ public class BuyDaoImpl extends BaseDaoImpl<BuyDomain> implements IBuyDao {
 	
 	@Override
 	public BuyDomain updateById(Integer domainId, BuyDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		BuyDomain buyDomain = (BuyDomain) sessionFactory.getCurrentSession().get(BuyDomain.class, domainId);
+		buyDomain.setDate(domain.getDate());
+		buyDomain.setNumber(domain.getNumber());
+		buyDomain.setType(domain.getType());
+		buyDomain.setTotal(domain.getTotal());
+	//	buyDomain.setEntryDomains(domain.getEntryDomains());
+		sessionFactory.getCurrentSession().saveOrUpdate(buyDomain);
+		return buyDomain;
 	}
 
 	@Override

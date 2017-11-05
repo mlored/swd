@@ -7,11 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.sd.isp.domain.base.BaseDomain;
-import com.sd.isp.domain.client.ClientDomain;
 
 @Entity
 @Table(name = "invoice")
@@ -26,18 +23,16 @@ public class InvoiceDomain extends BaseDomain {
 	private Date date;                      
 	
 	@Column(name = "number")
-	private Integer _number;
+	private Integer number;
 
 	@Column(name = "type")
 	private String type;
 	
 	@Column(name = "total")
-	private Integer _total;
+	private Integer total;
 	
-	
-	@ManyToOne
-	private ClientDomain _client;
-	
+	/*@OneToMany(mappedBy = "invoiceDomain")
+    private List<InvoiceDetailsDomain> invoiceDetailsDomains;*/
 	
 	public Integer getId() {
 		return id;
@@ -64,18 +59,18 @@ public class InvoiceDomain extends BaseDomain {
 	}
 	
 	public Integer getNumber() {
-		return _total;
+		return total;
 	}
 
 	public void setNumber(Integer number) {
-		_total = number;
+		this.number = number;
 	}
 
 	public Integer getTotal() {
-		return _total;
+		return total;
 	}
 
 	public void setTotal(Integer total) {
-		_total = total;
+		this.total = total;
 	}
 }

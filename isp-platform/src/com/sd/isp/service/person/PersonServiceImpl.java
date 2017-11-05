@@ -59,7 +59,6 @@ public class PersonServiceImpl extends BaseServiceImpl<PersonDTO, PersonDomain, 
 		domain.setRUC(newDomain.getRUC());
 		domain.setCellphone(newDomain.getCellphone());
 		domain.setAddress(newDomain.getAddress());
-		domain.setType(newDomain.getType());
 		final PersonDomain personDomain = personDao.save(domain);
 		return convertDomainToDto(personDomain);
 	}
@@ -79,7 +78,6 @@ public class PersonServiceImpl extends BaseServiceImpl<PersonDTO, PersonDomain, 
 		person.setRUC(domain.getRUC());
 		person.setCellphone(domain.getCellphone());
 		person.setAddress(domain.getAddress());
-		person.setType(domain.getType());
 		return person;
 	}
 
@@ -92,7 +90,6 @@ public class PersonServiceImpl extends BaseServiceImpl<PersonDTO, PersonDomain, 
 		person.setRUC(dto.getRUC());
 		person.setCellphone(dto.getCellphone());
 		person.setAddress(dto.getAddress());
-		person.setType(dto.getType());
 		return person;
 	}
 

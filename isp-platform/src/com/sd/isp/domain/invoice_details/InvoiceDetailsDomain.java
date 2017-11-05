@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.invoice.InvoiceDomain;
+import com.sd.isp.domain.item.ItemDomain;
 
 @Entity
 @Table(name = "invoice_details")
@@ -22,13 +23,16 @@ public class InvoiceDetailsDomain extends BaseDomain {
 	private Integer id;
 
 	@Column(name = "quantity")
-	private Integer _quantity;
+	private Integer quantity;
 	
 	@Column(name = "price")
-	private Integer _price;
+	private Integer price;
 	
 	@ManyToOne
-	private InvoiceDomain _invoice;
+	private InvoiceDomain invoiceDomain;
+	
+	@ManyToOne
+	private ItemDomain itemDomain;
 			
 	public Integer getId() {
 		return id;
@@ -41,18 +45,18 @@ public class InvoiceDetailsDomain extends BaseDomain {
 	
 	
 	public Integer getQuantity() {
-		return _quantity;
+		return quantity;
 	}
 
 	public void setQuantity(Integer quantity) {
-		_quantity = quantity;
+		this.quantity = quantity;
 	}
 
 	public Integer getPrice() {
-		return _price;
+		return price;
 	}
 
 	public void setPrice(Integer price) {
-		_price = price;
+		this.price = price;
 	}
 }

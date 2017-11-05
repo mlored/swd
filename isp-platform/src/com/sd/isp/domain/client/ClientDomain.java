@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.domain.person.PersonDomain;
 
@@ -14,6 +15,9 @@ public class ClientDomain extends PersonDomain {
 	
 	@OneToMany(mappedBy = "clientDomain")
     private List<EntryDomain> entryDomains;
+	
+	@OneToMany(mappedBy = "clientDomain")
+	private List<BuyDomain> buyDomains;
 	
 }
 

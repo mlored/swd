@@ -36,8 +36,14 @@ public class SupplierDaoImpl extends BaseDaoImpl<SupplierDomain> implements ISup
 
 	@Override
 	public SupplierDomain updateById(Integer domainId, SupplierDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		SupplierDomain supplierDomain = (SupplierDomain) sessionFactory.getCurrentSession().get(SupplierDomain.class, domainId);
+		supplierDomain.setName(domain.getName());
+		supplierDomain.setSurName(domain.getSurName());
+		supplierDomain.setRUC(domain.getRUC());
+		supplierDomain.setCellphone(domain.getCellphone());
+		supplierDomain.setAddress(domain.getAddress());
+		sessionFactory.getCurrentSession().saveOrUpdate(supplierDomain);
+		return supplierDomain;
 	}
 
 	@Override

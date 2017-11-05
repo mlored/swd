@@ -36,8 +36,13 @@ public class InvoiceDaoImpl extends BaseDaoImpl<InvoiceDomain> implements IInvoi
 	
 	@Override
 	public InvoiceDomain updateById(Integer domainId, InvoiceDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		InvoiceDomain invoiceDomain = (InvoiceDomain) sessionFactory.getCurrentSession().get(InvoiceDomain.class, domainId);
+		invoiceDomain.setDate(domain.getDate());
+		invoiceDomain.setNumber(domain.getNumber());
+		invoiceDomain.setType(domain.getType());
+		invoiceDomain.setTotal(domain.getTotal());
+		sessionFactory.getCurrentSession().saveOrUpdate(invoiceDomain);
+		return invoiceDomain;
 	}
 
 	@Override

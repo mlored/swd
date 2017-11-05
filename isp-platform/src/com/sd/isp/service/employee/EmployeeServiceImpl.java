@@ -58,7 +58,6 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		domain.setSurName(newDomain.getName());
 		domain.setRUC(newDomain.getRUC());
 		domain.setAddress(newDomain.getAddress());
-		domain.setType(newDomain.getType());
 		domain.setCellphone(newDomain.getCellphone());
 		final EmployeeDomain employeeDomain = employeeDao.save(domain);
 		return convertDomainToDto(employeeDomain);
@@ -78,7 +77,6 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		employee.setSurName(domain.getSurName());
 		employee.setRuc(domain.getRUC());
 		employee.setAddress(domain.getAddress());
-		employee.setType(domain.getType());
 		employee.setCellphone(domain.getCellphone());
 		return employee;
 	}
@@ -91,7 +89,6 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		employee.setSurName(dto.getSurName());
 		employee.setRUC(dto.getRuc());
 		employee.setAddress(dto.getAddress());
-		employee.setType(dto.getType());
 		employee.setCellphone(dto.getCellphone());
 		return employee;
 	}

@@ -11,8 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
-//import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
+import com.sd.isp.domain.invoice_details.InvoiceDetailsDomain;
 
 @Entity
 @Table(name = "items")
@@ -37,6 +37,10 @@ public class ItemDomain extends BaseDomain {
 	
 	@OneToMany(mappedBy = "itemDomain")
     private List<EntryDetailsDomain> entryDetailsDomains;
+	
+	@OneToMany(mappedBy = "itemDomain")
+    private List<InvoiceDetailsDomain> invoiceDetailsDomains;
+	
 
 	public Integer getId() {
 		return id;

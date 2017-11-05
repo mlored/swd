@@ -34,8 +34,6 @@ public class PersonDomain extends BaseDomain {
 	@Column(name = "address" ,nullable = true)
 	private String address;
 	
-	@Column(name = "personType")
-	private String personType;
 
 	public Integer getId() {
 		return id;
@@ -85,12 +83,5 @@ public class PersonDomain extends BaseDomain {
 		this.address = address;
 	}
 	
-	public String getType() {
-		return personType;
-	}
-
-	public void setType(String personType) {
-		this.personType = personType;
-	}
 }
 

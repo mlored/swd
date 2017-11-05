@@ -36,8 +36,14 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 
 	@Override
 	public EmployeeDomain updateById(Integer domainId, EmployeeDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeDomain employeeDomain = (EmployeeDomain) sessionFactory.getCurrentSession().get(EmployeeDomain.class, domainId);
+		employeeDomain.setName(domain.getName());
+		employeeDomain.setSurName(domain.getSurName());
+		employeeDomain.setRUC(domain.getRUC());
+		employeeDomain.setCellphone(domain.getCellphone());
+		employeeDomain.setAddress(domain.getAddress());
+		sessionFactory.getCurrentSession().saveOrUpdate(employeeDomain);
+		return employeeDomain;
 	}
 
 	@Override
