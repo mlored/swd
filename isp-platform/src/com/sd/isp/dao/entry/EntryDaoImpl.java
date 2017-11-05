@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.car.CarDomain;
 import com.sd.isp.domain.entry.EntryDomain;
 
 @Repository
@@ -36,8 +37,13 @@ public class EntryDaoImpl extends BaseDaoImpl<EntryDomain> implements IEntryDao 
 
 	@Override
 	public EntryDomain updateById(Integer domainId, EntryDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		EntryDomain entryDomain = (EntryDomain) sessionFactory.getCurrentSession().get(EntryDomain.class, domainId);
+		entryDomain.setDate(domain.getDate());
+		entryDomain.setDiagnostic(domain.getDiagnostic());
+		entryDomain.setNumber(domain.getNumber());
+		
+		sessionFactory.getCurrentSession().saveOrUpdate(entryDomain);
+		return entryDomain;
 	}
 
 	@Override
