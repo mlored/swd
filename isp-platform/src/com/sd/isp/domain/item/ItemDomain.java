@@ -1,13 +1,18 @@
 package com.sd.isp.domain.item;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
+//import com.sd.isp.domain.entry.EntryDomain;
+import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
 @Entity
 @Table(name = "items")
@@ -29,6 +34,9 @@ public class ItemDomain extends BaseDomain {
 
 	@Column(name = "quantity", nullable = true)
 	private Integer quantity;
+	
+	@OneToMany(mappedBy = "itemDomain")
+    private List<EntryDetailsDomain> entryDetailsDomains;
 
 	public Integer getId() {
 		return id;

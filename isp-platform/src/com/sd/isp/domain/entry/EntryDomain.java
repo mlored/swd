@@ -1,6 +1,7 @@
 package com.sd.isp.domain.entry;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.car.CarDomain;
 import com.sd.isp.domain.client.ClientDomain;
+import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
 @Entity
 @Table(name = "entries")
@@ -37,6 +40,17 @@ public class EntryDomain extends BaseDomain {
 	
 	@ManyToOne
     private ClientDomain clientDomain;
+	
+	@OneToMany(mappedBy = "entryDomain")
+    private List<EntryDetailsDomain> entryDetailsDomains;
+	
+	public List<EntryDetailsDomain> getEntryDetailsDomains() {
+		return entryDetailsDomains;
+	}
+
+	public void setEntryDetailsDomains(List<EntryDetailsDomain> entryDetailsDomains) {
+		this.entryDetailsDomains = entryDetailsDomains;
+	}
 
 	public Integer getId() {
 		return id;
