@@ -23,7 +23,7 @@ public class InvoiceDomain extends BaseDomain {
 	private Integer id;
 
 	@Column(name = "date")
-	private Date date;
+	private Date date;                      
 	
 	@Column(name = "number")
 	private Integer _number;

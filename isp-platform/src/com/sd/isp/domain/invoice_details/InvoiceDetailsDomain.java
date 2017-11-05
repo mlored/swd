@@ -29,7 +29,7 @@ public class InvoiceDetailsDomain extends BaseDomain {
 	
 	@ManyToOne
 	private InvoiceDomain _invoice;
-	
+			
 	public Integer getId() {
 		return id;
 	}
