@@ -52,6 +52,22 @@ public class EntryDomain extends BaseDomain {
 		this.entryDetailsDomains = entryDetailsDomains;
 	}
 
+	public CarDomain getCarDomain() {
+		return carDomain;
+	}
+
+	public void setCarDomain(CarDomain carDomain) {
+		this.carDomain = carDomain;
+	}
+
+	public ClientDomain getClientDomain() {
+		return clientDomain;
+	}
+
+	public void setClientDomain(ClientDomain clientDomain) {
+		this.clientDomain = clientDomain;
+	}
+
 	public Integer getId() {
 		return id;
 	}

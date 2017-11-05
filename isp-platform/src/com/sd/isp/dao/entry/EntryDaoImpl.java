@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.car.CarDomain;
 import com.sd.isp.domain.entry.EntryDomain;
 
 @Repository
@@ -41,6 +40,8 @@ public class EntryDaoImpl extends BaseDaoImpl<EntryDomain> implements IEntryDao 
 		entryDomain.setDate(domain.getDate());
 		entryDomain.setDiagnostic(domain.getDiagnostic());
 		entryDomain.setNumber(domain.getNumber());
+		entryDomain.setCarDomain(domain.getCarDomain());
+		entryDomain.setClientDomain(domain.getClientDomain());
 		
 		sessionFactory.getCurrentSession().saveOrUpdate(entryDomain);
 		return entryDomain;
