@@ -1,4 +1,4 @@
-package com.sd.isp.domain.item;
+package com.sd.isp.domain.part;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.sd.isp.domain.invoice_details.InvoiceDetailsDomain;
 
 @Entity
 @Table(name = "items")
-public class ItemDomain extends BaseDomain {
+public abstract class ItemDomain extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

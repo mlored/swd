@@ -10,8 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
-import com.sd.isp.domain.invoice.InvoiceDomain;
-import com.sd.isp.domain.item.ItemDomain;
+import com.sd.isp.domain.buy.InvoiceDomain;
+import com.sd.isp.domain.part.ItemDomain;
 
 @Entity
 @Table(name = "invoice_details")

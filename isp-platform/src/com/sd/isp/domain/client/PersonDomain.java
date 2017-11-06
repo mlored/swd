@@ -1,4 +1,4 @@
-package com.sd.isp.domain.person;
+package com.sd.isp.domain.client;
 
 
 import javax.persistence.Column;
@@ -12,7 +12,7 @@ import com.sd.isp.domain.base.BaseDomain;
 
 @Entity
 @Table(name = "person")
-public class PersonDomain extends BaseDomain {
+public abstract class PersonDomain extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

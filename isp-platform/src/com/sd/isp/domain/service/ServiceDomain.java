@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sd.isp.domain.item.ItemDomain;
+import com.sd.isp.domain.part.ItemDomain;
 
 @Entity
 public class ServiceDomain extends ItemDomain {

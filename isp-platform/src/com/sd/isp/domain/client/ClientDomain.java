@@ -8,7 +8,6 @@ import javax.persistence.OneToMany;
 
 import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.entry.EntryDomain;
-import com.sd.isp.domain.person.PersonDomain;
 
 @Entity
 public class ClientDomain extends PersonDomain {

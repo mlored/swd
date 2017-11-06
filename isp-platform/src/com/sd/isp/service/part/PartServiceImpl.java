@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sd.isp.dao.part.PartDaoImpl;
 import com.sd.isp.dao.part.IPartDao;
-import com.sd.isp.domain.item.PartDomain;
+import com.sd.isp.dao.part.PartDaoImpl;
+import com.sd.isp.domain.part.ItemDomain;
+import com.sd.isp.domain.part.PartDomain;
 import com.sd.isp.dto.part.PartDTO;
 import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.service.base.BaseServiceImpl;
@@ -24,14 +25,14 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	@Transactional
 	public PartDTO save(PartDTO dto) {
 		final PartDomain partDomain = convertDtoToDomain(dto);
-		final PartDomain part = partDao.save(partDomain);
+		final PartDomain part =  partDao.save(partDomain);
 		return convertDomainToDto(part);
 	}
 
 	@Override
 	@Transactional
 	public PartDTO getById(Integer id) {
-		final PartDomain partDomain = partDao.getById(id);
+		final PartDomain partDomain = (PartDomain) partDao.getById(id);
 		final PartDTO partDTO = convertDomainToDto(partDomain);
 		return partDTO;
 	}
@@ -40,8 +41,8 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	@Transactional
 	public PartResult getAll() {
 		final List<PartDTO> parts = new ArrayList<>();
-		for (PartDomain domain : partDao.findAll()) {
-			final PartDTO part = convertDomainToDto(domain);
+		for (ItemDomain domain : partDao.findAll()) {
+			final PartDTO part = convertDomainToDto((PartDomain) domain);
 			parts.add(part);
 		}
 
@@ -53,18 +54,18 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	@Override
 	public PartDTO updateById(Integer id, PartDTO dto) {
 		final PartDomain newDomain = convertDtoToDomain(dto);
-		final PartDomain domain = partDao.getById(id);
+		final PartDomain domain = (PartDomain) partDao.getById(id);
 		domain.setName(newDomain.getName());
 		domain.setDescription(newDomain.getDescription());
 		domain.setPrice(newDomain.getPrice());
 		domain.setQuantity(newDomain.getQuantity());
-		final PartDomain partDomain = partDao.save(domain);
+		final PartDomain partDomain = (PartDomain) partDao.save(domain);
 		return convertDomainToDto(partDomain);
 	}
 
 	@Override
 	public PartDTO delete(Integer id) {
-		final PartDomain domain = partDao.delete(id);
+		final PartDomain domain = (PartDomain) partDao.delete(id);
 		return convertDomainToDto(domain);
 	}
 	

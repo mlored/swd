@@ -8,18 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.item.PartDomain;
+import com.sd.isp.domain.part.ItemDomain;
+import com.sd.isp.domain.part.PartDomain;
 
 @Repository
 public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	@Override
-	public List<PartDomain> findByName(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public PartDomain save(PartDomain domain) {
@@ -35,6 +30,7 @@ public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PartDomain> findAll() {
+
 		final Criteria criteria = sessionFactory.getCurrentSession().createCriteria(PartDomain.class);
 		return criteria.list();
 	}

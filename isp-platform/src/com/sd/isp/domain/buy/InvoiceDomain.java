@@ -1,4 +1,4 @@
-package com.sd.isp.domain.invoice;
+package com.sd.isp.domain.buy;
 
 import java.util.Date;
 import java.util.List;
