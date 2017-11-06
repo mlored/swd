@@ -41,8 +41,8 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	@Transactional
 	public PartResult getAll() {
 		final List<PartDTO> parts = new ArrayList<>();
-		for (ItemDomain domain : partDao.findAll()) {
-			final PartDTO part = convertDomainToDto((PartDomain) domain);
+		for (PartDomain domain : partDao.findAll()) {
+			final PartDTO part = convertDomainToDto( domain);
 			parts.add(part);
 		}
 
