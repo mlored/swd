@@ -2,12 +2,11 @@ package com.sd.isp.country
 
 import org.springframework.dao.DataIntegrityViolationException
 
-import com.sd.isp.beans.country.CountryB
-import com.sd.isp.service.country.ICountryService
 
 class CountryController {
 
 	//services
+	/*
 	def ICountryService countryService
 
 
@@ -131,5 +130,5 @@ class CountryController {
 			])
 			redirect(action: "show", id: id)
 		}
-	}
+	}*/
 }

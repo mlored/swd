@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.isp.beans.base.BaseBean;
-import com.sd.isp.beans.city.CityB;
 
 public class ClientB extends BaseBean {
 
@@ -13,7 +12,6 @@ public class ClientB extends BaseBean {
 	private String _firstName;
 	private String _lastName;
 	private String _document;
-	private CityB _city;
 
 	public ClientB(Map<String, String> params) {
 		super(params);
@@ -41,14 +39,6 @@ public class ClientB extends BaseBean {
 
 	public void setDocument(String document) {
 		_document = document;
-	}
-
-	public CityB getCity() {
-		return _city;
-	}
-
-	public void setCity(CityB city) {
-		_city = city;
 	}
 
 	@Override

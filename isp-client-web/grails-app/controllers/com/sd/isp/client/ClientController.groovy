@@ -3,7 +3,6 @@ package com.sd.isp.client
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.isp.beans.client.ClientB
-import com.sd.isp.service.city.ICityService
 import com.sd.isp.service.client.IClientService
 
 class ClientController {
@@ -12,7 +11,6 @@ class ClientController {
 
 	//services
 	def IClientService clientService
-	def ICityService cityService
 
 	def index() {
 		redirect(action: "list", params: params)

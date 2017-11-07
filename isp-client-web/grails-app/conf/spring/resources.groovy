@@ -1,11 +1,8 @@
-import com.sd.isp.rest.city.CityResourceImpl
+
 import com.sd.isp.rest.client.ClientResourceImpl
-import com.sd.isp.rest.country.CountryResourceImpl
-import com.sd.isp.rest.state.StateResourceImpl
-import com.sd.isp.service.city.CityServiceImpl
+
 import com.sd.isp.service.client.ClientServiceImpl
-import com.sd.isp.service.country.CountryServiceImpl
-import com.sd.isp.service.state.StateServiceImpl
+
 
 
 // Place your Spring DSL code here

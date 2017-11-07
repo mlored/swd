@@ -13,7 +13,6 @@ import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.rest.client.IClientResource;
 import com.sd.isp.service.base.BaseServiceImpl;
-import com.sd.isp.service.city.ICityService;
 
 @Service("clientService")
 public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
@@ -21,8 +20,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 
 	@Autowired
 	private IClientResource _clientResource;
-	@Autowired
-	private ICityService _cityService;
+
 
 	public ClientServiceImpl() {
 	}
@@ -61,12 +59,11 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	protected ClientB convertDtoToBean(ClientDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
-		params.put("firstName", dto.getFirstName());
-		params.put("lastName", dto.getLastName());
-		params.put("document", dto.getDocument());
+		//params.put("firstName", dto.getFirstName());
+		//params.put("lastName", dto.getLastName());
+		//params.put("document", dto.getDocument());
 
 		final ClientB clientB = new ClientB(params);
-		clientB.setCity(_cityService.getById(dto.getCityId()));
 
 		return clientB;
 	}
@@ -75,10 +72,9 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	protected ClientDTO convertBeanToDto(ClientB bean) {
 		final ClientDTO dto = new ClientDTO();
 		dto.setId(bean.getId());
-		dto.setDocument(bean.getDocument());
-		dto.setFirstName(bean.getFirstName());
-		dto.setLastName(bean.getLastName());
-		dto.setCityId(bean.getCity().getId());
+		//dto.setDocument(bean.getDocument());
+		//dto.setFirstName(bean.getFirstName());
+		//dto.setLastName(bean.getLastName());
 		return dto;
 	}
 }
