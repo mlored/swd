@@ -26,11 +26,7 @@
 									
 						<g:sortableColumn property="document" title="Document" />	
 						<g:sortableColumn property="firstName" title="First Name" />					
-						<g:sortableColumn property="lastName" title="Last Name" />						
-						<g:sortableColumn property="city" title="City" />
-						<g:sortableColumn property="city.state" title="State" />
-						<g:sortableColumn property="city.state.country" title="Country" />
-					
+						<g:sortableColumn property="lastName" title="Last Name" />
 					</tr>
 				</thead>
 				<tbody>
@@ -39,10 +35,7 @@
 					
 						<td><g:link action="show" id="${clientInstance.id}">${fieldValue(bean: clientInstance, field: "document")}</g:link></td>
 						<td>${fieldValue(bean: clientInstance, field: "firstName")}</td>					
-						<td>${fieldValue(bean: clientInstance, field: "lastName")}</td>	
-						<td>${fieldValue(bean: clientInstance, field: "city.name")}</td>
-						<td>${fieldValue(bean: clientInstance, field: "city.state.name")}</td>					
-						<td>${fieldValue(bean: clientInstance, field: "city.state.country.name")}</td>
+						<td>${fieldValue(bean: clientInstance, field: "lastName")}</td>
 					</tr>
 				</g:each>
 				</tbody>
