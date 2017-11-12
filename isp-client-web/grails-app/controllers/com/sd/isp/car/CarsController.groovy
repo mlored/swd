@@ -1,5 +1,6 @@
 package com.sd.isp.car
 
+import com.sd.isp.service.client.IClientService
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.isp.beans.car.CarB
@@ -12,10 +13,12 @@ import grails.transaction.Transactional
 class CarsController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
     ICarService carService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Cars.list(params), model:[carsInstanceCount: Cars.count()]
+        //respond Car.list(params), model:[carsInstanceCount: Cars.count()]
         redirect(action: "list", params: params)
     }
 
