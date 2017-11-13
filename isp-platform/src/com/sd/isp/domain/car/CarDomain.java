@@ -30,7 +30,7 @@ public class CarDomain extends BaseDomain {
 	private String model;
 
 	@Column(name = "number", unique = true)
-	private Integer number;
+	private String number;
 
 	@Column(name = "color")
 	private String color;
@@ -70,11 +70,11 @@ public class CarDomain extends BaseDomain {
 		this.model = model;
 	}
 
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	

@@ -13,15 +13,15 @@ public class CarDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private String _mark;
 	private String _model;
-	private Integer _number;
+	private String _number;
 	private String _color;
 
 	@XmlElement
-	public Integer getNumber() {
+	public String getNumber() {
 		return _number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		_number = number;
 	}
 

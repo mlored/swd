@@ -11,7 +11,7 @@ public class CarB extends BaseBean {
     private static final long serialVersionUID = 1L;
     private String _mark;
     private String _model;
-    private Integer _number;
+    private String _number;
     private String _color;
 
     public CarB(Map<String, String> params) {
@@ -34,11 +34,11 @@ public class CarB extends BaseBean {
         _model = model;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return _number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         _number = number;
     }
 
@@ -57,7 +57,7 @@ public class CarB extends BaseBean {
         }
         setMark(params.get("mark"));
         setModel(params.get("model"));
-        //setNumber(params.get("number"));
+        setNumber(params.get("number"));
         setColor(params.get("color"));
 
     }
