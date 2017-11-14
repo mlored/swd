@@ -62,7 +62,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         params.put("mark", dto.getMark());
         params.put("model", dto.getModel());
         params.put("color", dto.getColor());
-        params.put("number", dto.getNumber());
+        //params.put("number", dto.getNumber());
 
         final CarB carB = new CarB(params);
 

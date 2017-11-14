@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -23,38 +23,55 @@
 			</g:if>
 			<ol class="property-list client">
 			
-				<g:if test="${clientInstance?.firstName}">
+				<g:if test="${clientInstance?.name}">
 				<li class="fieldcontain">
-					<span id="firstName-label" class="property-label"><g:message code="client.firstName.label" default="First Name" /></span>
+					<span id="name-label" class="property-label"><g:message code="client.name.label" default="Name" /></span>
 					
-						<span class="property-value" aria-labelledby="firstName-label"><g:fieldValue bean="${clientInstance}" field="firstName"/></span>
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${clientInstance}" field="name"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${clientInstance?.lastName}">
+				<g:if test="${clientInstance?.surName}">
 				<li class="fieldcontain">
-					<span id="lastName-label" class="property-label"><g:message code="client.lastName.label" default="Last Name" /></span>
+					<span id="surName-label" class="property-label"><g:message code="client.surName.label" default="Sur Name" /></span>
 					
-						<span class="property-value" aria-labelledby="lastName-label"><g:fieldValue bean="${clientInstance}" field="lastName"/></span>
+						<span class="property-value" aria-labelledby="surName-label"><g:fieldValue bean="${clientInstance}" field="surName"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${clientInstance?.document}">
+				<g:if test="${clientInstance?.ruc}">
 				<li class="fieldcontain">
-					<span id="document-label" class="property-label"><g:message code="client.document.label" default="Document" /></span>
+					<span id="ruc-label" class="property-label"><g:message code="client.ruc.label" default="Ruc" /></span>
 					
-						<span class="property-value" aria-labelledby="document-label"><g:fieldValue bean="${clientInstance}" field="document"/></span>
+						<span class="property-value" aria-labelledby="ruc-label"><g:fieldValue bean="${clientInstance}" field="ruc"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${clientInstance?.address}">
+				<li class="fieldcontain">
+					<span id="address-label" class="property-label"><g:message code="client.address.label" default="Address" /></span>
+					
+						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${clientInstance}" field="address"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${clientInstance?.cellphone}">
+				<li class="fieldcontain">
+					<span id="cellphone-label" class="property-label"><g:message code="client.cellphone.label" default="Cellphone" /></span>
+					
+						<span class="property-value" aria-labelledby="cellphone-label"><g:fieldValue bean="${clientInstance}" field="cellphone"/></span>
 					
 				</li>
 				</g:if>
 			
 			</ol>
-			<g:form>
+			<g:form url="[resource:clientInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${clientInstance?.id}" />
-					<g:link class="edit" action="edit" id="${clientInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:link class="edit" action="edit" resource="${clientInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
