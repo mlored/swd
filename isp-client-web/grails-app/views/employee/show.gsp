@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list employee">
 			
+				<g:if test="${employeeInstance?.number}">
+					<li class="fieldcontain">
+						<span id="number-label" class="property-label"><g:message code="employee.number.label" default="Number" /></span>
+						
+						   <span class="property-value" aria-labelledby="number-label"><g:fieldValue bean="${employeeInstance}" field="number"/></span>
+						
+					</li>
+			    </g:if>
+			
 				<g:if test="${employeeInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="employee.name.label" default="Name" /></span>
@@ -49,7 +58,7 @@
 					
 				</li>
 				</g:if>
-			
+				
 				<g:if test="${employeeInstance?.address}">
 				<li class="fieldcontain">
 					<span id="address-label" class="property-label"><g:message code="employee.address.label" default="Address" /></span>

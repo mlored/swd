@@ -40,7 +40,7 @@ class EmployeeController {
             return
         }
 
-        employeeInstance.save flush:true
+        personInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

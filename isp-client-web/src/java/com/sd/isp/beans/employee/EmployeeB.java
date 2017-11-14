@@ -17,6 +17,7 @@ public class EmployeeB extends BaseBean {
 	public EmployeeB(Map<String, String> params) {
 		super(params);
 	}
+	
 	public String getName() {
 		return _name;
 	}

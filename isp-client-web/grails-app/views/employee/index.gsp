@@ -23,7 +23,7 @@
 			<table>
 			<thead>
 					<tr>
-					
+						
 						<g:sortableColumn property="name" title="${message(code: 'employee.name.label', default: 'Name')}" />
 					
 						<g:sortableColumn property="surName" title="${message(code: 'employee.surName.label', default: 'SurName')}" />

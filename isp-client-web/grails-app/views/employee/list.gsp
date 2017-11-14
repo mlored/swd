@@ -12,10 +12,11 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+    <div class="box">
     <table class="table table-striped table-hover table-condensed">
         <thead>
         <tr>
-
+        	<th>#</th>
             <g:sortableColumn property="name" title="Nombre" />
             <g:sortableColumn property="surName" title="Apellido" />
             <g:sortableColumn property="ruc" title="Ruc" />
@@ -26,7 +27,7 @@
         <tbody>
         <g:each in="${employeeInstanceList}" status="i" var="employeeInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
+                <td>${i+1}</td>
                 <td><g:link action="show" id="${employeeInstance.id}">${fieldValue(bean: employeeInstance, field: "name")}</g:link></td>
                 <td>${fieldValue(bean: employeeInstance, field: "surName")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "ruc")}</td>
@@ -36,6 +37,7 @@
         </g:each>
         </tbody>
     </table>
+    </div>
     <div class="pagination">
         <g:paginate total="${employeeInstanceTotal}" />
     </div>
