@@ -1,33 +1,49 @@
+<%@ page import="com.sd.isp.client.Client" %>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'firstName', 'error')} required">
-	<label for="firstName">
-		<g:message code="client.firstName.label" default="First Name" />
+
+
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'name', 'error')} required">
+	<label for="name">
+		<g:message code="client.name.label" default="Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" maxlength="50" required="" value="${clientInstance?.firstName}"/>
+	<g:textField name="name" maxlength="50" required="" value="${clientInstance?.name}"/>
+
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'lastName', 'error')} required">
-	<label for="lastName">
-		<g:message code="client.lastName.label" default="Last Name" />
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'surName', 'error')} required">
+	<label for="surName">
+		<g:message code="client.surName.label" default="Sur Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="lastName" maxlength="50" required="" value="${clientInstance?.lastName}"/>
+	<g:textField name="surName" maxlength="50" required="" value="${clientInstance?.surName}"/>
+
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'document', 'error')} required">
-	<label for="document">
-		<g:message code="client.document.label" default="Document" />
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'ruc', 'error')} required">
+	<label for="ruc">
+		<g:message code="client.ruc.label" default="Ruc" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="document" maxlength="10" required="" value="${clientInstance?.document}"/>
+	<g:textField name="ruc" maxlength="10" required="" value="${clientInstance?.ruc}"/>
+
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'city', 'error')} required">
-	<label for="city">
-		<g:message code="state.city.label" default="City" />
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'address', 'error')} required">
+	<label for="address">
+		<g:message code="client.address.label" default="Address" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="country" name="cityId" from="${cities}" optionKey="id" optionValue="name" required="" value="${clientInstance?.city?.id}" class="many-to-one"/>
+	<g:textField name="address" maxlength="100" required="" value="${clientInstance?.address}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'cellphone', 'error')} required">
+	<label for="cellphone">
+		<g:message code="client.cellphone.label" default="Cellphone" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="cellphone" type="number" value="${clientInstance.cellphone}" required=""/>
+
 </div>
 
