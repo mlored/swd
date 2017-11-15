@@ -7,45 +7,38 @@ import org.apache.commons.lang.StringUtils;
 import com.sd.isp.beans.base.BaseBean;
 
 public class ClientB extends BaseBean {
+
 	private static final long serialVersionUID = 1L;
-	private String _name;
-	private String _surName;
-	private String _ruc;
-	private String _address;
-	private String _cellphone;
+	private String _firstName;
+	private String _lastName;
+	private String _document;
 
 	public ClientB(Map<String, String> params) {
 		super(params);
 	}
-	public String getName() {
-		return _name;
+
+	public String getFirstName() {
+		return _firstName;
 	}
-	public void setName(String name) {
-		_name = name;
+
+	public void setFirstName(String firstName) {
+		_firstName = firstName;
 	}
-	public String getSurName() {
-		return _surName;
+
+	public String getLastName() {
+		return _lastName;
 	}
-	public void setSurName(String surName) {
-		_surName = surName;
+
+	public void setLastName(String lastName) {
+		_lastName = lastName;
 	}
-	public String getRuc() {
-		return _ruc;
+
+	public String getDocument() {
+		return _document;
 	}
-	public void setRuc(String ruc) {
-		_ruc = ruc;
-	}
-	public String getAddress() {
-		return _address;
-	}
-	public void setAddress(String address) {
-		_address = address;
-	}
-	public String getCellphone() {
-		return _cellphone;
-	}
-	public void setCellphone(String cellphone) {
-		_cellphone = cellphone;
+
+	public void setDocument(String document) {
+		_document = document;
 	}
 
 	@Override
@@ -53,11 +46,9 @@ public class ClientB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		setName(params.get("name"));
-		setSurName(params.get("surName"));
-		setRuc(params.get("RUC"));
-		setAddress(params.get("address"));
-		setCellphone(params.get("cellphone"));
+		setFirstName(params.get("firstName"));
+		setLastName(params.get("lastName"));
+		setDocument(params.get("document"));
 
 	}
 

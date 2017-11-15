@@ -1,17 +1,19 @@
 package com.sd.isp.client
-import static org.springframework.http.HttpStatus.*
-import com.sd.isp.beans.client.ClientB
-import com.sd.isp.service.client.IClientService;
-import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+import org.springframework.dao.DataIntegrityViolationException
+
+import com.sd.isp.beans.client.ClientB
+import com.sd.isp.service.client.IClientService
+
 class ClientController {
 
-	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-	IClientService clientService
+	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	def index(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	//services
+	def IClientService clientService
+
+	def index() {
+		redirect(action: "list", params: params)
 	}
 
 	def list(Integer max) {
@@ -20,90 +22,115 @@ class ClientController {
 		[clientInstanceList: clients, clientInstanceTotal: clients?.size()]
 	}
 
-	def show(Client clientInstance) {
-		respond clientInstance
-	}
-
 	def create() {
-		respond new Client(params)
+		[clientInstance: new ClientB(params), cities:cityService.getAll()]
 	}
 
-	@Transactional
-	def save(Client clientInstance) {
-		if (clientInstance == null) {
-			notFound()
+	def save() {
+		def clientInstance = new ClientB(params)
+		clientInstance.setCity(cityService.getById(Integer.valueOf(params.cityId)))
+		def newClient= clientService.save(clientInstance)
+		if (!newClient?.getId()) {
+			render(view: "create", model: [clientInstance: clientInstance])
 			return
 		}
 
-		if (clientInstance.hasErrors()) {
-			respond clientInstance.errors, view:'create'
+		flash.message = message(code: 'default.created.message', args: [
+			message(code: 'client.label', default: 'Client'),
+			newClient.getId()
+		])
+		redirect(action: "show", id: newClient.getId())
+	}
+
+	def show(Long id) {
+		def clientInstance = clientService.getById(id.intValue())
+		if (!clientInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'client.label', default: 'Client'),
+				id
+			])
+			redirect(action: "list")
 			return
 		}
 
-		clientInstance.save flush:true
+		[clientInstance: clientInstance]
+	}
 
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
-				redirect clientInstance
+	def edit(Long id) {
+		def clientInstance = Client.get(id)
+		if (!clientInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'client.label', default: 'Client'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+
+		[clientInstance: clientInstance]
+	}
+
+	def update(Long id, Long version) {
+		def clientInstance = Client.get(id)
+		if (!clientInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'client.label', default: 'Client'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+
+		if (version != null) {
+			if (clientInstance.version > version) {
+				clientInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+						[
+							message(code: 'client.label', default: 'Client')] as Object[],
+						"Another user has updated this Client while you were editing")
+				render(view: "edit", model: [clientInstance: clientInstance])
+				return
 			}
-			'*' { respond clientInstance, [status: CREATED] }
 		}
-	}
 
-	def edit(Client clientInstance) {
-		respond clientInstance
-	}
+		clientInstance.properties = params
 
-	@Transactional
-	def update(Client clientInstance) {
-		if (clientInstance == null) {
-			notFound()
+		if (!clientInstance.save(flush: true)) {
+			render(view: "edit", model: [clientInstance: clientInstance])
 			return
 		}
 
-		if (clientInstance.hasErrors()) {
-			respond clientInstance.errors, view:'edit'
+		flash.message = message(code: 'default.updated.message', args: [
+			message(code: 'client.label', default: 'Client'),
+			clientInstance.id
+		])
+		redirect(action: "show", id: clientInstance.id)
+	}
+
+	def delete(Long id) {
+		def clientInstance = Client.get(id)
+		if (!clientInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'client.label', default: 'Client'),
+				id
+			])
+			redirect(action: "list")
 			return
 		}
 
-		clientInstance.save flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [message(code: 'Client.label', default: 'Client'), clientInstance.id])
-				redirect clientInstance
-			}
-			'*'{ respond clientInstance, [status: OK] }
+		try {
+			clientInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [
+				message(code: 'client.label', default: 'Client'),
+				id
+			])
+			redirect(action: "list")
 		}
-	}
-
-	@Transactional
-	def delete(Client clientInstance) {
-
-		if (clientInstance == null) {
-			notFound()
-			return
-		}
-
-		clientInstance.delete flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.deleted.message', args: [message(code: 'Client.label', default: 'Client'), clientInstance.id])
-				redirect action:"index", method:"GET"
-			}
-			'*'{ render status: NO_CONTENT }
-		}
-	}
-
-	protected void notFound() {
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.not.found.message', args: [message(code: 'client.label', default: 'Client'), params.id])
-				redirect action: "index", method: "GET"
-			}
-			'*'{ render status: NOT_FOUND }
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [
+				message(code: 'client.label', default: 'Client'),
+				id
+			])
+			redirect(action: "show", id: id)
 		}
 	}
 }

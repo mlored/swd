@@ -15,10 +15,6 @@ class CarsController {
 
     ICarService carService
 
-
-    def create() {
-        [carInstance: new CarB(params)]
-    }
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         //respond Car.list(params), model:[carsInstanceCount: Cars.count()]
