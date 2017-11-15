@@ -59,9 +59,11 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	protected ClientB convertDtoToBean(ClientDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
-		//params.put("firstName", dto.getFirstName());
-		//params.put("lastName", dto.getLastName());
-		//params.put("document", dto.getDocument());
+		params.put("name", dto.getName());
+		params.put("surName", dto.getSurName());
+		params.put("ruc", dto.getRUC());
+		params.put("address", dto.getAddress());
+		//params.put("cellphone", dto.getCellphone());
 
 		final ClientB clientB = new ClientB(params);
 
