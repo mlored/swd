@@ -12,18 +12,9 @@ public class CarDTO extends BaseDTO {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String _mark;
-	private String _model;
-	private String _number;
-	private String _color;
-
-	@XmlElement
-	public String getNumber() {
-		return _number;
-	}
-
-	public void setNumber(String number) {
-		_number = number;
-	}
+	//private String _model;
+	//private String _number;
+	//private String _color;
 
 	@XmlElement
 	public String getMark() {
@@ -34,6 +25,15 @@ public class CarDTO extends BaseDTO {
 		_mark = mark;
 	}
 
+	/*@XmlElement
+	public String getNumber() {
+		return _number;
+	}
+
+	public void setNumber(String number) {
+		_number = number;
+	}
+	
 	@XmlElement
 	public String getModel() {
 		return _model;
@@ -51,5 +51,5 @@ public class CarDTO extends BaseDTO {
 	public void setColor(String color) {
 		_color = color;
 	}
-
+*/
 }

@@ -1,4 +1,4 @@
-
+<%@ page import="com.sd.isp.car.Cars" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,10 @@
 </head>
 <body>
 <div id="list-car" class="content scaffold-list" role="main">
-    <h1>Lista de Automoviles</h1>
+    <h1>
+        Lista de Automoviles
+        <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+    </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -21,16 +24,22 @@
                 <g:sortableColumn property="mark" title="Marca" />
                 <g:sortableColumn property="model" title="Modelo" />
                 <g:sortableColumn property="color" title="Color" />
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <g:each in="${carInstanceList}" status="i" var="carInstance">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
-                    <td><g:link action="show" id="${carInstance.id}">${fieldValue(bean: carInstance, field: "number")}</g:link></td>
+                    <td>
+                        <g:link action="edit" id="${carInstance?.id}"><g:message code="${fieldValue(bean: carInstance, field: "number")}" default="${fieldValue(bean: carInstance, field: "number")}" /></g:link>
+                    </td>
                     <td>${fieldValue(bean: carInstance, field: "mark")}</td>
                     <td>${fieldValue(bean: carInstance, field: "model")}</td>
                     <td>${fieldValue(bean: carInstance, field: "color")}</td>
+                    <td>
+                        <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    </td>
                 </tr>
             </g:each>
             </tbody>

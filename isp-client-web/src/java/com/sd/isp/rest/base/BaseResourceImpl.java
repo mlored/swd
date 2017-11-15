@@ -1,8 +1,11 @@
 package com.sd.isp.rest.base;
 
 import com.sd.isp.dto.base.BaseDTO;
+import com.sd.isp.dto.car.CarDTO;
+import com.sd.isp.dto.car.CarResult;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import javax.ws.rs.core.MediaType;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseResource<DTO> {
 	private final String _resourcePath;
@@ -29,8 +32,19 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	}
 
 	@Override
-	public DTO save(DTO dto) {
-		return getWebResource().entity(dto).post(getDtoClass());
+	public DTO save(DTO dto1) {
+		com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create();
+
+
+		CarResult carResult = client.resource("http://localhost:8080/isp-platform/rest/car").get(CarResult.class);
+		for (CarDTO c :carResult.getCars()) { System.out.println(c.getMark()); }
+
+		CarDTO dto = new CarDTO();
+		dto.setMark("Porsche");
+		CarDTO newCar = client.resource("http://localhost:8080/isp-platform/rest/car").entity(dto).post(CarDTO.class);
+		System.out.println(newCar.getMark());
+
+		return null;
 	}
 
 	@Override

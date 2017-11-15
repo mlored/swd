@@ -1,7 +1,8 @@
+import com.sd.isp.dto.car.CarDTO;
+import com.sd.isp.dto.car.CarResult;
 import com.sd.isp.dto.client.ClientDTO;
-import com.sd.isp.dto.location.city.CityDTO;
-import com.sd.isp.dto.location.country.CountryDTO;
-import com.sd.isp.dto.location.state.StateDTO;
+import com.sd.isp.dto.client.ClientResult;
+
 
 public class IspPlatformClient {
 
@@ -32,29 +33,13 @@ public class IspPlatformClient {
 		 * ).get(ClientResult.class); for (ClientDTO c :
 		 * clientResult.getClients()) { System.out.println(c.getFirstName()); }
 		 */
-
-		final CountryDTO countryDTO = new CountryDTO();
-		countryDTO.setName("Paraguay");
-		final CountryDTO country = client.resource(BASE_URL + "/country").entity(countryDTO).post(CountryDTO.class);
-
-		final StateDTO stateDTO = new StateDTO();
-		stateDTO.setCountryId(country.getId());
-		stateDTO.setName("Itapua");
-		final StateDTO state = client.resource(BASE_URL + "/state").entity(stateDTO).post(StateDTO.class);
-
-		final CityDTO cityDTO = new CityDTO();
-		cityDTO.setCountryId(country.getId());
-		cityDTO.setStateId(state.getId());
-		cityDTO.setName("Encarnacion");
-		final CityDTO city = client.resource(BASE_URL + "/city").entity(cityDTO).post(CityDTO.class);
-
-		ClientDTO clientDTO = new ClientDTO();
-		clientDTO.setDocument("4585dad2");
-		clientDTO.setFirstName("juan3333");
-		clientDTO.setLastName("pere3333z");
-		clientDTO.setCityId(city.getId());
-
-		client.resource(BASE_URL + "/client").entity(clientDTO).post(ClientDTO.class);
-
+		
+		CarResult carResult = client.resource("http://localhost:8080/isp-platform/rest/car").get(CarResult.class);
+		for (CarDTO c :carResult.getCars()) { System.out.println(c.getMark()); }
+		
+		CarDTO dto = new CarDTO();
+		dto.setMark("Porsche");
+		CarDTO newCar = client.resource("http://localhost:8080/isp-platform/rest/car").entity(dto).post(CarDTO.class);
+		System.out.println(newCar.getMark());
 	}
 }

@@ -37,6 +37,7 @@ public class CarResource {
 
 	@POST
 	public CarDTO save(CarDTO car) {
+		System.out.println(car.getMark());
 		return carService.save(car);
 	}
 	

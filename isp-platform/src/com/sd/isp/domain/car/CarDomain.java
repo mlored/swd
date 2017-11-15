@@ -26,7 +26,7 @@ public class CarDomain extends BaseDomain {
 	@Column(name = "mark")
 	private String mark;
 
-	@Column(name = "model", nullable = false)
+	@Column(name = "model")
 	private String model;
 
 	@Column(name = "number", unique = true)

@@ -60,8 +60,8 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("mark", dto.getMark());
-        params.put("model", dto.getModel());
-        params.put("color", dto.getColor());
+        //params.put("model", dto.getModel());
+        //params.put("color", dto.getColor());
         //params.put("number", dto.getNumber());
 
         final CarB carB = new CarB(params);
@@ -73,9 +73,11 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     protected CarDTO convertBeanToDto(CarB bean) {
         final CarDTO dto = new CarDTO();
         dto.setId(bean.getId());
-        //dto.setDocument(bean.getDocument());
-        //dto.setFirstName(bean.getFirstName());
-        //dto.setLastName(bean.getLastName());
+        dto.setMark(bean.getMark());
+        //dto.setModel(bean.getModel());
+        //dto.setColor(bean.getColor());
+        //dto.setNumber(bean.getNumber());
+
         return dto;
     }
 }
