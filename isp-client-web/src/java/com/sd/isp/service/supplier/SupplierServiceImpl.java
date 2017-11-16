@@ -56,6 +56,11 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
+	public SupplierB delete(Integer id) {
+		return null;
+	}
+
+	@Override
 	protected SupplierB convertDtoToBean(SupplierDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));

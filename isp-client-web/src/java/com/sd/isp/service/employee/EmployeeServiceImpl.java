@@ -56,6 +56,11 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
+	public EmployeeB delete(Integer id) {
+		return null;
+	}
+
+	@Override
 	protected EmployeeB convertDtoToBean(EmployeeDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));

@@ -57,6 +57,11 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
+    public PartB delete(Integer id) {
+        return null;
+    }
+
+    @Override
     protected PartB convertDtoToBean(PartDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));

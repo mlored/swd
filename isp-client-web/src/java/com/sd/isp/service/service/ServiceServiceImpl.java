@@ -56,6 +56,11 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
+    public ServiceB delete(Integer id) {
+        return null;
+    }
+
+    @Override
     protected ServiceB convertDtoToBean(ServiceDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));

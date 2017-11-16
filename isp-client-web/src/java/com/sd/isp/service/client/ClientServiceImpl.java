@@ -56,6 +56,11 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
+	public ClientB delete(Integer id) {
+		return null;
+	}
+
+	@Override
 	protected ClientB convertDtoToBean(ClientDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
