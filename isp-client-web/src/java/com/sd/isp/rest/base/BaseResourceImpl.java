@@ -32,19 +32,8 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	}
 
 	@Override
-	public DTO save(DTO dto1) {
-		com.sun.jersey.api.client.Client client = com.sun.jersey.api.client.Client.create();
-
-
-		CarResult carResult = client.resource("http://localhost:8080/isp-platform/rest/car").get(CarResult.class);
-		for (CarDTO c :carResult.getCars()) { System.out.println(c.getMark()); }
-
-		CarDTO dto = new CarDTO();
-		dto.setMark("Porsche");
-		CarDTO newCar = client.resource("http://localhost:8080/isp-platform/rest/car").entity(dto).post(CarDTO.class);
-		System.out.println(newCar.getMark());
-
-		return null;
+	public DTO save(DTO dto) {
+		return getWebResource().entity(dto).post(getDtoClass());
 	}
 
 	@Override
@@ -52,4 +41,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 		return getWebResource().path("/" + id).get(getDtoClass());
 	}
 
+	public DTO destroy(Integer id){
+		return getWebResource().path("/" + id).delete(getDtoClass());
+	}
 }

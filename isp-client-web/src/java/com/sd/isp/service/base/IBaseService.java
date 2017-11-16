@@ -11,4 +11,6 @@ public interface IBaseService<BEAN extends BaseBean, DTO extends BaseDTO> {
 	public List<BEAN> getAll();
 
 	public BEAN getById(Integer id);
+
+	public BEAN delete(Integer id);
 }

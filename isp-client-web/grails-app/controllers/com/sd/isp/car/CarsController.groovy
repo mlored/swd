@@ -31,7 +31,7 @@ class CarsController {
                 message(code: 'car.label', default: 'Car'),
                 newCar.getId()
         ])
-        redirect(action: "show", id: newCar.getId())
+        redirect(action: "index")
     }
 
     def index(Integer max) {
@@ -44,11 +44,11 @@ class CarsController {
         [carInstanceList: cars, carInstanceTotal: cars?.size()]
     }
 
-    def show(Long id) {
+    /*def show(Long id) {
         def carInstance = carService.getById(id.intValue())
         if (!carInstance) {
             flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'car.label', default: 'Country'),
+                    message(code: 'car.label', default: 'Car'),
                     id
             ])
             redirect(action: "list")
@@ -56,13 +56,13 @@ class CarsController {
         }
 
         [carInstance: carInstance]
-    }
+    }*/
 
     def edit(Long id) {
         def carInstance = carService.getById(id.intValue())
         if (!carInstance) {
             flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'car.label', default: 'Country'),
+                    message(code: 'car.label', default: 'Car'),
                     id
             ])
             redirect(action: "list")
@@ -76,7 +76,7 @@ class CarsController {
         def carInstance = carService.getById(id.intValue())
         if (!carInstance) {
             flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'car.label', default: 'Country'),
+                    message(code: 'car.label', default: 'Car'),
                     id
             ])
             redirect(action: "list")
@@ -87,8 +87,8 @@ class CarsController {
             if (carInstance.version > version) {
                 carInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [
-                                message(code: 'car.label', default: 'Country')] as Object[],
-                        "Another user has updated this Country while you were editing")
+                                message(code: 'car.label', default: 'Car')] as Object[],
+                        "Another user has updated this Car while you were editing")
                 render(view: "edit", model: [carInstance: carInstance])
                 return
             }
@@ -102,10 +102,39 @@ class CarsController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [
-                message(code: 'car.label', default: 'Country'),
+                message(code: 'car.label', default: 'Car'),
                 carInstance.id
         ])
         redirect(action: "show", id: carInstance.id)
+    }
+
+    def delete(Long id) {
+        def carInstance = carService.getById(id.intValue())
+        if (!carInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'car.label', default: 'Car'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        try {
+            carService.delete(carInstance?.id)
+            carInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'car.label', default: 'Car'),
+                    id
+            ])
+            redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [
+                    message(code: 'car.label', default: 'Car'),
+                    id
+            ])
+            redirect(action: "show", id: id)
+        }
     }
 
     protected void notFound() {

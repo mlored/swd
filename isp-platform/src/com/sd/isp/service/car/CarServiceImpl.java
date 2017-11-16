@@ -73,9 +73,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 		final CarDTO dto = new CarDTO();
 		dto.setId(domain.getId());
 		dto.setMark(domain.getMark());
-		//dto.setModel(domain.getModel());
-		//dto.setNumber(domain.getNumber());
-		//dto.setColor(domain.getColor());
+		dto.setModel(domain.getModel());
+		dto.setNumber(domain.getNumber());
+		dto.setColor(domain.getColor());
 		return dto;
 	}
 
@@ -84,9 +84,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 		final CarDomain domain = new CarDomain();
 		domain.setId(dto.getId());
 		domain.setMark(dto.getMark());
-		//domain.setModel(dto.getModel());
-		//domain.setNumber(dto.getNumber());
-		//domain.setColor(dto.getColor());
+		domain.setModel(dto.getModel());
+		domain.setNumber(dto.getNumber());
+		domain.setColor(dto.getColor());
 		return domain;
 	}
 

@@ -56,13 +56,21 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
+    public CarB delete(Integer id) {
+        final CarDTO dto = _carResource.destroy(id);
+        final CarB bean = convertDtoToBean(dto);
+
+        return bean;
+    }
+
+    @Override
     protected CarB convertDtoToBean(CarDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("mark", dto.getMark());
-        //params.put("model", dto.getModel());
-        //params.put("color", dto.getColor());
-        //params.put("number", dto.getNumber());
+        params.put("model", dto.getModel());
+        params.put("color", dto.getColor());
+        params.put("number", dto.getNumber());
 
         final CarB carB = new CarB(params);
 
@@ -74,9 +82,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         final CarDTO dto = new CarDTO();
         dto.setId(bean.getId());
         dto.setMark(bean.getMark());
-        //dto.setModel(bean.getModel());
-        //dto.setColor(bean.getColor());
-        //dto.setNumber(bean.getNumber());
+        dto.setModel(bean.getModel());
+        dto.setColor(bean.getColor());
+        dto.setNumber(bean.getNumber());
 
         return dto;
     }
