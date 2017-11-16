@@ -8,8 +8,10 @@
 </head>
 <body>
 <div id="list-employee" class="content scaffold-list" role="main">
-    <h1>Lista de Empleados</h1>
-    <g:if test="${flash.message}">
+    <h1>Lista de Empleados
+   		 <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+    </h1>
+     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <div class="box">
@@ -33,6 +35,9 @@
                 <td>${fieldValue(bean: employeeInstance, field: "ruc")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "address")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "cellphone")}</td>
+                <td>
+                   <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
+                </td>
             </tr>
         </g:each>
         </tbody>

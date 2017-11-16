@@ -135,7 +135,7 @@
                     <ul class="treeview-menu">
                         <li><a href="employee/list"><i class="fa fa-user"></i> Empleados</a></li>
                         <li><a href="client/list"><i class="fa fa-user"></i> Clientes</a></li>
-                        <li><a href="index2.html"><i class="fa fa-user"></i> Proveedores</a></li>
+                        <li><a href="supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
                     </ul>
                 </li>
 

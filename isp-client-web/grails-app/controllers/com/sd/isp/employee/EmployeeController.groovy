@@ -1,7 +1,9 @@
 package com.sd.isp.employee
 import static org.springframework.http.HttpStatus.*
+
 import com.sd.isp.beans.employee.EmployeeB
 import com.sd.isp.service.employee.IEmployeeService;
+
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -12,6 +14,7 @@ class EmployeeController {
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+		redirect(action: "list", params: params)
     }
 	
 	def list(Integer max) {
@@ -20,36 +23,39 @@ class EmployeeController {
 		[employeeInstanceList: employees, employeeInstanceTotal: employees?.size()]
 	}
 
-    def show(Employee employeeInstance) {
-        respond employeeInstance
+     def show(Long id) {
+        def employeeInstance = employeeService.getById(id.intValue())
+        if (!employeeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'employee.label', default: 'Country'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        [employeeInstance: employeeInstance]
     }
 
     def create() {
-        respond new Employee(params)
+        [employeeInstance: new EmployeeB(params)]
     }
 
     @Transactional
-    def save(Employee employeeInstance) {
-        if (employeeInstance == null) {
-            notFound()
-            return
-        }
+	def save() {
+		def employeeInstance = new EmployeeB(params)
+		def newEmployee = employeeService.save(employeeInstance)
+		if (!newEmployee?.getId()) {
+			render(view: "create", model: [employeeInstance: employeeInstance])
+			return
+		}
 
-        if (employeeInstance.hasErrors()) {
-            respond employeeInstance.errors, view:'create'
-            return
-        }
-
-        personInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'employee.label', default: 'Employee'), employeeInstance.id])
-                redirect employeeInstance
-            }
-            '*' { respond employeeInstance, [status: CREATED] }
-        }
-    }
+		flash.message = message(code: 'default.created.message', args: [
+				message(code: 'employee.label', default: 'Employee'),
+				newEmployee.getId()
+		])
+		redirect(action: "show", id: newEmployee.getId())
+	}
 
     def edit(Employee employeeInstance) {
         respond employeeInstance
