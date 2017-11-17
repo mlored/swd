@@ -26,14 +26,14 @@
 			<g:message code="employee.address.label" default="Dirección" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="color" class="form-control"  placeholder="Color" maxlength="10" required="" value="${employeeInstance?.address}"/>
+		<g:textField name="address" class="form-control"  placeholder="Address" maxlength="80" required="" value="${employeeInstance?.address}"/>
 	</div>
 	<div class="form-group ${hasErrors(bean: employeeInstance, field: 'number', 'error')}">
 		<label for="cellphone">
 			<g:message code="employee.cellphone.label" default="Telefono" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="color" class="form-control"  placeholder="Telefono" maxlength="10" required="" value="${employeeInstance?.cellphone}"/>
+		<g:textField name="cellphone" class="form-control"  placeholder="Telefono" maxlength="30" required="" value="${employeeInstance?.cellphone}"/>
 	</div>
 </div>
 <!-- /.box-body -->

@@ -211,7 +211,7 @@
 			</g:if>
 			<ol class="property-list employee">
 			
-				<g:if test="${employeeInstance?.mark}">
+				<g:if test="${employeeInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="employee.name.label" default="Name" /></span>
 					
@@ -220,29 +220,38 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${employeeInstance?.model}">
+				<g:if test="${employeeInstance?.surName}">
 				<li class="fieldcontain">
-					<span id="model-label" class="property-label"><g:message code="employee.model.label" default="Model" /></span>
+					<span id="surName-label" class="property-label"><g:message code="employee.surName.label" default="SurName" /></span>
 					
-						<span class="property-value" aria-labelledby="model-label"><g:fieldValue bean="${employeeInstance}" field="model"/></span>
+						<span class="property-value" aria-labelledby="surName-label"><g:fieldValue bean="${employeeInstance}" field="surName"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${employeeInstance?.number}">
+				<g:if test="${employeeInstance?.ruc}">
 				<li class="fieldcontain">
-					<span id="number-label" class="property-label"><g:message code="employee.number.label" default="Number" /></span>
+					<span id="ruc-label" class="property-label"><g:message code="employee.ruc.label" default="Ruc" /></span>
 					
-						<span class="property-value" aria-labelledby="number-label"><g:fieldValue bean="${employeeInstance}" field="number"/></span>
+						<span class="property-value" aria-labelledby="ruc-label"><g:fieldValue bean="${employeeInstance}" field="ruc"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${employeeInstance?.color}">
+				<g:if test="${employeeInstance?.address}">
 				<li class="fieldcontain">
-					<span id="color-label" class="property-label"><g:message code="employee.color.label" default="Color" /></span>
+					<span id="address-label" class="property-label"><g:message code="employee.address.label" default="Address" /></span>
 					
-						<span class="property-value" aria-labelledby="color-label"><g:fieldValue bean="${employeeInstance}" field="color"/></span>
+						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${employeeInstance}" field="address"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${employeeInstance?.cellphone}">
+				<li class="fieldcontain">
+					<span id="cellphone-label" class="property-label"><g:message code="employee.cellphone.label" default="Cellphone" /></span>
+					
+						<span class="property-value" aria-labelledby="cellphone-label"><g:fieldValue bean="${employeeInstance}" field="cellphone"/></span>
 					
 				</li>
 				</g:if>

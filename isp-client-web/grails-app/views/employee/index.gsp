@@ -23,14 +23,15 @@
 			<table>
 			<thead>
 					<tr>
-						<g:sortableColumn property="mark" title="${message(code: 'employee.name.label', default: 'Mark')}" />
+						<g:sortableColumn property="name" title="${message(code: 'employee.name.label', default: 'Name')}" />
 					
-						<g:sortableColumn property="model" title="${message(code: 'employee.surName.label', default: 'Model')}" />
+						<g:sortableColumn property="surName" title="${message(code: 'employee.surName.label', default: 'SurName')}" />
 					
-						<g:sortableColumn property="number" title="${message(code: 'employee.ruc.label', default: 'Number')}" />
+						<g:sortableColumn property="ruc" title="${message(code: 'employee.ruc.label', default: 'Ruc')}" />
 					
-						<g:sortableColumn property="color" title="${message(code: 'employee.address.label', default: 'Color')}" />
+						<g:sortableColumn property="address" title="${message(code: 'employee.address.label', default: 'Address')}" />
 					
+					    <g:sortableColumn property="cellphone" title="${message(code: 'employee.cellphone.label', default: 'Cellphone')}" />
 					</tr>
 				</thead>
 				<tbody>

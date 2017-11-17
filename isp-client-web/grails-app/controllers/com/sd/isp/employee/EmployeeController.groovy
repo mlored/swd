@@ -23,7 +23,7 @@ class EmployeeController {
 		[employeeInstanceList: employees, employeeInstanceTotal: employees?.size()]
 	}
 
-     def show(Long id) {
+    /* def show(Long id) {
         def employeeInstance = employeeService.getById(id.intValue())
         if (!employeeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [
@@ -35,7 +35,7 @@ class EmployeeController {
         }
 
         [employeeInstance: employeeInstance]
-    }
+    }*/
 
     def create() {
         [employeeInstance: new EmployeeB(params)]
@@ -54,7 +54,7 @@ class EmployeeController {
 				message(code: 'employee.label', default: 'Employee'),
 				newEmployee.getId()
 		])
-		redirect(action: "show", id: newEmployee.getId())
+		 redirect(action: "index")
 	}
 
     def edit(Employee employeeInstance) {

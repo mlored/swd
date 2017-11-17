@@ -8,7 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sd.isp.beans.car.CarB;
 import com.sd.isp.beans.employee.EmployeeB;
+import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.employee.EmployeeDTO;
 import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.employee.IEmployeeResource;
@@ -57,7 +59,9 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 
 	@Override
 	public EmployeeB delete(Integer id) {
-		return null;
+		final EmployeeDTO dto = _employeeResource.destroy(id);
+        final EmployeeB bean = convertDtoToBean(dto);
+		return bean;
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 		params.put("surName", dto.getSurName());
 		params.put("ruc", dto.getRuc());
 		params.put("address", dto.getAddress());
-		//params.put("cellphone", dto.getCellphone());
+		params.put("cellphone", dto.getCellphone());
 
 		final EmployeeB employeeB = new EmployeeB(params);
 
@@ -79,9 +83,11 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	protected EmployeeDTO convertBeanToDto(EmployeeB bean) {
 		final EmployeeDTO dto = new EmployeeDTO();
 		dto.setId(bean.getId());
-		//dto.setDocument(bean.getDocument());
-		//dto.setFirstName(bean.getFirstName());
-		//dto.setLastName(bean.getLastName());
+        dto.setName(bean.getName());
+        dto.setSurName(bean.getSurName());
+        dto.setRuc(bean.getRuc());
+        dto.setAddress(bean.getAddress());
+        dto.setCellphone(bean.getCellphone());
 		return dto;
 	}
 }

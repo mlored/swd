@@ -36,7 +36,9 @@
                 <td>${fieldValue(bean: employeeInstance, field: "address")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "cellphone")}</td>
                 <td>
-                   <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
+                  <g:form controller="employee" method="DELETE">
+                    <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
+                  </g:form>
                 </td>
             </tr>
         </g:each>
