@@ -14,7 +14,7 @@ public class SupplierDTO extends BaseDTO {
 	private String _ruc;
 	private String _address;
 	private String _personType;
-	private Integer _cellphone;
+	private String _cellphone;
 
 	@XmlElement
 	public String getName() {
@@ -62,11 +62,11 @@ public class SupplierDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public Integer getCellphone() {
+	public String getCellphone() {
 		return _cellphone;
 	}
 
-	public void setCellphone(Integer cellphone) {
+	public void setCellphone(String cellphone) {
 		_cellphone = cellphone;
 	}
 

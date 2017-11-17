@@ -29,7 +29,7 @@ public abstract class PersonDomain extends BaseDomain {
 	private String RUC;
 
 	@Column(name = "cellphone" ,nullable = true)
-	private Integer cellphone;
+	private String cellphone;
 	
 	@Column(name = "address" ,nullable = true)
 	private String address;
@@ -67,11 +67,11 @@ public abstract class PersonDomain extends BaseDomain {
 		this.RUC = ruc;
 	}
 
-	public Integer getCellphone() {
+	public String getCellphone() {
 		return cellphone;
 	}
 
-	public void setCellphone(Integer cellphone) {
+	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
 	

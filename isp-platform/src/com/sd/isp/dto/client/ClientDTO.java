@@ -12,7 +12,7 @@ public class ClientDTO extends BaseDTO {
 	private String _name;
 	private String _surName;
 	private String _RUC;
-	private Integer _cellphone;
+	private String _cellphone;
 	private String _address;
 	private String _personType;
 
@@ -44,11 +44,11 @@ public class ClientDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public Integer getCellphone() {
+	public String getCellphone() {
 		return _cellphone;
 	}
 
-	public void setCellphone(Integer cellphone) {
+	public void setCellphone(String cellphone) {
 		_cellphone = cellphone;
 	}
 	
