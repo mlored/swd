@@ -1,9 +1,9 @@
 
-<%@ page import="com.sd.isp.car.Cars" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="adminlte">
 		<g:set var="entityName" value="${message(code: 'cars.label', default: 'Cars')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
