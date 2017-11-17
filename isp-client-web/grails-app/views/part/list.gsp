@@ -8,7 +8,10 @@
 </head>
 <body>
 <div id="list-part" class="content scaffold-list" role="main">
-    <h1>Lista de Respuestos</h1>
+    <h1>
+    	Lista de Respuestos
+    	<g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+    </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -27,11 +30,16 @@
             <g:each in="${partInstanceList}" status="i" var="partInstance">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
-                    <td><g:link action="show" id="${partInstance.id}">${fieldValue(bean: partInstance, field: "name")}</g:link></td>
+                    <td><g:link action="edit" id="${carInstance?.id}"><g:message code="${fieldValue(bean: carInstance, field: "number")}" default="${fieldValue(bean: carInstance, field: "number")}" /></g:link></td>
                     <td>${fieldValue(bean: partInstance, field: "name")}</td>
                     <td>${fieldValue(bean: partInstance, field: "description")}</td>
                     <td>${fieldValue(bean: partInstance, field: "price")}</td>
                     <td>${fieldValue(bean: partInstance, field: "quantity")}</td>
+                	<td>
+                        <g:form controller="parts" method="DELETE">
+                            <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
+                        </g:form>
+                    </td>
                 </tr>
             </g:each>
             </tbody>
