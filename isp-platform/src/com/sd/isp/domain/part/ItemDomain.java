@@ -30,10 +30,10 @@ public abstract class ItemDomain extends BaseDomain {
 	private String description;
 
 	@Column(name = "price")
-	private String price;
+	private Integer price;
 
 	@Column(name = "quantity", nullable = true)
-	private String quantity;
+	private Integer quantity;
 	
 	@OneToMany(mappedBy = "itemDomain")
     private List<EntryDetailsDomain> entryDetailsDomains;
@@ -66,19 +66,19 @@ public abstract class ItemDomain extends BaseDomain {
 		this.description = description;
 	}
 
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

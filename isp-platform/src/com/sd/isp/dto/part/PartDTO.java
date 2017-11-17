@@ -13,8 +13,8 @@ public class PartDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _description;
-	private String _price;
-	private String _quantity;
+	private Integer _price;
+	private Integer _quantity;
 
 	@XmlElement
 	public String getName() {
@@ -35,20 +35,20 @@ public class PartDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public String getPrice() {
+	public Integer getPrice() {
 		return _price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		_price = price;
 	}
 
 	@XmlElement
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return _quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		_quantity = quantity;
 	}
 
