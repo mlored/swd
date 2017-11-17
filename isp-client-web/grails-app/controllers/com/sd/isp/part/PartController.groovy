@@ -24,10 +24,10 @@ class PartController {
 		[partInstanceList: parts, partInstanceTotal: parts?.size()]
 	}
 
-    def show(Part partInstance) {
+   /* def show(Part partInstance) {
         respond partInstance
-    }
-
+    }*/
+	
     def create() {
         respond new Part(params)
     }
