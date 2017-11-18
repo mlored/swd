@@ -33,26 +33,20 @@ class PartController {
     }
 
     @Transactional
-    def save(Part partInstance) {
-        if (partInstance == null) {
-            notFound()
+    def save(){
+        def partInstance = new PartB(params)
+        def newPart = partService.save(partInstance)
+        if (!newPart?.getId()) {
+            render(view: "create", model: [partInstance: partInstance])
             return
         }
 
-        if (partInstance.hasErrors()) {
-            respond partInstance.errors, view:'create'
-            return
-        }
+        flash.message = message(code: 'default.created.message', args: [
+                message(code: 'part.label', default: 'Part'),
+                newPart.getId()
+        ])
+        redirect(action: "index")
 
-        partInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'part.label', default: 'Part'), partInstance.id])
-                redirect partInstance
-            }
-            '*' { respond partInstance, [status: CREATED] }
-        }
     }
 
     def edit(Part partInstance) {

@@ -1,4 +1,4 @@
-<%@ page import="com.sd.isp.part.Part" %>
+
 
 <div class="box-body">
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'name', 'error')} required">
@@ -16,21 +16,21 @@
 		</label>
 		<g:textField name="description" class="form-control" maxlength="50" placeholder="Descripción" required="" value="${partInstance?.description}"/>
 	</div>
-	
+
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'price', 'error')} required">
 		<label for="price">
-			<g:message code="part.price.label" default="Price" />
+			<g:message code="part.price.label" default="Precio" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="price" class="form-control" placeholder="Precio" value="${partInstance?.price}" required=""/>
+		<g:field name="price" type="number" class="form-control" maxlength="15"  placeholder="Precio" value="${partInstance?.price}" required=""/>
+
 	</div>
-	
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'quantity', 'error')} required">
 		<label for="quantity">
-			<g:message code="part.quantity.label" default="Quantity" />
+			<g:message code="part.quantity.label" default="Cantidad" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="quantity" class="form-control"  placeholder="Cantidad" maxlength="10" required="" value="${partInstance?.quantity}"/>
+		<g:field name="quantity" type="number" class="form-control"  placeholder="Cantidad" maxlength="10" value="${partInstance?.quantity}" required=""/>
 	</div>
 </div>
 <!-- /.box-body -->

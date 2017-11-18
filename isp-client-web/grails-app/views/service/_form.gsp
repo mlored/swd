@@ -25,9 +25,16 @@
 		<g:message code="service.price.label" default="Precio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="price" type="number" class="form-control" maxlength="15"  placeholder="Precio" value="${serviceInstance.price}" required=""/>
+	<g:field name="price" type="number" class="form-control" maxlength="15"  placeholder="Precio" value="${serviceInstance?.price}" required=""/>
 
 </div>
+	<div class="form-group ${hasErrors(bean: serviceInstance, field: 'quantity', 'error')} required">
+		<label for="quantity">
+			<g:message code="service.quantity.label" default="Cantidad" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:field name="quantity" type="number" class="form-control"  placeholder="Cantidad" maxlength="10" value="${serviceInstance?.quantity}" required=""/>
+	</div>	
 
 
 </div>

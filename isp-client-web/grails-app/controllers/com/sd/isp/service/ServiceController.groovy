@@ -30,10 +30,9 @@ class ServiceController {
         respond new Service(params)
     }
 
-    //@Transactional
+    @Transactional
     def save(){
         def serviceInstance = new ServiceB(params)
-        //serviceInstance.set
         def newService = serviceService.save(serviceInstance)
         if (!newService?.getId()) {
             render(view: "create", model: [serviceInstance: serviceInstance])
@@ -45,25 +44,7 @@ class ServiceController {
                 newService.getId()
         ])
         redirect(action: "index")
-        /*if (serviceInstance == null) {
-            notFound()
-            return
-        }
 
-        if (serviceInstance.hasErrors()) {
-            respond serviceInstance.errors, view:'create'
-            return
-        }
-
-        serviceInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'service.label', default: 'Service'), serviceInstance.id])
-                redirect serviceInstance
-            }
-            '*' { respond serviceInstance, [status: CREATED] }
-        }*/
     }
 
     def edit(Long id) {
