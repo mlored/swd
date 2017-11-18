@@ -55,8 +55,8 @@ public class PartB extends BaseBean{
 		}
 		setName(params.get("name"));
 		setDescription(params.get("description"));
-		setPrice(Integer.parseInt(params.get("price")));
-		setQuantity(Integer.parseInt(params.get("quantity")));
+		setPrice(Integer.valueOf(params.get("price")));
+		setQuantity(Integer.valueOf(params.get("quantity")));
 	}
 	
 }
