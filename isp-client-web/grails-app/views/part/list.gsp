@@ -9,7 +9,7 @@
 <body>
 <div id="list-part" class="content scaffold-list" role="main">
     <h1>
-    	Respuestos
+    	Repuestos
     	<g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
     </h1>
     <g:if test="${flash.message}">
