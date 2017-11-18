@@ -178,7 +178,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="cars/list">
+                    <a href="stock">
                         <i class="fa fa-cubes"></i> <span>Stock</span>
 
                     </a>
@@ -192,7 +192,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="index.html"><i class="fa fa-wrench"></i> Servicios</a></li>
-                        <li><a href="index2.html"><i class="fa fa-gear"></i> Repuestos</a></li>
+                        <li><a href="part"><i class="fa fa-gear"></i> Repuestos</a></li>
                     </ul>
                 </li>
 

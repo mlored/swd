@@ -136,7 +136,7 @@
 					<ul class="treeview-menu">
 						<li><a href="employee/list"><i class="fa fa-user"></i> Empleados</a></li>
 						<li><a href="client/list"><i class="fa fa-user"></i> Clientes</a></li>
-						<li><a href="index2.html"><i class="fa fa-user"></i> Proveedores</a></li>
+						<li><a href="supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
 					</ul>
 				</li>
 
@@ -179,7 +179,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="cars/list">
+					<a href="stock">
 						<i class="fa fa-cubes"></i> <span>Stock</span>
 
 					</a>
@@ -193,7 +193,7 @@
 					</a>
 					<ul class="treeview-menu">
 						<li><a href="index.html"><i class="fa fa-wrench"></i> Servicios</a></li>
-						<li><a href="index2.html"><i class="fa fa-gear"></i> Repuestos</a></li>
+						<li><a href="part"><i class="fa fa-gear"></i> Repuestos</a></li>
 					</ul>
 				</li>
 
