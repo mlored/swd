@@ -30,7 +30,7 @@
 			<g:message code="part.quantity.label" default="Quantity" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="cantidad" class="form-control"  placeholder="Cantidad" maxlength="10" required="" value="${partInstance?.quantity}"/>
+		<g:textField name="quantity" class="form-control"  placeholder="Cantidad" maxlength="10" required="" value="${partInstance?.quantity}"/>
 	</div>
 </div>
 <!-- /.box-body -->
