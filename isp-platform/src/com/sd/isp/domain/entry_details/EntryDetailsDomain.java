@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.entry.EntryDomain;
-import com.sd.isp.domain.item.ItemDomain;
+import com.sd.isp.domain.part.ItemDomain;
 
 @Entity
 @Table(name = "entry_details")
