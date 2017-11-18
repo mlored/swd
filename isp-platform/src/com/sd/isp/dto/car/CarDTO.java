@@ -1,9 +1,14 @@
 package com.sd.isp.dto.car;
 
+import java.util.List;
+
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.dto.base.BaseDTO;
+import com.sd.isp.dto.entry.EntryDTO;
 
 @XmlRootElement(name = "car")
 public class CarDTO extends BaseDTO {
@@ -15,6 +20,16 @@ public class CarDTO extends BaseDTO {
 	private String _model;
 	private String _number;
 	private String _color;
+    private List<EntryDTO> _entries;
+
+    @XmlElement
+	public List<EntryDTO> getEntries() {
+		return _entries;
+	}
+
+	public void setEntries(List<EntryDTO> entries) {
+		_entries = entries;
+	}
 
 	@XmlElement
 	public String getMark() {

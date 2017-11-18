@@ -10,15 +10,26 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.entry.EntryDaoImpl;
 import com.sd.isp.dao.entry.IEntryDao;
 import com.sd.isp.domain.entry.EntryDomain;
+import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
+import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.car.ICarService;
+import com.sd.isp.service.cliente.IClientService;
 
 @Service
 public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, EntryDaoImpl, EntryResult> implements IEntryService {
 
 	@Autowired
 	private IEntryDao entryDao;
+	
+	@Autowired
+	private ICarService carService;
+	
+	@Autowired
+	private IClientService clientService;
+	
 
 	@Override
 	@Transactional
@@ -74,6 +85,15 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		entry.setDate(domain.getDate());
 		entry.setNumber(domain.getNumber());
 		entry.setDiagnostic(domain.getDiagnostic());
+		entry.setCar(carService.getById(domain.getCarDomain().getId()));
+		entry.setClient(clientService.getById(domain.getClientDomain().getId()));
+		
+		for (EntryDetailsDomain edd : domain.getEntryDetailsDomains()) {
+			final EntryDetailsDTO entryDetail = new EntryDetailsDTO();
+			entryDetail.setDate(edd.getDate());
+			entry.getEntryDetails().add(entryDetail);
+		}
+		
 		return entry;
 	}
 
@@ -84,6 +104,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		entry.setDate(dto.getDate());
 		entry.setNumber(dto.getNumber());
 		entry.setDiagnostic(dto.getDiagnostic());
+		
 		return entry;
 	}
 

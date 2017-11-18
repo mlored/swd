@@ -53,7 +53,7 @@ public class CarB extends BaseBean {
     @Override
     protected void create(Map<String, String> params) {
         if (!StringUtils.isBlank(params.get("id"))) {
-            setId(Integer.valueOf(params.get("id")));
+                setId(Integer.valueOf(params.get("id")));
         }
         setMark(params.get("mark"));
         setModel(params.get("model"));

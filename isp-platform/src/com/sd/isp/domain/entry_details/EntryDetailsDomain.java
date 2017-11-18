@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.entry.EntryDomain;
-import com.sd.isp.domain.part.ItemDomain;
+import com.sd.isp.domain.item.ItemDomain;
 
 @Entity
 @Table(name = "entry_details")
@@ -30,5 +30,37 @@ public class EntryDetailsDomain extends BaseDomain {
 		
 		@ManyToOne
 	    private EntryDomain entryDomain;
+
+		public Integer getId() {
+			return id;
+		}
+
+		public void setId(Integer id) {
+			this.id = id;
+		}
+
+		public Date getDate() {
+			return date;
+		}
+
+		public void setDate(Date date) {
+			this.date = date;
+		}
+
+		public ItemDomain getItemDomain() {
+			return itemDomain;
+		}
+
+		public void setItemDomain(ItemDomain itemDomain) {
+			this.itemDomain = itemDomain;
+		}
+
+		public EntryDomain getEntryDomain() {
+			return entryDomain;
+		}
+
+		public void setEntryDomain(EntryDomain entryDomain) {
+			this.entryDomain = entryDomain;
+		}
 
 }
