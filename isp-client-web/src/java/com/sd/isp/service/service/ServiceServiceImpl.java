@@ -66,8 +66,8 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
         params.put("id", String.valueOf(dto.getId()));
         params.put("name", dto.getName());
         params.put("description", dto.getDescription());
-        //params.put("price", dto.getPrice());
-        //params.put("quantity", dto.getQuantity());
+        params.put("price", String.valueOf(dto.getPrice()));
+        params.put("quantity", String.valueOf(dto.getQuantity()));
 
         final ServiceB serviceB = new ServiceB(params);
 
@@ -78,9 +78,10 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     protected ServiceDTO convertBeanToDto(ServiceB bean) {
         final ServiceDTO dto = new ServiceDTO();
         dto.setId(bean.getId());
-        //dto.setDocument(bean.getDocument());
-        //dto.setFirstName(bean.getFirstName());
-        //dto.setLastName(bean.getLastName());
+        dto.setName(bean.getName());
+        dto.setDescription(bean.getDescription());
+        dto.setPrice(bean.getPrice());
+        dto.setQuantity(bean.getQuantity());
         return dto;
     }
 }

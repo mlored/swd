@@ -13,6 +13,7 @@ public class ClientB extends BaseBean {
 	private String _ruc;
 	private String _address;
 	private String _cellphone;
+	private String _personType;
 
 	public ClientB(Map<String, String> params) {
 		super(params);
@@ -47,6 +48,12 @@ public class ClientB extends BaseBean {
 	public void setCellphone(String cellphone) {
 		_cellphone = cellphone;
 	}
+	/*public String getPersonType() {
+		return _personType;
+	}*/
+	public void setPersonType(String type) {
+		_personType = type;
+	}
 
 	@Override
 	protected void create(Map<String, String> params) {
@@ -58,6 +65,7 @@ public class ClientB extends BaseBean {
 		setRuc(params.get("RUC"));
 		setAddress(params.get("address"));
 		setCellphone(params.get("cellphone"));
+		//setPersonType("ClientDomain");
 
 	}
 

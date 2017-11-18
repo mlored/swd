@@ -10,8 +10,8 @@ public class ServiceB extends BaseBean {
     private static final long serialVersionUID = 1L;
     private String _name;
     private String _description;
-    private String _price;
-    private String _quantity;
+    private Integer _price;
+    private Integer _quantity;
 
     public ServiceB(Map<String, String> params) {
         super(params);
@@ -28,16 +28,16 @@ public class ServiceB extends BaseBean {
     public void setDescription(String description) {
         _description = description;
     }
-    public String getPrice() {
+    public Integer getPrice() {
         return _price;
     }
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         _price = price;
     }
-    public String getQuantity() {
+    public Integer getQuantity() {
         return _quantity;
     }
-    public void setQuantity(String quantity) {
+    public void setQuantity(Integer quantity) {
         _quantity = quantity;
     }
 
@@ -48,8 +48,8 @@ public class ServiceB extends BaseBean {
         }
         setName(params.get("name"));
         setDescription(params.get("description"));
-        setPrice(params.get("price"));
-        setQuantity(params.get("quantity"));
+        setPrice(Integer.parseInt(params.get("price")));
+        setQuantity(Integer.parseInt(params.get("quantity")));
 
 
     }

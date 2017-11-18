@@ -1,5 +1,5 @@
 
-<%@ page import="com.sd.isp.client.Client" %>
+
 <!DOCTYPE html>
 <html>
 	<head>

@@ -8,7 +8,9 @@
 </head>
 <body>
 <div id="list-client" class="content scaffold-list" role="main">
-    <h1>Clientes</h1>
+    <h1>Clientes
+        <g:link class="btn btn-primary" action="create">Nuevo</g:link>
+    </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -33,6 +35,9 @@
                     <td>${fieldValue(bean: clientInstance, field: "ruc")}</td>
                     <td>${fieldValue(bean: clientInstance, field: "address")}</td>
                     <td>${fieldValue(bean: clientInstance, field: "cellphone")}</td>
+                    <td>
+                        <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
+                    </td>
                 </tr>
             </g:each>
             </tbody>

@@ -68,7 +68,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 		params.put("surName", dto.getSurName());
 		params.put("ruc", dto.getRUC());
 		params.put("address", dto.getAddress());
-		//params.put("cellphone", dto.getCellphone());
+		params.put("cellphone", dto.getCellphone());
+		//params.put("personType", dto.getType());
 
 		final ClientB clientB = new ClientB(params);
 
@@ -79,9 +80,12 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	protected ClientDTO convertBeanToDto(ClientB bean) {
 		final ClientDTO dto = new ClientDTO();
 		dto.setId(bean.getId());
-		//dto.setDocument(bean.getDocument());
-		//dto.setFirstName(bean.getFirstName());
-		//dto.setLastName(bean.getLastName());
+		dto.setName(bean.getName());
+		dto.setSurName(bean.getSurName());
+		dto.setRUC(bean.getRuc());
+		dto.setAddress(bean.getAddress());
+		dto.setCellphone(bean.getCellphone());
+		//dto.setType("ClientDomain");
 		return dto;
 	}
 }

@@ -7,7 +7,9 @@
 </head>
 <body>
 <div id="list-service" class="content scaffold-list" role="main">
-    <h1>Servicios</h1>
+    <h1>Servicios
+        <g:link class="btn btn-primary" action="create">Nuevo</g:link>
+    </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -19,7 +21,7 @@
                 <g:sortableColumn property="name" title="Nombre" />
                 <g:sortableColumn property="description" title="Descripcion" />
                 <g:sortableColumn property="price" title="Precio" />
-                <g:sortableColumn property="quantity" title="Cantidad" />
+
             </tr>
             </thead>
             <tbody>
@@ -29,7 +31,10 @@
                     <td><g:link action="show" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: serviceInstance, field: "description")}</td>
                     <td>${fieldValue(bean: serviceInstance, field: "price")}</td>
-                    <td>${fieldValue(bean: serviceInstance, field: "quantity")}</td>
+
+                    <td>
+                        <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
+                    </td>
                 </tr>
             </g:each>
             </tbody>
