@@ -23,17 +23,15 @@
 			<table>
 			<thead>
 					<tr>
-					
 						<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: 'Name')}" />
 					
-						<g:sortableColumn property="surName" title="${message(code: 'supplier.surName.label', default: 'Sur Name')}" />
+						<g:sortableColumn property="surName" title="${message(code: 'supplier.surName.label', default: 'SurName')}" />
 					
 						<g:sortableColumn property="ruc" title="${message(code: 'supplier.ruc.label', default: 'Ruc')}" />
 					
 						<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: 'Address')}" />
 					
-						<g:sortableColumn property="cellphone" title="${message(code: 'supplier.cellphone.label', default: 'Cellphone')}" />
-					
+					    <g:sortableColumn property="cellphone" title="${message(code: 'supplier.cellphone.label', default: 'Cellphone')}" />
 					</tr>
 				</thead>
 				<tbody>
@@ -47,7 +45,7 @@
 						<td>${fieldValue(bean: supplierInstance, field: "ruc")}</td>
 					
 						<td>${fieldValue(bean: supplierInstance, field: "address")}</td>
-					
+						
 						<td>${fieldValue(bean: supplierInstance, field: "cellphone")}</td>
 					
 					</tr>

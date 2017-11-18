@@ -8,8 +8,10 @@
 </head>
 <body>
 <div id="list-supplier" class="content scaffold-list" role="main">
-    <h1>Lista de Proveedores</h1>
-    <g:if test="${flash.message}">
+    <h1>Proveedores
+   		 <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+    </h1>
+     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <div class="box">
@@ -33,6 +35,11 @@
                 <td>${fieldValue(bean: supplierInstance, field: "ruc")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "address")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "cellphone")}</td>
+                <td>
+                  <g:form controller="supplier" method="DELETE">
+                    <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
+                  </g:form>
+                </td>
             </tr>
         </g:each>
         </tbody>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="list-employee" class="content scaffold-list" role="main">
-    <h1>Lista de Empleados
+    <h1>Empleados
    		 <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
     </h1>
      <g:if test="${flash.message}">

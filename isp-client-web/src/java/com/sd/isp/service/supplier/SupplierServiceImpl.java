@@ -8,7 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sd.isp.beans.employee.EmployeeB;
 import com.sd.isp.beans.supplier.SupplierB;
+import com.sd.isp.dto.employee.EmployeeDTO;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.rest.supplier.ISupplierResource;
 import com.sd.isp.dto.supplier.SupplierResult;
@@ -57,7 +59,11 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 
 	@Override
 	public SupplierB delete(Integer id) {
+		_supplierResource.destroy(id);
 		return null;
+	/*	final SupplierDTO dto = _supplierResource.destroy(id);
+        final SupplierB bean = convertDtoToBean(dto);
+		return bean;*/
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 		params.put("surName", dto.getSurName());
 		params.put("ruc", dto.getRuc());
 		params.put("address", dto.getAddress());
-		//params.put("cellphone", dto.getCellphone());
+		params.put("cellphone", dto.getCellphone());
 
 		final SupplierB supplierB = new SupplierB(params);
 
@@ -79,9 +85,11 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	protected SupplierDTO convertBeanToDto(SupplierB bean) {
 		final SupplierDTO dto = new SupplierDTO();
 		dto.setId(bean.getId());
-		//dto.setDocument(bean.getDocument());
-		//dto.setFirstName(bean.getFirstName());
-		//dto.setLastName(bean.getLastName());
+        dto.setName(bean.getName());
+        dto.setSurName(bean.getSurName());
+        dto.setRuc(bean.getRuc());
+        dto.setAddress(bean.getAddress());
+        dto.setCellphone(bean.getCellphone());
 		return dto;
 	}
 }

@@ -1,7 +1,9 @@
 package com.sd.isp.supplier
 import static org.springframework.http.HttpStatus.*
 
-import com.sd.isp.service.employee.IEmployeeService;
+import com.sd.isp.beans.supplier.SupplierB
+import com.sd.isp.supplier.Supplier;
+import com.sd.isp.service.supplier.ISupplierService;
 import com.sd.isp.service.supplier.ISupplierService
 
 import grails.transaction.Transactional
@@ -23,36 +25,30 @@ class SupplierController {
 		[supplierInstanceList: suppliers, supplierInstanceTotal: suppliers?.size()]
 	}
 
-    def show(Supplier supplierInstance) {
+   /* def show(Supplier supplierInstance) {
         respond supplierInstance
-    }
+    }*/
 
     def create() {
-        respond new Supplier(params)
+        [supplierInstance: new SupplierB(params)]
     }
 
     @Transactional
-    def save(Supplier supplierInstance) {
-        if (supplierInstance == null) {
-            notFound()
-            return
-        }
+	def save() {
+		def supplierInstance = new SupplierB(params)
+		def newSupplier = supplierService.save(supplierInstance)
+		if (!newSupplier?.getId()) {
+			render(view: "create", model: [supplierInstance: supplierInstance])
+			return
+		}
 
-        if (supplierInstance.hasErrors()) {
-            respond supplierInstance.errors, view:'create'
-            return
-        }
+		flash.message = message(code: 'default.created.message', args: [
+				message(code: 'supplier.label', default: 'Supplier'),
+				newSupplier.getId()
+		])
+		 redirect(action: "index")
+	}
 
-        supplierInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
-                redirect supplierInstance
-            }
-            '*' { respond supplierInstance, [status: CREATED] }
-        }
-    }
 
     def edit(Supplier supplierInstance) {
         respond supplierInstance
@@ -80,25 +76,24 @@ class SupplierController {
             '*'{ respond supplierInstance, [status: OK] }
         }
     }
-
     @Transactional
-    def delete(Supplier supplierInstance) {
-
-        if (supplierInstance == null) {
-            notFound()
-            return
-        }
-
-        supplierInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Supplier.label', default: 'Supplier'), supplierInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
+	def delete(Supplier supplierInstance) {
+		
+				if (supplierInstance == null) {
+					notFound()
+					return
+				}
+		
+				supplierInstance.delete flush:true
+		
+				request.withFormat {
+					form multipartForm {
+						flash.message = message(code: 'default.deleted.message', args: [message(code: 'Supplier.label', default: 'Supplier'), supplierInstance.id])
+						redirect action:"index", method:"GET"
+					}
+					'*'{ render status: NO_CONTENT }
+				}
+			}
 
     protected void notFound() {
         request.withFormat {

@@ -5,6 +5,7 @@ import com.sd.isp.beans.employee.EmployeeB
 import com.sd.isp.service.employee.IEmployeeService;
 
 import grails.transaction.Transactional
+import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
 class EmployeeController {
@@ -85,23 +86,33 @@ class EmployeeController {
     }
 
     @Transactional
-    def delete(Employee employeeInstance) {
-
-        if (employeeInstance == null) {
-            notFound()
-            return
-        }
-
-        employeeInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Employee.label', default: 'Employee'), employeeInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
+	def delete(Long id) {
+		def employeeInstance = Employee.get(id)
+		if (!employeeInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'employee.label', default: 'Employee'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
+		try {
+			employeeInstance.delete(flush: true)
+			flash.message = message(code: 'default.deleted.message', args: [
+				message(code: 'employee.label', default: 'Employee'),
+				id
+			])
+			redirect(action: "list")
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [
+				message(code: 'employee.label', default: 'Employee'),
+				id
+			])
+			redirect(action: "show", id: id)
+		}
+		
+	}
 
     protected void notFound() {
         request.withFormat {

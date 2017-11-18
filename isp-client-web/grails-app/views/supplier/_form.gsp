@@ -1,46 +1,39 @@
-<%@ page import="com.sd.isp.supplier.Supplier" %>
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'name', 'error')} required">
-	<label for="name">
-		<g:message code="supplier.name.label" default="Name" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="name" maxlength="50" required="" value="${supplierInstance?.name}"/>
 
+<div class="box-body">
+	<div class="form-group ${hasErrors(bean: supplierInstance, field: 'number', 'error')}">
+		<label for="name">
+			<g:message code="supplier.name.label" default="Nombre" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:textField name="name" class="form-control" maxlength="50"  placeholder="Nombre" required="" value="${supplierInstance?.name}" autofocus="autofocus" />
+	</div>
+	<div class="form-group ${hasErrors(bean: supplierInstance, field: 'number', 'error')}">
+		<label for="surName">
+			<g:message code="supplier.surName.label" default="Apellido" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:textField name="surName" class="form-control" maxlength="50" placeholder="Apellido" required="" value="${supplierInstance?.surName}"/>
+	</div>
+	<div class="form-group ${hasErrors(bean: supplierInstance, field: 'number', 'error')}">
+		<label for="ruc">
+			<g:message code="supplier.ruc.label" default="Ruc" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:textField name="ruc" class="form-control" placeholder="Ruc" value="${supplierInstance?.ruc}" required=""/>
+	</div>
+	<div class="form-group ${hasErrors(bean: supplierInstance, field: 'number', 'error')}">
+		<label for="address">
+			<g:message code="supplier.address.label" default="Dirección" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:textField name="address" class="form-control"  placeholder="Address" maxlength="80" required="" value="${supplierInstance?.address}"/>
+	</div>
+	<div class="form-group ${hasErrors(bean: supplierInstance, field: 'number', 'error')}">
+		<label for="cellphone">
+			<g:message code="supplier.cellphone.label" default="Telefono" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:textField name="cellphone" class="form-control"  placeholder="Telefono" maxlength="30" required="" value="${supplierInstance?.cellphone}"/>
+	</div>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'surName', 'error')} required">
-	<label for="surName">
-		<g:message code="supplier.surName.label" default="Sur Name" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="surName" maxlength="50" required="" value="${supplierInstance?.surName}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'ruc', 'error')} required">
-	<label for="ruc">
-		<g:message code="supplier.ruc.label" default="Ruc" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="ruc" maxlength="10" required="" value="${supplierInstance?.ruc}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'address', 'error')} required">
-	<label for="address">
-		<g:message code="supplier.address.label" default="Address" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="address" maxlength="100" required="" value="${supplierInstance?.address}"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'cellphone', 'error')} required">
-	<label for="cellphone">
-		<g:message code="supplier.cellphone.label" default="Cellphone" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="cellphone" type="number" value="${supplierInstance.cellphone}" required=""/>
-
-</div>
-
+<!-- /.box-body -->
