@@ -34,7 +34,7 @@
 			<span class="required-indicator">*</span>
 		</label>
 		<g:field name="quantity" type="number" class="form-control"  placeholder="Cantidad" maxlength="10" value="${serviceInstance?.quantity}" required=""/>
-	</div>	
+	</div>
 
 
 </div>

@@ -3,15 +3,15 @@
 <div class="box-body">
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'name', 'error')} required">
 		<label for="name">
-			<g:message code="part.name.label" default="Name" />
+			<g:message code="part.name.label" default="Nombre" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="name" class="form-control" maxlength="50"  placeholder="Name" required="" value="${partInstance?.name}" autofocus="autofocus" />
+		<g:textField name="name" class="form-control" maxlength="50"  placeholder="Nombre" required="" value="${partInstance?.name}" autofocus="autofocus" />
 	</div>
 	
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'description', 'error')} required">
 		<label for="description">
-			<g:message code="part.description.label" default="Description" />
+			<g:message code="part.description.label" default="Descripción" />
 			<span class="required-indicator">*</span>
 		</label>
 		<g:textField name="description" class="form-control" maxlength="50" placeholder="Descripción" required="" value="${partInstance?.description}"/>

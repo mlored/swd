@@ -147,27 +147,27 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="/isp-client-web/#">
                         <i class="fa fa-shopping-cart"></i> <span>Compras</span>
 
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/isp-client-web/#">
                         <i class="fa fa-credit-card"></i> <span>Ventas</span>
 
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="/isp-client-web/#">
                         <i class="fa fa-file"></i> <span>Fichas</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
-                        <li><a href="#"><i class="fa fa-file-text"></i> Servicios realizados</a></li>
+                        <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
+                        <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Servicios realizados</a></li>
                     </ul>
                 </li>
 

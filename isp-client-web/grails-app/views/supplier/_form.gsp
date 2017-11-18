@@ -26,7 +26,7 @@
 			<g:message code="supplier.address.label" default="Dirección" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="address" class="form-control"  placeholder="Address" maxlength="80" required="" value="${supplierInstance?.address}"/>
+		<g:textField name="address" class="form-control"  placeholder="Dirección" maxlength="80" required="" value="${supplierInstance?.address}"/>
 	</div>
 	<div class="form-group ${hasErrors(bean: supplierInstance, field: 'number', 'error')}">
 		<label for="cellphone">

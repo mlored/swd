@@ -9,8 +9,8 @@
 <body>
 <div id="list-car" class="content scaffold-list" role="main">
     <h1>
-        Lista de Automoviles
-        <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+         Automóviles
+        <g:link class="btn btn-primary" action="create">Nuevo</g:link>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -20,7 +20,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <g:sortableColumn property="number" title="Numero" />
+                <g:sortableColumn property="number" title="Nº de Chapa" />
                 <g:sortableColumn property="mark" title="Marca" />
                 <g:sortableColumn property="model" title="Modelo" />
                 <g:sortableColumn property="color" title="Color" />
