@@ -134,14 +134,14 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="employee/list"><i class="fa fa-user"></i> Empleados</a></li>
-						<li><a href="client/list"><i class="fa fa-user"></i> Clientes</a></li>
-						<li><a href="supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
+						<li><a href="/isp-client-web/employee/list"><i class="fa fa-user"></i> Empleados</a></li>
+						<li><a href="/isp-client-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
+						<li><a href="/isp-client-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
 					</ul>
 				</li>
 
 				<li>
-					<a href="cars/list">
+					<a href="/isp-client-web/cars/list">
 						<i class="fa fa-car"></i> <span>Autos</span>
 
 					</a>
@@ -154,7 +154,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="cars/list">
+					<a href="#">
 						<i class="fa fa-credit-card"></i> <span>Ventas</span>
 
 					</a>
@@ -167,19 +167,19 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="index.html"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
-						<li><a href="index2.html"><i class="fa fa-file-text"></i> Servicios realizados</a></li>
+						<li><a href="#"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
+						<li><a href="#"><i class="fa fa-file-text"></i> Servicios realizados</a></li>
 					</ul>
 				</li>
 
 				<li>
-					<a href="cars/list">
+					<a href="#">
 						<i class="fa fa-file-text-o"></i> <span>Reportes</span>
 
 					</a>
 				</li>
 				<li>
-					<a href="stock">
+					<a href="/isp-client-web/stock">
 						<i class="fa fa-cubes"></i> <span>Stock</span>
 
 					</a>
@@ -192,8 +192,8 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="index.html"><i class="fa fa-wrench"></i> Servicios</a></li>
-						<li><a href="part"><i class="fa fa-gear"></i> Repuestos</a></li>
+						<li><a href="/isp-client-web/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
+						<li><a href="/isp-client-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
 					</ul>
 				</li>
 
