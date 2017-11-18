@@ -23,7 +23,6 @@
                 <g:sortableColumn property="name" title="Nombre" />
                 <g:sortableColumn property="description" title="Descripción" />
                 <g:sortableColumn property="price" title="Precio" />
-                <g:sortableColumn property="quantity" title="Cantidad" />
             	<th></th>
             </tr>
             </thead>
@@ -34,7 +33,6 @@
                     <td><g:link action="edit" id="${partInstance?.id}"><g:message code="${fieldValue(bean: partInstance, field: "name")}" default="${fieldValue(bean: partInstance, field: "name")}" /></g:link></td>
                     <td>${fieldValue(bean: partInstance, field: "description")}</td>
                     <td>${fieldValue(bean: partInstance, field: "price")}</td>
-                    <td>${fieldValue(bean: partInstance, field: "quantity")}</td>
                 	<td>
                         <g:form controller="parts" method="DELETE">
                             <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />

@@ -19,7 +19,6 @@
                 <th>#</th>
                 <g:sortableColumn property="name" title="Nombre" />
                 <g:sortableColumn property="description" title="Descripción" />
-                <g:sortableColumn property="price" title="Precio" />
                 <g:sortableColumn property="quantity" title="Cantidad" />
             	<th></th>
             </tr>
@@ -30,7 +29,6 @@
                     <td>${i+1}</td>
                     <td><g:link action="edit" id="${partInstance?.id}"><g:message code="${fieldValue(bean: partInstance, field: "name")}" default="${fieldValue(bean: partInstance, field: "name")}" /></g:link></td>
                     <td>${fieldValue(bean: partInstance, field: "description")}</td>
-                    <td>${fieldValue(bean: partInstance, field: "price")}</td>
                     <td>${fieldValue(bean: partInstance, field: "quantity")}</td>
                 </tr>
             </g:each>
