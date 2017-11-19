@@ -13,7 +13,7 @@ public class BuyResult extends BaseResult<BuyDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<BuyDTO> getClients() {
+	public List<BuyDTO> getBuys() {
 		return getList();
 	}
 

@@ -1,9 +1,9 @@
-<%@ page import="com.sd.isp.supplier.Supplier" %>
+<%@ page import="com.sd.isp.employee.Employee" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="adminlte">
-		<g:set var="entityName" value="${message(code: 'supplier.label', default: 'Supplier')}" />
+		<g:set var="entityName" value="${message(code: 'employee.label', default: 'Employee')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -20,15 +20,15 @@
 						<g:if test="${flash.message}">
 							<div class="message" role="status">${flash.message}</div>
 						</g:if>
-						<g:hasErrors bean="${supplierInstance}">
+						<g:hasErrors bean="${employeeInstance}">
 							<ul class="errors" role="alert">
-								<g:eachError bean="${supplierInstance}" var="error">
+								<g:eachError bean="${employeeInstance}" var="error">
 									<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form url="[resource:supplierInstance, action:'update']" method="PUT" >
-							<g:hiddenField name="id" value="${supplierInstance?.id}" />
+						<g:form url="[resource:employeeInstance, action:'update']" method="PUT" >
+							<g:hiddenField name="id" value="${employeeInstance?.id}" />
 
 							<fieldset class="form">
 								<g:render template="form"/>
