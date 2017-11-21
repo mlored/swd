@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-platform-cache")
 	public CarDTO save(CarDTO dto) {
 		final CarDomain domain = convertDtoToDomain(dto);
 		final CarDomain carDomain = carDao.save(domain);
@@ -29,6 +31,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-platform-cache")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);
 		return convertDomainToDto(domain);
@@ -36,6 +39,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
+	@CachePut(value = "lab-platform-cache")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();
 		for (CarDomain domain : carDao.findAll()) {
