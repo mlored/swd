@@ -22,7 +22,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-platform-cache")
+	@CachePut(value = "isp-platform-cache",key = "'car_save'")
 	public CarDTO save(CarDTO dto) {
 		final CarDomain domain = convertDtoToDomain(dto);
 		final CarDomain carDomain = carDao.save(domain);
@@ -31,7 +31,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-platform-cache")
+	@CachePut(value = "isp-platform-cache", key = "'car_' + #id")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);
 		return convertDomainToDto(domain);
@@ -39,7 +39,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "lab-platform-cache")
+	@CachePut(value = "isp-platform-cache" , key = "'car_getAll'")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();
 		for (CarDomain domain : carDao.findAll()) {

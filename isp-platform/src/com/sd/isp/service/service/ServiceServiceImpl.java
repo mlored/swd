@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,10 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'service_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'service_getById_'+#dto.getId()")})*/
+  //  @CachePut(value = "isp-platform-cache",key="'client_getById_'+#dto.getId()", condition="#dto.getId() != null") 
+	@CachePut(value = "isp-platform-cache",key="'service_save'")
 	public ServiceDTO save(ServiceDTO dto) {
 		final ServiceDomain serviceDomain = convertDtoToDomain(dto);
 		final ServiceDomain service = serviceDao.save(serviceDomain);
@@ -30,6 +38,8 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'service_' + #id")
+  //@Cacheable(value="isp-platform-cache", key="'service_'+#root.methodName+'_'+#id")
 	public ServiceDTO getById(Integer id) {
 		final ServiceDomain serviceDomain = serviceDao.getById(id);
 		final ServiceDTO serviceDTO = convertDomainToDto(serviceDomain);
@@ -38,6 +48,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'service_getAll'")
 	public ServiceResult getAll() {
 		final List<ServiceDTO> services = new ArrayList<>();
 		for (ServiceDomain domain : serviceDao.findAll()) {
@@ -63,6 +74,8 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 
 	@Override
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'service_getAll'"),
+			           @CacheEvict(value="isp-platform-cache", key="'service_getById_'+#dto.getId()")})*/
 	public ServiceDTO delete(Integer id) {
 		final ServiceDomain domain = serviceDao.delete(id);
 		return convertDomainToDto(domain);

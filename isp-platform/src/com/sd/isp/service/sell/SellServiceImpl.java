@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,10 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 
 	@Override
 	@Transactional
+/*	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'sell_getAll'"),
+	                   @CacheEvict(value="isp-platform-cache", key="'sell_getById_'+#dto.getId()")})*/
+   // @CachePut(value = "isp-platform-cache",key="'sell_getById_'+#dto.getId()", condition="#dto.getId() != null")
+	@CachePut(value = "isp-platform-cache",key="'sell_save'")
 	public SellDTO save(SellDTO dto) {
 		final SellDomain sellDomain = convertDtoToDomain(dto);
 		final SellDomain sell = sellDao.save(sellDomain);
@@ -30,6 +38,8 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'sell_' + #id")
+	//@Cacheable(value="isp-platform-cache", key="'sell_'+#root.methodName+'_'+#id")
 	public SellDTO getById(Integer id) {
 		final SellDomain sellDomain = sellDao.getById(id);
 		final SellDTO sellDTO = convertDomainToDto(sellDomain);
@@ -38,6 +48,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "sell_getAll'")
 	public SellResult getAll() {
 		final List<SellDTO> sells = new ArrayList<>();
 		for (SellDomain domain : sellDao.findAll()) {
@@ -63,6 +74,8 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 
 	@Override
+/*	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'sell_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'sell_getById_'+#dto.getId()")})*/
 	public SellDTO delete(Integer id) {
 		final SellDomain domain = sellDao.delete(id);
 		return convertDomainToDto(domain);

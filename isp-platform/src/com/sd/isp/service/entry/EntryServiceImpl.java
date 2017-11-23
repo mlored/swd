@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +37,10 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'entry_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'entry_getById_'+#dto.getId()")})*/
+  //  @CachePut(value = "isp-platform-cache",key="'entry_getById_'+#dto.getId()", condition="#dto.getId() != null")
+	@CachePut(value = "isp-platform-cache",key="'entry_save'")
 	public EntryDTO save(EntryDTO dto) {
 		final EntryDomain entryDomain = convertDtoToDomain(dto);
 		final EntryDomain entry = entryDao.save(entryDomain);
@@ -41,6 +49,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'entry_' + #id")
+	//@Cacheable(value="isp-platform-cache", key="'entry_'+#root.methodName+'_'+#id")
 	public EntryDTO getById(Integer id) {
 		final EntryDomain entryDomain = entryDao.getById(id);
 		final EntryDTO entryDTO = convertDomainToDto(entryDomain);
@@ -49,6 +59,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'entry_getAll'")
 	public EntryResult getAll() {
 		final List<EntryDTO> entries = new ArrayList<>();
 		for (EntryDomain domain : entryDao.findAll()) {
@@ -73,6 +84,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'entry_getAll'"),
+	   		           @CacheEvict(value="isp-platform-cache", key="'entry_getById_'+#dto.getId()")})*/
 	public EntryDTO delete(Integer id) {
 		final EntryDomain domain = entryDao.delete(id);
 		return convertDomainToDto(domain);

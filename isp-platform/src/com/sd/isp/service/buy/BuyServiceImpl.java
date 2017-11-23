@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional
+   // @CachePut(value = "isp-platform-cache",key="'buy_getById_'+#dto.getId()", condition="#dto.getId() != null")
+	@CachePut(value = "isp-platform-cache",key="'buy_save'")
 	public BuyDTO save(BuyDTO dto) {
 		final BuyDomain buyDomain = convertDtoToDomain(dto);
 		final BuyDomain buy = buyDao.save(buyDomain);
@@ -30,6 +36,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'buy_' + #id")
+  //@Cacheable(value="isp-platform-cache", key="'buy_'+#root.methodName+'_'+#id")
 	public BuyDTO getById(Integer id) {
 		final BuyDomain buyDomain = buyDao.getById(id);
 		final BuyDTO buyDTO = convertDomainToDto(buyDomain);
@@ -38,6 +46,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = " 'buy_getAll'")
 	public BuyResult getAll() {
 		final List<BuyDTO> buys = new ArrayList<>();
 		for (BuyDomain domain : buyDao.findAll()) {
@@ -63,6 +72,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'buy_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'buy_getById_'+#dto.getId()")})*/
 	public BuyDTO delete(Integer id) {
 		final BuyDomain domain = buyDao.delete(id);
 		return convertDomainToDto(domain);

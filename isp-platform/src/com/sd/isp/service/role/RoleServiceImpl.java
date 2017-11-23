@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,10 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'role_getAll'"),
+	                   @CacheEvict(value="isp-platform-cache", key="'role_getById_'+#dto.getId()")})*/
+   // @CachePut(value = "isp-platform-cache",key="'role_getById_'+#dto.getId()", condition="#dto.getId() != null")
+	@CachePut(value = "isp-platform-cache",key="'role_save'")
 	public RoleDTO save(RoleDTO dto) {
 		final RoleDomain roleDomain = convertDtoToDomain(dto);
 		final RoleDomain role = roleDao.save(roleDomain);
@@ -30,6 +38,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'role_' + #id")
+  //@Cacheable(value="isp-platform-cache", key="'role_'+#root.methodName+'_'+#id")
 	public RoleDTO getById(Integer id) {
 		final RoleDomain roleDomain = roleDao.getById(id);
 		final RoleDTO roleDTO = convertDomainToDto(roleDomain);
@@ -38,6 +48,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'role_getAll'")
 	public RoleResult getAll() {
 		final List<RoleDTO> roles = new ArrayList<>();
 		for (RoleDomain domain : roleDao.findAll()) {
@@ -60,6 +71,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	}
 
 	@Override
+	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'role_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'role_getById_'+#dto.getId()")})*/
 	public RoleDTO delete(Integer id) {
 		final RoleDomain domain = roleDao.delete(id);
 		return convertDomainToDto(domain);

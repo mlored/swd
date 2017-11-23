@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,9 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 
 	@Override
 	@Transactional
+	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'supplier_getAll'"),
+	                   @CacheEvict(value="isp-platform-cache", key="'supplier_getById_'+#dto.getId()")})
+   @CachePut(value = "isp-platform-cache",key="'supplier_getById_'+#dto.getId()", condition="#dto.getId() != null")
 	public SupplierDTO save(SupplierDTO dto) {
 		final SupplierDomain supplierDomain = convertDtoToDomain(dto);
 		final SupplierDomain supplier = supplierDao.save(supplierDomain);
@@ -30,6 +37,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'supplier_' + #id")
+  //@Cacheable(value="isp-platform-cache", key="'supplier_'+#root.methodName+'_'+#id")
 	public SupplierDTO getById(Integer id) {
 		final SupplierDomain supplierDomain = supplierDao.getById(id);
 		final SupplierDTO supplierDTO = convertDomainToDto(supplierDomain);
@@ -38,6 +47,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 
 	@Override
 	@Transactional
+	@Cacheable(value = "isp-platform-cache", key = "'supplier_' + #id")
 	public SupplierResult getAll() {
 		final List<SupplierDTO> suppliers = new ArrayList<>();
 		for (SupplierDomain domain : supplierDao.findAll()) {
@@ -63,6 +73,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
+	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'supplier_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'supplier_getById_'+#dto.getId()")})
 	public SupplierDTO delete(Integer id) {
 		final SupplierDomain domain = supplierDao.delete(id);
 		return convertDomainToDto(domain);
