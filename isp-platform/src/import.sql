@@ -16,3 +16,7 @@ insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambi
 insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'caja mecanica',	'500000',	1);
 insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de motor',	'4000000',	null);
 insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'motor',			'2000000',	4);
+
+insert into role (name) values ('admin');
+
+insert into user (userName, name, surName, password, role_id) values ('mlored','lorena','del puerto', '123456', 1);
