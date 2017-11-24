@@ -37,11 +37,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     @Override
     public List<UserB> getAll() {
         final UserResult result = _userResource.getAll();
-        final List<UserDTO> cList = null == result.getUsers() ? new ArrayList<UserDTO>()
+        final List<UserDTO> uList = null == result.getUsers() ? new ArrayList<UserDTO>()
                 : result.getUsers();
 
         final List<UserB> users = new ArrayList<UserB>();
-        for (UserDTO dto : cList) {
+        for (UserDTO dto : uList) {
             final UserB bean = convertDtoToBean(dto);
             users.add(bean);
         }
