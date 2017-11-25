@@ -11,10 +11,10 @@ insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('Supp
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Albert','Einstein','123459', 'Centro', '0985102369');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Marie','Curie','1234560', 'Centro', '0994125786');
 
-insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de aceite','100000',	null);
-insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de frenos','250000',	null);
+insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de aceite','100000',	0);
+insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de frenos','250000',	0);
 insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'caja mecanica',	'500000',	1);
-insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de motor',	'4000000',	null);
+insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'cambio de motor',	'4000000',	0);
 insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'motor',			'2000000',	4);
 
 insert into role (name) values ('admin');
