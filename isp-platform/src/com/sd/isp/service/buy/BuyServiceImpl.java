@@ -36,7 +36,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'buy_' + #id")
+	@Cacheable(value = "isp-platform-cache", key = "'buy_' + #id'")
   //@Cacheable(value="isp-platform-cache", key="'buy_'+#root.methodName+'_'+#id")
 	public BuyDTO getById(Integer id) {
 		final BuyDomain buyDomain = buyDao.getById(id);

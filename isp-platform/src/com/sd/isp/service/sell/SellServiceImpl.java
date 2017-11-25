@@ -38,7 +38,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'sell_' + #id")
+	@Cacheable(value = "isp-platform-cache", key = "'sell_' + #id'")
 	//@Cacheable(value="isp-platform-cache", key="'sell_'+#root.methodName+'_'+#id")
 	public SellDTO getById(Integer id) {
 		final SellDomain sellDomain = sellDao.getById(id);
@@ -48,7 +48,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "sell_getAll'")
+	@Cacheable(value = "isp-platform-cache", key = "'sell_getAll'")
 	public SellResult getAll() {
 		final List<SellDTO> sells = new ArrayList<>();
 		for (SellDomain domain : sellDao.findAll()) {

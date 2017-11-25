@@ -39,7 +39,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'part_' + #id")
+	@Cacheable(value = "isp-platform-cache", key = "'part_' + #id'")
 	//@Cacheable(value="isp-platform-cache", key="'part_'+#root.methodName+'_'+#id")
 	public PartDTO getById(Integer id) {
 		final PartDomain partDomain = (PartDomain) partDao.getById(id);

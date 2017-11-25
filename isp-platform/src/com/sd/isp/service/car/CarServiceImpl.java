@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "isp-platform-cache",key = "'car_save'")
+	@CachePut(value = "isp-platform-cache",key = "'cars_save'")
 	public CarDTO save(CarDTO dto) {
 		final CarDomain domain = convertDtoToDomain(dto);
 		final CarDomain carDomain = carDao.save(domain);
@@ -31,7 +32,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "isp-platform-cache", key = "'car_' + #id")
+	@CachePut(value = "isp-platform-cache", key = "'cars_' + #id'")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);
 		return convertDomainToDto(domain);
@@ -39,7 +40,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CachePut(value = "isp-platform-cache" , key = "'car_getAll'")
+	@Cacheable(value = "isp-platform-cache" , key = "'cars_getAll'")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();
 		for (CarDomain domain : carDao.findAll()) {

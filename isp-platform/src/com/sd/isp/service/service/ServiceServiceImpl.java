@@ -38,7 +38,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'service_' + #id")
+	@Cacheable(value = "isp-platform-cache", key = "'service_' + #id'")
   //@Cacheable(value="isp-platform-cache", key="'service_'+#root.methodName+'_'+#id")
 	public ServiceDTO getById(Integer id) {
 		final ServiceDomain serviceDomain = serviceDao.getById(id);

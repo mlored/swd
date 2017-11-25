@@ -49,7 +49,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'entry_' + #id")
+	@Cacheable(value = "isp-platform-cache", key = "'entry_' + #id'")
 	//@Cacheable(value="isp-platform-cache", key="'entry_'+#root.methodName+'_'+#id")
 	public EntryDTO getById(Integer id) {
 		final EntryDomain entryDomain = entryDao.getById(id);
