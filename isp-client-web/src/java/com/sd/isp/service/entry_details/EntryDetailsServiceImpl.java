@@ -70,6 +70,11 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     }
 
     @Override
+    public EntryDetailsB update(Integer id, EntryDetailsB bean) {
+        return null;
+    }
+
+    @Override
     protected EntryDetailsB convertDtoToBean(EntryDetailsDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
