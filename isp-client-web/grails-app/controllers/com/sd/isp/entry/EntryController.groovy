@@ -1,4 +1,4 @@
-package com.sd.isp.Entry
+package com.sd.isp.entry
 
 import com.sd.isp.service.car.ICarService
 import com.sd.isp.beans.entry.EntryB
