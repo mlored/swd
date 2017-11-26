@@ -82,4 +82,10 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
         dto.setTotal(bean.getTotal());
         return dto;
     }
+
+	@Override
+	public BuyB update(Integer id, BuyB bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

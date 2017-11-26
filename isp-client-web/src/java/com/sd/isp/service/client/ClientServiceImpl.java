@@ -88,4 +88,10 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 		//dto.setType("ClientDomain");
 		return dto;
 	}
+
+	@Override
+	public ClientB update(Integer id, ClientB bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

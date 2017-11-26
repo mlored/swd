@@ -84,4 +84,10 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
         dto.setQuantity(bean.getQuantity());
         return dto;
     }
+
+	@Override
+	public ServiceB update(Integer id, ServiceB bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

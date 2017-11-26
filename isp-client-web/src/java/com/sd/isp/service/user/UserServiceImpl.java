@@ -89,4 +89,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
 
         return dto;
     }
+
+	@Override
+	public UserB update(Integer id, UserB bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

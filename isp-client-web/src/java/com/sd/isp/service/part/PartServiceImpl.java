@@ -85,5 +85,11 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
         dto.setQuantity(bean.getQuantity());
         return dto;
     }
+
+	@Override
+	public PartB update(Integer id, PartB bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

@@ -8,9 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sd.isp.beans.car.CarB;
 import com.sd.isp.beans.employee.EmployeeB;
-import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.employee.EmployeeDTO;
 import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.employee.IEmployeeResource;
@@ -89,5 +87,11 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
         dto.setAddress(bean.getAddress());
         dto.setCellphone(bean.getCellphone());
 		return dto;
+	}
+
+	@Override
+	public EmployeeB update(Integer id, EmployeeB bean) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
