@@ -55,6 +55,11 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
+    public EntryB update(Integer id, EntryB bean) {
+        return null;
+    }
+
+    @Override
     public EntryB delete(Integer id) {
         final EntryDTO dto = _entryResource.destroy(id);
         final EntryB bean = convertDtoToBean(dto);
