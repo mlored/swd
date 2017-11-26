@@ -28,4 +28,7 @@
 	</bean>
 
 	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean" />
+	
+	<!-- Cache Configuration -->	
+	<import resource="cacheContext.xml" />
 </beans>

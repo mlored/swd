@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.car.CarB;
@@ -34,6 +35,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
+    @Cacheable(value="isp-client-web-cache", key="'car_getAll'")
     public List<CarB> getAll() {
         final CarResult result = _carResource.getAll();
         final List<CarDTO> cList = null == result.getCars() ? new ArrayList<CarDTO>()

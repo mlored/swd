@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.service.ServiceB;
@@ -34,6 +35,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
+    @Cacheable(value="isp-client-web-cache", key="'service_getAll'")
     public List<ServiceB> getAll() {
         final ServiceResult result = _serviceResource.getAll();
         final List<ServiceDTO> cList = null == result.getServices() ? new ArrayList<ServiceDTO>()

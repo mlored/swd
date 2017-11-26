@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.supplier.SupplierB;
@@ -34,6 +35,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
+	@Cacheable(value="isp-client-web-cache", key="'supplier_getAll'")
 	public List<SupplierB> getAll() {
 		final SupplierResult result = _supplierResource.getAll();
 		final List<SupplierDTO> cList = null == result.getSuppliers() ? new ArrayList<SupplierDTO>()

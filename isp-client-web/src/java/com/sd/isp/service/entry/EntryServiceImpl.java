@@ -5,7 +5,9 @@ import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.rest.entry.IEntryResource;
 import com.sd.isp.service.base.BaseServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
+    @Cacheable(value="isp-client-web-cache", key="'entry_getAll'")
     public List<EntryB> getAll() {
         final EntryResult result = _entryResource.getAll();
         final List<EntryDTO> cList = null == result.getEntry() ? new ArrayList<EntryDTO>()

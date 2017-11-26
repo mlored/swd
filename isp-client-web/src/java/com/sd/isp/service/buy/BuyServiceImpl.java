@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.buy.BuyB;
@@ -34,6 +35,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
+    @Cacheable(value="isp-client-web-cache", key="'buy_getAll'")
 	public List<BuyB> getAll() {
 		final BuyResult result = _buyResource.getAll();
 		final List<BuyDTO> cList = null == result.getBuys() ? new ArrayList<BuyDTO>()

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.employee.EmployeeB;
@@ -26,6 +27,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
+	//@Cacheable(value="isp-client-web-cache", key="'employee_save'")
 	public EmployeeB save(EmployeeB bean) {
 		final EmployeeDTO employee = convertBeanToDto(bean);
 		final EmployeeDTO dto = _employeeResource.save(employee);
@@ -34,6 +36,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
+	@Cacheable(value="isp-client-web-cache", key="'employee_getAll'")
 	public List<EmployeeB> getAll() {
 		final EmployeeResult result = _employeeResource.getAll();
 		final List<EmployeeDTO> cList = null == result.getEmployees() ? new ArrayList<EmployeeDTO>()
@@ -48,6 +51,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
+	//@Cacheable(value="isp-client-web-cache", key="'employee_getById'_'+#id")
 	public EmployeeB getById(Integer id) {
 		final EmployeeDTO dto = _employeeResource.getById(id);
 		final EmployeeB bean = convertDtoToBean(dto);

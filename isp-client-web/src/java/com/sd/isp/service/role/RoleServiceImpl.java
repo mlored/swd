@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
@@ -35,6 +36,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
+    @Cacheable(value="isp-client-web-cache", key="'role_getAll'")
     public List<RoleB> getAll() {
         final RoleResult result = _roleResource.getAll();
         final List<RoleDTO> rList = null == result.getRoles() ? new ArrayList<RoleDTO>()
