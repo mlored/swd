@@ -31,9 +31,8 @@
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
                     <td>
-                        <g:link action="edit" id="${userInstance?.id}"><g:message code="${fieldValue(bean: userInstance, field: "name")}" default="${fieldValue(bean: userInstance, field: "name")}" /></g:link>
+                        <g:link action="edit" id="${userInstance?.id}"><g:message code="${fieldValue(bean: userInstance, field: "userName")}" default="${fieldValue(bean: userInstance, field: "userName")}" /></g:link>
                     </td>
-                    <td>${fieldValue(bean: userInstance, field: "userName")}</td>
                     <td>${fieldValue(bean: userInstance, field: "name")}</td>
                     <td>${fieldValue(bean: userInstance, field: "surName")}</td>
                     <td>${fieldValue(bean: userInstance, field: "role")}</td>

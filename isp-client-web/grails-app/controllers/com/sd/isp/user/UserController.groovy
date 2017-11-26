@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.user.UserB
 import com.sd.isp.service.user.IUserService
+import com.sd.isp.service.role.IRoleService
 
 import grails.transaction.Transactional
 
@@ -17,6 +18,7 @@ class UserController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	IUserService userService
+	IRoleService roleService
 	
 	def create() {
 		[userInstance: new UserB(params)]
