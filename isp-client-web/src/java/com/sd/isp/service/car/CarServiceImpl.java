@@ -56,6 +56,15 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
+    public CarB update(Integer id, CarB carB) {
+        final CarDTO car = convertBeanToDto(carB);
+        final CarDTO dto = _carResource.update(id, car);
+        final CarB bean = convertDtoToBean(dto);
+
+        return bean;
+    }
+
+    @Override
     public CarB delete(Integer id) {
         final CarDTO dto = _carResource.destroy(id);
         final CarB bean = convertDtoToBean(dto);

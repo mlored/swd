@@ -12,5 +12,7 @@ public interface IBaseService<BEAN extends BaseBean, DTO extends BaseDTO> {
 
 	public BEAN getById(Integer id);
 
+	public BEAN update(Integer id, BEAN bean);
+
 	public BEAN delete(Integer id);
 }

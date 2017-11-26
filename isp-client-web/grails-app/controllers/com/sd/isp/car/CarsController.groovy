@@ -73,8 +73,9 @@ class CarsController {
     }
 
     def update(Long id) {
-        def carInstance = carService.getById(id.intValue())
-        if (!carInstance) {
+        def carB= new CarB(params)
+        def carInstance = carService.update(id.intValue(), carB)
+        if (carInstance == null) {
             flash.message = message(code: 'default.not.found.message', args: [
                     message(code: 'car.label', default: 'Car'),
                     id
@@ -83,29 +84,16 @@ class CarsController {
             return
         }
 
-        if (version != null) {
-            if (carInstance.version > version) {
-                carInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [
-                                message(code: 'car.label', default: 'Car')] as Object[],
-                        "Another user has updated this Car while you were editing")
-                render(view: "edit", model: [carInstance: carInstance])
-                return
-            }
-        }
-
-        carInstance.properties = params
-
-        if (!carInstance.save(flush: true)) {
+        /*if (!carInstance.save(flush: true)) {
             render(view: "edit", model: [carInstance: carInstance])
             return
-        }
+        }*/
 
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'car.label', default: 'Car'),
                 carInstance.id
         ])
-        redirect(action: "show", id: carInstance.id)
+        redirect(action: "list")
     }
 
     def delete(Long id) {

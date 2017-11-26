@@ -37,10 +37,16 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	}
 
 	@Override
+	public DTO update(Integer id, DTO dto) {
+		return getWebResource().path("/" + id).entity(dto).put(getDtoClass());
+	}
+
+	@Override
 	public DTO getById(Integer id) {
 		return getWebResource().path("/" + id).get(getDtoClass());
 	}
 
+	@Override
 	public DTO destroy(Integer id){
 		return getWebResource().path("/" + id).delete(getDtoClass());
 	}

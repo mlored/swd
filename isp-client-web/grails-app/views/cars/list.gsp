@@ -37,11 +37,7 @@
                     <td>${fieldValue(bean: carInstance, field: "mark")}</td>
                     <td>${fieldValue(bean: carInstance, field: "model")}</td>
                     <td>${fieldValue(bean: carInstance, field: "color")}</td>
-                    <td>
-                        <g:form controller="cars" method="DELETE">
-                            <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
-                        </g:form>
-                    </td>
+                    <td><a data-confirm="Estas Seguro?" method="delete" href="/isp-client-web/cars/delete/${carInstance.id}" rel="nofollow">Borrar</a></td>
                 </tr>
             </g:each>
             </tbody>

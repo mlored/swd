@@ -15,6 +15,8 @@ import com.sd.isp.dao.entry.EntryDaoImpl;
 import com.sd.isp.dao.entry.IEntryDao;
 import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
+import com.sd.isp.dto.car.CarDTO;
+import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
@@ -98,14 +100,17 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		entry.setDate(domain.getDate());
 		entry.setNumber(domain.getNumber());
 		entry.setDiagnostic(domain.getDiagnostic());
-		entry.setCar(carService.getById(domain.getCarDomain().getId()));
-		entry.setClient(clientService.getById(domain.getClientDomain().getId()));
-		
-		for (EntryDetailsDomain edd : domain.getEntryDetailsDomains()) {
-			final EntryDetailsDTO entryDetail = new EntryDetailsDTO();
-			entryDetail.setDate(edd.getDate());
-			entry.getEntryDetails().add(entryDetail);
+		if (domain.getCarDomain() != null) {
+			CarDTO car = carService.getById(domain.getCarDomain().getId());
+			if (car != null)
+				entry.setCar(car);
 		}
+		if (domain.getClientDomain() != null) {
+			ClientDTO client = clientService.getById(domain.getClientDomain().getId());
+			if (client != null)
+				entry.setClient(client);
+		}	
+		
 		
 		return entry;
 	}

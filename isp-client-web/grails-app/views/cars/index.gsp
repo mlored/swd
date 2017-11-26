@@ -45,7 +45,6 @@
 						<td>${fieldValue(bean: carsInstance, field: "number")}</td>
 					
 						<td>${fieldValue(bean: carsInstance, field: "color")}</td>
-					
 					</tr>
 				</g:each>
 				</tbody>
