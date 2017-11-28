@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
 import com.sd.isp.beans.user.UserB;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
@@ -92,9 +91,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
         return dto;
     }
 
-	@Override
-	public UserB update(Integer id, UserB bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+	public UserB update(Integer id,  UserB userB) {
+    	final UserDTO user   = convertBeanToDto(userB);
+        final UserDTO dto     = _userResource.update(id, user);
+        final UserB bean      = convertDtoToBean(dto);
+
+        return bean;
+    }
 }

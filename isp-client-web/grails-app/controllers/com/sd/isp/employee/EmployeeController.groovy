@@ -3,7 +3,6 @@ import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.employee.EmployeeB
 import com.sd.isp.service.employee.IEmployeeService;
-
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -58,11 +57,20 @@ class EmployeeController {
 		 redirect(action: "index")
 	}
 
-    def edit(Employee employeeInstance) {
-        respond employeeInstance
+     def edit(Long id) {
+        def employeeInstance = employeeService.getById(id.intValue())
+        if (!employeeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'employee.label', default: 'Employee'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        [employeeInstance: employeeInstance]
     }
 
-    @Transactional
     def update(Employee employeeInstance) {
         if (employeeInstance == null) {
             notFound()

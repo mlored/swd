@@ -35,7 +35,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'car_getAll'")
+   // @Cacheable(value="isp-client-web-cache", key="'car_getAll'")
     public List<CarB> getAll() {
         final CarResult result = _carResource.getAll();
         final List<CarDTO> cList = null == result.getCars() ? new ArrayList<CarDTO>()

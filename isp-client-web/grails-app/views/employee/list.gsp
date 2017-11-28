@@ -8,7 +8,8 @@
 </head>
 <body>
 <div id="list-employee" class="content scaffold-list" role="main">
-    <h1>Empleados
+    <h1>
+    	Empleados
    		 <g:link class="btn btn-primary" action="create">Nuevo</g:link>
     </h1>
      <g:if test="${flash.message}">
@@ -29,15 +30,16 @@
         <tbody>
         <g:each in="${employeeInstanceList}" status="i" var="employeeInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                <td>${i+1}</td>
-                <td><g:link action="show" id="${employeeInstance.id}">${fieldValue(bean: employeeInstance, field: "name")}</g:link></td>
+                <td>${i+1}
+                	<g:link action="edit" id="${employeeInstance?.id}"><g:message code="${fieldValue(bean: employeeInstance, field: "name")}" default="${fieldValue(bean: employeeInstance, field: "name")}" /></g:link>
+                </td>
                 <td>${fieldValue(bean: employeeInstance, field: "surName")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "ruc")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "address")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "cellphone")}</td>
                 <td>
                   <g:form controller="employee" method="DELETE">
-                    <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
+                    <td><a data-confirm="Estas Seguro?" method="delete" href="/isp-client-web/employee/delete/${employeeInstance.id}" rel="nofollow">Borrar</a></td>
                   </g:form>
                 </td>
             </tr>

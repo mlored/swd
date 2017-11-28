@@ -35,7 +35,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	@Cacheable(value="isp-client-web-cache", key="'client_getAll'")
+	//@Cacheable(value="isp-client-web-cache", key="'client_getAll'")
 	public List<ClientB> getAll() {
 		final ClientResult result = _clientResource.getAll();
 		final List<ClientDTO> cList = null == result.getClients() ? new ArrayList<ClientDTO>()
@@ -92,8 +92,11 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	public ClientB update(Integer id, ClientB bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public ClientB update(Integer id,  ClientB clientB) {
+        final ClientDTO client   = convertBeanToDto(clientB);
+        final ClientDTO dto  	 = _clientResource.update(id, client);
+        final ClientB bean       = convertDtoToBean(dto);
+
+        return bean;
+    }
 }

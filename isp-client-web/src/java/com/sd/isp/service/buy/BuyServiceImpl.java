@@ -85,9 +85,12 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
         return dto;
     }
 
-	@Override
-	public BuyB update(Integer id, BuyB bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+	public BuyB update(Integer id,  BuyB buyB) {
+    	final BuyDTO buy   = convertBeanToDto(buyB);
+        final BuyDTO dto   = _buyResource.update(id, buy);
+        final BuyB bean    = convertDtoToBean(dto);
+
+        return bean;
+    }
 }

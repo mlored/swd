@@ -35,7 +35,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@Cacheable(value="isp-client-web-cache", key="'supplier_getAll'")
+	//@Cacheable(value="isp-client-web-cache", key="'supplier_getAll'")
 	public List<SupplierB> getAll() {
 		final SupplierResult result = _supplierResource.getAll();
 		final List<SupplierDTO> cList = null == result.getSuppliers() ? new ArrayList<SupplierDTO>()
@@ -94,8 +94,12 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	public SupplierB update(Integer id, SupplierB bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public SupplierB update(Integer id,  SupplierB supplierB) {
+        final SupplierDTO supplier = convertBeanToDto(supplierB);
+        final SupplierDTO dto  = _supplierResource.update(id, supplier);
+        final SupplierB bean   = convertDtoToBean(dto);
+
+        return bean;
+    }
+
 }

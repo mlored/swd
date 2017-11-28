@@ -86,9 +86,12 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
         return dto;
     }
 
-	@Override
-	public RoleB update(Integer id, RoleB bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+	public RoleB update(Integer id,  RoleB roleB) {
+    	final RoleDTO role   = convertBeanToDto(roleB);
+        final RoleDTO dto     = _roleResource.update(id, role);
+        final RoleB bean      = convertDtoToBean(dto);
+
+        return bean;
+    }
 }

@@ -222,7 +222,7 @@
 			
 				<g:if test="${employeeInstance?.surName}">
 				<li class="fieldcontain">
-					<span id="surName-label" class="property-label"><g:message code="employee.surName.label" default="SurName" /></span>
+					<span id="model-label" class="property-label"><g:message code="employee.surName.label" default="SurName" /></span>
 					
 						<span class="property-value" aria-labelledby="surName-label"><g:fieldValue bean="${employeeInstance}" field="surName"/></span>
 					
@@ -231,13 +231,14 @@
 			
 				<g:if test="${employeeInstance?.ruc}">
 				<li class="fieldcontain">
-					<span id="ruc-label" class="property-label"><g:message code="employee.ruc.label" default="Ruc" /></span>
+					<span id="number-label" class="property-label"><g:message code="employee.ruc.label" default="Ruc" /></span>
 					
 						<span class="property-value" aria-labelledby="ruc-label"><g:fieldValue bean="${employeeInstance}" field="ruc"/></span>
 					
 				</li>
 				</g:if>
 			
+	
 				<g:if test="${employeeInstance?.address}">
 				<li class="fieldcontain">
 					<span id="address-label" class="property-label"><g:message code="employee.address.label" default="Address" /></span>
@@ -255,12 +256,13 @@
 					
 				</li>
 				</g:if>
+				
 			
 			</ol>
 			<g:form url="[resource:employeeInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${employeeInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
+					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
 		</div>

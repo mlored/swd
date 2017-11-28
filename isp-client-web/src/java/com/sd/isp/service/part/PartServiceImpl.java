@@ -36,7 +36,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'part_getAll'")
+    //(value="isp-client-web-cache", key="'part_getAll'")
     public List<PartB> getAll() {
         final PartResult result = _partResource.getAll();
         final List<PartDTO> pList = null == result.getParts() ? new ArrayList<PartDTO>()
@@ -89,9 +89,12 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
 	@Override
-	public PartB update(Integer id, PartB bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public PartB update(Integer id,  PartB partB) {
+        final PartDTO part = convertBeanToDto(partB);
+        final PartDTO dto  = _partResource.update(id, part);
+        final PartB bean   = convertDtoToBean(dto);
+
+        return bean;
+    }
     
 }
