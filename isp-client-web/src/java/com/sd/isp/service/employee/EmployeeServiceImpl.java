@@ -36,7 +36,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache", key="'employee_getAll'")
+	@Cacheable(value="isp-client-web-cache", key="'employee_getAll'")
 	public List<EmployeeB> getAll() {
 		final EmployeeResult result = _employeeResource.getAll();
 		final List<EmployeeDTO> cList = null == result.getEmployees() ? new ArrayList<EmployeeDTO>()

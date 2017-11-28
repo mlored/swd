@@ -35,7 +35,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache", key="'supplier_getAll'")
+	@Cacheable(value="isp-client-web-cache", key="'supplier_getAll'")
 	public List<SupplierB> getAll() {
 		final SupplierResult result = _supplierResource.getAll();
 		final List<SupplierDTO> cList = null == result.getSuppliers() ? new ArrayList<SupplierDTO>()
