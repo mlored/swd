@@ -60,7 +60,10 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
 
     @Override
     public PartB delete(Integer id) {
-        return null;
+        final PartDTO dto = _partResource.getById(id);
+        final PartB bean = convertDtoToBean(dto);
+
+        return bean;
     }
 
     @Override

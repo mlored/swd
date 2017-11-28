@@ -1,5 +1,4 @@
 
-
 <div class="box-body">
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'name', 'error')} required">
 		<label for="name">
@@ -8,7 +7,6 @@
 		</label>
 		<g:textField name="name" class="form-control" maxlength="50"  placeholder="Nombre" required="" value="${partInstance?.name}" autofocus="autofocus" />
 	</div>
-	
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'description', 'error')} required">
 		<label for="description">
 			<g:message code="part.description.label" default="Descripción" />
@@ -16,14 +14,12 @@
 		</label>
 		<g:textField name="description" class="form-control" maxlength="50" placeholder="Descripción" required="" value="${partInstance?.description}"/>
 	</div>
-
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'price', 'error')} required">
 		<label for="price">
 			<g:message code="part.price.label" default="Precio" />
 			<span class="required-indicator">*</span>
 		</label>
 		<g:field name="price" type="number" class="form-control" maxlength="15"  placeholder="Precio" value="${partInstance?.price}" required=""/>
-
 	</div>
 	<div class="form-group ${hasErrors(bean: partInstance, field: 'quantity', 'error')} required">
 		<label for="quantity">

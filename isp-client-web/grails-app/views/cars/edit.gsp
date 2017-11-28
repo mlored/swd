@@ -33,7 +33,7 @@
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit  class="btn btn-primary" value="Update" />
+								<g:actionSubmit  class="btn btn-primary" value="Actualizar" />
 							</fieldset>
 						</g:form>
 					</div>

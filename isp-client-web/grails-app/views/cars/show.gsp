@@ -200,10 +200,9 @@
 				</div>
 				<!-- /.box -->
 			</div>
+		</div>
 	</section>
 
-
-	</div>
 		<div id="show-cars" class="content scaffold-show" role="main">
 			<h1></h1>
 			<g:if test="${flash.message}">

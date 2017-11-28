@@ -5,32 +5,42 @@ import com.sd.isp.service.part.IPartService
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
 class PartController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
 	IPartService partService
+	
+	def create() {
+		[partInstance: new PartB(params)]
+	}
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        //respond Part.list(params), model:[partInstanceCount: Part.count()]
-		redirect(action: "list", params: params)
+        redirect(action: "list", params: params)
     }
 	
 	def list(Integer max) {
 		def parts = partService.getAll()
-
 		[partInstanceList: parts, partInstanceTotal: parts?.size()]
 	}
 
-    def show(Part partInstance) {
-        respond partInstance
-    }
-	
-    def create() {
-        respond new Part(params)
-    }
+    /*def show(Long id) {
+        def partInstance = partService.getById(id.intValue())
+        if (!partInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        [partInstance: partInstance]
+    }*/
 
     @Transactional
     def save(){
@@ -49,49 +59,62 @@ class PartController {
 
     }
 
-    def edit(Part partInstance) {
-        respond partInstance
+    def edit(Long id) {
+        def partInstance = partService.getById(id.intValue())
+        if (!partInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        [partInstance: partInstance]
     }
 
     @Transactional
-    def update(Part partInstance) {
+    def update(Long id) {
+        def partB= new PartB(params)
+        def partInstance = partService.update(id.intValue(), partB)
         if (partInstance == null) {
-            notFound()
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        if (partInstance.hasErrors()) {
-            respond partInstance.errors, view:'edit'
+        /*if (!partInstance.save(flush: true)) {
+            render(view: "edit", model: [partInstance: partInstance])
             return
-        }
+        }*/
 
-        partInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Part.label', default: 'Part'), partInstance.id])
-                redirect partInstance
-            }
-            '*'{ respond partInstance, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [
+                message(code: 'part.label', default: 'Part'),
+                carInstance.id
+        ])
+        redirect(action: "list")
     }
 
     @Transactional
-    def delete(Part partInstance) {
+    def delete(Long id) {
 
-        if (partInstance == null) {
-            notFound()
-            return
+        try {
+            partService.delete(id.intValue())
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
         }
-
-        partInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Part.label', default: 'Part'), partInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [
+                    message(code: 'car.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "show", id: id)
         }
     }
 
