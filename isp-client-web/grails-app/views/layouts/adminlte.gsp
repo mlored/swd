@@ -224,4 +224,25 @@
 </body>
 <asset:javascript src="jquery.js"/>
 <asset:javascript src="adminlte.js"/>
+<script>
+    $(function(){
+        $('a[data-method="delete"]').click(function(){
+            $.ajax(
+                {
+                    url: this.getAttribute('href'),
+                    type: 'DELETE',
+                    async: false,
+                    complete: function(response, status) {
+                        if (status == 'success')
+                        //alert('success!')
+                            location.reload();
+                        else
+                        alert('Error: the service responded with: ' + response.status + '\n' + response.responseText)
+                    }
+                }
+            )
+            return false
+        })
+    });
+</script>
 </html>

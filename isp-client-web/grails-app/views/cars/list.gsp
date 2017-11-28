@@ -37,7 +37,7 @@
                     <td>${fieldValue(bean: carInstance, field: "mark")}</td>
                     <td>${fieldValue(bean: carInstance, field: "model")}</td>
                     <td>${fieldValue(bean: carInstance, field: "color")}</td>
-                    <td><a data-confirm="Estas Seguro?" method="delete" href="/isp-client-web/cars/delete/${carInstance.id}" rel="nofollow">Borrar</a></td>
+                    <td><a data-confirm="Estas Seguro?" data-method="delete" href="/isp-client-web/cars/delete/${carInstance.id}">Borrar</a></td>
                 </tr>
             </g:each>
             </tbody>
