@@ -59,7 +59,10 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 
 	@Override
 	public ClientB delete(Integer id) {
-		return null;
+        final ClientDTO dto = _clientResource.destroy(id);
+        final ClientB bean = convertDtoToBean(dto);
+
+        return bean;
 	}
 
 	@Override

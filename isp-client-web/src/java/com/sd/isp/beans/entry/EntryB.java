@@ -1,6 +1,5 @@
 package com.sd.isp.beans.entry;
 
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

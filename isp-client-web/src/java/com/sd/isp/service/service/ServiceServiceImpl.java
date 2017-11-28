@@ -59,7 +59,10 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
 
     @Override
     public ServiceB delete(Integer id) {
-        return null;
+        final ServiceDTO dto = _serviceResource.destroy(id);
+        final ServiceB bean = convertDtoToBean(dto);
+
+        return bean;
     }
 
     @Override
