@@ -17,7 +17,7 @@ public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 
 	@Override
 	public PartDomain save(PartDomain domain) {
-		sessionFactory.getCurrentSession().save(domain);
+		sessionFactory.getCurrentSession().saveOrUpdate(domain);
 		return domain;
 	}
 
@@ -35,8 +35,13 @@ public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 
 	@Override
 	public PartDomain updateById(Integer domainId, PartDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		PartDomain partDomain = (PartDomain) sessionFactory.getCurrentSession().get(PartDomain.class, domainId);
+		partDomain.setName(domain.getName());
+		partDomain.setDescription(domain.getDescription());
+		partDomain.setPrice(domain.getPrice());
+		partDomain.setQuantity(domain.getQuantity());
+		sessionFactory.getCurrentSession().saveOrUpdate(partDomain);
+		return partDomain;
 	}
 
 	@Override
