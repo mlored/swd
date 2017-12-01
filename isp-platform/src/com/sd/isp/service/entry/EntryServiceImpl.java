@@ -50,7 +50,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache", key = "'entry_' + #id'")
 	//@Cacheable(value="isp-platform-cache", key="'entry_'+#root.methodName+'_'+#id")
 	public EntryDTO getById(Integer id) {
@@ -74,7 +74,9 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		return entriesResult;
 	}
 	
+	
 	@Override
+	@Transactional(readOnly = true)
 	public EntryDTO updateById(Integer id, EntryDTO dto) {
 		final EntryDomain newDomain = convertDtoToDomain(dto);
 		final EntryDomain domain = entryDao.getById(id);

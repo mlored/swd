@@ -37,7 +37,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache", key = "'service_' + #id'")
   //@Cacheable(value="isp-platform-cache", key="'service_'+#root.methodName+'_'+#id")
 	public ServiceDTO getById(Integer id) {
@@ -47,7 +47,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache", key = "'service_getAll'")
 	public ServiceResult getAll() {
 		final List<ServiceDTO> services = new ArrayList<>();
@@ -62,6 +62,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public ServiceDTO updateById(Integer id, ServiceDTO dto) {
 		final ServiceDomain newDomain = convertDtoToDomain(dto);
 		final ServiceDomain domain = serviceDao.getById(id);

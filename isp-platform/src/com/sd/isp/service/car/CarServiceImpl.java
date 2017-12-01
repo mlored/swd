@@ -23,7 +23,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	private ICarDao carDao;
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();
@@ -38,7 +38,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);

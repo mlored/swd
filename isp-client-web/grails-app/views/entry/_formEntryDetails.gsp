@@ -18,11 +18,7 @@
             </td>
 
             <td class="col-md-5">
-                <g:selectH  labelFor	="part"		labelClass="hide"
-                            id		    ="part"		name	  ="item.id"
-                            from		="${items}"  optionKey ="id"
-                            optionValue ="nombre"		value	  ="${entryDetailsInstance?.item?.id}"
-                />
+                <g:selectH  labelFor="part"	labelClass="hide" id="part"	name="item.id" from="${items}"  optionKey ="id" optionValue ="nombre" value="${entryDetailsInstance?.item?.id}"/>
             </td>
 
 

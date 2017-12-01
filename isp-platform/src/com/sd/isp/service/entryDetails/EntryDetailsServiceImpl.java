@@ -47,7 +47,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache", key = "'entryDetails_' + #id'")
 	//@Cacheable(value="isp-platform-cache", key="'entry_'+#root.methodName+'_'+#id")
 	public EntryDetailsDTO getById(Integer id) {

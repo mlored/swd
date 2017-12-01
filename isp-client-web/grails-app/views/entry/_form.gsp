@@ -36,7 +36,7 @@
             <g:message code="entry.car.label" default="Automovil" />
             <span class="required-indicator">*</span>
         </label>
-        <g:select id="car" name="carId" from="${cars}" optionKey="id" optionValue="mark" required="" value="${entryInstance?.car?.id}" class="many-to-one"/>
+        <g:select id="car" name="carId" from="${cars}" optionKey="id" optionValue="mark" required="" value="${entryInstance?.car?.id}" />
     </div>
 
     <div class="form-group ${hasErrors(bean: entryInstance, field: 'string', 'error')}">

@@ -64,7 +64,7 @@
 
 								<div class="form-group ${hasErrors(bean: entryDetailsInstance, field: 'part', 'error')} required">
                                      <label for="part">
-                                        <g:message code="entryDetails.part.label" default="Repuesto" />
+                                        <g:message code="entry_details.part.label" default="Repuesto" />
                                         <span class="required-indicator">*</span>
                                     </label>
                                         <g:select in="${entry_details}" id="part" name="partId" from="${parts}" optionKey="id" optionValue="name"  value="${entryDetailsInstance?.part?.id}" class="many-to-one"/>
@@ -73,7 +73,7 @@
                             <td>
                                 <div class="form-group ${hasErrors(bean: entryDetailsInstance, field: 'date', 'error')}">
                                     <label for="date">
-                                        <g:message code="entryDetails.date.label" default="Fecha" />
+                                        <g:message code="entry_details.date.label" default="Fecha" />
                                         <span class="required-indicator">*</span>
                                         <g:datePicker name="date" precision="day" noSelection="['':'-Choose-']" class="form-control" autofocus="autofocus" inputClass="date required"></g:datePicker>
                                 </div>

@@ -37,22 +37,19 @@ class EntryController {
         List<EntryDetails> entryDetails;
         [entryInstance: new Entry(params), cars: carService.getAll(),
          clients: clientService.getAll(), entryDetails: entryDetails]
+        return
 
     }
 
-    def newRow(){
-        def idN =  params.get("id")
-        def date = "date"
-        def item = "item["+ idN + "]"
-        render(template: 'tableRow', model: [ id: idN, date: date,  item: item, item: partService.getAll() ])
-
-    }
 
     def save() {
         def car= carService.getById(Integer.valueOf(params.car.id))
+        def client= clientService.getById(Integer.valueOf(params.client.id))
+
 
         def newEntry = new EntryB(params)
         newEntry.setCar(car)
+        newEntry.setCliente(client)
 
         def entryInstance = entryService.save(newEntry)
 

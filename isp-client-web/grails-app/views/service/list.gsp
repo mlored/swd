@@ -21,14 +21,14 @@
                 <g:sortableColumn property="name" title="Nombre" />
                 <g:sortableColumn property="description" title="Descripcion" />
                 <g:sortableColumn property="price" title="Precio" />
-
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <g:each in="${serviceInstanceList}" status="i" var="serviceInstance">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
-                    <td><g:link action="show" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "name")}</g:link></td>
+                    <td><g:link action="edit" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: serviceInstance, field: "description")}</td>
                     <td>${fieldValue(bean: serviceInstance, field: "price")}</td>
 

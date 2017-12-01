@@ -38,7 +38,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache")
 	//@Cacheable(value="isp-platform-cache", key="'part_'+#root.methodName+'_'+#id")
 	public PartDTO getById(Integer id) {
@@ -47,7 +47,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@CacheEvict(value= "isp-platform-cache")
 	public PartResult getAll() {
 		final List<PartDTO> parts = new ArrayList<>();
@@ -62,7 +62,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public PartDTO updateById(Integer id, PartDTO dto) {
 		final PartDomain newDomain = convertDtoToDomain(dto);
