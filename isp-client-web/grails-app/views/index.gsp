@@ -134,6 +134,7 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
+						<li><a href="/isp-client-web/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
 						<li><a href="/isp-client-web/employee/list"><i class="fa fa-user"></i> Empleados</a></li>
 						<li><a href="/isp-client-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
 						<li><a href="/isp-client-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
