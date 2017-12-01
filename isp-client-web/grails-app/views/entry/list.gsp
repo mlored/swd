@@ -20,8 +20,8 @@
             <tr>
                 <th>#</th>
                 <g:sortableColumn property="date" title="Fecha" />
-                <g:sortableColumn property="number" title="Número" />
-                <g:sortableColumn property="diagnostic" title="Diagnostico" />
+                <g:sortableColumn property="client" title="Cliente" />
+                <g:sortableColumn property="car" title="Automovil" />
                 <g:sortableColumn property="color" title="Color" />
                 <th></th>
             </tr>
@@ -30,12 +30,11 @@
             <g:each in="${entryInstanceList}" status="i" var="entryInstance">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
-                    <td>
-                        <g:link action="edit" id="${entryInstance?.id}"><g:message code="${fieldValue(bean: entryInstance, field: "number")}" default="${fieldValue(bean: entryInstance, field: "number")}" /></g:link>
-                    </td>
+
                     <td>${fieldValue(bean: entryInstance, field: "date")}</td>
-                    <td>${fieldValue(bean: entryInstance, field: "number")}</td>
-                    <td>${fieldValue(bean: entryInstance, field: "diagnostic")}</td>
+                    <td>${fieldValue(bean: entryInstance, field: "client.name")}</td>
+                    <td>${fieldValue(bean: entryInstance, field: "car.mark")}</td>
+                    <td>${fieldValue(bean: entryInstance, field: "car.color")}</td>
                     <td>
                         <g:form controller="entries" method="DELETE">
                             <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
@@ -47,9 +46,7 @@
         </table>
     </div>
 
-    <div class="pagination">
-        <g:paginate total="${entryInstanceTotal}" />
-    </div>
+
 </div>
 </body>
 </html>

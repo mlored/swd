@@ -18,13 +18,24 @@ public class EntryDetailsResourceImpl extends BaseResourceImpl<EntryDetailsDTO> 
     @Override
     public EntryDetailsResult getAll() {
         //setWebResourceBasicAuthFilter();
-        return getWebResource().get(EntryDetailsResult.class);
+        EntryDetailsResult entryDetails = getWebResource().get(EntryDetailsResult.class);
+        //return getWebResource().get(EntryDetailsResult.class);
+        return entryDetails;
     }
 
     @Override
     public EntryDetailsResult getAllBy(Map<String, String> args) {
         //setWebResourceBasicAuthFilter();
         return getWebResource().path("/partId/" + args.get("partId")).get(EntryDetailsResult.class);
+    }
+    @Override
+    public EntryDetailsDTO save(EntryDetailsDTO entryDetails) {
+        return super.save(entryDetails);
+    }
+
+    @Override
+    public EntryDetailsDTO getById(Integer id) {
+        return super.getById(id);
     }
 
 }

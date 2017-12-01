@@ -6,6 +6,10 @@ import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.rest.entry.IEntryResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 
+import com.sd.isp.service.car.CarServiceImpl;
+import com.sd.isp.service.car.ICarService;
+import com.sd.isp.service.client.IClientService;
+import com.sd.isp.service.client.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
 
     @Autowired
     private IEntryResource _entryResource;
+    private ICarService _carService = new CarServiceImpl();
+    private IClientService _clientService = new ClientServiceImpl();
 
 
     public EntryServiceImpl() {
@@ -41,12 +47,12 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         final List<EntryDTO> cList = null == result.getEntry() ? new ArrayList<EntryDTO>()
                 : result.getEntry();
 
-        final List<EntryB> entrys = new ArrayList<EntryB>();
+        final List<EntryB> entries = new ArrayList<EntryB>();
         for (EntryDTO dto : cList) {
             final EntryB bean = convertDtoToBean(dto);
-            entrys.add(bean);
+            entries.add(bean);
         }
-        return entrys;
+        return entries;
     }
 
     @Override
@@ -81,12 +87,12 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         params.put("date", String.valueOf(dto.getDate()));
         params.put("number", String.valueOf(dto.getNumber()));
         params.put("diagnostic", dto.getDiagnostic());
-        //params.put("carB", dto.getNumber());
-        //params.put("clientB", dto.getNumber());
-
 
         final EntryB entryB = new EntryB(params);
 
+        entryB.setCar(_carService.getById(dto.getCar().getId()));
+        entryB.setCliente(_clientService.getById(dto.getClient().getId()));
+        entryB.setDate(dto.getDate());
         return entryB;
     }
 
@@ -98,8 +104,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         dto.setDate(bean.getDate());
         dto.setNumber(bean.getNumber());
         dto.setDiagnostic(bean.getDiagnostic());
-        //dto.setCar(bean.getCarB());
-        //dto.setClient(params.get("clientB"))
+        dto.getCar().setId(bean.getCar().getId());
+        dto.getClient().setId(bean.getCliente().getId());
 
         return dto;
     }

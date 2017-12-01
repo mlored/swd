@@ -1,6 +1,7 @@
 package com.sd.isp.entry
 
 import com.sd.isp.service.car.ICarService
+import com.sd.isp.service.part.IPartService
 import com.sd.isp.beans.entry.EntryB
 import com.sd.isp.entry.Entry;
 import com.sd.isp.entry_details.EntryDetails
@@ -15,15 +16,16 @@ class EntryController {
     def IEntryService entryService
     def IEntryDetailsService entryDetailsService
     def ICarService carService
+    def IPartService partService
     def IClientService clientService
 
 
-    def index(){
+    def index(Integer max){
         //def entries = entryService.getAll()
         //[entryList: entries, entryInstanceTotal: entries.size()]
 
         params.max = Math.min(max ?: 10, 100)
-        redirect(action: "_list", params: params)
+        redirect(action: "list", params: params)
     }
     def list(Integer max) {
         def entries = entryService.getAll()
@@ -35,8 +37,16 @@ class EntryController {
         List<EntryDetails> entryDetails;
         [entryInstance: new Entry(params), cars: carService.getAll(),
          clients: clientService.getAll(), entryDetails: entryDetails]
+
     }
 
+    def newRow(){
+        def idN =  params.get("id")
+        def date = "date"
+        def item = "item["+ idN + "]"
+        render(template: 'tableRow', model: [ id: idN, date: date,  item: item, item: partService.getAll() ])
+
+    }
 
     def save() {
         def car= carService.getById(Integer.valueOf(params.car.id))

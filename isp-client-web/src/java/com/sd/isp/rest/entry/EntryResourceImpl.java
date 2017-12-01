@@ -10,6 +10,16 @@ public class EntryResourceImpl extends BaseResourceImpl<EntryDTO> implements IEn
     public EntryResourceImpl() {
         super(EntryDTO.class, "/entry");
     }
+    @Override
+    public EntryDTO save(EntryDTO entry) {
+        return super.save(entry);
+    }
+
+
+    @Override
+    public EntryDTO getById(Integer id) {
+        return super.getById(id);
+    }
 
     @Override
     public EntryResult getAll() {

@@ -60,7 +60,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache", key = "'entry_getAll'")
 	public EntryResult getAll() {
 		final List<EntryDTO> entries = new ArrayList<>();

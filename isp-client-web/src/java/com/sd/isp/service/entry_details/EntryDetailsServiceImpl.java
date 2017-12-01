@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sd.isp.entry_details.EntryDetails;
+
+import com.sd.isp.service.entry.EntryServiceImpl;
+import com.sd.isp.service.part.IPartService;
+import com.sd.isp.service.part.PartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.entry_details.EntryDetailsB;
@@ -19,7 +18,6 @@ import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.rest.entry_details.IEntryDetailsResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.entry_details.IEntryDetailsService;
-//import com.sd.isp.service.materia.IMateriaService;
 import com.sd.isp.service.entry.IEntryService;
 
 @Service("entryDetailsService")
@@ -28,10 +26,10 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
 
     @Autowired
     private IEntryDetailsResource _entryDetailsResource;
-    //@Autowired
-    //private IMateriaService _materiaService;
     @Autowired
-    private IEntryService _entryService;
+    private IPartService _partService=new PartServiceImpl();
+    @Autowired
+    private IEntryService _entryService=new EntryServiceImpl();
 
     public EntryDetailsServiceImpl() {
     }
@@ -46,8 +44,8 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     @Override
     public EntryDetailsB save(EntryDetailsB bean) {
         final EntryDetailsDTO dto = convertBeanToDto(bean);
-        final EntryDetailsDTO profesorDetalleDTO = _entryDetailsResource.save(dto);
-        return convertDtoToBean(profesorDetalleDTO);
+        final EntryDetailsDTO entryDetailsDTO = _entryDetailsResource.save(dto);
+        return convertDtoToBean(entryDetailsDTO);
     }
 
     @Override
@@ -81,8 +79,9 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
         params.put("date", dto.getDate().toString());
 
         final EntryDetailsB entryDetails = new EntryDetailsB(params);
-        //entryDetails.setMateria(_materiaService.getById(dto.getMateriaId()));
-        //entryDetails.setProfesor(_profesorService.getById(dto.getProfesorId()));
+        entryDetails.setPart(_partService.getById(dto.getPart().getId()));
+        entryDetails.setEntry(_entryService.getById(dto.getEntryId()));
+
 
         return entryDetails;
     }
@@ -92,10 +91,10 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
         final EntryDetailsDTO dto = new EntryDetailsDTO();
         dto.setId(bean.getId());
         dto.setDate(bean.getDate());
+        dto.getPart().setId(bean.getPart().getId());
+        dto.setEntryId(bean.getEntry().getId());
 
 
-       // dto.setMateriaId(bean.getMateria().getId());
-       // dto.setProfesorId(bean.getProfesor().getId());
 
         return dto;
     }

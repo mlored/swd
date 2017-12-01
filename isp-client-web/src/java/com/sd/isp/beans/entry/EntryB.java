@@ -84,6 +84,7 @@ public class EntryB extends BaseBean{
 
         setNumber(Integer.valueOf(params.get("number")));
         setDiagnostic(params.get("diagnostic"));
+        //setCliente(Integer.valueOf(params.get("cliente")));
 
     }
 
