@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +29,8 @@
         <tbody>
         <g:each in="${employeeInstanceList}" status="i" var="employeeInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                <td>${i+1}
-                	<g:link action="edit" id="${employeeInstance?.id}"><g:message code="${fieldValue(bean: employeeInstance, field: "name")}" default="${fieldValue(bean: employeeInstance, field: "name")}" /></g:link>
-                </td>
+                <td>${i+1}</td>
+                <td><g:link action="edit" id="${employeeInstance?.id}"><g:message code="${fieldValue(bean: employeeInstance, field: "name")}" default="${fieldValue(bean: employeeInstance, field: "name")}" /></g:link></td>
                 <td>${fieldValue(bean: employeeInstance, field: "surName")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "ruc")}</td>
                 <td>${fieldValue(bean: employeeInstance, field: "address")}</td>

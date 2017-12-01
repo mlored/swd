@@ -24,14 +24,10 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 
 	@Autowired
 	private IEmployeeDao employeeDao;
-	CacheManager cacheManager;
 
 	@Override
 	@Transactional
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'employee_getAll'"),
-	                   @CacheEvict(value="isp-platform-cache", key="'employee_getById_'+#dto.getId()")})*/
-    //@CachePut(value = "isp-platform-cache",key="'employee_getById_'+#dto.getId()", condition="#dto.getId() != null")
-	@CachePut(value = "isp-platform-cache",key="'employee_save'")
+	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public EmployeeDTO save(EmployeeDTO dto) {
 		final EmployeeDomain employeeDomain = convertDtoToDomain(dto);
 		final EmployeeDomain employee = employeeDao.save(employeeDomain);
@@ -40,22 +36,19 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'employee_'+ #id'")
-	//@Cacheable(value="isp-platform-cache", key="'employee_'+#root.methodName+'_'+#id")
+	@Cacheable(value = "isp-platform-cache")
 	public EmployeeDTO getById(Integer id) {
 		final EmployeeDomain employeeDomain = employeeDao.getById(id);
-		final EmployeeDTO employeeDTO = convertDomainToDto(employeeDomain);
-		return employeeDTO;
+		return convertDomainToDto(employeeDomain);
 	}
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'employee_getAll'")
+	@Cacheable(value = "isp-platform-cache")
 	public EmployeeResult getAll() {
 		final List<EmployeeDTO> employees = new ArrayList<>();
 		for (EmployeeDomain domain : employeeDao.findAll()) {
 			final EmployeeDTO employee = convertDomainToDto(domain);
-			//cacheManager.getCache("isp-platform-cache").put("employee/_"+domain.getId(),domain);
 			employees.add(employee);
 		}
 
@@ -65,6 +58,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 	
 	@Override
+	@Transactional
+	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public EmployeeDTO updateById(Integer id, EmployeeDTO dto) {
 		final EmployeeDomain newDomain = convertDtoToDomain(dto);
 		final EmployeeDomain domain = employeeDao.getById(id);
@@ -78,8 +73,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 
 	@Override
-/*	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'employee_getAll'"),
-			   		   @CacheEvict(value="isp-platform-cache", key="'employee_getById_'+#dto.getId()")})*/
+	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public EmployeeDTO delete(Integer id) {
 		final EmployeeDomain domain = employeeDao.delete(id);
 		return convertDomainToDto(domain);

@@ -3,7 +3,9 @@ import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.employee.EmployeeB
 import com.sd.isp.service.employee.IEmployeeService;
+
 import grails.transaction.Transactional
+
 import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
@@ -39,6 +41,7 @@ class EmployeeController {
 
     def create() {
         [employeeInstance: new EmployeeB(params)]
+		//respond new Employee(params)
     }
 
     @Transactional
@@ -71,50 +74,44 @@ class EmployeeController {
         [employeeInstance: employeeInstance]
     }
 
-    def update(Employee employeeInstance) {
-        if (employeeInstance == null) {
-            notFound()
-            return
-        }
+	 def update(Long id) {
+		 def employeeB= new EmployeeB(params)
+		 def employeeInstance = employeeService.update(id.intValue(), employeeB)
+		 if (employeeInstance == null) {
+			 flash.message = message(code: 'default.not.found.message', args: [
+					 message(code: 'employee.label', default: 'Part'),
+					 id
+			 ])
+			 redirect(action: "list")
+			 return
+		 }
 
-        if (employeeInstance.hasErrors()) {
-            respond employeeInstance.errors, view:'edit'
-            return
-        }
-
-        employeeInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Employee.label', default: 'Employee'), employeeInstance.id])
-                redirect employeeInstance
-            }
-            '*'{ respond employeeInstance, [status: OK] }
-        }
-    }
+		 /*if (!employeeInstance.save(flush: true)) {
+			 render(view: "edit", model: [employeeInstance: employeeInstance])
+			 return
+		 }*/
+ 
+		 flash.message = message(code: 'default.updated.message', args: [
+				 message(code: 'employee.label', default: 'Part'),
+				 employeeInstance.id
+		 ])
+		 redirect(action: "list")
+	 }
 
     @Transactional
 	def delete(Long id) {
-		def employeeInstance = Employee.get(id)
-		if (!employeeInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'employee.label', default: 'Employee'),
-				id
-			])
-			redirect(action: "list")
-			return
-		}
+		
 		try {
-			employeeInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [
-				message(code: 'employee.label', default: 'Employee'),
-				id
-			])
-			redirect(action: "list")
+			employeeService.delete(id.intValue())
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [
-				message(code: 'employee.label', default: 'Employee'),
+				  message(code: 'employee.label', default: 'Employee'),
 				id
 			])
 			redirect(action: "show", id: id)
