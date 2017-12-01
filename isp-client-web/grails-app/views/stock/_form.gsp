@@ -1,3 +1,5 @@
+<%@ page import="com.sd.isp.stock.Stock" %>
+
 <div class="box-body">
 	<div class="fieldcontain ${hasErrors(bean: partInstance, field: 'date', 'error')} required">
 		<label for="name">

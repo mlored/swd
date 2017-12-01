@@ -52,9 +52,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     @Override
     public CarB getById(Integer id) {
         final CarDTO dto = _carResource.getById(id);
-        final CarB bean = convertDtoToBean(dto);
+       // final CarB bean = convertDtoToBean(dto);
 
-        return bean;
+        return convertDtoToBean(dto);
     }
 
     @Override
