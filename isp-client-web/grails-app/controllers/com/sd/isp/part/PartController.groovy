@@ -15,7 +15,7 @@ class PartController {
 	IPartService partService
 	
 	def create() {
-		[partInstance: new PartB(params)]
+		respond new Part(params)
 	}
 
     def index(Integer max) {
@@ -93,12 +93,11 @@ class PartController {
 
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'part.label', default: 'Part'),
-                carInstance.id
+                partInstance.id
         ])
         redirect(action: "list")
     }
 
-    @Transactional
     def delete(Long id) {
 
         try {
@@ -111,7 +110,7 @@ class PartController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [
-                    message(code: 'car.label', default: 'Part'),
+                    message(code: 'part.label', default: 'Part'),
                     id
             ])
             redirect(action: "show", id: id)

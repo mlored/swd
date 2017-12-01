@@ -34,7 +34,7 @@
                     <td>${fieldValue(bean: partInstance, field: "description")}</td>
                     <td>${fieldValue(bean: partInstance, field: "price")}</td>
                 	<td>
-                        <g:form controller="parts" method="DELETE">
+                        <g:form controller="part" method="DELETE">
                             <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
                         </g:form>
                     </td>

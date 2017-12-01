@@ -237,15 +237,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${partInstance?.quantity}">
-				<li class="fieldcontain">
-					<span id="quantity-label" class="property-label"><g:message code="part.quantity.label" default="Quantity" /></span>
-					
-						<span class="property-value" aria-labelledby="quantity-label"><g:fieldValue bean="${partInstance}" field="quantity"/></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form url="[resource:partInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

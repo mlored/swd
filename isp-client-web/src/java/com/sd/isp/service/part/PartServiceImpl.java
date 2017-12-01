@@ -14,7 +14,6 @@ import com.sd.isp.dto.part.PartDTO;
 import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.rest.part.IPartResource;
 import com.sd.isp.service.base.BaseServiceImpl;
-import com.sd.isp.service.part.IPartService;
 
 @Service("partService")
 public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
@@ -58,9 +57,18 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
         return bean;
     }
 
+	@Override
+	public PartB update(Integer id,  PartB partB) {
+        final PartDTO part = convertBeanToDto(partB);
+        final PartDTO dto  = _partResource.update(id, part);
+        final PartB bean   = convertDtoToBean(dto);
+
+        return bean;
+    }
+    
     @Override
     public PartB delete(Integer id) {
-        final PartDTO dto = _partResource.getById(id);
+        final PartDTO dto = _partResource.destroy(id);
         final PartB bean = convertDtoToBean(dto);
 
         return bean;
@@ -89,15 +97,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
         dto.setPrice(bean.getPrice());
         dto.setQuantity(bean.getQuantity());
         return dto;
-    }
-
-	@Override
-	public PartB update(Integer id,  PartB partB) {
-        final PartDTO part = convertBeanToDto(partB);
-        final PartDTO dto  = _partResource.update(id, part);
-        final PartB bean   = convertDtoToBean(dto);
-
-        return bean;
     }
     
 }
