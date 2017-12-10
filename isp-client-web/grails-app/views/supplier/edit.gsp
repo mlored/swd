@@ -1,4 +1,3 @@
-<%@ page import="com.sd.isp.supplier.Supplier" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -27,14 +26,14 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form url="[resource:supplierInstance, action:'update']" method="PUT" >
+						<g:form action="update" method="PUT" id="${supplierInstance?.id}"	>
 							<g:hiddenField name="id" value="${supplierInstance?.id}" />
 
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+								<g:actionSubmit  class="btn btn-primary" value="Update" />
 							</fieldset>
 						</g:form>
 					</div>

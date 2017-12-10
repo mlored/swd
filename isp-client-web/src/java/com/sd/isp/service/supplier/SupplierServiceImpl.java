@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
+	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public SupplierB save(SupplierB bean) {
 		final SupplierDTO supplier = convertBeanToDto(bean);
 		final SupplierDTO dto = _supplierResource.save(supplier);
@@ -35,7 +37,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@Cacheable(value="isp-client-web-cache", key="'supplier_getAll'")
+	@Cacheable(value = "isp-platform-cache")
 	public List<SupplierB> getAll() {
 		final SupplierResult result = _supplierResource.getAll();
 		final List<SupplierDTO> cList = null == result.getSuppliers() ? new ArrayList<SupplierDTO>()
@@ -50,6 +52,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
+	@Cacheable(value = "isp-platform-cache")
 	public SupplierB getById(Integer id) {
 		final SupplierDTO dto = _supplierResource.getById(id);
 		final SupplierB bean = convertDtoToBean(dto);
@@ -94,6 +97,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
+	//@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public SupplierB update(Integer id,  SupplierB supplierB) {
         final SupplierDTO supplier = convertBeanToDto(supplierB);
         final SupplierDTO dto  = _supplierResource.update(id, supplier);

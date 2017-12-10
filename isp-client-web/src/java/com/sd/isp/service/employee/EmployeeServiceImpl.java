@@ -27,7 +27,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache", key="'employee_save'")
+	//@Cacheable(value="isp-client-web-cache")
 	public EmployeeB save(EmployeeB bean) {
 		final EmployeeDTO employee = convertBeanToDto(bean);
 		final EmployeeDTO dto = _employeeResource.save(employee);
@@ -36,7 +36,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	@Cacheable(value="isp-client-web-cache", key="'employee_getAll'")
+	//@Cacheable(value="isp-client-web-cache")
 	public List<EmployeeB> getAll() {
 		final EmployeeResult result = _employeeResource.getAll();
 		final List<EmployeeDTO> cList = null == result.getEmployees() ? new ArrayList<EmployeeDTO>()
@@ -51,7 +51,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache", key="'employee_getById'_'+#id")
+	//@Cacheable(value="isp-client-web-cache")
 	public EmployeeB getById(Integer id) {
 		final EmployeeDTO dto = _employeeResource.getById(id);
 		final EmployeeB bean = convertDtoToBean(dto);

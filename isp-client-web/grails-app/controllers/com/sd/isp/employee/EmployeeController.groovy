@@ -79,7 +79,7 @@ class EmployeeController {
 		 def employeeInstance = employeeService.update(id.intValue(), employeeB)
 		 if (employeeInstance == null) {
 			 flash.message = message(code: 'default.not.found.message', args: [
-					 message(code: 'employee.label', default: 'Part'),
+					 message(code: 'employee.label', default: 'Employee'),
 					 id
 			 ])
 			 redirect(action: "list")
@@ -92,7 +92,7 @@ class EmployeeController {
 		 }*/
  
 		 flash.message = message(code: 'default.updated.message', args: [
-				 message(code: 'employee.label', default: 'Part'),
+				 message(code: 'employee.label', default: 'Employee'),
 				 employeeInstance.id
 		 ])
 		 redirect(action: "list")

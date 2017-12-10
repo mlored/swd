@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +29,14 @@
         <g:each in="${supplierInstanceList}" status="i" var="supplierInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                 <td>${i+1}</td>
-                <td><g:link action="show" id="${supplierInstance.id}">${fieldValue(bean: supplierInstance, field: "name")}</g:link></td>
+                <td><g:link action="edit" id="${supplierInstance?.id}"><g:message code="${fieldValue(bean: supplierInstance, field: "name")}" default="${fieldValue(bean: supplierInstance, field: "name")}" /></g:link></td>
                 <td>${fieldValue(bean: supplierInstance, field: "surName")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "ruc")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "address")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "cellphone")}</td>
                 <td>
                   <g:form controller="supplier" method="DELETE">
-                    <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
+                    <td><a data-confirm="Estas Seguro?" method="delete" href="/isp-client-web/supplier/delete/${supplierInstance.id}" rel="nofollow">Borrar</a></td>
                   </g:form>
                 </td>
             </tr>

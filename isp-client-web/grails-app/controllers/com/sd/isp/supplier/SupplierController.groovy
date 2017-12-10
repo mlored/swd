@@ -7,6 +7,7 @@ import com.sd.isp.service.supplier.ISupplierService;
 import com.sd.isp.service.supplier.ISupplierService
 
 import grails.transaction.Transactional
+import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
 class SupplierController {
@@ -50,50 +51,64 @@ class SupplierController {
 	}
 
 
-    def edit(Supplier supplierInstance) {
-        respond supplierInstance
-    }
-
-    @Transactional
-    def update(Supplier supplierInstance) {
-        if (supplierInstance == null) {
-            notFound()
+    def edit(Long id) {
+        def supplierInstance = supplierService.getById(id.intValue())
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'supplier.label', default: 'Supplier'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        if (supplierInstance.hasErrors()) {
-            respond supplierInstance.errors, view:'edit'
-            return
-        }
-
-        supplierInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Supplier.label', default: 'Supplier'), supplierInstance.id])
-                redirect supplierInstance
-            }
-            '*'{ respond supplierInstance, [status: OK] }
-        }
+        [supplierInstance: supplierInstance]
     }
+
     @Transactional
-	def delete(Supplier supplierInstance) {
+	def update(Long id) {
+		def supplierB= new SupplierB(params)
+		def supplierInstance = supplierService.update(id.intValue(), supplierB)
+		if (supplierInstance == null) {
+			flash.message = message(code: 'default.not.found.message', args: [
+					message(code: 'supplier.label', default: 'Supplier'),
+					id
+			])
+			redirect(action: "list")
+			return
+		}
+
+		/*if (!supplierInstance.save(flush: true)) {
+			render(view: "edit", model: [supplierInstance: supplierInstance])
+			return
+		}*/
+
+		flash.message = message(code: 'default.updated.message', args: [
+				message(code: 'supplier.label', default: 'Supplier'),
+				supplierInstance.id
+		])
+		redirect(action: "list")
+	}
+    @Transactional
+	def delete(Long id) {
 		
-				if (supplierInstance == null) {
-					notFound()
-					return
-				}
+		try {
+			supplierService.delete(id.intValue())
+			flash.message = message(code: 'default.deleted.message', args: [
+					message(code: 'supplier.label', default: 'Supplier'),
+					id
+			])
+			redirect(action: "list")
+		}
+		catch (DataIntegrityViolationException e) {
+			flash.message = message(code: 'default.not.deleted.message', args: [
+				  message(code: 'supplier.label', default: 'Supplier'),
+				id
+			])
+			redirect(action: "show", id: id)
+		}
 		
-				supplierInstance.delete flush:true
-		
-				request.withFormat {
-					form multipartForm {
-						flash.message = message(code: 'default.deleted.message', args: [message(code: 'Supplier.label', default: 'Supplier'), supplierInstance.id])
-						redirect action:"index", method:"GET"
-					}
-					'*'{ render status: NO_CONTENT }
-				}
-			}
+	}
 
     protected void notFound() {
         request.withFormat {
