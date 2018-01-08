@@ -26,10 +26,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'part_getAll'"),
-                       @CacheEvict(value="isp-platform-cache", key="'part_getById_'+#dto.getId()")})*/
-	//@CachePut(value = "isp-platform-cache",key="'part_getById_'+#dto.getId()", condition="#dto.getId() != null")
-	//@CachePut(value = "isp-platform-cache",key="'part_save'")
 	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public PartDTO save(PartDTO dto) {
 		final PartDomain domain = convertDtoToDomain(dto);
@@ -40,7 +36,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	@Override
 	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache")
-	//@Cacheable(value="isp-platform-cache", key="'part_'+#root.methodName+'_'+#id")
 	public PartDTO getById(Integer id) {
 		final PartDomain domain = partDao.getById(id);
 		return convertDomainToDto(domain);
@@ -48,7 +43,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@CacheEvict(value= "isp-platform-cache")
+	@Cacheable(value= "isp-platform-cache")
 	public PartResult getAll() {
 		final List<PartDTO> parts = new ArrayList<>();
 		for (PartDomain domain : partDao.findAll()) {
@@ -76,8 +71,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'part_getAll'"),
-	   		           @CacheEvict(value="isp-platform-cache", key="'part_getById_'+#dto.getId()")})*/
 	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public PartDTO delete(Integer id) {
 		final PartDomain domain = (PartDomain) partDao.delete(id);

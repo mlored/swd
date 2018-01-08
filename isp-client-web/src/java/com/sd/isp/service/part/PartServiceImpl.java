@@ -35,7 +35,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'part_getAll'")
     public List<PartB> getAll() {
         final PartResult result = _partResource.getAll();
         final List<PartDTO> pList = null == result.getParts() ? new ArrayList<PartDTO>()
