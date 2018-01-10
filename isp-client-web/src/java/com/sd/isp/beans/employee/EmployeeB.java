@@ -56,7 +56,7 @@ public class EmployeeB extends BaseBean {
 		}
 		setName(params.get("name"));
 		setSurName(params.get("surName"));
-		setRuc(params.get("RUC"));
+		setRuc(params.get("ruc"));
 		setAddress(params.get("address"));
 		setCellphone(params.get("cellphone"));
 
