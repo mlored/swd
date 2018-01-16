@@ -47,7 +47,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	public PartResult getAll() {
 		final List<PartDTO> parts = new ArrayList<>();
 		for (PartDomain domain : partDao.findAll()) {
-			final PartDTO part = convertDomainToDto( domain);
+			final PartDTO part = convertDomainToDto(domain);
 			parts.add(part);
 		}
 
@@ -58,7 +58,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public PartDTO updateById(Integer id, PartDTO dto) {
 		final PartDomain newDomain = convertDtoToDomain(dto);
 		final PartDomain domain = partDao.getById(id);

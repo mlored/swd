@@ -16,12 +16,6 @@ public class ServiceDaoImpl extends BaseDaoImpl<ServiceDomain> implements IServi
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<ServiceDomain> findByName(String textToFind) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ServiceDomain save(ServiceDomain domain) {
 		sessionFactory.getCurrentSession().save(domain);
 		return domain;
@@ -41,8 +35,13 @@ public class ServiceDaoImpl extends BaseDaoImpl<ServiceDomain> implements IServi
 
 	@Override
 	public ServiceDomain updateById(Integer domainId, ServiceDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceDomain serviceDomain = (ServiceDomain) sessionFactory.getCurrentSession().get(ServiceDomain.class, domainId);
+		serviceDomain.setName(domain.getName());
+		serviceDomain.setDescription(domain.getDescription());
+		serviceDomain.setPrice(domain.getPrice());
+		serviceDomain.setQuantity(domain.getQuantity());
+		sessionFactory.getCurrentSession().saveOrUpdate(serviceDomain);
+		return serviceDomain;
 	}
 
 	@Override

@@ -7,9 +7,7 @@ import com.sd.isp.dto.base.BaseDTO;
 
 @XmlRootElement(name = "part")
 public class PartDTO extends BaseDTO {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _description;

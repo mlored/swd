@@ -9,4 +9,3 @@ import com.sd.isp.service.base.IBaseService;
 public interface IServiceService extends IBaseService<ServiceDTO, ServiceDomain, ServiceDaoImpl, ServiceResult> {
 
 }
-

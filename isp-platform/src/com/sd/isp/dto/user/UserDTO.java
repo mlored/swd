@@ -3,8 +3,6 @@ package com.sd.isp.dto.user;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import sun.security.util.Password;
-
 import com.sd.isp.dto.base.BaseDTO;
 
 @XmlRootElement(name = "user")

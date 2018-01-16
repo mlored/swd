@@ -18,13 +18,22 @@ class ServiceController {
 
     def list(Integer max) {
         def services = serviceService.getAll()
-
         [serviceInstanceList: services, serviceInstanceTotal: services?.size()]
     }
-
-    def show(Service serviceInstance) {
-        respond serviceInstance
-    }
+	
+	/*def show(Long id) {
+		 def serviceInstance = serviceService.getById(id.intValue())
+		 if (!serviceInstance) {
+			 flash.message = message(code: 'default.not.found.message', args: [
+					 message(code: 'service.label', default: 'Service'),
+					 id
+			 ])
+			 redirect(action: "list")
+			 return
+		 }
+	
+		 [serviceInstance: serviceInstance]
+	}*/
 
     def create() {
         respond new Service(params)
@@ -64,27 +73,9 @@ class ServiceController {
 
     @Transactional
     def update(Long id) {
-        /*if (serviceInstance == null) {
-            notFound()
-            return
-        }
-
-        if (serviceInstance.hasErrors()) {
-            respond serviceInstance.errors, view:'edit'
-            return
-        }
-
-        serviceInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Service.label', default: 'Service'), serviceInstance.id])
-                redirect serviceInstance
-            }
-            '*'{ respond serviceInstance, [status: OK] }
-        }*/
-        def serviceInstance = serviceService.getById(id.intValue())
-        if (!serviceInstance) {
+        def serviceB= new ServiceB(params)
+        def serviceInstance = serviceService.update(id.intValue(), serviceB)
+        if (serviceInstance == null) {
             flash.message = message(code: 'default.not.found.message', args: [
                     message(code: 'service.label', default: 'Service'),
                     id
@@ -93,29 +84,16 @@ class ServiceController {
             return
         }
 
-        if (version != null) {
-            if (serviceInstance.version > version) {
-                serviceInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [
-                                message(code: 'service.label', default: 'Service')] as Object[],
-                        "Another user has updated this Service while you were editing")
-                render(view: "edit", model: [serviceInstance: serviceInstance])
-                return
-            }
-        }
-
-        serviceInstance.properties = params
-
-        if (!serviceInstance.save(flush: true)) {
+        /*if (!serviceInstance.save(flush: true)) {
             render(view: "edit", model: [serviceInstance: serviceInstance])
             return
-        }
+        }*/
 
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'service.label', default: 'Service'),
                 serviceInstance.id
         ])
-        redirect(action: "show", id: serviceInstance.id)
+        redirect(action: "list")
     }
 
     @Transactional

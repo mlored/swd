@@ -16,27 +16,35 @@ public class ServiceB extends BaseBean {
     public ServiceB(Map<String, String> params) {
         super(params);
     }
+    
     public String getName() {
         return _name;
     }
+    
     public void setName(String name) {
         _name = name;
     }
+    
     public String getDescription() {
         return _description;
     }
+    
     public void setDescription(String description) {
         _description = description;
     }
+    
     public Integer getPrice() {
         return _price;
     }
+    
     public void setPrice(Integer price) {
         _price = price;
     }
+    
     public Integer getQuantity() {
         return _quantity;
     }
+    
     public void setQuantity(Integer quantity) {
         _quantity = quantity;
     }
@@ -50,8 +58,6 @@ public class ServiceB extends BaseBean {
         setDescription(params.get("description"));
         setPrice(Integer.valueOf(params.get("price")));
         setQuantity(Integer.valueOf(params.get("quantity")));
-
-
     }
 
 }

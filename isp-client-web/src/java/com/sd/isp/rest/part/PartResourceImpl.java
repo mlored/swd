@@ -8,7 +8,8 @@ import com.sd.isp.rest.base.BaseResourceImpl;
 
 @Repository("partResource")
 public class PartResourceImpl extends BaseResourceImpl<PartDTO> implements IPartResource{
-    public PartResourceImpl() {
+    
+	public PartResourceImpl() {
         super(PartDTO.class, "/part");
     }
 
@@ -17,4 +18,5 @@ public class PartResourceImpl extends BaseResourceImpl<PartDTO> implements IPart
         final PartResult result = getWebResource().get(PartResult.class);
         return result;
     }
+    
 }

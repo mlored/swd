@@ -18,7 +18,7 @@ public class ServiceResult extends BaseResult<ServiceDTO> {
 		return getList();
 	}
 
-	public void setService(List<ServiceDTO> dtos) {
+	public void setServices(List<ServiceDTO> dtos) {
 		super.setList(dtos);
 	}
 }

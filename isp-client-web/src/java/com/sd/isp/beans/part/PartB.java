@@ -49,6 +49,7 @@ public class PartB extends BaseBean{
 		_quantity = quantity;
 	}
 
+	@Override
 	protected void create(Map<String, String> params) {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));

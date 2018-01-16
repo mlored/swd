@@ -35,7 +35,6 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'service_getAll'")
     public List<ServiceB> getAll() {
         final ServiceResult result = _serviceResource.getAll();
         final List<ServiceDTO> cList = null == result.getServices() ? new ArrayList<ServiceDTO>()
