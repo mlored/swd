@@ -1,4 +1,5 @@
 
+<%@ page import="com.sd.isp.stock.Stock" %>
 <!DOCTYPE html>
 <html>
 	<head>
