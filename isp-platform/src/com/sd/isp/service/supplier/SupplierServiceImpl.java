@@ -43,7 +43,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value = "isp-platform-cache")
 	public SupplierResult getAll() {
 		final List<SupplierDTO> suppliers = new ArrayList<>();

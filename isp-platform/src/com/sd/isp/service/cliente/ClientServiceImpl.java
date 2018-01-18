@@ -25,11 +25,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	private IClientDao clientDao;
 
 	@Override
+	@CacheEvict(value="isp-platform-cache", allEntries=true)
 	@Transactional
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'client_getAll'"),
-	                   @CacheEvict(value="isp-platform-cache", key="'client_getById_'+#dto.getId()")})*/
-   // @CachePut(value = "isp-platform-cache",key="'client_getById_'+#dto.getId()", condition="#dto.getId() != null")
-	 @CachePut(value = "isp-platform-cache",key="'client_save'")
 	public ClientDTO save(ClientDTO dto) {
 		final ClientDomain clientDomain = convertDtoToDomain(dto);
 		final ClientDomain client = clientDao.save(clientDomain);
@@ -37,9 +34,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 
 	@Override
-	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'client_' + #id'")
-	//@Cacheable(value="isp-platform-cache", key="'client_'+#root.methodName+'_'+#id")
+	@Cacheable(value="isp-platform-cache")
+	@Transactional(readOnly = true)
 	public ClientDTO getById(Integer id) {
 		final ClientDomain clientDomain = clientDao.getById(id);
 		final ClientDTO clientDTO = convertDomainToDto(clientDomain);
@@ -47,8 +43,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 
 	@Override
-	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'client_getAll'")
+	@Transactional(readOnly = true)
+	@Cacheable(value = "isp-platform-cache")
 	public ClientResult getAll() {
 		final List<ClientDTO> clients = new ArrayList<>();
 		for (ClientDomain domain : clientDao.findAll()) {
@@ -62,6 +58,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 	
 	@Override
+	@Transactional
+	@CacheEvict(value= "isp-platform-cache", allEntries=true)
 	public ClientDTO updateById(Integer id, ClientDTO dto) {
 		final ClientDomain newDomain = convertDtoToDomain(dto);
 		final ClientDomain domain = clientDao.getById(id);
@@ -75,8 +73,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 
 	@Override
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'client_getAll'"),
-					   @CacheEvict(value="isp-platform-cache", key="'client_getById_'+#dto.getId()")})*/
+	@CacheEvict(value="isp-platform-cache", allEntries=true)
+	@Transactional
 	public ClientDTO delete(Integer id) {
 		final ClientDomain domain = clientDao.delete(id);
 		return convertDomainToDto(domain);
