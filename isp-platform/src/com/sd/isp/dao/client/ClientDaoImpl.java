@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.client.ClientDomain;
 
 @Repository
@@ -51,5 +52,8 @@ public class ClientDaoImpl extends BaseDaoImpl<ClientDomain> implements IClientD
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
 	}
-
+	
+	public List<ClientDomain> find(String textToFind, int page, int maxItems) {
+		return null;
+	}
 }

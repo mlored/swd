@@ -47,7 +47,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	@Cacheable(value = "isp-platform-cache")
 	public EmployeeResult getAll() {
 		final List<EmployeeDTO> employees = new ArrayList<>();
-		for (EmployeeDomain domain : employeeDao.findAll()) {
+		for (EmployeeDomain domain : employeeDao.findAll()) {			//findAll
 			final EmployeeDTO employee = convertDomainToDto(domain);
 			employees.add(employee);
 		}
@@ -103,5 +103,19 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		employee.setCellphone(dto.getCellphone());
 		return employee;
 	}
+	
+	
+/*	@Override
+	@Transactional(readOnly = true)
+	public EmployeeResult find(String textToFind, int page, int maxItems) throws Exception {
+		final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;
+	}*/
 
 }

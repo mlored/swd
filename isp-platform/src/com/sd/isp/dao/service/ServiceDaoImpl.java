@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.service.ServiceDomain;
 
 @Repository
@@ -49,6 +50,10 @@ public class ServiceDaoImpl extends BaseDaoImpl<ServiceDomain> implements IServi
 		ServiceDomain domain = (ServiceDomain) sessionFactory.getCurrentSession().get(ServiceDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
+	}
+	
+	public List<ServiceDomain> find(String textToFind, int page, int maxItems) {
+		return null;
 	}
 
 }

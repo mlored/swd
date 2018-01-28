@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
 @Repository
@@ -45,6 +46,10 @@ public class EntryDetailsDaoImpl extends BaseDaoImpl<EntryDetailsDomain> impleme
 		EntryDetailsDomain domain = (EntryDetailsDomain) sessionFactory.getCurrentSession().get(EntryDetailsDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
+	}
+	
+	public List<EntryDetailsDomain> find(String textToFind, int page, int maxItems) {
+		return null;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
 import com.sd.isp.domain.buy.BuyDomain;
+import com.sd.isp.domain.employee.EmployeeDomain;
 
 @Repository
 public class BuyDaoImpl extends BaseDaoImpl<BuyDomain> implements IBuyDao {
@@ -52,5 +53,8 @@ public class BuyDaoImpl extends BaseDaoImpl<BuyDomain> implements IBuyDao {
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
 	}
-
+	
+	public List<BuyDomain> find(String textToFind, int page, int maxItems) {
+		return null;
+	}
 }

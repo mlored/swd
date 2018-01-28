@@ -72,8 +72,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'buy_getAll'"),
-                       @CacheEvict(value="isp-platform-cache", key="'buy_getById_'+#dto.getId()")})*/
+	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'buy_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'buy_getById_'+#dto.getId()")})
 	public BuyDTO delete(Integer id) {
 		final BuyDomain domain = buyDao.delete(id);
 		return convertDomainToDto(domain);
