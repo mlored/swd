@@ -13,12 +13,15 @@ import com.sd.isp.domain.user.UserDomain;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.util.MailMail;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDaoImpl, UserResult> implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;
+	@Autowired
+	private MailMail mailMail;
 
 	@Override
 	@Transactional
@@ -33,6 +36,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	public UserDTO getById(Integer id) {
 		final UserDomain userDomain = userDao.getById(id);
 		final UserDTO userDTO = convertDomainToDto(userDomain);
+		
+		String to = "iceberg.04@gmail.com";
+        String dear = "Adrian";
+        String content = "Que tal?";
+		
+		try {
+			mailMail.sendMail(to, dear, content);
+		}catch( Exception e ){
+			e.printStackTrace();
+			System.out.println("Error");
+			//logger.info("Error Sending Email: " + e.getMessage());
+		}
+		// FIN EJEMPLO ENVIO DE MAIL
 		return userDTO;
 	}
 

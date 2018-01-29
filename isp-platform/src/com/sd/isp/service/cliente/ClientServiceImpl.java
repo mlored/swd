@@ -1,6 +1,7 @@
 package com.sd.isp.service.cliente;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,15 @@ import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.util.Scheduler;
 
 @Service
 public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, ClientDaoImpl, ClientResult> implements IClientService {
 
 	@Autowired
 	private IClientDao clientDao;
+	private Scheduler scheduler;
+
 
 	@Override
 	@CacheEvict(value="isp-platform-cache", allEntries=true)
@@ -39,12 +43,14 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	public ClientDTO getById(Integer id) {
 		final ClientDomain clientDomain = clientDao.getById(id);
 		final ClientDTO clientDTO = convertDomainToDto(clientDomain);
+		
+
 		return clientDTO;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value = "isp-platform-cache", key="1")
 	public ClientResult getAll() {
 		final List<ClientDTO> clients = new ArrayList<>();
 		for (ClientDomain domain : clientDao.findAll()) {
