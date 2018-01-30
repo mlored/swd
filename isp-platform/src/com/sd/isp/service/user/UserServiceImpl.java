@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.user.IUserDao;
 import com.sd.isp.dao.user.UserDaoImpl;
 import com.sd.isp.domain.user.UserDomain;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.BaseServiceImpl;
@@ -104,6 +105,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		user.setSurName(dto.getSurName());
 		user.setPassword(dto.getPassword());
 		return user;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public UserResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

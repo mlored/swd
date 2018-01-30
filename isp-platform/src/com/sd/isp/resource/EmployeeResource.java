@@ -54,8 +54,8 @@ public class EmployeeResource {
 		return employeeService.delete(employeeId);
 	}
 	
-/*
-	 http://localhost:8080/lab-patologia-platform/rest/doctor/search/textToFind 
+
+	// http://localhost:8080/isp-platform/rest/employee/search/textToFind 
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
@@ -70,6 +70,6 @@ public class EmployeeResource {
 	//@Secured({"ROLE_ADMINISTRADOR"})
 	public EmployeeResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return employeeService.find(null, page, maxItems);
-	}*/
+	}
 	
 }

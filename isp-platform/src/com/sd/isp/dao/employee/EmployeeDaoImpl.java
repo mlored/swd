@@ -13,6 +13,7 @@ import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Order;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
 import com.sd.isp.domain.employee.EmployeeDomain;
@@ -58,7 +59,7 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 		EmployeeDomain domain = (EmployeeDomain) sessionFactory.getCurrentSession().get(EmployeeDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
-	}
+	}	  	 	
 	@Override
 	public List<EmployeeDomain> find(String textToFind, int page, int maxItems) {
 		Session session = sessionFactory.getCurrentSession();
@@ -82,15 +83,36 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 				} else {
 					criteria.add(propertyCriterion);
 				}
+			}
+				if (map.containsKey("sort")) {
+					String sort = (map.get("sort"));
+					if(sort.equals("_name") || sort.equals("_surname") || sort.equals("_cellphone") || sort.equals("_ruc") || sort.equals("_address")){
+						if (map.containsKey("order")){
+							String order = (map.get("order"));
+							if(order.equals("desc")){
+								criteria.addOrder(Order.desc(sort).ignoreCase());
+							}else{
+								criteria.addOrder(Order.asc(sort).ignoreCase());
+							}
+						}else{
+							criteria.addOrder(Order.asc(sort).ignoreCase());
+							criteria.addOrder(Order.asc(sort).ignoreCase());
+						}
+					}
+				}else{
+					criteria.addOrder(Order.asc("_name").ignoreCase());
+					criteria.addOrder(Order.asc("_surname").ignoreCase());
+				}
+			}else{
+				criteria.addOrder(Order.asc("_name").ignoreCase());
+				criteria.addOrder(Order.asc("_surname").ignoreCase());
+			}
 				criteria.setFirstResult(page * maxItems);
 				criteria.setMaxResults(maxItems);
 				criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 				List<EmployeeDomain> employees = criteria.list();
 				return employees;
-			}
-		}
-		return null;
-	}
+	   }
 	
 	/**
 	 * Creo un diccionario con clave valor En donde clave=columna de la bd y

@@ -105,7 +105,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 	
 	
-/*	@Override
+	@Override
 	@Transactional(readOnly = true)
 	public EmployeeResult find(String textToFind, int page, int maxItems) throws Exception {
 		final List<EmployeeDTO> employees = new ArrayList<>();
@@ -116,6 +116,6 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 		final EmployeeResult employeeResult = new EmployeeResult();
 		employeeResult.setEmployees(employees);
 		return employeeResult;
-	}*/
+	}
 
 }

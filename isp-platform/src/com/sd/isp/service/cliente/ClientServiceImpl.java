@@ -17,6 +17,7 @@ import com.sd.isp.dao.client.IClientDao;
 import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.util.Scheduler;
 
@@ -108,6 +109,20 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 		client.setCellphone(dto.getCellphone());
 		client.setAddress(dto.getAddress());
 		return client;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public ClientResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

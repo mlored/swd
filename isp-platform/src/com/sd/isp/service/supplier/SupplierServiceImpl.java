@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.supplier.SupplierDaoImpl;
 import com.sd.isp.dao.supplier.ISupplierDao;
 import com.sd.isp.domain.supplier.SupplierDomain;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.dto.supplier.SupplierResult;
 import com.sd.isp.service.base.BaseServiceImpl;
@@ -98,6 +99,20 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 		supplier.setAddress(dto.getAddress());
 		supplier.setCellphone(dto.getCellphone());
 		return supplier;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public SupplierResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }
