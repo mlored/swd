@@ -20,6 +20,7 @@ import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.car.ICarService;
 import com.sd.isp.service.cliente.IClientService;
@@ -126,6 +127,20 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		entry.setDiagnostic(dto.getDiagnostic());
 		
 		return entry;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public EntryResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.role.IRoleDao;
 import com.sd.isp.dao.role.RoleDaoImpl;
 import com.sd.isp.domain.role.RoleDomain;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.role.RoleDTO;
 import com.sd.isp.dto.role.RoleResult;
 import com.sd.isp.service.base.BaseServiceImpl;
@@ -106,6 +107,20 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 		role.setId(dto.getId());
 		role.setAuthority(dto.getAuthority());
 		return role;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public RoleResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

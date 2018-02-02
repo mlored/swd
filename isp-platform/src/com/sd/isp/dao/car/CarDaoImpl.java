@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.car.CarDomain;
 
 @Repository
@@ -51,6 +52,10 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 		CarDomain domain = (CarDomain) sessionFactory.getCurrentSession().get(CarDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
+	}
+	
+	public List<CarDomain> find(String textToFind, int page, int maxItems) {
+		return null;
 	}
 
 }

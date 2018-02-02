@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.user.UserDomain;
 
 @Repository
@@ -65,5 +66,8 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
 	}
-
+	
+	public List<UserDomain> find(String textToFind, int page, int maxItems) {
+		return null;
+	}
 }

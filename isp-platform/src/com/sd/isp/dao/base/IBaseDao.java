@@ -10,6 +10,8 @@ public interface IBaseDao<DOMAIN extends BaseDomain> {
 
 	public DOMAIN getById(Integer domainId);
 
+	public abstract List<DOMAIN>find(String textToFind, int page, int maxItems) throws Exception;
+
 	public List<DOMAIN> findAll();
 	
 	public DOMAIN updateById(Integer domainId, DOMAIN domain);

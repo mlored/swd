@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.supplier.SupplierDomain;
 
 @Repository
@@ -51,6 +52,10 @@ public class SupplierDaoImpl extends BaseDaoImpl<SupplierDomain> implements ISup
 		SupplierDomain domain = (SupplierDomain) sessionFactory.getCurrentSession().get(SupplierDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
+	}
+	
+	public List<SupplierDomain> find(String textToFind, int page, int maxItems) {
+		return null;
 	}
 
 }

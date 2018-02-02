@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.entry_details.EntryDetailsDaoImpl;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
 import com.sd.isp.dao.part.IPartDao;
+import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
+import com.sd.isp.dto.employee.EmployeeDTO;
+import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.part.PartDTO;
@@ -112,6 +115,20 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 		entryDetails.setItemDomain(partDao.getById(dto.getPart().getId()));
 		
 		return entryDetails;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public EntryDetailsResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

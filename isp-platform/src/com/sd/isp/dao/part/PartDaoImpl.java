@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
+import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.part.PartDomain;
 
 @Repository
@@ -49,6 +50,10 @@ public class PartDaoImpl extends BaseDaoImpl<PartDomain> implements IPartDao {
 		PartDomain domain = (PartDomain) sessionFactory.getCurrentSession().get(PartDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
+	}
+	
+	public List<PartDomain> find(String textToFind, int page, int maxItems) {
+		return null;
 	}
 
 }

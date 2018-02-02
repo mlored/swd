@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.sell.ISellDao;
 import com.sd.isp.dao.sell.SellDaoImpl;
 import com.sd.isp.domain.sell.SellDomain;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.sell.SellDTO;
 import com.sd.isp.dto.sell.SellResult;
 import com.sd.isp.service.base.BaseServiceImpl;
@@ -101,6 +102,20 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 		sell.setTotal(dto.getTotal());
 		sell.setType(dto.getType());
 		return sell;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public SellResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

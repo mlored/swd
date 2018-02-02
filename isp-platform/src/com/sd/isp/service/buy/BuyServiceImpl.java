@@ -16,6 +16,7 @@ import com.sd.isp.dao.buy.IBuyDao;
 import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.dto.buy.BuyDTO;
 import com.sd.isp.dto.buy.BuyResult;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.service.base.BaseServiceImpl;
 
 @Service
@@ -72,8 +73,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'buy_getAll'"),
-                       @CacheEvict(value="isp-platform-cache", key="'buy_getById_'+#dto.getId()")})*/
+	@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'buy_getAll'"),
+                       @CacheEvict(value="isp-platform-cache", key="'buy_getById_'+#dto.getId()")})
 	public BuyDTO delete(Integer id) {
 		final BuyDomain domain = buyDao.delete(id);
 		return convertDomainToDto(domain);
@@ -99,6 +100,20 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 		buy.setTotal(dto.getTotal());
 		buy.setType(dto.getType());
 		return buy;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public BuyResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 }

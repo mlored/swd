@@ -19,7 +19,7 @@ class ClientController {
 	def list(Integer max) {
 		def clients = clientService.getAll()
 
-		[clientInstanceList: clients, clientInstanceTotal: clients?.size()]
+		respond clients, [model: [results: clients, clientInstanceTotal: clients?.size()]]
 	}
 
 	def show(Client clientInstance) {

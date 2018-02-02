@@ -14,15 +14,19 @@ import com.sd.isp.dao.user.IUserDao;
 import com.sd.isp.dao.user.UserDaoImpl;
 import com.sd.isp.domain.role.RoleDomain;
 import com.sd.isp.domain.user.UserDomain;
+import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.util.MailMail;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDaoImpl, UserResult> implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;
+	@Autowired
+	private MailMail mailMail;
 
 	@Autowired
 	private IRoleDao roleDao;
@@ -40,6 +44,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	public UserDTO getById(Integer id) {
 		final UserDomain userDomain = userDao.getById(id);
 		final UserDTO userDTO = convertDomainToDto(userDomain);
+		
+		String to = "iceberg.04@gmail.com";
+        String dear = "Adrian";
+        String content = "Que tal?";
+		
+		try {
+			mailMail.sendMail(to, dear, content);
+		}catch( Exception e ){
+			e.printStackTrace();
+			System.out.println("Error");
+			//logger.info("Error Sending Email: " + e.getMessage());
+		}
+		// FIN EJEMPLO ENVIO DE MAIL
 		return userDTO;
 	}
 
@@ -119,6 +136,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 			user.setRole(roles);
 		}
 		return user;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public UserResult find(String textToFind, int page, int maxItems) throws Exception {
+		/*final List<EmployeeDTO> employees = new ArrayList<>();
+		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
+			final EmployeeDTO dto = convertDomainToDto(domain);
+			employees.add(dto);
+		}
+		final EmployeeResult employeeResult = new EmployeeResult();
+		employeeResult.setEmployees(employees);
+		return employeeResult;*/
+		return null;
 	}
 
 	@Transactional(readOnly = true)
