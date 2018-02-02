@@ -6,7 +6,6 @@ import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.IBaseService;
 
-
 public interface IUserService extends IBaseService<UserDTO, UserDomain, UserDaoImpl, UserResult> {
-
+	UserDTO getByUsername(String username);
 }

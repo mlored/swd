@@ -6,4 +6,5 @@ import com.sd.isp.rest.base.IBaseResource;
 
 public interface IUserResource extends IBaseResource<UserDTO>{
     public UserResult getAll();
+	public UserDTO getByUsername(String username);
 }

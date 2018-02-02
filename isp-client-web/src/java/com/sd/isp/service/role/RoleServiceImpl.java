@@ -70,7 +70,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     protected RoleB convertDtoToBean(RoleDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
-        params.put("name", dto.getName());
+        params.put("authority", dto.getAuthority());
 
         final RoleB roleB = new RoleB(params);
 
@@ -81,7 +81,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     protected RoleDTO convertBeanToDto(RoleB bean) {
         final RoleDTO dto = new RoleDTO();
         dto.setId(bean.getId());
-        dto.setName(bean.getName());
+        dto.setAuthority(bean.getAuthority());
 
         return dto;
     }

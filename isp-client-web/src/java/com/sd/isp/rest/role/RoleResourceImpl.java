@@ -7,7 +7,7 @@ import com.sd.isp.dto.role.RoleResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 import com.sd.isp.rest.role.IRoleResource;
 
-@Repository("RoleResource")
+@Repository("roleResource")
 public class RoleResourceImpl extends BaseResourceImpl<RoleDTO> implements IRoleResource{
     public RoleResourceImpl() {
         super(RoleDTO.class, "/role");
@@ -18,4 +18,9 @@ public class RoleResourceImpl extends BaseResourceImpl<RoleDTO> implements IRole
         final RoleResult result = getWebResource().get(RoleResult.class);
         return result;
     }
+    
+    @Override
+	public RoleDTO getById(Integer id) {
+		return getWebResource().path("/" + id).get(getDtoClass());
+	}
 }

@@ -1,6 +1,7 @@
 package com.sd.isp.beans.user;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -9,23 +10,34 @@ import com.sd.isp.beans.role.RoleB;
 
 public class UserB extends BaseBean {
 	private static final long serialVersionUID = 1L;
-	private String _userName;
+	private String _username;
 	private String _name;
 	private String _surName;
 	private String _password;
 	private RoleB _role;
+	private String _accountExpired;
 	private String _accountLocked;
+	private String _passwordExpired;
+	private Set<RoleB> _roles;
+
+	public Set<RoleB> getRoles(){
+		return _roles;
+	}
+
+	public void setRoles(Set<RoleB> roles){
+		_roles = roles;
+	}
 	
 	public UserB(Map<String, String> params) {
 		super(params);
 	}
 	
-	public String getUserName() {
-		return _userName;
+	public String getUsername() {
+		return _username;
 	}
 
-	public void setUserName(String userName) {
-		_userName = userName;
+	public void setUsername(String username) {
+		_username = username;
 	}
 
 	public String getName() {
@@ -73,12 +85,11 @@ public class UserB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		setUserName(params.get("userName"));
+		setUsername(params.get("username"));
 		setName(params.get("name"));
 		setSurName(params.get("surName"));
 		setPassword(params.get("password"));
 		setAccountLocked(params.get("accountLocked"));
-
 	}
 
 }

@@ -8,17 +8,17 @@ import com.sd.isp.beans.base.BaseBean;
 
 public class RoleB extends BaseBean {
 	private static final long serialVersionUID = 1L;
-	private String _name;
+	private String _authority;
 
 	public RoleB(Map<String, String> params) {
 		super(params);
 	}
 	
-	public String getName() {
-		return _name;
+	public String getAuthority() {
+		return _authority;
 	}
-	public void setName(String name) {
-		_name = name;
+	public void setAuthority(String authority) {
+		_authority = authority;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class RoleB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		setName(params.get("name"));
+		setAuthority(params.get("authority"));
 	}
 
 }

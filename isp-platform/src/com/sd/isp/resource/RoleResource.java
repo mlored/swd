@@ -1,5 +1,8 @@
 package com.sd.isp.resource;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,6 +13,7 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+//import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.sd.isp.dto.role.RoleDTO;
@@ -31,7 +35,18 @@ public class RoleResource {
 	}
 
 	@GET
+	@Path("/authority/{authority}")
 	@Produces("application/xml")
+	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
+	public RoleResult getAllBy(@PathParam("authority") String authority){
+		Map<String, String> args = new HashMap<>();
+		args.put("authority", authority);
+		return roleService.getAllBy(args);
+	}
+	
+	@GET
+	@Produces("application/xml")
+	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public RoleResult getAll() {
 		return roleService.getAll();
 	}
@@ -49,8 +64,10 @@ public class RoleResource {
 	
 	@DELETE
 	@Path("/{id}")
-	@Produces("application/json")
+	//@Produces("application/json")
+	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public RoleDTO delete(@PathParam("id") Integer roleId) {
 		return roleService.delete(roleId);
 	}
+	
 }

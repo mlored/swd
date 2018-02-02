@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseResult;
-import com.sd.isp.dto.role.RoleDTO;
 
 @XmlRootElement(name = "roleResult")
 public class RoleResult extends BaseResult<RoleDTO> {

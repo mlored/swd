@@ -1,12 +1,14 @@
-
-import com.sd.isp.rest.client.ClientResourceImpl
-
-import com.sd.isp.service.client.ClientServiceImpl
-
-
+import login.MyAuthenticationProvider;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 // Place your Spring DSL code here
 beans = {
+	myAuthenticationProvider(MyAuthenticationProvider) {
+	}
+	
+	localeResolver(SessionLocaleResolver) {
+		defaultLocale= new java.util.Locale('es');
+	}
 	//resources
 	/*clientResource(ClientResourceImpl)
 	countryResource(CountryResourceImpl)

@@ -1,17 +1,21 @@
 package com.sd.isp.rest.base;
 
 import com.sd.isp.dto.base.BaseDTO;
-import com.sd.isp.dto.car.CarDTO;
-import com.sd.isp.dto.car.CarResult;
+import com.sd.isp.service.auth.IAuthService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
-import javax.ws.rs.core.MediaType;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseResource<DTO> {
 	private final String _resourcePath;
 	private final Class<DTO> _dtoClass;
 	private final WebResource _webResource;
-
+	
+	@Autowired
+	private IAuthService authService;
+	
 	private static final String BASE_URL = "http://localhost:8080/isp-platform/rest";
 
 	public BaseResourceImpl(Class<DTO> dtoClass, String resourcePath) {
@@ -30,7 +34,14 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	protected Class<DTO> getDtoClass() {
 		return _dtoClass;
 	}
-
+/*	
+	public void setWebResourceBasicAuthFilter(){
+		String u = authService.getUsername();
+		String p = authService.getPassword();
+				
+		_webResource.addFilter(new HTTPBasicAuthFilter(u,p));		
+	}
+*/
 	@Override
 	public DTO save(DTO dto) {
 		return getWebResource().entity(dto).post(getDtoClass());

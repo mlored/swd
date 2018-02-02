@@ -132,3 +132,25 @@ log4j.main = {
 		   
 		   info 'grails.plugin.cache'
 }
+
+
+// Added by the Spring Security Core plugin:
+//grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.sd.isp.login.User'
+//grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.sd.isp.login.UserRole'
+//grails.plugin.springsecurity.authority.className = 'com.sd.isp.login.Role'
+grails.plugin.springsecurity.providerManager.eraseCredentialsAfterAuthentication=false
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll']
+]
+
+grails.plugin.springsecurity.providerNames = [
+	'myAuthenticationProvider',
+	'anonymousAuthenticationProvider',
+	'rememberMeAuthenticationProvider']

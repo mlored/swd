@@ -1,8 +1,10 @@
 package com.sd.isp.dao.role;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,7 +39,7 @@ public class RoleDaoImpl extends BaseDaoImpl<RoleDomain> implements IRoleDao {
 	@Override
 	public RoleDomain updateById(Integer domainId, RoleDomain domain) {
 		RoleDomain roleDomain = (RoleDomain) sessionFactory.getCurrentSession().get(RoleDomain.class, domainId);
-		roleDomain.setName(domain.getName());
+		roleDomain.setAuthority(domain.getAuthority());
 		sessionFactory.getCurrentSession().saveOrUpdate(roleDomain);
 		return roleDomain;
 	}
@@ -47,6 +49,24 @@ public class RoleDaoImpl extends BaseDaoImpl<RoleDomain> implements IRoleDao {
 		RoleDomain domain = (RoleDomain) sessionFactory.getCurrentSession().get(RoleDomain.class, domainId);
 		sessionFactory.getCurrentSession().delete(domain);
 		return domain;
+	}
+	
+	public RoleDomain delete(RoleDomain domain){
+		sessionFactory.getCurrentSession().delete(domain);
+		return domain;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RoleDomain> findAllBy(Map<String, String> args) {
+		if(args.containsKey("authority")){
+			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select * from role where authority=:authority");
+			query.addEntity(RoleDomain.class); // Define el tipo de resultado de la consulta
+			query.setString("authority", args.get("authority"));
+			return query.list();
+		}else{
+			return null;
+		}
 	}
 
 }

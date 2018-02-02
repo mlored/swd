@@ -1,147 +1,164 @@
-package com.sd.isp.user
-
-
-
-import static org.springframework.http.HttpStatus.*
+package com.sd.isp.user;
 
 import com.sd.isp.beans.user.UserB
-import com.sd.isp.service.user.IUserService
+import com.sd.isp.beans.role.RoleB
 import com.sd.isp.service.role.IRoleService
+import com.sd.isp.service.user.IUserService
+import com.sd.isp.service.auth.IAuthService;
+import com.sd.isp.service.auth.AuthServiceImpl;
 
-import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Transactional(readOnly = true)
-class UserController {
+import login.Util
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+class UserController{
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	IUserService userService
-	IRoleService roleService
-	
-	def create() {
-		[userInstance: new UserB(params)]
+  def IUserService userService
+  def IRoleService roleService
+  
+  @Autowired def IAuthService authService
+
+  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  def index(){
+	def users = userService.getAll()
+	[userInstanceList: users]
+  }
+
+  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  def create() {
+	  [userInstance: new UserB(params)]
+  }
+
+  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  def save() {
+	final Set<RoleB> roles = new HashSet<RoleB>();
+	for (String roleId : params.list('rolesIds')) {
+	  roles.add(roleService.getById(Integer.valueOf(roleId)));
+	}
+
+	def nuevoUser = new UserB(params)
+	nuevoUser.setPassword(params.username)
+	  nuevoUser.setRoles(roles);
+
+	  def userInstance = userService.save(nuevoUser)
+
+
+	  if (!userInstance.getId()) {
+		  render(view: "create", model: [userInstance: userInstance])
+		  return
+	  }
+
+	  flash.message = message(code: 'default.created.message', args: [
+		  message(code: 'user.label', default: 'User'),
+		  userInstance.getId()
+	  ])
+	  redirect(action: "index")
+  }
+
+  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  def edit(Long id) {
+	def userInstance = userService.getById(id.intValue())
+	if (!userInstance) {
+	  flash.message = message(code: 'default.not.found.message', args: [
+		message(code: 'user.label', default: 'User'),
+		id
+	  ])
+	  redirect(action: "list")
+	  return
 	}
 	
-	@Transactional
-	def save() {
-		def userInstance = new UserB(params)
-		def newUser = userService.save(userInstance)
-		if (!newUser?.getId()) {
-			render(view: "create", model: [userInstance: userInstance])
-			return
-		}
+	[userInstance: userInstance]
+  }
+    
+  @Secured(['ROLE_SUPERUSER', 'ROLE_ADMIN'])
+  def show(Long id) {
+	  def userInstance = userService.getById(id.intValue())
+	  if (!userInstance) {
+		  flash.message = message(code: 'default.not.found.message', args: [
+			  message(code: 'user.label', default: 'Usuario'),
+			  id
+		  ])
+		  redirect(action: "list")
+		  return
+	  }
 
-		flash.message = message(code: 'default.created.message', args: [
-				message(code: 'user.label', default: 'User'),
-				newUser.getId()
-		])
-		redirect(action: "index")
-	}
-	
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        redirect(action: "list", params: params)
-    }
-
-	def list(Integer max) {
-		def users = userService.getAll()
-		[userInstanceList: users, userInstanceTotal: users?.size()]
-	}
-	
-/*    def show(User userInstance) {
-        respond userInstance
-    }
-*/
-
-	def edit(Long id) {
-		def userInstance = userService.getById(id.intValue())
-		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-					message(code: 'user.label', default: 'User'),
-					id
-			])
-			redirect(action: "list")
-			return
-		}
-
-		[userInstance: userInstance]
+	   [userInstance: userInstance]
+  }
+  
+  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  def update(Long id, Long version) {
+	def userInstance = userService.getById(id.intValue())
+	if (!userInstance) {
+	  flash.message = message(code: 'default.not.found.message', args: [
+		message(code: 'user.label', default: 'User'),
+		id
+	  ])
+	  redirect(action: "index")
+	  return
 	}
 
-    @Transactional
-    def update(Long id) {
-        def userInstance = userService.getById(id.intValue())
-        if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'user.label', default: 'User'),
-                    id
-            ])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (userInstance.version > version) {
-                userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [
-                                message(code: 'car.label', default: 'User')] as Object[],
-                        "Another user has updated this User while you were editing")
-                render(view: "edit", model: [userInstance: userInstance])
-                return
-            }
-        }
-
-        userInstance.properties = params
-
-        if (!userInstance.save(flush: true)) {
-            render(view: "edit", model: [userInstance: userInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [
-                message(code: 'user.label', default: 'User'),
-                userInstance.id
-        ])
-        redirect(action: "show", id: userInstance.id)
-    }
-    @Transactional
-    def delete(Long id) {
-        def userInstance = userService.getById(id.intValue())
-        if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'user.label', default: 'User'),
-                    id
-            ])
-            redirect(action: "list")
-            return
-        }
-		
-		try {
-			userService.delete(userInstance?.id)
-			userInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [
-					message(code: 'user.label', default: 'User'),
-					id
-			])
-			redirect(action: "list")
-		}
-		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [
-					message(code: 'user.label', default: 'User'),
-					id
-			])
-			redirect(action: "show", id: id)
-		}
+	if (userInstance.getUsername()==authService.getUsername()) {
+	  flash.message = "No puedes editar tu registro de usuario"
+	  redirect(action: "index")
+	  return
 	}
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+	final Set<RoleB> roles = new HashSet<RoleB>();
+	for (String roleId : params.list('rolesIds')) {
+	  roles.add(roleService.getById(Integer.valueOf(roleId)));
+	}
+	def username=userInstance.getUsername()
+	def password=userInstance.getPassword()
+	userInstance.create(params)
+	userInstance.setRoles(roles)
+	userInstance.setUsername(username)
+	userInstance.setPassword(password)
+
+	userService.save(userInstance)
+	flash.message = message(code: 'default.updated.message', args: [
+	  message(code: 'user.label', default: 'User'),
+	  userInstance.getId()
+	])
+	redirect(action: "index")
+  }
+
+  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  def delete(Long id) {
+	def userInstance = userService.getById(id.intValue())
+
+	  if (userInstance.getUsername()==authService.getUsername()) {
+	  flash.message = "No puedes eliminar tu registro de usuario"
+	  redirect(action: "index")
+	  return
+	}
+
+	if (!userInstance) {
+	  flash.message = message(code: 'default.not.found.message', args: [
+		message(code: 'user.label', default: 'User'),
+		id
+	  ])
+	  redirect(action: "index")
+	  return
+	}
+
+	try {
+	  userService.delete(id.intValue())
+	  flash.message = message(code: 'default.deleted.message', args: [
+		message(code: 'user.label', default: 'User'),
+		id
+	  ])
+	  redirect(action: "index")
+	}
+	catch (DataIntegrityViolationException e) {
+	  flash.message = message(code: 'default.not.deleted.message', args: [
+		message(code: 'user.label', default: 'User'),
+		id
+	  ])
+	  redirect(action: "index")
+	}
+  }
 }

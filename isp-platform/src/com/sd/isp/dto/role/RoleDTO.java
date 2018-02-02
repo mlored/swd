@@ -4,19 +4,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.sd.isp.dto.base.BaseDTO;
 
-@XmlRootElement(name = "role")
+@XmlRootElement(name = "user")
 public class RoleDTO extends BaseDTO {
 	
 	private static final long serialVersionUID = 1L;
-	private String _name;
+	private String _authority;
 	
 	@XmlElement
-	public String getName() {
-		return _name;
+	public String getAuthority() {
+		return _authority;
 	}
-	
-	public void setName(String name) {
-		_name = name;
+
+	public void setAuthority(String _authority) {
+		this._authority = _authority;
 	}
-	
 }

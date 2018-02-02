@@ -6,9 +6,15 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+		/*
+		 "/"(view:"/index")
+		 */
+		 "500"(view:'/error')
+		 "/" {
+			 controller = "secure"
+			 action = "index"
+		  }
+	 }
+ }
 
-        "/"(view:"/login/login")
-        
-        "500"(view:'/error')
-	}
-}
+	

@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseResult;
-import com.sd.isp.dto.user.UserDTO;
 
 @XmlRootElement(name = "userResult")
 public class UserResult extends BaseResult<UserDTO> {
