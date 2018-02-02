@@ -22,21 +22,27 @@
     http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
 	<tx:annotation-driven />
-	
+	<task:annotation-driven/>
     <cache:annotation-driven />
     <tx:annotation-driven transaction-manager="transactionManager"  />
 
 	<context:component-scan base-package="com.sd.isp.dao"/>
 	<context:component-scan base-package="com.sd.isp.service"/>
 	<context:component-scan base-package="com.sd.isp.resource" />
+	<context:component-scan base-package="com.sd.isp.service.util" />
+	<context:property-placeholder location="classpath:foo.properties"/>
+	
+	<bean id="scheduler" class="com.sd.isp.service.util.Scheduler"></bean>
+	
+	
 	
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/tracker" />
-		<property name="username" value="dev_user" />
-		<property name="password" value="123456" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
 	</bean>
 
 	<bean id="sessionFactory"
@@ -65,4 +71,34 @@
 	<!-- Spring Security Configuration
 	<import resource="securityContext.xml" /> -->
 	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="prometeo875@gmail.com" />
+		<property name="password" value="Prometeo+875" />
+	
+		<property name="javaMailProperties">
+		     <props>
+	           	<prop key="mail.smtp.auth">true</prop>
+	           	<prop key="mail.smtp.starttls.enable">true</prop>
+	       	     </props>
+		</property>
+	</bean>
+
+	<bean id="mailMail" class="com.sd.isp.service.util.MailMail">
+		<property name="mailSender" ref="mailSender" />
+		<property name="simpleMailMessage" ref="customeMailMessage" />
+	</bean>
+
+	<bean id="customeMailMessage"
+		class="org.springframework.mail.SimpleMailMessage">
+	
+		<property name="from" value="${email.incoming.sms.from.address}" />
+		<property name="subject" value="${email.incoming.sms.subject}" />
+		<property name="text">
+		   <value>
+			"${email.incoming.sms.message}"
+		   </value>
+        </property>
+	</bean>
 </beans>

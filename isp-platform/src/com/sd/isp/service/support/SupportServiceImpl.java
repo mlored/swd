@@ -90,6 +90,12 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportDTO, SupportDomai
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public SupportResult find(String textToFind, int page, int maxItems) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 		
 
