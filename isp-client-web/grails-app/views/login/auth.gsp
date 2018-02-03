@@ -1,53 +1,86 @@
-<!DOCTYPE html>
-<html>
-	<head>	
-		<meta name="layout" content="main" />
-		%{-- <title><g:message code="Inicio de Sesion"/></title> --}%
-		<asset:stylesheet src="auth.css"/>
-	</head>
-	<body>
-		<div class="container">
-	      <form class="form-signin form-horizontal" action='${postUrl}' method='POST' id='loginForm' autocomplete='off'>
-	        <h2> Iniciar Sesión</h2>
 
-	        <g:if test='${flash.message}'>
-				<div class='login_message'>${flash.message = "Usuario y/o Contraseña incorrectos."}</div>
-			</g:if>			
 
-	        <div class="form-group">
-				<label for='username' class="col-sm-3 control-label"><g:message code="Usuario"/></label>
-				<div class="col-sm-8">
-					<input type='text' class='form-control' name='j_username' id='username'/>
-				</div>
-			</div>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-			<div class="row">
-				<label for='password' class="col-sm-3 control-label"><g:message code="Contraseña"/></label>
-				<div class="col-sm-8">
-					<input type='password' class='form-control' name='j_password' id='password'/>
-				</div>
-			</div>
+    <!-- Tell the browser to be responsive to screen width -->
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'application.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'AdminLTE.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'skins/_all-skins.css')}" type="text/css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-			<p id="remember_me_holder">
-				<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
-				<label for='remember_me'><g:message code="Recuérdame"/></label>
-			</p>
+    <title>Sistema</title>
 
-			<p>
-				<input type='submit' id="submit" class ="btn" value='${message(code: "Entrar")}'/>
-			</p>
-	      </form>
+    <r:require modules="bootstrap"/>
+    <r:require modules="adminlte-core"/>
+    <r:layoutResources />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js does nott work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
-	    </div>					
-		
-		<script type='text/javascript'>
-			<!--
-			(function() {
-				document.forms['loginForm'].elements['j_username'].focus();
-			})();
-			// -->
-		</script>
+    <![endif]-->
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>Sistemas</b>Distribuidos</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg"></p>
 
-	</body>
-</html>
+        <form action="/isp-client-web/" method="post">
+            <div class="form-group has-feedback">
+                <input type="username" class="form-control" placeholder="Usuario">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Contraseña">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
 
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-5">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar sesión</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../../plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
+
+
+</body></html>
