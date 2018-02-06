@@ -27,7 +27,36 @@ public class EntryDTO extends BaseDTO {
 	private String _diagnostic;
     private CarDTO _car;
     private ClientDTO _client;
-    private List<EntryDetailsDTO> _entryDetails;
+    private Integer _carId;
+    private Integer _clientId;
+    
+    public CarDTO get_car() {
+		return _car;
+	}
+
+	public void set_car(CarDTO _car) {
+		this._car = _car;
+	}
+	
+	@XmlElement
+	public Integer getCarId() {
+		return _carId;
+	}
+
+	public void setCarId(Integer _carId) {
+		this._carId = _carId;
+	}
+	
+	@XmlElement
+	public Integer getClientId() {
+		return _clientId;
+	}
+
+	public void setClientId(Integer _clientId) {
+		this._clientId = _clientId;
+	}
+
+	private List<EntryDetailsDTO> _entryDetails;
 
     @XmlElement
 	public CarDTO getCar() {

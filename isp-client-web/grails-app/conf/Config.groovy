@@ -43,6 +43,7 @@ grails.views.default.codec = "html"
 // If unspecified, controllers are prototype scoped.
 grails.controllers.defaultScope = 'singleton'
 
+
 jquery {
     sources = 'jquery' // Holds the value where to store jQuery-js files /web-app/js/
     version = '3.3.1' // The jQuery version in use
@@ -152,7 +153,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll']
+	'/**/favicon.ico':  ['permitAll'],
+    '/**': ['permitAll']
+
 ]
 
 grails.plugin.springsecurity.providerNames = [

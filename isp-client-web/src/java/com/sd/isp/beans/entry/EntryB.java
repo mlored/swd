@@ -18,7 +18,24 @@ public class EntryB extends BaseBean{
     private String diagnostic;
     private ClientB cliente;
     private CarB car;
+    private Integer carId;
+    private Integer clientId;
 
+    public Integer getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
+    }
 
     public EntryB(Map<String, String> params) {
         super(params);
@@ -72,17 +89,7 @@ public class EntryB extends BaseBean{
             setId(Integer.valueOf(params.get("id")));
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        String dateInString = params.get("date");
-        try {
 
-            Date aux = formatter.parse(dateInString);
-            setDate(aux);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        setNumber(Integer.valueOf(params.get("number")));
         setDiagnostic(params.get("diagnostic"));
         //setCliente(Integer.valueOf(params.get("cliente")));
 
