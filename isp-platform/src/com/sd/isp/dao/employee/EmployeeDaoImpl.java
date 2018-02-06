@@ -68,15 +68,15 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 			Map<String, String> map = obtenerQuery(textToFind);
 			if (map.containsKey("text")) {
 				String text = map.get("text");
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("_name", "%"+text+"%"))
-						.add(Restrictions.ilike("_name", "%"+text+"%"))
-						.add(Restrictions.ilike("_surname", "%"+text+"%"))
-						.add(Restrictions.ilike("_cellphone", "%"+text+"%"))
-						.add(Restrictions.ilike("_ruc", "%"+text+"%"))
-						.add(Restrictions.ilike("_address", "%"+text+"%"));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("name", "%"+text+"%"))
+						.add(Restrictions.ilike("name", "%"+text+"%"))
+						.add(Restrictions.ilike("surname", "%"+text+"%"))
+						.add(Restrictions.ilike("cellphone", "%"+text+"%"))
+						.add(Restrictions.ilike("RUC", "%"+text+"%"))
+						.add(Restrictions.ilike("address", "%"+text+"%"));
 				Criterion idCriterion = null;
 				if (StringUtils.isNumeric(text)) {
-					idCriterion = Restrictions.eq("_id", Integer.valueOf(text));
+					idCriterion = Restrictions.eq("id", Integer.valueOf(text));
 				}
 				if (idCriterion != null) {
 					criteria.add(Restrictions.or(propertyCriterion, idCriterion));
@@ -86,7 +86,8 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 			}
 				if (map.containsKey("sort")) {
 					String sort = (map.get("sort"));
-					if(sort.equals("_name") || sort.equals("_surname") || sort.equals("_cellphone") || sort.equals("_ruc") || sort.equals("_address")){
+					if(sort.equals("name") || sort.equals("surname") || sort.equals("cellphone") || sort.equals("RUC") || 
+							sort.equals("address")){
 						if (map.containsKey("order")){
 							String order = (map.get("order"));
 							if(order.equals("desc")){
@@ -100,12 +101,12 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 						}
 					}
 				}else{
-					criteria.addOrder(Order.asc("_name").ignoreCase());
-					criteria.addOrder(Order.asc("_surname").ignoreCase());
+					criteria.addOrder(Order.asc("name").ignoreCase());
+					criteria.addOrder(Order.asc("surname").ignoreCase());
 				}
 			}else{
-				criteria.addOrder(Order.asc("_name").ignoreCase());
-				criteria.addOrder(Order.asc("_surname").ignoreCase());
+				criteria.addOrder(Order.asc("name").ignoreCase());
+				criteria.addOrder(Order.asc("surname").ignoreCase());
 			}
 				criteria.setFirstResult(page * maxItems);
 				criteria.setMaxResults(maxItems);
