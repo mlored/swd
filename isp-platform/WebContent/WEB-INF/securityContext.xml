@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Usa por defecto beans como namespace -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:sec="http://www.springframework.org/schema/security"
+  xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd"> 
+
+	<!--Fuente: http://www.jtech.ua.es/j2ee/publico/spring-2012-13/sesion07-apuntes.html -->
+	<!--Nota: Si a la siguiente linea se le agrega create-session="stateless" cada vez que se hace un request
+	          se consultará a la base datos por las credenciales. Si se apaga el servidor de base de datos
+	          el cache debería funcionar, pero no funciona porque esta configuracion consulta a la base de datos
+	          directamente sin pasar por el cache.
+	          Sin create-session="stateless" no se consultará la bd cada vez que se hace un request,
+	          ya que la sesion va a ser mantenida por el servidor, por lo que el cache va a funcionar, aún
+	          si el servidor de bd no esta corriendo
+	          Soluciones:
+	          1. No usar create-session="stateless"
+	          2. Buscar una manera de que  el bean authenticationManager consulte la cache (Cuenta con un atributo cache-ref
+	          pero no se puede referenciar la cache existente porque cache-ref solo permite org.springframework.security.core.userdetails.UserCache
+	          y no com.google.code.ssm.spring.SSMCache) -->
+	<sec:http auto-config="true" use-expressions="true" pattern="/rest/**"> 
+    	<sec:intercept-url pattern="/rest/user/username/**" access="permitAll()"/>
+    	<sec:intercept-url pattern="/rest/role/**" access="permitAll()"/>
+    	<sec:intercept-url pattern="/rest/user/**" access="permitAll()"/> 
+    	<!-- Nota: la url a user solo se habilita para crear datos básicos en la bd, en produccion no se necesita y seria un hueco a de seguridad
+    	           la url a role es necesaria pero deja un hueco de seguridad, 
+    	           para disminuir estos huecos, también se anotan algunos métodos de la capa resource -->
+    	<sec:intercept-url pattern="/**" access="isAuthenticated()"/>
+    	<!-- <sec:intercept-url pattern="/rest/part/**" access="isAuthenticated()"/> -->
+  		<sec:http-basic/>
+  	</sec:http>
+  	  	
+  	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider>
+			<sec:password-encoder ref="encoder"/>			
+			
+			<sec:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="
+                SELECT username, password, account_locked as enabled
+                FROM user WHERE username = ?"
+
+            	authorities-by-username-query="
+                SELECT u.username, r.authority
+                FROM user u, user_role u_r, role r
+                WHERE u.id = u_r.user_id
+                AND r.id = u_r.role_id
+                AND u.username = ?"
+			/>
+		</sec:authentication-provider>
+	</sec:authentication-manager>		
+		
+	<!-- Referenciado mas arriba en sec:password-encoder ref="encoder" 
+	     Permite a spring security comprender la contraseña guardada en la 
+	     tabla user de la base de datos. La contraseña esta hasheada con BCrypt
+	-->
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!--Para usar la anotacion @Secured de Spring -->
+	<sec:global-method-security secured-annotations="enabled" />
+</beans>
+

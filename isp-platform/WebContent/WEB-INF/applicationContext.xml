@@ -2,25 +2,29 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:sec="http://www.springframework.org/schema/security"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd 
-    http://www.springframework.org/schema/cache 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd 
+    http://www.springframework.org/schema/cache
     http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
-    http://www.springframework.org/schema/tx 
-    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd
 	http://www.springframework.org/schema/task
-	http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+    http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
 	<tx:annotation-driven />
 	<task:annotation-driven/>
-	<cache:annotation-driven />
-    <tx:annotation-driven transaction-manager="transactionManager"  /> 
-	
-	
+    <cache:annotation-driven />
+    <tx:annotation-driven transaction-manager="transactionManager"  />
 
 	<context:component-scan base-package="com.sd.isp.dao"/>
 	<context:component-scan base-package="com.sd.isp.service"/>
@@ -29,6 +33,8 @@
 	<context:property-placeholder location="classpath:foo.properties"/>
 	
 	<bean id="scheduler" class="com.sd.isp.service.util.Scheduler"></bean>
+	
+	
 	
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -62,6 +68,9 @@
     <!-- Cache Configuration -->	
 	<import resource="cacheContext.xml" />
 	
+	<!-- Spring Security Configuration
+	<import resource="securityContext.xml" /> -->
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
@@ -92,5 +101,4 @@
 		   </value>
         </property>
 	</bean>
-
 </beans>

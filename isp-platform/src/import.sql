@@ -31,6 +31,6 @@ insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'Caja Mec
 insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'Cambio de Motor','4000000',0);
 insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'Motor','2000000',4);
 
-insert into role (name) values ('admin');
-
-insert into user (userName, name, surName, password, role_id) values ('mlored','lorena','del puerto', '123456', 1);
+insert into role (authority) values ('ROLE_ADMIN');
+insert into user (username, name, surName, password, account_expired, account_locked, password_expired) values ('mlored','lorena','del puerto', '123456', false, false, false);
+insert into user_role (user_id, role_id) values ('1','1');

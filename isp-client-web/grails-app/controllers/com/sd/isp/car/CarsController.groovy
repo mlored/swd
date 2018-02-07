@@ -41,7 +41,7 @@ class CarsController {
 
     def list(Integer max) {
         def cars = carService.getAll()
-        [carInstanceList: cars, carInstanceTotal: cars?.size()]
+        respond cars, [model: [carInstanceList: cars, carInstanceTotal: cars?.size()]]
     }
 
     /*def show(Long id) {

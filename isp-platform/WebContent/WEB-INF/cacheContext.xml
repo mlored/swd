@@ -75,7 +75,7 @@
 			<bean class="com.google.code.ssm.config.DefaultAddressProvider">
 				<property name="address" value="${cache.address}" />
 			</bean>
-		</property>
+		</property> 
 		<property name="configuration">
 			<bean class="com.google.code.ssm.providers.CacheConfiguration">
 				<property name="consistentHashing" value="true" />

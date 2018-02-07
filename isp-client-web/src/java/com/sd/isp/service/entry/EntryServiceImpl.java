@@ -90,8 +90,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
 
         final EntryB entryB = new EntryB(params);
 
-        entryB.setCar(_carService.getById(dto.getCar().getId()));
-        entryB.setCliente(_clientService.getById(dto.getClient().getId()));
+        entryB.setCarId(dto.getCarId());
+        entryB.setClientId(dto.getClientId());
         entryB.setDate(dto.getDate());
         return entryB;
     }
@@ -104,8 +104,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         dto.setDate(bean.getDate());
         dto.setNumber(bean.getNumber());
         dto.setDiagnostic(bean.getDiagnostic());
-        dto.getCar().setId(bean.getCar().getId());
-        dto.getClient().setId(bean.getCliente().getId());
+        dto.setCarId(bean.getCarId());
+        dto.setClientId(bean.getClientId());
 
         return dto;
     }

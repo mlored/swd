@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+//import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.sd.isp.dto.user.UserDTO;
@@ -26,12 +27,21 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public UserDTO getById(@PathParam("id") Integer userId) {
 		return userService.getById(userId);
+	}
+	
+	@GET
+	@Path("/username/{username}")
+	@Produces("application/json")
+	public UserDTO getByUserName(@PathParam("username") String username) {
+		return userService.getByUsername(username);
 	}
 
 	@GET
 	@Produces("application/xml")
+	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public UserResult getAll() {
 		return userService.getAll();
 	}
@@ -49,8 +59,10 @@ public class UserResource {
 	
 	@DELETE
 	@Path("/{id}")
-	@Produces("application/json")
+	//@Produces("application/json")
+	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public UserDTO delete(@PathParam("id") Integer userId) {
 		return userService.delete(userId);
 	}
+	
 }
