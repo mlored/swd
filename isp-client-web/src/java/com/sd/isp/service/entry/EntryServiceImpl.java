@@ -1,15 +1,16 @@
 package com.sd.isp.service.entry;
 
 import com.sd.isp.beans.entry.EntryB;
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.rest.entry.IEntryResource;
 import com.sd.isp.service.base.BaseServiceImpl;
-
 import com.sd.isp.service.car.CarServiceImpl;
 import com.sd.isp.service.car.ICarService;
 import com.sd.isp.service.client.IClientService;
 import com.sd.isp.service.client.ClientServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -109,4 +110,16 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
 
         return dto;
     }
+    public List<EntryB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 }

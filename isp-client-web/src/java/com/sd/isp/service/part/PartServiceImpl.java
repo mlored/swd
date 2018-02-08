@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.part.PartB;
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.part.PartDTO;
 import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.rest.part.IPartResource;
@@ -97,5 +98,18 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
         dto.setQuantity(bean.getQuantity());
         return dto;
     }
+    
+    public List<PartB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
     
 }

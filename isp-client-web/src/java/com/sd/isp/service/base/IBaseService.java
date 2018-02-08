@@ -13,6 +13,8 @@ public interface IBaseService<BEAN extends BaseBean, DTO extends BaseDTO> {
 	public BEAN getById(Integer id);
 
 	public BEAN update(Integer id, BEAN bean);
+	
+	public List <BEAN> find(String textToFind, int maxItems, int page);
 
 	public BEAN delete(Integer id);
 }

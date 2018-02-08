@@ -17,5 +17,13 @@ public class EmployeeResourceImpl extends BaseResourceImpl<EmployeeDTO> implemen
 		final EmployeeResult result = getWebResource().get(EmployeeResult.class);
 		return result;
 	}
+	
+	@Override
+	public EmployeeResult find(String textToFind, int maxItems, int page) {
+		//setWebResourceBasicAuthFilter();
+		final EmployeeResult result = findWR(textToFind, maxItems, page).get(
+				EmployeeResult.class);
+		return result;
+	}
 
 }

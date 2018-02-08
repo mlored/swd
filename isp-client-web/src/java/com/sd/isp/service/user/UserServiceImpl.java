@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.beans.user.UserB;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
@@ -130,5 +131,18 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
 	public UserB getByUsername(String username) {
 		final UserDTO dto = _userResource.getByUsername(username);
 		return convertDtoToBean(dto);
+	}
+	
+	public List<UserB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.car.CarB;
+import com.sd.isp.beans.client.ClientB;
 import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.car.CarResult;
 import com.sd.isp.rest.car.ICarResource;
@@ -99,4 +100,17 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
 
         return dto;
     }
+    
+    public List<CarB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 }

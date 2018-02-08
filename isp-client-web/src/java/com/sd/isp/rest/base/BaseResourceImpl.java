@@ -61,4 +61,14 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO> implements IBaseReso
 	public DTO destroy(Integer id){
 		return getWebResource().path("/" + id).delete(getDtoClass());
 	}
+	
+	public WebResource findWR(String textToFind, int maxItems, int page) {
+		if (null == textToFind){
+			//setWebResourceBasicAuthFilter();
+			return getWebResource().path("/search/" + maxItems + "/" + page);
+		}else{
+			//setWebResourceBasicAuthFilter();
+			return getWebResource().path("/search/" + maxItems + "/" + page + "/" + textToFind);
+		}
+	}
 }

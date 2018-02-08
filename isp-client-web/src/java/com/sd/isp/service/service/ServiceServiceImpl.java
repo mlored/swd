@@ -97,4 +97,17 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
 
         return bean;
     }
+    
+    public List<ServiceB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getPatients() ? new ArrayList<PatientDTO>()
+				: result.getPatients();
+
+		final List<PatientB> patients = new ArrayList<PatientB>();
+		for (PatientDTO dto : rList) {
+			final PatientB bean = convertDtoToBean(dto);
+			patients.add(bean);
+		}*/
+		return null;
+	}
 }

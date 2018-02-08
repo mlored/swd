@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.buy.BuyB;
+import com.sd.isp.beans.client.ClientB;
 import com.sd.isp.dto.buy.BuyDTO;
 import com.sd.isp.dto.buy.BuyResult;
 import com.sd.isp.rest.buy.IBuyResource;
@@ -93,4 +94,17 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
 
         return bean;
     }
+    
+    public List<BuyB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 }

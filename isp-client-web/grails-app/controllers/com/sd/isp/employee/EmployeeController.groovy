@@ -20,9 +20,38 @@ class EmployeeController {
     }
 	
 	def list(Integer max) {
-		def employees = employeeService.getAll()
+		//def employees = employeeService.getAll()
+		
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
+		def text = params.text
+		def search = ""
+		def employees = null
+		
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
+		
+		if(null != search && !"".equals(search)){
+			employees = employeeService.find(search,10,page)
+			siguiente = employeeService.find(search,10,page+1)
+		}else{
+			employees = employeeService.find(null,10,page)
+			siguiente = employeeService.find(null,10,page+1)
+		}
 
-		[employeeInstanceList: employees, employeeInstanceTotal: employees?.size()]
+
+		[employeeInstanceList: employees, employeeInstanceTotal: employees?.size(), page: page, siguiente: siguiente?.size(),eemployeeInstanceList: employeeService.getAll(), text: text/*,
+			user:authService.getName()*/]
 	}
 
     /* def show(Long id) {

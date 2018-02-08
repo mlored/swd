@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.beans.support.SupportB;
 import com.sd.isp.dto.support.SupportDTO;
 import com.sd.isp.rest.support.SupportResourceImpl;
@@ -83,5 +84,18 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportB, SupportDTO> im
 
         return bean;
     }
+    
+    public List<SupportB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 
 }

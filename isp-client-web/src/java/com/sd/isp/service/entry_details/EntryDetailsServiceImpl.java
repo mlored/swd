@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 
+
 import com.sd.isp.service.entry.EntryServiceImpl;
 import com.sd.isp.service.part.IPartService;
 import com.sd.isp.service.part.PartServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.entry_details.EntryDetailsB;
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.rest.entry_details.IEntryDetailsResource;
@@ -111,4 +114,17 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
         }
         return entry_details;
     }
+    
+    public List<EntryDetailsB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 }

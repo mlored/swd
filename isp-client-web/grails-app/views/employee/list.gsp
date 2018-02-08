@@ -7,13 +7,28 @@
 </head>
 <body>
 <div id="list-employee" class="content scaffold-list" role="main">
+     <div class="col-sm-5" align="right">
+		<g:form action="list" class="form-search">
+			<div class="input-group col-md-7">
+				<input type="text" name="text" class="form-control" maxlength="50" value="${text}"
+						placeholder="Ingrese un texto para buscar" /> <span
+					    class="input-group-btn">
+					<button class="btn btn-primary" name="list" value="Buscar">
+					 	<span class=" glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+		</g:form>
+	</div>
     <h1>
     	Empleados
    		 <g:link class="btn btn-primary" action="create">Nuevo</g:link>
     </h1>
+    
      <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+    
     <div class="box">
     <table class="table table-striped table-hover table-condensed">
         <thead>

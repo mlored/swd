@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.role.RoleDTO;
 import com.sd.isp.dto.role.RoleResult;
 import com.sd.isp.rest.role.IRoleResource;
@@ -94,4 +95,16 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
 
         return bean;
     }
+    public List<RoleB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 }

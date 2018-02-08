@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.beans.supplier.SupplierB;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.rest.supplier.ISupplierResource;
@@ -105,5 +106,18 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 
         return bean;
     }
+	
+	public List<SupplierB> find (String textToFind, int maxItems, int page) {
+		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+				: result.getServices();
+
+		final List<ServiceB> services = new ArrayList<ServiceB>();
+		for (ServicetDTO dto : rList) {
+			final ServiceB bean = convertDtoToBean(dto);
+			services.add(bean);
+		}*/
+		return null;
+	}
 
 }
