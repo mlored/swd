@@ -1,6 +1,3 @@
-<%@ page import="com.sd.isp.role.Role" %>
-
-
 
 <div class="fieldcontain ${hasErrors(bean: roleInstance, field: 'name', 'error')} required">
 	<label for="name">

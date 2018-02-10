@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="list-employee" class="content scaffold-list" role="main">
-     <div class="col-sm-5" align="right">
+     <div class="col-sm-5" align="center">
 		<g:form action="list" class="form-search">
 			<div class="input-group col-md-7">
 				<input type="text" name="text" class="form-control" maxlength="50" value="${text}"
@@ -18,8 +18,8 @@
 					</button>
 				</span>
 			</div>
-		</g:form>
-	</div>
+	    </g:form>
+     </div>
     <h1>
     	Empleados
    		 <g:link class="btn btn-primary" action="create">Nuevo</g:link>

@@ -1,5 +1,4 @@
 
-<%@ page import="com.sd.isp.user.User" %>
 <!DOCTYPE html>
 <html>
 	<head>
