@@ -17,10 +17,30 @@ insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('Supp
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('SupplierDomain','Lorena','Delpuerto','1234568', 'Centro', '0985012369');
 
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Albert','Einstein','123459', 'Centro', '0985102369');
-insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Sonia','Curie','1234560', 'Centro', '0994125786');
-insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Lara','López','4789523', 'Miranda', '0985412369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Sonia','Curie','1234567', 'Centro', '0994125786');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Lara','López','4789823', 'Miranda', '0985412369');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Marian','Benitez','4782302', 'Encarnación', '0995748444');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Fabiola','Acosta','47851233', 'Yuty', '0985417223');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Albert','Einstein','143459', 'Centro', '0985102369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Sonia','Curie','1234560', 'Centro', '0994125786');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Lara','López','4789523', 'Miranda', '0985412369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Marian','Benitez','4782382', 'Encarnación', '0995748444');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Mirian','Acosta','4785533', 'Yuty', '0985417223');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Ana','Einstein','173459', 'Centro', '0985102369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Guada','Curie','1231560', 'Centro', '0994125786');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Juana','López','4785523', 'Miranda', '0985412369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Perla','Benitez','4755302', 'Encarnación', '0995748444');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Ana Maria','Acosta','47851273', 'Yuty', '0985417223');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Maria','Einstein','123549', 'Centro', '0985102369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Perla','Curie','1234550', 'Centro', '0994125786');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Diana','López','4784523', 'Miranda', '0985412369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Mirian','Benitez','4752302', 'Encarnación', '0995748444');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Paola','Acosta','47851293', 'Yuty', '0985417223');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Iris','Einstein','125459', 'Centro', '0985102369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Noemi','Curie','1534560', 'Centro', '0994125786');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Niara','López','4759523', 'Miranda', '0985412369');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Naras','Benitez','4785312', 'Encarnación', '0995748444');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('EmployeeDomain','Jazmin','Acosta','42851233', 'Yuty', '0985417223');
 
 
 

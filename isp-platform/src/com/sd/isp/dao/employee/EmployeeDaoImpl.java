@@ -69,7 +69,6 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 			if (map.containsKey("text")) {
 				String text = map.get("text");
 				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("name", "%"+text+"%"))
-						.add(Restrictions.ilike("name", "%"+text+"%"))
 						.add(Restrictions.ilike("surname", "%"+text+"%"))
 						.add(Restrictions.ilike("cellphone", "%"+text+"%"))
 						.add(Restrictions.ilike("RUC", "%"+text+"%"))
