@@ -40,7 +40,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value = "isp-platform-cache", key = "new Integer(#id).toString().concat('.car')")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);
 		return convertDomainToDto(domain);

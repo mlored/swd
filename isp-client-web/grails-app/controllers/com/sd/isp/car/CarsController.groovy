@@ -84,11 +84,6 @@ class CarsController {
             return
         }
 
-        /*if (!carInstance.save(flush: true)) {
-            render(view: "edit", model: [carInstance: carInstance])
-            return
-        }*/
-
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'car.label', default: 'Car'),
                 carInstance.id

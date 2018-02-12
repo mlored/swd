@@ -11,13 +11,12 @@ import com.sd.isp.service.entry_details.IEntryDetailsService
 
 class EntryController {
 
-    static allowedMethods = [list: "GET",save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [list: "GET",save: "POST", update: "PUT", delete: "DELETE"]
 
-    def IEntryService entryService
-    def IEntryDetailsService entryDetailsService
-    def ICarService carService
-    def IPartService partService
-    def IClientService clientService
+    IEntryService entryService
+    IEntryDetailsService entryDetailsService
+    IPartService partService
+    IClientService clientService
 
 
     def index(Integer max){
@@ -35,7 +34,7 @@ class EntryController {
 
     def create() {
         List<EntryDetails> entryDetails;
-        [entryInstance: new Entry(params), cars: carService.getAll(),
+        [entryInstance: new Entry(params), cars: entryService.getAll(),
          clients: clientService.getAll(), entryDetails: entryDetails]
         return
 
@@ -71,7 +70,7 @@ class EntryController {
             return
         }
 
-        [entryInstance: entryInstance, cars: carService.getAll()]
+        [entryInstance: entryInstance, cars: entryService.getAll()]
     }
 
 
@@ -86,40 +85,30 @@ class EntryController {
             redirect(action: "list")
             return
         }
-        Map<String,String> args = new HashMap<String,String>();
-        args.put("entryId",entryInstance.getId().toString())
-        def entry_details = entryDetailsService.getAllBy(args)
 
-        System.out.println(entry_details.size())
 
-        [entryInstance: entryInstance, car: carService.getAll(),
-         client: clientService.getAll(), entry: entry_details]
+        [entryInstance: entryInstance]
     }
 
 
-    /*def update(Long id, Long version) {
-        def entryInstance = entryService.getById(id.intValue())
-        if (!entryInstance) {
+    def update(Long id) {
+        def entryB = new EntryB(params)
+        def entryInstance = entryService.update(id.intValue(), entryB)
+        if (entryInstance == null) {
             flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'entry.label', default: 'Entry'),
+                    message(code: 'entry.label', default: 'Entrada'),
                     id
             ])
-            redirect(action: "index")
+            redirect(action: "list")
             return
         }
 
-        def car= carService.getById(Integer.valueOf(params.car.id))
-        if (!car) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'entry.label', default: 'Entry'),
-                    id
-            ])
-            redirect(action: "index")
-            return
-        }
-
-        redirect(action: "index")
-    }*/
+        flash.message = message(code: 'default.updated.message', args: [
+                message(code: 'entry.label', default: 'Entrada'),
+                entryInstance.id
+        ])
+        redirect(action: "list")
+    }
 
     /*
     def delete(Long id) {

@@ -20,6 +20,7 @@
 	<cache:annotation-driven />
 	<context:component-scan base-package="com.sd.isp.service" />
 	<context:component-scan base-package="com.sd.isp.rest" />
+	<context:component-scan base-package="com.sd.isp.beans" />
 
 	<bean name="cacheManager" class="com.google.code.ssm.spring.SSMCacheManager">
 		<property name="caches">

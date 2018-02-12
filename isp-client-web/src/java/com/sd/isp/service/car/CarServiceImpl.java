@@ -21,7 +21,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         implements ICarService {
 
     @Autowired
-    private ICarResource _carResource;
+    private ICarResource carResource;
 
 
     public CarServiceImpl() {
@@ -30,7 +30,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     @Override
     public CarB save(CarB bean) {
         final CarDTO car = convertBeanToDto(bean);
-        final CarDTO dto = _carResource.save(car);
+        final CarDTO dto = carResource.save(car);
         final CarB carB = convertDtoToBean(dto);
         return carB;
     }
@@ -38,7 +38,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     @Override
     @Cacheable(value="isp-client-web-cache", key="'car_getAll'")
     public List<CarB> getAll() {
-        final CarResult result = _carResource.getAll();
+        final CarResult result = carResource.getAll();
         final List<CarDTO> cList = null == result.getCars() ? new ArrayList<CarDTO>()
                 : result.getCars();
 
@@ -52,7 +52,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
 
     @Override
     public CarB getById(Integer id) {
-        final CarDTO dto = _carResource.getById(id);
+        final CarDTO dto = carResource.getById(id);
        // final CarB bean = convertDtoToBean(dto);
 
         return convertDtoToBean(dto);
@@ -61,7 +61,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     @Override
     public CarB update(Integer id, CarB carB) {
         final CarDTO car = convertBeanToDto(carB);
-        final CarDTO dto = _carResource.update(id, car);
+        final CarDTO dto = carResource.update(id, car);
         final CarB bean = convertDtoToBean(dto);
 
         return bean;
@@ -69,7 +69,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
 
     @Override
     public CarB delete(Integer id) {
-        final CarDTO dto = _carResource.destroy(id);
+        final CarDTO dto = carResource.destroy(id);
         final CarB bean = convertDtoToBean(dto);
 
         return bean;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,19 +27,19 @@ public class EntryDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
 
-	@Column(name = "date")
+	@Column(name = "date", nullable = false)
 	private Date date;
 
-	@Column(name = "diagnostic")
+	@Column(name = "diagnostic", nullable = false)
 	private String diagnostic;
 
-	@Column(name = "number", unique = true)
+	@Column(name = "number", unique = true, nullable = false)
 	private Integer number;
 	
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CarDomain carDomain;
 	
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
     private ClientDomain clientDomain;
 
 	
@@ -100,5 +101,6 @@ public class EntryDomain extends BaseDomain {
 	public void setDiagnostic(String diagnostic) {
 		this.diagnostic = diagnostic;
 	}
+	
 	
 }

@@ -11,8 +11,11 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.isp.dao.car.ICarDao;
+import com.sd.isp.dao.client.IClientDao;
 import com.sd.isp.dao.entry.EntryDaoImpl;
 import com.sd.isp.dao.entry.IEntryDao;
+import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 import com.sd.isp.dto.car.CarDTO;
@@ -32,10 +35,10 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	private IEntryDao entryDao;
 	
 	@Autowired
-	private ICarService carService;
+	private ICarDao carDao;
 	
 	@Autowired
-	private IClientService clientService;
+	private IClientDao clientDao;
 	
 
 	@Override
@@ -52,8 +55,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache", key = "'entry_' + #id'")
-	//@Cacheable(value="isp-platform-cache", key="'entry_'+#root.methodName+'_'+#id")
+	@Cacheable(value = "isp-platform-cache", key = "new Integer(#id).toString().concat('.entry')")
 	public EntryDTO getById(Integer id) {
 		final EntryDomain entryDomain = entryDao.getById(id);
 		final EntryDTO entryDTO = convertDomainToDto(entryDomain);
@@ -77,13 +79,15 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	
 	
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
+	@CachePut(value = "isp-platform-cache", key = "new Integer(#id).toString().concat('.entry')")
 	public EntryDTO updateById(Integer id, EntryDTO dto) {
 		final EntryDomain newDomain = convertDtoToDomain(dto);
 		final EntryDomain domain = entryDao.getById(id);
 		domain.setDate(newDomain.getDate());
 		domain.setNumber(newDomain.getNumber());
 		domain.setDiagnostic(newDomain.getDiagnostic());
+		
 		final EntryDomain entryDomain = entryDao.save(domain);
 		return convertDomainToDto(entryDomain);
 	}
@@ -103,16 +107,18 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		entry.setDate(domain.getDate());
 		entry.setNumber(domain.getNumber());
 		entry.setDiagnostic(domain.getDiagnostic());
-		if (domain.getCarDomain() != null) {
-			CarDTO car = carService.getById(domain.getCarDomain().getId());
+		entry.setCarId(domain.getCarDomain().getId());
+		entry.setClientId(domain.getClientDomain().getId());
+		/*if (domain.getCarDomain() != null) {
+			CarDTO car = carDao.getById(domain.getCarDomain().getId());
 			if (car != null)
 				entry.setCar(car);
 		}
 		if (domain.getClientDomain() != null) {
-			ClientDTO client = clientService.getById(domain.getClientDomain().getId());
+			ClientDTO client = clientDao.getById(domain.getClientDomain().getId());
 			if (client != null)
 				entry.setClient(client);
-		}	
+		}*/	
 		
 		
 		return entry;
@@ -125,6 +131,9 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 		entry.setDate(dto.getDate());
 		entry.setNumber(dto.getNumber());
 		entry.setDiagnostic(dto.getDiagnostic());
+
+		entry.setClientDomain(clientDao.getById(dto.getClientId()));
+		entry.setCarDomain(carDao.getById(dto.getCarId()));
 		
 		return entry;
 	}

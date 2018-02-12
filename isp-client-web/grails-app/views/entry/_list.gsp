@@ -15,11 +15,14 @@
         <tr>
             <th scope="row">${x++}</th>
             <td>
+                <g:link action="edit" id="${entryInstance?.id}"><g:message code="${fieldValue(bean: entryInstance, field: "number")}" default="${fieldValue(bean: entryInstance, field: "number")}" /></g:link>
+            </td>
+            <td>
                 ${fieldValue(bean: entryInstance, field: "number")}
             </td>
 
             <td>
-                ${fieldValue(bean: entryInstance, field: "client")}
+                ${fieldValue(bean: entryInstance, field: "cliente")}
             </td>
 
             <td>

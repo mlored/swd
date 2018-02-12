@@ -18,4 +18,15 @@ public class ClientResourceImpl extends BaseResourceImpl<ClientDTO> implements I
 		return result;
 	}
 
+	@Override
+	public ClientDTO save(ClientDTO entry) {
+		return super.save(entry);
+	}
+
+
+	@Override
+	public ClientDTO getById(Integer id) {
+		return super.getById(id);
+	}
+
 }

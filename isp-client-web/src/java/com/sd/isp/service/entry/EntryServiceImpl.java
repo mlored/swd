@@ -11,23 +11,31 @@ import com.sd.isp.service.car.ICarService;
 import com.sd.isp.service.client.IClientService;
 import com.sd.isp.service.client.ClientServiceImpl;
 
+import com.sd.isp.service.client.IClientService;
+import com.sd.isp.service.car.ICarService;
+import com.sd.isp.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.text.SimpleDateFormat;
+
 
 @Service("entryService")
 public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         implements IEntryService {
 
     @Autowired
-    private IEntryResource _entryResource;
-    private ICarService _carService = new CarServiceImpl();
-    private IClientService _clientService = new ClientServiceImpl();
+    private IEntryResource entryResource;
+    @Autowired
+    private ICarService carResource;
+    @Autowired
+    private IClientService clientResource;
 
 
     public EntryServiceImpl() {
@@ -36,21 +44,23 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     @Override
     public EntryB save(EntryB bean) {
         final EntryDTO entry = convertBeanToDto(bean);
-        final EntryDTO dto = _entryResource.save(entry);
+        final EntryDTO dto = entryResource.save(entry);
         final EntryB entryB = convertDtoToBean(dto);
         return entryB;
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'entry_getAll'")
+    //@Cacheable(value="isp-client-web-cache", key="'entry_getAll'")
     public List<EntryB> getAll() {
-        final EntryResult result = _entryResource.getAll();
+        final EntryResult result = entryResource.getAll();
         final List<EntryDTO> cList = null == result.getEntry() ? new ArrayList<EntryDTO>()
                 : result.getEntry();
-
         final List<EntryB> entries = new ArrayList<EntryB>();
         for (EntryDTO dto : cList) {
+
             final EntryB bean = convertDtoToBean(dto);
+            bean.setCar(carResource.getById(dto.getCarId()));
+            bean.setCliente(clientResource.getById(dto.getClientId()));
             entries.add(bean);
         }
         return entries;
@@ -58,8 +68,10 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
 
     @Override
     public EntryB getById(Integer id) {
-        final EntryDTO dto = _entryResource.getById(id);
+        final EntryDTO dto = entryResource.getById(id);
         final EntryB bean = convertDtoToBean(dto);
+        bean.setCar(carResource.getById(dto.getCarId()));
+        bean.setCliente(clientResource.getById(dto.getClientId()));
 
         return bean;
     }
@@ -67,15 +79,16 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     @Override
 	public EntryB update(Integer id,  EntryB entryB) {
     	final EntryDTO entry   = convertBeanToDto(entryB);
-        final EntryDTO dto     = _entryResource.update(id, entry);
+        final EntryDTO dto     = entryResource.update(id, entry);
         final EntryB bean      = convertDtoToBean(dto);
 
         return bean;
     }
 
     @Override
+
     public EntryB delete(Integer id) {
-        final EntryDTO dto = _entryResource.destroy(id);
+        final EntryDTO dto = entryResource.destroy(id);
         final EntryB bean = convertDtoToBean(dto);
 
         return bean;
@@ -88,12 +101,14 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         params.put("date", String.valueOf(dto.getDate()));
         params.put("number", String.valueOf(dto.getNumber()));
         params.put("diagnostic", dto.getDiagnostic());
+        params.put("carId", String.valueOf(dto.getCarId()));
+        params.put("clientId", String.valueOf(dto.getClientId()));
 
         final EntryB entryB = new EntryB(params);
 
         entryB.setCarId(dto.getCarId());
         entryB.setClientId(dto.getClientId());
-        entryB.setDate(dto.getDate());
+        //entryB.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(dto.getDate()));
         return entryB;
     }
 
@@ -102,7 +117,14 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         final EntryDTO dto = new EntryDTO();
         dto.setId(bean.getId());
 
-        dto.setDate(bean.getDate());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+        String dateInString = "7-Jun-2013";
+
+        try {
+            dto.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(bean.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         dto.setNumber(bean.getNumber());
         dto.setDiagnostic(bean.getDiagnostic());
         dto.setCarId(bean.getCarId());

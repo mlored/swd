@@ -39,7 +39,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 
 	@Override
-	@Cacheable(value="isp-platform-cache")
+	@Cacheable(value="isp-platform-cache", key = "new Integer(#id).toString().concat('.client')")
 	@Transactional(readOnly = true)
 	public ClientDTO getById(Integer id) {
 		final ClientDomain clientDomain = clientDao.getById(id);

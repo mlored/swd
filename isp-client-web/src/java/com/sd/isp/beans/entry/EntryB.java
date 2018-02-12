@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.sd.isp.beans.car.CarB;
 import com.sd.isp.beans.client.ClientB;
@@ -13,7 +16,7 @@ import com.sd.isp.beans.base.BaseBean;
 public class EntryB extends BaseBean{
 
     private static final long serialVersionUID = 4680476902664047494L;
-    private Date date;
+    private String date;
     private Integer number;
     private String diagnostic;
     private ClientB cliente;
@@ -41,11 +44,11 @@ public class EntryB extends BaseBean{
         super(params);
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date _date) {
+    public void setDate(String _date) {
         date = _date;
     }
 
@@ -62,7 +65,7 @@ public class EntryB extends BaseBean{
     }
 
     public void setDiagnostic(String _diagnostic){
-        diagnostic=_diagnostic;
+        diagnostic = _diagnostic;
     }
 
     public ClientB getCliente() {
@@ -88,11 +91,11 @@ public class EntryB extends BaseBean{
         if (!StringUtils.isBlank(params.get("id"))) {
             setId(Integer.valueOf(params.get("id")));
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-
+        setDate(params.get("date"));
+        setNumber(Integer.valueOf(params.get("number")));
+        setCarId(Integer.valueOf(params.get("carId")));
+        setClientId(Integer.valueOf(params.get("clientId")));
         setDiagnostic(params.get("diagnostic"));
-        //setCliente(Integer.valueOf(params.get("cliente")));
-
     }
 
 }

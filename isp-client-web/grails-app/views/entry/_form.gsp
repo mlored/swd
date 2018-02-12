@@ -6,8 +6,7 @@
                 <label for="date">
                     <g:message code="entry.date.label" default="Fecha" />
                     <span class="required-indicator">*</span>
-
-                    <g:datePicker name="date" precision="day" noSelection="['':'-Choose-']" class="form-control" autofocus="autofocus" inputClass="date required"></g:datePicker>
+                    <g:textField name="date" class="form-control" placeholder="Fecha" value="${entryInstance?.date}" autofocus="autofocus" />
                 </label>
             </div>
         </div>
@@ -16,7 +15,7 @@
 
     <div class="form-group ${hasErrors(bean: entryInstance, field: 'number', 'error')}">
         <label for="number">
-            <g:message code="entry.date.label" default="Numero" />
+            <g:message code="entry.number.label" default="Numero" />
 
         </label>
             <g:textField name="number" class="form-control" placeholder="numero" value="${entryInstance?.number}" />
@@ -29,7 +28,10 @@
                     <g:message code="entry.client.label" default="Cliente" />
                     <span class="required-indicator">*</span>
                 </label>
-                <g:select id="client" name="clientId" from="${clients}" optionKey="id" optionValue="name" required="" value="${entryInstance?.client?.id}" class="form-control input-sm"/>
+                <g:select id="client" name="clientId" from="${entryInstance?.getCliente()}"
+                          optionKey="id" optionValue="name" required=""
+                          value="${entryInstance?.cliente?.id}" class="form-control input-sm"
+                          noSelection="['null':'Select a Resource']" />
             </div>
         </div>
     </div>
@@ -42,7 +44,11 @@
                     <g:message code="entry.car.label" default="Automovil" />
                     <span class="required-indicator">*</span>
                 </label>
-                <g:select id="car" name="carId" from="${cars}" optionKey="id" optionValue="mark" required="" value="${entryInstance?.car?.id}"  class="form-control input-sm" />
+                <g:hiddenField name="id" value="${entryInstance?.id}" />
+                <g:select id="car" name="carId" from="${entryInstance?.getCar()}"
+                          optionKey="id" optionValue="mark" required=""
+                          value="${entryInstance?.car?.id}"  class="form-control input-sm"
+                          noSelection="['null':'Select a Resource']"/>
             </div>
         </div>
     </div>
@@ -79,7 +85,7 @@
                             results: $.map(data, function (item) {
                                 return {
                                     text: item.name,
-                                    id: item.name
+                                    id: item.id
                                 }
                             })
                         };
@@ -112,7 +118,7 @@
                                 results: $.map(data, function (item) {
                                     return {
                                         text: item.mark,
-                                        id: item.mark
+                                        id: item.id
                                     }
                                 })
                             };

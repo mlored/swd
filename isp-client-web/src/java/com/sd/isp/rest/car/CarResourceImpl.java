@@ -16,4 +16,15 @@ public class CarResourceImpl extends BaseResourceImpl<CarDTO> implements ICarRes
         final CarResult result = getWebResource().get(CarResult.class);
         return result;
     }
+
+    @Override
+    public CarDTO save(CarDTO entry) {
+        return super.save(entry);
+    }
+
+
+    @Override
+    public CarDTO getById(Integer id) {
+        return super.getById(id);
+    }
 }

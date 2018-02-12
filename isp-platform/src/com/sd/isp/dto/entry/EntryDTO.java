@@ -29,14 +29,6 @@ public class EntryDTO extends BaseDTO {
     private ClientDTO _client;
     private Integer _carId;
     private Integer _clientId;
-    
-    public CarDTO get_car() {
-		return _car;
-	}
-
-	public void set_car(CarDTO _car) {
-		this._car = _car;
-	}
 	
 	@XmlElement
 	public Integer getCarId() {
