@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.sd.isp.domain.base.BaseDomain;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class RoleDomain extends BaseDomain {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

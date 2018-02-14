@@ -33,9 +33,7 @@ class EntryController {
     }
 
     def create() {
-        List<EntryDetails> entryDetails;
-        [entryInstance: new Entry(params), cars: entryService.getAll(),
-         clients: clientService.getAll(), entryDetails: entryDetails]
+        [entryInstance: new Entry(params)]
         return
 
     }

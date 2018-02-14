@@ -17,7 +17,7 @@ import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.role.RoleDomain;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserDomain extends BaseDomain {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +33,11 @@ public class UserDomain extends BaseDomain {
 	@Column(name = "surName", nullable = false, length = 50)
 	private String surName;
 
-	@Column(name = "password", nullable = false, length = 25)
+	@Column(name = "password", nullable = false, length = 60)
 	private String password;
 	
-	@Column(name = "account_expired", nullable = true)
-	private Boolean accountExpired;
+	@Column(name = "enabled", nullable = true)
+	private Boolean enabled;
 	
 	@Column(name = "account_locked", nullable = true)
 	private Boolean accountLocked;
@@ -47,7 +47,7 @@ public class UserDomain extends BaseDomain {
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-		    name="user_role",
+		    name="users_roles",
 		    joinColumns= @JoinColumn(name="user_id", referencedColumnName="id"),
 		    inverseJoinColumns= @JoinColumn(name="role_id", referencedColumnName="id")
     )
@@ -109,14 +109,7 @@ public class UserDomain extends BaseDomain {
 		*/
 		this.password = _password;
 	}
-	
-	public String getAccountExpired() {
-		return accountExpired.toString();
-	}
 
-	public void setAccountExpired(String _accountExpired) {
-		this.accountExpired = Boolean.valueOf(_accountExpired);
-	}
 
 	public String getAccountLocked() {
 		return accountLocked.toString();

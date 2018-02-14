@@ -4,7 +4,6 @@
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:sec="http://www.springframework.org/schema/security"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -16,10 +15,12 @@
     http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop.xsd
-    http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security.xsd
 	http://www.springframework.org/schema/task
-    http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+    http://www.springframework.org/schema/task/spring-task-4.0.xsd
+     http://www.springframework.org/schema/security 
+      http://www.springframework.org/schema/security/spring-security-3.2.xsd
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <tx:annotation-driven transaction-manager="transactionManager"  />
 
@@ -63,10 +64,12 @@
     <!-- Cache Configuration -->	
 	<import resource="cacheContext.xml" />
 	
-	<!-- <bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"></bean> -->
+	<!-- Security Configuration -->
+	<bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"></bean>
 	
-	<!-- Spring Security Configuration -->
 	<import resource="securityContext.xml" />
+	
+	
 	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />

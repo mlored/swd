@@ -3,6 +3,7 @@ package com.sd.isp.beans.entry;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.Date;
 
 import com.sd.isp.beans.car.CarB;
 import com.sd.isp.beans.client.ClientB;
+import com.sd.isp.beans.entry_details.EntryDetailsB;
 import org.apache.commons.lang.StringUtils;
 import com.sd.isp.beans.base.BaseBean;
 
@@ -23,6 +25,7 @@ public class EntryB extends BaseBean{
     private CarB car;
     private Integer carId;
     private Integer clientId;
+    private List<EntryDetailsB> entryDetails;
 
     public Integer getCarId() {
         return carId;
