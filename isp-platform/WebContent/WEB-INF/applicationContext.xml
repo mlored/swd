@@ -21,9 +21,6 @@
 	http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
-	<tx:annotation-driven />
-	<task:annotation-driven/>
-    <cache:annotation-driven />
     <tx:annotation-driven transaction-manager="transactionManager"  />
 
 	<context:component-scan base-package="com.sd.isp.dao"/>
@@ -36,9 +33,7 @@
 	
 	
 	
-
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${database.url}" />
 		<property name="username" value="${database.username}" />
@@ -68,8 +63,10 @@
     <!-- Cache Configuration -->	
 	<import resource="cacheContext.xml" />
 	
-	<!-- Spring Security Configuration
-	<import resource="securityContext.xml" /> -->
+	<!-- <bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"></bean> -->
+	
+	<!-- Spring Security Configuration -->
+	<import resource="securityContext.xml" />
 	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
