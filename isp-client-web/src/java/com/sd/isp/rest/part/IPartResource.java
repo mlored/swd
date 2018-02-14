@@ -4,6 +4,6 @@ import com.sd.isp.dto.part.PartDTO;
 import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.rest.base.IBaseResource;
 
-public interface IPartResource extends IBaseResource<PartDTO> {
+public interface IPartResource extends IBaseResource<PartDTO, PartResult> {
 	public PartResult getAll();
 }

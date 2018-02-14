@@ -5,12 +5,11 @@ import org.springframework.stereotype.Repository;
 import com.sd.isp.dto.role.RoleDTO;
 import com.sd.isp.dto.role.RoleResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
-import com.sd.isp.rest.role.IRoleResource;
 
 @Repository("roleResource")
-public class RoleResourceImpl extends BaseResourceImpl<RoleDTO> implements IRoleResource{
+public class RoleResourceImpl extends BaseResourceImpl<RoleDTO, RoleResult> implements IRoleResource{
     public RoleResourceImpl() {
-        super(RoleDTO.class, "/role");
+        super(RoleDTO.class, "/role", RoleResult.class);
     }
 
     @Override

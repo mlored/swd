@@ -6,16 +6,13 @@ import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.car.CarResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("carResource")
-public class CarResourceImpl extends BaseResourceImpl<CarDTO> implements ICarResource{
+public class CarResourceImpl extends BaseResourceImpl<CarDTO, CarResult> implements ICarResource{
     public CarResourceImpl() {
-        super(CarDTO.class, "/car");
+        super(CarDTO.class, "/car", CarResult.class);
     }
 
     @Override
-    public CarResult getAll() {
-        final CarResult result = getWebResource().get(CarResult.class);
-        return result;
-    }
+    public CarResult getAll() { return super.getAll(); }
 
     @Override
     public CarDTO save(CarDTO entry) {

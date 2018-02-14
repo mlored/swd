@@ -7,10 +7,10 @@ import com.sd.isp.dto.service.ServiceResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 
 @Repository("serviceResource")
-public class ServiceResourceImpl extends BaseResourceImpl<ServiceDTO> implements IServiceResource {
+public class ServiceResourceImpl extends BaseResourceImpl<ServiceDTO, ServiceResult> implements IServiceResource {
 
     public ServiceResourceImpl() {
-        super(ServiceDTO.class, "/service");
+        super(ServiceDTO.class, "/service", ServiceResult.class);
     }
 
     @Override

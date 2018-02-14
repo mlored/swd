@@ -6,9 +6,9 @@ import com.sd.isp.rest.base.BaseResourceImpl;
 import org.springframework.stereotype.Repository;
 
 @Repository("entryResource")
-public class EntryResourceImpl extends BaseResourceImpl<EntryDTO> implements IEntryResource {
+public class EntryResourceImpl extends BaseResourceImpl<EntryDTO, EntryResult> implements IEntryResource {
     public EntryResourceImpl() {
-        super(EntryDTO.class, "/entry");
+        super(EntryDTO.class, "/entry", EntryResult.class);
     }
     @Override
     public EntryDTO save(EntryDTO entry) {

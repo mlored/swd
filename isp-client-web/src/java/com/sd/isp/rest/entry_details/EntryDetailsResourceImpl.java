@@ -9,10 +9,10 @@ import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 
 @Repository("entryDetailsResource")
-public class EntryDetailsResourceImpl extends BaseResourceImpl<EntryDetailsDTO> implements IEntryDetailsResource {
+public class EntryDetailsResourceImpl extends BaseResourceImpl<EntryDetailsDTO, EntryDetailsResult> implements IEntryDetailsResource {
 
     public EntryDetailsResourceImpl() {
-        super(EntryDetailsDTO.class, "/entry_details");
+        super(EntryDetailsDTO.class, "/entry_details", EntryDetailsResult.class);
     }
 
     @Override

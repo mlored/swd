@@ -6,10 +6,10 @@ import com.sd.isp.dto.employee.EmployeeDTO;
 import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("employeeResource")
-public class EmployeeResourceImpl extends BaseResourceImpl<EmployeeDTO> implements IEmployeeResource {
+public class EmployeeResourceImpl extends BaseResourceImpl<EmployeeDTO, EmployeeResult> implements IEmployeeResource {
 
 	public EmployeeResourceImpl() {
-		super(EmployeeDTO.class, "/employee");
+		super(EmployeeDTO.class, "/employee", EmployeeResult.class);
 	}
 
 	@Override
@@ -21,8 +21,7 @@ public class EmployeeResourceImpl extends BaseResourceImpl<EmployeeDTO> implemen
 	@Override
 	public EmployeeResult find(String textToFind, int maxItems, int page) {
 		//setWebResourceBasicAuthFilter();
-		final EmployeeResult result = findWR(textToFind, maxItems, page).get(
-				EmployeeResult.class);
+		final EmployeeResult result = findWR(textToFind, maxItems, page);
 		return result;
 	}
 

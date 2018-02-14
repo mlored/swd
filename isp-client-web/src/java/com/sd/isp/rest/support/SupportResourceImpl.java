@@ -1,15 +1,16 @@
 package com.sd.isp.rest.support;
 
+import com.sd.isp.dto.support.SupportResult;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dto.support.SupportDTO;
 import com.sd.isp.rest.base.BaseResourceImpl;
 
 @Repository("supportResource")
-public class SupportResourceImpl extends BaseResourceImpl<SupportDTO> implements ISupportResource {
+public class SupportResourceImpl extends BaseResourceImpl<SupportDTO, SupportResult> implements ISupportResource {
 
     public SupportResourceImpl() {
-        super(SupportDTO.class, "/support");
+        super(SupportDTO.class, "/support", SupportResult.class);
     }
 
     @Override

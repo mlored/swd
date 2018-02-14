@@ -6,9 +6,9 @@ import com.sd.isp.dto.buy.BuyDTO;
 import com.sd.isp.dto.buy.BuyResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("buyResource")
-public class BuyResourceImpl extends BaseResourceImpl<BuyDTO> implements IBuyResource{
+public class BuyResourceImpl extends BaseResourceImpl<BuyDTO, BuyResult> implements IBuyResource{
     public BuyResourceImpl() {
-        super(BuyDTO.class, "/buy");
+        super(BuyDTO.class, "/buy", BuyResult.class);
     }
 
     @Override

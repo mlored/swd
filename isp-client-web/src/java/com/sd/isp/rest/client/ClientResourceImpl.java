@@ -6,17 +6,14 @@ import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("clientResource")
-public class ClientResourceImpl extends BaseResourceImpl<ClientDTO> implements IClientResource {
+public class ClientResourceImpl extends BaseResourceImpl<ClientDTO, ClientResult> implements IClientResource {
 
 	public ClientResourceImpl() {
-		super(ClientDTO.class, "/client");
+		super(ClientDTO.class, "/client", ClientResult.class);
 	}
 
 	@Override
-	public ClientResult getAll() {
-		final ClientResult result = getWebResource().get(ClientResult.class);
-		return result;
-	}
+	public ClientResult getAll() { return super.getAll(); }
 
 	@Override
 	public ClientDTO save(ClientDTO entry) {

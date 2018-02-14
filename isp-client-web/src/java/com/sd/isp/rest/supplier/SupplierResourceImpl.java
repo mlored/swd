@@ -6,10 +6,10 @@ import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.dto.supplier.SupplierResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("supplierResource")
-public class SupplierResourceImpl extends BaseResourceImpl<SupplierDTO> implements ISupplierResource {
+public class SupplierResourceImpl extends BaseResourceImpl<SupplierDTO, SupplierResult> implements ISupplierResource {
 
 	public SupplierResourceImpl() {
-		super(SupplierDTO.class, "/supplier");
+		super(SupplierDTO.class, "/supplier", SupplierResult.class);
 	}
 
 	@Override

@@ -1,8 +1,11 @@
 package com.sd.isp.rest.base;
 
 import com.sd.isp.dto.base.BaseDTO;
+import com.sd.isp.dto.base.BaseResult;
 
-public interface IBaseResource<DTO extends BaseDTO> {
+public interface IBaseResource<DTO extends BaseDTO, Result extends BaseResult> {
+
+	public Result getAll();
 
 	public DTO save(DTO dto);
 

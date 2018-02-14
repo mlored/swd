@@ -7,10 +7,10 @@ import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 
 @Repository("partResource")
-public class PartResourceImpl extends BaseResourceImpl<PartDTO> implements IPartResource{
+public class PartResourceImpl extends BaseResourceImpl<PartDTO, PartResult> implements IPartResource{
     
 	public PartResourceImpl() {
-        super(PartDTO.class, "/part");
+        super(PartDTO.class, "/part", PartResult.class);
     }
 
     @Override
