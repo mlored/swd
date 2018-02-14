@@ -17,6 +17,8 @@
 
     <r:require modules="bootstrap"/>
     <r:require modules="adminlte-core"/>
+    <g:javascript src="jquery/jquery-1.8.2.min.js"/>
+
     <r:layoutResources />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js does nott work if you view the page via file:// -->

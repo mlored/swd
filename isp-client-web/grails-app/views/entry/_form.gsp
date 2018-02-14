@@ -60,6 +60,14 @@
         </label>
         <g:textField name="diagnostic" class="form-control" placeholder="Diagnostico" value="${entryInstance?.diagnostic}" />
     </div>
+
+    <dynamic:block itemId="fullName" min="2" max="5" addBtnId="addFullName" removeBtnLabel="Delete"
+                   onComplete="makeDatePicker" limitReachedMsg="Limit is exceeded!">
+        <g:textField name="firstName"/>
+        <g:textField name="lastName"/>
+        <g:textField name="birthday" id="birthday"/>
+        <input id="addFullName" type="button" value="Add another name"/>
+    </dynamic:block>
 </div>
 <!-- /.box-body -->
 
