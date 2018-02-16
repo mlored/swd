@@ -53,7 +53,29 @@ insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'Motor','
 
 insert into roles (authority) values ('ROLE_SUPER');
 insert into roles (authority) values ('ROLE_ADMIN');
+insert into roles (authority) values ('ROLE_MECANICO');
+insert into roles (authority) values ('ROLE_SECRETARIO');
+insert into roles (authority) values ('ROLE_SUPERSECRE');
+
+
 insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('admin','admin','admin', 'Admin123', true, true, true);
 insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('mlored','lorena','del puerto', '12345678', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('ksanabria','karina','sanabria', 'karina123', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('aaguero','adrian','aguero', 'adrian123', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('gzarza','guillermo','zarza', 'guille123', true, false, false);
+
 insert into users_roles (user_id, role_id) values ('1','1');
 insert into users_roles (user_id, role_id) values ('2','2');
+insert into users_roles (user_id, role_id) values ('3','3');
+insert into users_roles (user_id, role_id) values ('4','4');
+insert into users_roles (user_id, role_id) values ('5','5');
+
+
+
+
+
+
+
+
+
+

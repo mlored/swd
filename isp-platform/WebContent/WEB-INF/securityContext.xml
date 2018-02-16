@@ -28,6 +28,9 @@
                     join roles on users_roles.role_id = roles.id and users.username = ?" />
         </authentication-provider>
     </authentication-manager>
+    
+    <!-- Para usar la anotacion @Secured de Spring -->
+	<global-method-security secured-annotations="enabled" />
  
     
  
