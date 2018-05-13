@@ -70,7 +70,7 @@ public class RoleDaoImpl extends BaseDaoImpl<RoleDomain> implements IRoleDao {
 	}
 
 	@Override
-	public List<RoleDomain> find(String textToFind, int page, int maxItems) throws Exception {
+	public List<RoleDomain> find(String textToFind, int page, int maxItems) {
 		// TODO Auto-generated method stub
 		return null;
 	}

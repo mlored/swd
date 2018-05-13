@@ -41,7 +41,7 @@ public class SupportDaoImpl  extends BaseDaoImpl<SupportDomain> implements ISupp
 		return null;
 	}
 	@Override
-	public List<SupportDomain> find(String textToFind, int page, int maxItems) throws Exception {
+	public List<SupportDomain> find(String textToFind, int page, int maxItems) {
 		// TODO Auto-generated method stub
 		return null;
 	}
