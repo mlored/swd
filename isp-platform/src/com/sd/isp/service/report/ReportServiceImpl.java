@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.isp.dao.entry.IEntryDao;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
-import com.sd.isp.exception.AutomotiveException;
 import com.sd.isp.dao.report.IReportDao;
 import com.sd.isp.dao.report.ReportDaoImpl;
 import com.sd.isp.domain.report.ReportDomain;
@@ -30,7 +29,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	private IEntryDao _entryDao;
 
 	@Autowired
-	private IEntryDetailsDao _diagnosticDao;
+	private IEntryDetailsDao _entrydetailsDao;
 	/*
 	@Autowired
 	private IStatisticDao _statisticDao;*/
@@ -79,6 +78,40 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		reportResult.setReports(reports);
 		return reportResult;
 	}
+	
+	@Override
+	protected ReportDTO convertDomainToDto(ReportDomain domain) {
+		final ReportDTO dto = new ReportDTO();
+		dto.setId(domain.getId());
+		dto.setEntryId(domain.getEntry().getId());
+		dto.setEntryDetailsId(domain.getEntryDetails().getId());
+		dto.setDate(domain.getDate());
+		//dto.setObservations(domain.getObservations());
+		//dto.setAge(domain.getAge());
+		//dto.setIsProcessed(domain.getIsProcessed());
+		/*dto.setDiagnosticDetail(domain.getDiagnosticDetail());
+		if (null != domain.getStatistic()) {
+			dto.setStatisticId(domain.getStatistic().getId());
+		}*/
+		return dto;
+	}
+
+	@Override
+	protected ReportDomain convertDtoToDomain(ReportDTO dto){
+		final ReportDomain domain = new ReportDomain();
+		domain.setId(dto.getId());
+		domain.setEntry(_entryDao.getById(dto.getEntryId()));
+		domain.setEntryDetails(_entrydetailsDao.getById(dto.getEntryDetailsId()));
+		domain.setDate(dto.getDate());
+		//domain.setObservations(dto.getObservations());
+		//domain.setAge(dto.getAge());
+		domain.setIsFinished(dto.getIsFinished());
+		//domain.setDiagnosticDetail(dto.getDiagnosticDetail());
+		/*if(null!=dto.getStatisticId()){
+			domain.setStatistic(_statisticDao.getById(dto.getStatisticId()));	
+		}*/
+		return domain;
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -94,7 +127,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	public ReportResult find(String textToFind) throws AutomotiveException {
+	public ReportResult find(String textToFind) throws Exception /*AutomotiveException*/ {
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : _reportDao.find(textToFind)) {
 			final ReportDTO dto = convertDomainToDto(domain);
@@ -113,18 +146,6 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	public ReportDTO delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected ReportDTO convertDomainToDto(ReportDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected ReportDomain convertDtoToDomain(ReportDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

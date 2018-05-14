@@ -16,7 +16,7 @@ public class ReportDTO extends BaseDTO {
 	private Integer  _entryDetailsId;
 	private Date 	 _date;
 	private String   _observations;
-	private Integer  _age;
+	//private Integer  _age;
 	private Boolean  _isFinished;
 	/*private Integer _statisticId;
 	private String _diagnosticDetail;*/
@@ -66,17 +66,17 @@ public class ReportDTO extends BaseDTO {
 		_observations = observations;
 	}
 
-	@XmlElement
+	/*@XmlElement
 	public Integer getAge() {
 		return _age;
 	}
 
 	public void setAge(Integer age) {
 		_age = age;
-	}
+	}*/
 
 	@XmlElement
-	public Boolean getIsProcessed() {
+	public Boolean getIsFinished() {
 		return _isFinished;
 	}
 
