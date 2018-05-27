@@ -34,10 +34,10 @@
 	        <thead>
 	        <tr>
 	        	<th>#</th>
-	            <g:sortableColumn property="name" title="Nombre" />
-	            <g:sortableColumn property="surName" title="Apellido" />
-	            <g:sortableColumn property="ruc" title="Ruc" />
-	            <g:sortableColumn property="address" title="Dirección" />
+	            <g:sortableColumn property="name"      title="Nombre" />
+	            <g:sortableColumn property="surName"   title="Apellido" />
+	            <g:sortableColumn property="ruc"       title="Ruc" />
+	            <g:sortableColumn property="address"   title="Dirección" />
 	            <g:sortableColumn property="cellphone" title="Telefono" />
 	        </tr>
 	        </thead>
@@ -52,7 +52,10 @@
 	                <td>${fieldValue(bean: employeeInstance, field: "cellphone")}</td>
 	                <td>
 	                  <g:form controller="employee" method="DELETE">
-	                    <td><a data-confirm="Estas Seguro?" method="delete" href="/isp-client-web/employee/delete/${employeeInstance.id}" rel="nofollow">Borrar</a></td>
+	                    <td><a data-confirm="Estas Seguro?" 
+	                    	   method="delete" 
+	                    	   href="/isp-client-web/employee/delete/${employeeInstance.id}" 
+	                    	   rel="nofollow">Borrar</a></td>
 	                  </g:form>
 	                </td>
 	            </tr>

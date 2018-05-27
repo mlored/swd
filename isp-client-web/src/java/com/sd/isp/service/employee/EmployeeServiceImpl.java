@@ -108,11 +108,11 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 		final List<EmployeeDTO> rList = null == result.getEmployees() ? new ArrayList<EmployeeDTO>()
 				: result.getEmployees();
 
-		final List<EmployeeB> doctors = new ArrayList<EmployeeB>();
+		final List<EmployeeB> employees = new ArrayList<EmployeeB>();
 		for (EmployeeDTO dto : rList) {
 			final EmployeeB bean = convertDtoToBean(dto);
-			doctors.add(bean);
+			employees.add(bean);
 		}
-		return doctors;
+		return employees;
 	}
 }

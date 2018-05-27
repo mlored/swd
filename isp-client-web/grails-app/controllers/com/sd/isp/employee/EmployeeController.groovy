@@ -28,6 +28,7 @@ class EmployeeController {
 			page = Integer.parseInt(params.get("page"))
 		}
 		def text = params.text
+
 		def search = ""
 		def employees = null
 		
@@ -50,8 +51,12 @@ class EmployeeController {
 		}
 
 
-		[employeeInstanceList: employees, employeeInstanceTotal: employees?.size(), page: page, siguiente: siguiente?.size(),eemployeeInstanceList: employeeService.getAll(), text: text/*,
-			user:authService.getName()*/]
+		[employeeInstanceList: employees, employeeInstanceTotal: employees?.size(), 
+										  page: page, 
+										  siguiente: siguiente?.size(),
+										  eemployeeInstanceList: employeeService.getAll(), 
+										  text: text/*,
+										  user:authService.getName()*/]
 	}
 
     /* def show(Long id) {

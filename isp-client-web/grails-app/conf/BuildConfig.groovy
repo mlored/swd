@@ -78,6 +78,9 @@ grails.project.dependency.resolution = {
 		
 		// Plugin para establecer seguridad por medio de roles
 		compile ':spring-security-core:2.0-RC6'
+		
+		//plugin used to export PDF
+		compile "org.grails.plugins:jasper:1.11.0"
 
 	}
 }
