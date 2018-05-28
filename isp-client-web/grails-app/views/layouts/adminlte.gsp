@@ -166,13 +166,13 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
+                        <li><a href="/isp-client-web/entry/list"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
                         <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Servicios realizados</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="/isp-client-web/#">
+                    <a href="/isp-client-web/report/list">
                         <i class="fa fa-file-text-o"></i> <span>Reportes</span>
 
                     </a>

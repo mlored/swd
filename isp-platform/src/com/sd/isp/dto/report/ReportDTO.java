@@ -15,11 +15,11 @@ public class ReportDTO extends BaseDTO {
 	private Integer  _entryId;
 	private Integer  _entryDetailsId;
 	private Date 	 _date;
-	private String   _observations;
-	//private Integer  _age;
 	private Boolean  _isFinished;
-	/*private Integer _statisticId;
-	private String _diagnosticDetail;*/
+	/*private String   _observations;
+      private Integer  _age;
+	  private Integer _statisticId;
+	  private String _diagnosticDetail;*/
 
 	@XmlElement
 	public Integer getEntryId() {
@@ -38,16 +38,8 @@ public class ReportDTO extends BaseDTO {
 	public void setEntryDetailsId(Integer entryDetails) {
 		_entryDetailsId = entryDetails;
 	}
-/*	
-	@XmlElement
-	public String getDiagnosticDetail() {
-		return _diagnosticDetail;
-	}
+	
 
-	public void setDiagnosticDetail(String diagnosticDetail) {
-		_diagnosticDetail = diagnosticDetail;
-	}
-	*/
 	@XmlElement
 	public Date getDate() {
 		return _date;
@@ -56,14 +48,14 @@ public class ReportDTO extends BaseDTO {
 	public void setDate(Date date) {
 		_date = date;
 	}
-
+	
 	@XmlElement
-	public String getObservations() {
-		return _observations;
+	public Boolean getIsFinished() {
+		return _isFinished;
 	}
 
-	public void setObservations(String observations) {
-		_observations = observations;
+	public void setIsFinished(Boolean isFinished) {
+		_isFinished = isFinished;
 	}
 
 	/*@XmlElement
@@ -73,17 +65,27 @@ public class ReportDTO extends BaseDTO {
 
 	public void setAge(Integer age) {
 		_age = age;
-	}*/
-
+	}
+	
 	@XmlElement
-	public Boolean getIsFinished() {
-		return _isFinished;
+	public String getObservations() {
+		return _observations;
 	}
 
-	public void setIsFinished(Boolean isFinished) {
-		_isFinished = isFinished;
+	public void setObservations(String observations) {
+		_observations = observations;
 	}
-	/*
+
+		
+	@XmlElement
+	public String getDiagnosticDetail() {
+		return _diagnosticDetail;
+	}
+
+	public void setDiagnosticDetail(String diagnosticDetail) {
+		_diagnosticDetail = diagnosticDetail;
+	}
+	
 	@XmlElement
 	public Integer getStatisticId() {
 		return _statisticId;
