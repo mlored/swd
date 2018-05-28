@@ -30,7 +30,7 @@
 	<context:component-scan base-package="com.sd.isp.service.util" />
 	<context:property-placeholder location="classpath:foo.properties"/>
 	
-	<bean id="scheduler" class="com.sd.isp.util.Scheduler"></bean>
+	<bean id="scheduler" class="com.sd.isp.service.util.Scheduler"></bean>
 	
 	
 	
@@ -85,7 +85,7 @@
 		</property>
 	</bean>
 
-	<bean id="mailMail" class="com.sd.isp.util.MailMail">
+	<bean id="mailMail" class="com.sd.isp.service.util.MailMail">
 		<property name="mailSender" ref="mailSender" />
 		<property name="simpleMailMessage" ref="customeMailMessage" />
 	</bean>

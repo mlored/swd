@@ -10,9 +10,9 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
-//grails.assets.less.compile = 'less4j'
-//grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
-//grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
+grails.assets.less.compile = 'less4j'
+grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
+grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -106,15 +106,13 @@ grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
 
-app.port = 8081
-
 environments {
     development {
         grails.logging.jul.usebridge = true
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://localhost:${grailsApplication.config.app.port}/${appName}"
+        grails.serverURL = "http://localhost:8050/${appName}"
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }

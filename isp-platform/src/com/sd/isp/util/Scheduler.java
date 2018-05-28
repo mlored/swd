@@ -1,4 +1,4 @@
-package com.sd.isp.util;
+package com.sd.isp.service.util;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="layout" content="adminlte"/>
+	<meta name="layout" content="main"/>
 	<title><g:message code="Acceso Denegado" /></title>
 </head>
 <body>
@@ -12,12 +12,14 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 
 				<%-- LOGO  --%>
+				<g:render template="/layouts/logo"></g:render>
 
 			</div>
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 				<%-- MENU  --%>
+				<g:render template="/layouts/menu"></g:render>
 
 				<%-- CONTENT  --%>
 	      <div id="contenido">
