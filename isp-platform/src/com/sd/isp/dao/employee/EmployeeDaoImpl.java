@@ -85,10 +85,8 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 			}
 				if (map.containsKey("sort")) {
 					String sort = (map.get("sort"));
-					if(sort.equals("name") || sort.equals("surname") 
-										   || sort.equals("cellphone") 
-										   || sort.equals("RUC") 
-										   || sort.equals("address")){
+					if(sort.equals("name") || sort.equals("surname") || sort.equals("cellphone") || sort.equals("RUC") || 
+							sort.equals("address")){
 						if (map.containsKey("order")){
 							String order = (map.get("order"));
 							if(order.equals("desc")){
@@ -125,7 +123,7 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			for (String param : params) {
-				String name  = param.split("=")[0];
+				String name = param.split("=")[0];
 				String value = param.split("=")[1];
 				map.put(name, value);
 			}

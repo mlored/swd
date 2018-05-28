@@ -3,18 +3,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-	<!-- Tell the browser to be responsive to screen width -->
-	<link rel="stylesheet" href="${resource(dir: 'css', file: 'application.css')}" type="text/css">
-	<link rel="stylesheet" href="${resource(dir: 'css', file: 'AdminLTE.css')}" type="text/css">
-	<link rel="stylesheet" href="${resource(dir: 'css', file: 'skins/_all-skins.css')}" type="text/css">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<title>Sistema</title>
 
-	<r:require modules="bootstrap"/>
-	<r:require modules="adminlte-core"/>
-	<r:layoutResources />
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js does nott work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -197,7 +189,7 @@
 						<li><a href="/isp-client-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
 					</ul>
 				</li>
-
+</ul>
 
 
 		</section>
@@ -224,6 +216,4 @@
 </div><!-- ./wrapper -->
 
 </body>
-<asset:javascript src="jquery.js"/>
-<asset:javascript src="adminlte.js"/>
-</html>
+

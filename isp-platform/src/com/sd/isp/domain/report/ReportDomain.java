@@ -29,9 +29,9 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "date", nullable = false)
 	private Date _date;
 
-	/*@Column(name = "observations", length = 10000)
+	@Column(name = "observations", length = 10000)
 	private String _observations;
-*/
+
 	/********************************************************************************************/
 	@ManyToOne
 	private EntryDetailsDomain _details;
@@ -73,6 +73,14 @@ public class ReportDomain extends BaseDomain {
 		_date = date;
 	}
 
+	public String getObservations() {
+		return _observations;
+	}
+
+	public void setObservations(String observations) {
+		_observations = observations;
+	}
+
 	public EntryDetailsDomain getEntryDetails() {
 		return _details;
 	}
@@ -80,7 +88,15 @@ public class ReportDomain extends BaseDomain {
 	public void setEntryDetails(EntryDetailsDomain details) {
 		_details= details;
 	}
-	
+
+	/*public Integer getAge() {
+		return _age;
+	}
+
+	public void setAge(Integer age) {
+		_age = age;
+	}*/
+
 	public Boolean getIsFinished() {
 		return _isFinished;
 	}
@@ -88,24 +104,8 @@ public class ReportDomain extends BaseDomain {
 	public void setIsFinished(Boolean isFinished) {
 		_isFinished = isFinished;
 	}
-
 	
-	/*public void setObservations(String observations) {
-	_observations = observations;
-	}
-	
-	public String getObservations() {
-		return _observations;
-	}
-	
-	public Integer getAge() {
-		return _age;
-	}
-
-	public void setAge(Integer age) {
-		_age = age;
-	}
-	
+   /*
 	public EntryDetailsDomain getStatistic() {
 		return _statistic;
 	}

@@ -1,4 +1,4 @@
-package com.sd.isp.service.util;
+package com.sd.isp.util;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

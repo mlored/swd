@@ -61,11 +61,11 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	@Override
 	public List<ReportDomain> find(String textToFind, int page, int maxItems) throws Exception {
 		Date minDate, maxDate;
-		Session session   = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._diagnostic", "diagnostic");
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-			Map<String, String> map    = obtenerQuery(textToFind);
+			Map<String, String> map = obtenerQuery(textToFind);
 
 			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
 				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("diagnostic._id", Integer.parseInt(map.get("diagnostic"))));
@@ -81,11 +81,11 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 																		// entre
 																		// fechas
 				try {
-					minDate    = formatter.parse(map.get("start"));
+					minDate = formatter.parse(map.get("start"));
 					Calendar c = Calendar.getInstance();
 					c.setTime(formatter.parse(map.get("end")));
 					c.add(Calendar.DATE, 1);
-					maxDate    = c.getTime();
+					maxDate = c.getTime();
 					// System.out.println("desde" + minDate + "hasta " +
 					// maxDate);
 					criteria.add(Restrictions.between("_date", minDate, maxDate));
@@ -116,7 +116,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	@Override
 	public List<ReportDomain> find(String textToFind)/* throws AutomotiveException*/ {
 		Date minDate, maxDate;
-		Session session   = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._diagnostic", "diagnostic");
 
 		if (textToFind != null) {
@@ -137,11 +137,11 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 																		// entre
 																		// fechas
 				try {
-					minDate    = formatter.parse(map.get("start"));
+					minDate = formatter.parse(map.get("start"));
 					Calendar c = Calendar.getInstance();
 					c.setTime(formatter.parse(map.get("end")));
 					c.add(Calendar.DATE, 1);
-					maxDate    = c.getTime();
+					maxDate = c.getTime();
 					// System.out.println("desde" + minDate + "hasta " +
 					// maxDate);
 					criteria.add(Restrictions.between("_date", minDate, maxDate));
