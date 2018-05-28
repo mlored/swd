@@ -5,10 +5,13 @@
 // You're free to add application-wide JavaScript to this file, but it's generally better 
 // to create separate JavaScript files as needed.
 //
-// require jquery
-//= require_tree .
+//This is a javascript file with its top level require directives
+
 //= require_self
-//= require bootstrap
+console.log("This is my javascript manifest");
+
+
+console.log("My javascript goes here");
 
 if (typeof jQuery !== 'undefined') {
 	(function($) {
