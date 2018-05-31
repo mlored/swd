@@ -38,6 +38,7 @@
 			<exclude name="com/sd/isp/domain/**" />
 			<exclude name="com/sd/isp/resource/**" />
 			<exclude name="com/sd/isp/test/**" />
+			<exclude name="com/sd/isp/util/**" />
 		</jar>
 
 	</target>
