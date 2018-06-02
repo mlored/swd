@@ -222,7 +222,9 @@
 <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.js')}"></script>
 <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
 <script type="text/javascript" src="${resource(dir: 'js', file: 'adminlte.js')}"></script>
+<h1>Instancia : ${app.instance} </h1>
 </body>
+
 <script>
 
         $('a[data-method="delete"]').click(function(){
