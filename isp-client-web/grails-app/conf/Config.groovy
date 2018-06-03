@@ -110,11 +110,11 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-        grails.serverURL = "http://localhost:8090/${appName}"
+        grails.serverURL = "http://localhost:${grails.server.port.http}/${appName}"
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://localhost:8090/${appName}"
+        grails.serverURL = "http://localhost:${grails.server.port.http}/${appName}"
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
@@ -164,3 +164,4 @@ grails.plugin.springsecurity.providerNames = [
 	'myAuthenticationProvider',
 	'anonymousAuthenticationProvider',
 	'rememberMeAuthenticationProvider']
+server.port = 8081
