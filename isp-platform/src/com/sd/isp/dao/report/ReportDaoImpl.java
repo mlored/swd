@@ -62,16 +62,16 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind, int page, int maxItems) throws Exception {
 		Date minDate, maxDate;
 		Session session   = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._diagnostic", "diagnostic");
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._entry", "entry");
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map    = obtenerQuery(textToFind);
 
-			if (map.containsKey("diagnostic")) { // si quiere filtrar por diagnostico
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("diagnostic._id", Integer.parseInt(map.get("diagnostic"))));
+			if (map.containsKey("entry")) { // si quiere filtrar por diagnostico
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("entry._id", Integer.parseInt(map.get("entry"))));
 				criteria.add(Restrictions.or(propertyCriterion));
 			}
-			if (map.containsKey("isFinished")) { //si quiere filtrar por procesado
+			if (map.containsKey("isFinished")) { //si quiere filtrar por estado
 				criteria.add(Restrictions.eq("_isFinished", map.get("isFinished")));
 			}
 
@@ -117,17 +117,17 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind)/* throws AutomotiveException*/ {
 		Date minDate, maxDate;
 		Session session   = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._diagnostic", "diagnostic");
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._entry", "entry");
 
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
-			if (map.containsKey("diagnostic")) { // si quiere filtrar por
+			if (map.containsKey("entry")) { // si quiere filtrar por
 													// diagnostico
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("diagnostic._name", "%"+map.get("diagnostic")+"%"));
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("entry._id", "%"+map.get("entry")+"%"));
 			}
-			if (map.containsKey("isFinished")) { //si quiere filtrar por terminado
+			if (map.containsKey("isFinished")) { //si quiere filtrar por estado
 				criteria.add(Restrictions.eq("_isFinished", Boolean.parseBoolean(map.get("isFinished"))));
 			}
 

@@ -26,18 +26,14 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	private IReportResource _reportResource;
 	@Autowired
 	private IEntryService   _entryService;
-	@Autowired 
-	private IEntryService   _diagnosticService;
+	/*@Autowired 
+	private IEntryService   _diagnosticService;*/
 	@Autowired
 	private IEntryService   _clientDomain;
 	@Autowired
-	private IEntryDetailsService _entryDetailsService;
+	private IEntryService   _carDomain;
 	/*@Autowired
-	private IDiagnosticService _diagnosticService;
-	@Autowired
-	private IRequestService _doctorService;
-	@Autowired
-	private IStatisticService _statisticService;*/
+	private IEntryDetailsService _entryDetailsService;*/
 
 	public ReportServiceImpl() {
 	}
@@ -78,8 +74,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		//params.put("observations", dto.getObservations());
 		final ReportB reportB = new ReportB(params);
 		reportB.setEntry(_entryService.getById(dto.getEntryId()));
-		reportB.setDate(dto.getDate());
-		reportB.setEntryDetails(_entryDetailsService.getById(dto.getEntryDetailsId()));
+		reportB.setDate(dto.getDate());	
+		//reportB.setEntryDetails(_entryDetailsService.getById(dto.getEntryDetailsId()));
 		//reportB.setIsFinished(dto.getIsFinished());
 		//reportB.setAge(dto.getAge());
 		//reportB.setIsProcessed(dto.getIsProcessed());
@@ -95,7 +91,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(bean.getId());
 		dto.setDate(bean.getDate());
-		dto.setEntryDetailsId(bean.getEntry().getId());
+		//dto.setEntryDetailsId(bean.getEntry().getId());
 		dto.setIsFinished(bean.getIsFinished());
 		//dto.setObservations(bean.getObservations());
 		//dto.setRequestId(bean.getRequest().getId());
