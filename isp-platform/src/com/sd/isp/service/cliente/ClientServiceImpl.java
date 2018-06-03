@@ -19,7 +19,7 @@ import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.service.base.BaseServiceImpl;
-import com.sd.isp.service.util.Scheduler;
+import com.sd.isp.util.Scheduler;
 
 @Service
 public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, ClientDaoImpl, ClientResult> implements IClientService {

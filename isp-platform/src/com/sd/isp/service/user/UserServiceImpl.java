@@ -18,7 +18,7 @@ import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.BaseServiceImpl;
-import com.sd.isp.service.util.MailMail;
+import com.sd.isp.util.MailMail;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDaoImpl, UserResult> implements IUserService {
