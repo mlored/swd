@@ -2,12 +2,11 @@
 //
 // Any JavaScript file within this directory can be referenced here using a relative path.
 //
-// You're free to add application-wide JavaScript to this file, but it's generally better 
+// You're free to add application-wide JavaScript to this file, but it's generally better
 // to create separate JavaScript files as needed.
 //
 //This is a javascript file with its top level require directives
 
-//= require_self
 console.log("This is my javascript manifest");
 
 
