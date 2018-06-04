@@ -13,13 +13,9 @@ public class ReportDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 
 	private Integer  _entryId;
-	private Integer  _entryDetailsId;
+	//private Integer  _entryDetailsId;
 	private Date 	 _date;
 	private Boolean  _isFinished;
-	/*private String   _observations;
-      private Integer  _age;
-	  private Integer _statisticId;
-	  private String _diagnosticDetail;*/
 
 	@XmlElement
 	public Integer getEntryId() {
@@ -30,7 +26,7 @@ public class ReportDTO extends BaseDTO {
 		_entryId= entryId;
 	}
 
-	@XmlElement
+	/*@XmlElement
 	public Integer getEntryDetailsId() {
 		return _entryDetailsId;
 	}
@@ -38,7 +34,7 @@ public class ReportDTO extends BaseDTO {
 	public void setEntryDetailsId(Integer entryDetails) {
 		_entryDetailsId = entryDetails;
 	}
-	
+	*/
 
 	@XmlElement
 	public Date getDate() {
@@ -58,40 +54,4 @@ public class ReportDTO extends BaseDTO {
 		_isFinished = isFinished;
 	}
 
-	/*@XmlElement
-	public Integer getAge() {
-		return _age;
-	}
-
-	public void setAge(Integer age) {
-		_age = age;
-	}
-	
-	@XmlElement
-	public String getObservations() {
-		return _observations;
-	}
-
-	public void setObservations(String observations) {
-		_observations = observations;
-	}
-
-		
-	@XmlElement
-	public String getDiagnosticDetail() {
-		return _diagnosticDetail;
-	}
-
-	public void setDiagnosticDetail(String diagnosticDetail) {
-		_diagnosticDetail = diagnosticDetail;
-	}
-	
-	@XmlElement
-	public Integer getStatisticId() {
-		return _statisticId;
-	}
-
-	public void setStatisticId(Integer statisticId) {
-		_statisticId = statisticId;
-	}*/
 }

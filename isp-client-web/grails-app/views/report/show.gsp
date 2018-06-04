@@ -46,12 +46,12 @@
 	</div>
 	<!-- jQuery -->
 	<script src=" ${request.contextPath}/template/js/jquery.js"></script>
-	<script>
+	<%--<script>
 	$('#observations').prop('readonly', true);
 	</script>
 	<script>
 	document.getElementById("entry").disabled = true;
 	document.getElementById("entryDetail").disabled = true;
 	</script>
-</body>
+--%></body>
 </html>

@@ -28,8 +28,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	@Autowired
 	private IEntryDao _entryDao;
 
-	@Autowired
-	private IEntryDetailsDao _entrydetailsDao;
+	/*@Autowired
+	private IEntryDetailsDao _entrydetailsDao;*/
 	/*
 	@Autowired
 	private IStatisticDao _statisticDao;*/
@@ -38,8 +38,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional
-	//@CacheEvict(value = "lab-patologia-platform-cache", key = "'reports'")
-	@CachePut(value = "lab-patologia-platform-cache", key = "'report_' + #dto.id", condition = "#dto.id!=null")
+	//@CacheEvict(value = "isp-platform-cache", key = "'reports'")
+	//@CachePut(value = "isp-platform-cache", key = "'report_' + #dto.id", condition = "#dto.id!=null")
 	public ReportDTO save(ReportDTO dto) {
 		try {
 			// Lanzo exepcion de tipo runtime para realizar rollback
@@ -47,7 +47,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 			final ReportDomain report = _reportDao.save(domain);
 			final ReportDTO newDto    = convertDomainToDto(report);
 			if (dto.getId() == null) {
-				getCacheManager().getCache("lab-patologia-platform-cache").put("report_" + report.getId(), newDto);
+				getCacheManager().getCache("isp-platform-cache").put("report_" + report.getId(), newDto);
 			}
 			return newDto;
 		} catch (Exception ex) {
@@ -58,20 +58,20 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional(readOnly = true)
-	//@Cacheable(value = "lab-patologia-platform-cache", key = "'report_' + #id")
+	//@Cacheable(value = "isp-platform-cache", key = "'report_' + #id")
 	public ReportDTO getById(Integer id) {
 		final ReportDomain domain = _reportDao.getById(id);
-		final ReportDTO dto = convertDomainToDto(domain);
+		final ReportDTO dto 	  = convertDomainToDto(domain);
 		return dto;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	//@Cacheable(value = "lab-patologia-platform-cache", key = "'reports'")
+	//@Cacheable(value = "isp-platform-cache", key = "'reports'")
 	public ReportResult getAll(){
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : _reportDao.findAll()) {
-			final ReportDTO dto = convertDomainToDto(domain);
+			final ReportDTO dto  = convertDomainToDto(domain);
 			reports.add(dto);
 		}
 		final ReportResult reportResult = new ReportResult();
@@ -84,9 +84,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
 		dto.setEntryId(domain.getEntry().getId());
-		dto.setEntryDetailsId(domain.getEntryDetails().getId());
 		dto.setDate(domain.getDate());
 		dto.setIsFinished(domain.getIsFinished());
+		//dto.setEntryDetailsId(domain.getEntryDetails().getId());
 		//dto.setObservations(domain.getObservations());
 		//dto.setAge(domain.getAge());
 		/*dto.setDiagnosticDetail(domain.getDiagnosticDetail());
@@ -101,9 +101,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
 		domain.setEntry(_entryDao.getById(dto.getEntryId()));
-		domain.setEntryDetails(_entrydetailsDao.getById(dto.getEntryDetailsId()));
 		domain.setDate(dto.getDate());
 		domain.setIsFinished(dto.getIsFinished());
+		//domain.setEntryDetails(_entrydetailsDao.getById(dto.getEntryDetailsId()));
 		//domain.setObservations(dto.getObservations());
 		//domain.setAge(dto.getAge());
 		//domain.setDiagnosticDetail(dto.getDiagnosticDetail());

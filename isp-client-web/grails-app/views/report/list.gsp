@@ -30,21 +30,21 @@
 						<div class="panel-body">
 							<g:form action="list">
 								<div class="col-md-4">
-									<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'diagnostic', 'error')} required">
-											<label class="col-sm-3" for="diagnostic"> <g:message code="Diagnostico" />
+									<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'car', 'error')} required">
+											<label class="col-sm-3" for="car"> <g:message code="Car" />
 											</label>
 											<div class="col-md-9">
 											<g:if test="${null == diagnosticSearch}">
 										
-											<select class="select-diagnostic form-control" name="diagnosticSearch" id="diagnosticSearch">
-												<option value="${requestInstance?.diagnostic?.id}">Selecciona un diagnostico</option>
+											<select class="select-car form-control" name="carSearch" id="carSearch">
+												<option value="${requestInstance?.diagnostic?.id}">Selecciona un automovil</option>
 											</select>
 											
 											
 									</g:if>
 									<g:else>
-									<select class="select-diagnostic form-control" name="diagnosticSearch" id="diagnosticSearch">
-										<option value="${diagnosticSearch}">"asd"</option>
+									<select class="select-car form-control" name="carSearch" id="carSearch">
+										<option value="${carSearch}">"asd"</option>
 									</select>
 									</g:else>
 									</div>
@@ -132,30 +132,30 @@
 											<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 												<td><g:link action="edit" controller="request"
 														id="${reportInstance.request.id}">
-														${fieldValue(bean: reportInstance, field: "request.code")}
+														${fieldValue(bean: reportInstance, field: "entry.code")}
 													</g:link></td>
 
 												<td>
-													${formatDate(format: 'dd-MM-yyyy', date:reportInstance.getRequest().getDate())}
+													${formatDate(format: 'dd-MM-yyyy', date:reportInstance.getEntry().getDate())}
 												</td>
 												<td>
 													${formatDate(format: 'dd-MM-yyyy', date:reportInstance.getDate())}
 												</td>
 												<td>
-													${fieldValue(bean: reportInstance, field: "request.client.name")}
-													${fieldValue(bean: reportInstance, field: "request.client.lastName")}
+													${fieldValue(bean: reportInstance, field: "entry.client.name")}
+													${fieldValue(bean: reportInstance, field: "entry.client.lastName")}
 												</td>
 												<td>
-													${fieldValue(bean: reportInstance, field: "request.car.number")}
-													${fieldValue(bean: reportInstance, field: "request.car.mark")}
+													${fieldValue(bean: reportInstance, field: "entry.car.number")}
+													${fieldValue(bean: reportInstance, field: "entry.car.mark")}
 												</td>
 												<td>
 													${fieldValue(bean: reportInstance, field: "entry.diagnostic")}
 												</td>
 
-												  <td>${fieldValue(bean: reportInstance, field: "request.id")}</td>		
-												<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
-													<td align="center"><g:jasperReport
+												  <td>${fieldValue(bean: reportInstance, field: "entry.id")}</td>		
+												<%--<sec:ifAnyGranted roles='ROLE_ADMINISTRADOR,ROLE_DOCTOR'>
+													--%><td align="center"><g:jasperReport
 															action="generateReport" controller="report"
 															format="PDF,DOCX" jasper="report"
 															id="${reportInstance.getId()}">
@@ -166,24 +166,21 @@
 															class="btn btn-success" id="${reportInstance.getId()}">
 															<i class="fa fa-pencil"></i>
 														</g:link>
-												</sec:ifAnyGranted>
+												<%--</sec:ifAnyGranted>
 												<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
-													<td class="center"><g:link action="show"
+													--%><td class="center"><g:link action="show"
 															class="btn btn-default" id="${reportInstance.getId()}">
 															<i class="fa fa-list-alt"></i>
-														</g:link>
+														</g:link><%--
 												</sec:ifAnyGranted>
-											</tr>
+											--%></tr>
 
 										</g:each>
 
 
 									</tbody>
 								</table>
-
 								<g:render template="/layouts/paginate" />
-
-
 							</div>
 						</div>
 					</div>
@@ -194,7 +191,7 @@
 	<br />
 	<br />
 	<br />
-	<br /><%--
+	<br />
 	
 	<!-- Moment -->
 	<script src=" ${request.contextPath}/template/js/moment.js"></script>
@@ -237,17 +234,17 @@
 	</script>
 	<script>
 		function deleteData() {
-			$("#dataDiagnosticSearch").val("null");
+			$("#dataCarSearch").val("null");
 			$("#dataEndSearch").val("");
 			$("#dataStartSearch").val("");
 		}
 	</script>
-	<!-- Para selector de diagnostico -->
+	<!-- Para selector de automovil -->
     <script type="text/javascript">
-	    	$(".select-diagnostic").select2({
+	    	$(".select-car").select2({
 				language: 'es',
 	    		  ajax: {
-	    		    url: "${createLink(controller: 'diagnostic', action: 'selectDiagnostic')}",
+	    		    url: "${createLink(controller: 'car', action: 'selectCar')}",
 	    		    dataType: 'json',
 	    		    delay: 250,
 	    		    data: function (params) {
@@ -270,5 +267,5 @@
 	    	});
   
     </script>
---%></body>
+</body>
 </html>

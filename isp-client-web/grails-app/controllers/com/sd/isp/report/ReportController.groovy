@@ -30,7 +30,6 @@ class ReportController {
 	def IEntryService  entryService;
 	def IClientService clientService;
 	def ICarService    carService;
-	//def IRequestService requestService;
 	
 	
 	//def ILaboratoryService laboratoryService;
@@ -63,38 +62,47 @@ class ReportController {
 		'ROLE_SECRETARIA'
 	])*/
 	def list() {
+		def text = params.text
 		def page = 0
-		def siguiente
+		def siguiente	
 		if(null != params.get("page")){
 			page = Integer.parseInt(params.get("page"))
 		}
 		def reports   = null
-		String search ="";
-		System.out.println("asdasd" + search)
+		String textToFind ="";
+		System.out.println("asdasd" + textToFind)
 		System.out.println("asdasd" + params)
-			if(null!=params.get("diagnosticSearch") && !"".equals(params.get("diagnosticSearch")) && !"null".equals(params.get("diagnosticSearch"))){
-				search+="diagnostic="+params.get("diagnosticSearch")+'&'
+			if(null!=params.get("carSearch") && !""
+				 		   .equals(params.get("carSearch")) && !"null"
+						   .equals(params.get("carSearch"))){textToFind+="car="+
+						   		   params.get("carSearch")+'&'
 			}
-			if((!"".equals(params.get("startSearch")) && !"".equals(params.get("endSearch"))) &&
-			(null!=(params.get("startSearch")) && null!=params.get("endSearch"))){
-				search+="start="+params.get("startSearch")+'&'
-				search+="end="+params.get("endSearch")
+			if((!"".equals(params.get("startSearc h")) && !""
+								 .equals(params.get("endSearch"))) && 
+							     (null!=(params.get("startSearch")) && 
+								  null!=params.get("endSearch"))){
+					   textToFind+="start="+params.get("startSearch")+'&'
+				         textToFind+="end="+params.get("endSearch")
 			}else{
 				if(null!=(params.get("startSearch")) && !"".equals(params.get("startSearch"))){
-					search+="date="+params.get("startSearch")
+					textToFind+="date="+params.get("startSearch")
 				}
 			}
-		System.out.println("asdasd" + search)
-		if(!search.equals("")){
-			reports   = reportService.find(search,10,page);
-			siguiente = reportService.find(search,10,page+1);
+		System.out.println("asdasd" + textToFind)
+		if(!textToFind.equals("")){
+			reports   = reportService.find(textToFind,10,page);
+			siguiente = reportService.find(textToFind,10,page+1);
 		}else{
 			reports   = reportService.find(null,10,page);
 			siguiente = reportService.find(null,10,page+1);
 		}
 		System.out.println("Cantidad Reportes----------------------------->"+reports.size())
-		[reportInstanceList: reports, reportInstanceTotal: reports?.size(), page: page, siguiente: siguiente?.size(),laboratoryInstanceList: laboratoryService.getAll(), text: params.get("diagnosticSearch"),
-			user:authService.getName()]
+		[reportInstanceList: reports, 
+		 reportInstanceTotal: reports?.size(), 
+		 page: page, 
+		 siguiente: siguiente?.size(),
+		 entryInstanceList: entryService.getAll(), text: text ] /*text: params.get("entySearch"),
+			user:authService.getName()]*/
 	}
 	/*@Secured([
 		'ROLE_DOCTOR',
@@ -103,11 +111,11 @@ class ReportController {
 	def create(Integer id) {
 		def action = "save"
 		def reportInstance = new ReportB(params)
-		reportInstance.setRequest(requestService.getById(id))
+		reportInstance.setEntry(entryService.getById(id))
 		/*if((null!=reportInstance.request.patient._birthDate)){
 			reportInstance.setAge(calculateAge(reportInstance.request.patient._birthDate));
 		}*/
-		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
+		[reportInstance: reportInstance,entryInstanceList: entryService.getAll(),
 			user:authService.getName(), action:action] //, requests:requestService.getAll()]
 	}
 	/*@Secured([
@@ -119,32 +127,32 @@ class ReportController {
 		def reportInstance = new ReportB(params)
 		//request
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		reportInstance.setId(Integer.parseInt(params.get("requestId")));
+		reportInstance.setId(Integer.parseInt(params.get("entryId")));
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
-		reportInstance.setRequest(requestService.getById(Integer.parseInt(params.get("requestId"))))
+		reportInstance.setEntry(EntryService.getById(Integer.parseInt(params.get("entryId"))))
 		reportInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("diagnosticId"))))
 		reportInstance.setDiagnosticDetail((params.get("diagnosticDetail")))
 		if((null!=params.get("age"))){
 			reportInstance.setAge(Integer.parseInt(params.get("age")));
 		}
-		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
-		requestInstance.setStatus(StatusEnum.TERMINADO)
-		reportInstance.setIsProcessed(false);
+		def entryInstance = entryService.getById(Integer.parseInt(params.get("requestId")))
+		entryInstance.setStatus(StatusEnum.TERMINADO)
+		entryInstance.setIsProcessed(false);
 		//reportInstance.setAge(calculateAge(requestInstance.getPatient().getBirthDate()));
 		def newReport= reportService.save(reportInstance)
-		requestService.save(requestInstance)
+		entryService.save(entryInstance)
 
 		if (!newReport?.getId()) {
 			//redirect(action: "list", id: newReport.getId())
 			//return
 		}
-		redirect(action: "list", controller: "request")
-	}
-	@Secured([
+		redirect(action: "list", controller: "entry")
+	}*/
+	/*@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR'
-	])
-	def edit(Integer id) {
+	])*/
+	/*def edit(Integer id) {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		def statisticId = ""
 		if(null!= reportInstance.getStatistic()){
@@ -152,24 +160,24 @@ class ReportController {
 		}
 		[reportInstance: reportInstance,laboratoryInstanceList: laboratoryService.getAll(),
 			user:authService.getName(), reportEdit:params.get("reportEdit"), statisticId:statisticId, isProcessed:reportInstance._isProcessed]
-	}
-	@Secured([
+	}*/
+	/*@Secured([
 		'ROLE_DOCTOR',
 		'ROLE_ADMINISTRADOR'
-	])
-	def update(Integer id) {
+	])*/
+	/*def update(Integer id) {
 		def reportInstance = new ReportB(params)
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		reportInstance.setDate(formatter.parse(formatter.format(new Date())));
-		def requestInstance = requestService.getById(Integer.parseInt(params.get("requestId")))
-		reportInstance.setRequest(requestInstance)
+		def entryInstance = entryService.getById(Integer.parseInt(params.get("entryId")))
+		reportInstance.setRequest(entryInstance)
 		reportInstance.setId(Integer.parseInt(params.get("edit")))
-		reportInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("diagnosticId"))))
+		reportInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("entryId"))))
 		
 		reportInstance.setDiagnosticDetail(params.get("diagnosticDetail"))
-		if(params.get("isProcessed")=="true"){
+		if(params.get("isFinished")=="true"){
 			def statisticInstance = statisticService.getById(Integer.parseInt(params.get("statisticId")))
-			statisticInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("diagnosticId"))))
+			statisticInstance.setDiagnostic(diagnosticService.getById(Integer.parseInt(params.get("entryId"))))
 			statisticInstance.setId(Integer.parseInt(params.get("statisticId")))
 			reportInstance.setStatistic(statisticService.save(statisticInstance))
 			reportInstance.setIsProcessed(true)
@@ -182,8 +190,8 @@ class ReportController {
 		}
 
 		reportService.save(reportInstance)
-		if(params.get("reportEdit").equals("request")){
-			redirect(action: "list", controller: "request")
+		if(params.get("reportEdit").equals("entry")){
+			redirect(action: "list", controller: "entry")
 		}else{
 			redirect(action: "list")
 		}
@@ -193,16 +201,18 @@ class ReportController {
 
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		
-		params.client = reportInstance?.request?.client?.name +" "+ reportInstance?.entry?.client?.lastName
+		params.client = reportInstance?.entry?.client?.name +" "+ reportInstance?.entry?.client?.lastName
 		//params.age = reportInstance.getAge()
-		params.date = "ENCARNACION, "+ new Date().getDate() + " de " + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())+ " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
+		params.date = "ENCARNACION, "+ new Date().getDate() + " de " 
+									 + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())
+									 + " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
 		params.code = reportInstance?.entry?.code
 		/*if(reportInstance?.request.doctor?.sex == SexEnum.MASCULINO){
 			params.doctor = "Dr. " + reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
 		}else{
 			params.doctor = "Dra. " + reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
 		}*/
-		params.number = reportInstance?.entry?.car?.number
+		params.number = reportInstance?.entry?.client?.name
 		
 		/*params.specimen = reportInstance?.request?.specimen
 		params.signature = "DR. SERGIO ARIEL MEDINA S."
