@@ -15,8 +15,7 @@ public class PartResourceImpl extends BaseResourceImpl<PartDTO, PartResult> impl
 
     @Override
     public PartResult getAll() {
-        final PartResult result = getWebResource().get(PartResult.class);
-        return result;
+        return super.getAll();
     }
     
 }

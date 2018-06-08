@@ -23,7 +23,6 @@ public class EntryResourceImpl extends BaseResourceImpl<EntryDTO, EntryResult> i
 
     @Override
     public EntryResult getAll() {
-        final EntryResult result = getWebResource().get(EntryResult.class);
-        return result;
+        return super.getAll();
     }
 }

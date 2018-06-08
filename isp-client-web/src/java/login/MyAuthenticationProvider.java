@@ -1,5 +1,6 @@
 package login;
 
+import com.sd.isp.service.auth.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -26,15 +27,19 @@ class MyAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
 	private IUserService _userService;
+
+	@Autowired
+	private IAuthService authService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
 		String username = String.valueOf(auth.getPrincipal());
 		String password = String.valueOf(auth.getCredentials());			
-		UserB user = getUser(username);		
-		if(user!=null){ 
-			if (passwordEncoder.matches(password,user.getPassword())) {
+		UserB user = _userService.getByUsername(username, password);
+		if(user!=null){
+			//passwordEncoder.matches(password, user.getPassword())
+			if (password.equals(user.getPassword())) {
 				List<GrantedAuthority> authorities = getUserRoles(user);
 				if(authorities != null){
 					Boolean enabled=Boolean.valueOf(user.getAccountLocked());
@@ -46,12 +51,7 @@ class MyAuthenticationProvider implements AuthenticationProvider {
 			}else throw new BadCredentialsException("Log in failed: Password incorrecto"); 			
 		}
 		return auth;
-	}	
-	
-	private UserB getUser(String username){	
-		UserB userB = _userService.getByUsername(username);
-		return userB;		
-	}	
+	}
 	
 	private List getUserRoles(UserB user) {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();		

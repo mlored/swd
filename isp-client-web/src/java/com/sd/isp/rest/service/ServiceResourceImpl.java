@@ -15,8 +15,7 @@ public class ServiceResourceImpl extends BaseResourceImpl<ServiceDTO, ServiceRes
 
     @Override
     public ServiceResult getAll() {
-        final ServiceResult result = getWebResource().get(ServiceResult.class);
-        return result;
+       return super.getAll();
     }
 
 }

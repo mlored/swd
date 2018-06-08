@@ -14,8 +14,7 @@ public class EmployeeResourceImpl extends BaseResourceImpl<EmployeeDTO, Employee
 
 	@Override
 	public EmployeeResult getAll() {
-		final EmployeeResult result = getWebResource().get(EmployeeResult.class);
-		return result;
+		return super.getAll();
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package com.sd.isp.rest.user;
 
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dto.user.UserDTO;
@@ -22,4 +23,11 @@ public class UserResourceImpl extends BaseResourceImpl<UserDTO, UserResult> impl
 	public UserDTO getByUsername(String username) {		
 		return getWebResource().path("/username/" + username).get(getDtoClass());
 	}
+
+    @Override
+    public UserDTO getByUsername(String username, String password) {
+        getWebResource().addFilter(new HTTPBasicAuthFilter(username, password));
+        return getWebResource().path("/username/" + username).get(getDtoClass());
+    }
+
 }

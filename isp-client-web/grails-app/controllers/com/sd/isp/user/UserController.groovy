@@ -22,7 +22,7 @@ class UserController{
   
   @Autowired def IAuthService authService
 
-  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def index(){
 	def users = userService.getAll()
 	[userInstanceList: users]
@@ -74,7 +74,7 @@ class UserController{
 	[userInstance: userInstance]
   }
     
-  @Secured(['ROLE_SUPERUSER', 'ROLE_ADMIN'])
+  //@Secured(['ROLE_SUPERUSER', 'ROLE_ADMIN'])
   def show(Long id) {
 	  def userInstance = userService.getById(id.intValue())
 	  if (!userInstance) {

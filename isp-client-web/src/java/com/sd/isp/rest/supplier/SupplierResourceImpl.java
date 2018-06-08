@@ -14,8 +14,7 @@ public class SupplierResourceImpl extends BaseResourceImpl<SupplierDTO, Supplier
 
 	@Override
 	public SupplierResult getAll() {
-		final SupplierResult result = getWebResource().get(SupplierResult.class);
-		return result;
+		return super.getAll();
 	}
 
 }

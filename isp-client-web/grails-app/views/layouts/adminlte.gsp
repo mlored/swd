@@ -65,7 +65,9 @@
                                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    <sec:ifLoggedIn>
+                                        <sec:username/>!
+                                    </sec:ifLoggedIn>
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -90,7 +92,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="/isp-client-web/secure/logout" class="btn btn-default btn-flat"/>Salir</a>
                                 </div>
                             </li>
                         </ul>
@@ -147,14 +149,14 @@
                 </li>
 
                 <li>
-                    <a href="/isp-client-web/#">
+                    <a href="/isp-client-web/buy/list">
                         <i class="fa fa-shopping-cart"></i> <span>Compras</span>
 
                     </a>
                 </li>
                 <li>
                     <a href="/isp-client-web/#">
-                        <i class="fa fa-credit-card"></i> <span>Ventas</span>
+                        <i class="fa fa-credit-card"></i> <span>Ventas (No Funciona)</span>
 
                     </a>
                 </li>
@@ -167,19 +169,19 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/isp-client-web/entry/list"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
-                        <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Servicios realizados</a></li>
+                        <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Servicios realizados (No funciona)</a></li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="/isp-client-web/report/list">
-                        <i class="fa fa-file-text-o"></i> <span>Reportes</span>
+                        <i class="fa fa-file-text-o"></i> <span>Reportes (no funciona) </span>
 
                     </a>
                 </li>
                 <li>
                     <a href="/isp-client-web/stock">
-                        <i class="fa fa-cubes"></i> <span>Stock</span>
+                        <i class="fa fa-cubes"></i> <span>Stock (NO funciona)</span>
 
                     </a>
                 </li>

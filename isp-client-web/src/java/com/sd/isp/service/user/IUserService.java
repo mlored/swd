@@ -6,4 +6,5 @@ import com.sd.isp.service.base.IBaseService;
 
 public interface IUserService extends IBaseService<UserB, UserDTO> {
 	public UserB getByUsername(String username);
+	public UserB getByUsername(String username, String password);
 }

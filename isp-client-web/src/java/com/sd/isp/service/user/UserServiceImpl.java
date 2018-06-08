@@ -129,11 +129,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     
 	@Override
 	public UserB getByUsername(String username) {
-		final UserDTO dto = _userResource.getByUsername(username);
-		return convertDtoToBean(dto);
-	}
-	
-	public List<UserB> find (String textToFind, int maxItems, int page) {
+        final UserDTO dto = _userResource.getByUsername(username);
+        return convertDtoToBean(dto);
+    }
+
+    public UserB getByUsername(String username, String password) {
+        final UserDTO dto = _userResource.getByUsername(username, password);
+        return convertDtoToBean(dto);
+    }
+
+    public List<UserB> find (String textToFind, int maxItems, int page) {
 		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
 		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
 				: result.getServices();

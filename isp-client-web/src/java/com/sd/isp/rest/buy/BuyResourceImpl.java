@@ -13,7 +13,6 @@ public class BuyResourceImpl extends BaseResourceImpl<BuyDTO, BuyResult> impleme
 
     @Override
     public BuyResult getAll() {
-        final BuyResult result = getWebResource().get(BuyResult.class);
-        return result;
+        return super.getAll();
     }
 }
