@@ -5,8 +5,6 @@ import grails.plugin.springsecurity.SpringSecurityUtils
 
 class SecureController {
 
-	def springSecurityService
-
 	@Secured(['ROLE_SUPERUSER', 'ROLE_ADMIN'])
 	def index() {
 
@@ -28,7 +26,7 @@ class SecureController {
 	}
 
 	@Secured(['ROLE_SUPERUSER', 'ROLE_ADMIN'])
-  def index_admin() {
-  }
+	def index_admin() {
+	}
 
 }

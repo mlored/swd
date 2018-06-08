@@ -54,7 +54,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserDomain> implements IUserDao {
 
 	@Override
 	public UserDomain getByUsername(String name) {
-		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select * from user where username=:name");	
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery("select * from users where username=:name");	
 		query.addEntity(UserDomain.class); 
 		query.setString("name", name);
 		return (UserDomain) query.uniqueResult();	

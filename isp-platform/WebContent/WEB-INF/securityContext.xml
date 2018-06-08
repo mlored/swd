@@ -7,12 +7,13 @@
     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http pattern="/securityNone" security="none"/>
+    <http pattern="/user/**" security="none"/>
     <http pattern="/**" use-expressions="true">
      <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/users/ **" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/roles **" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/roles/ **" access="hasRole('ROLE_ADMIN')" />
+        <!-- <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" /> -->
+        <intercept-url pattern="/roles**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/roles/**" access="hasRole('ROLE_ADMIN')" />
         <http-basic/>
         <logout logout-url="/logout"/><logout/>
     </http>

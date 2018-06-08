@@ -15,7 +15,7 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult>
 		IReportResource {
 
 	public ReportResourceImpl() {
-		super(ReportDTO.class, "/report");
+		super(ReportDTO.class, "/report", ReportResult.class);
 	}
 
 	@Override

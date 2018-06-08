@@ -152,10 +152,4 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		return null;
 	}
 
-	@Transactional(readOnly = true)
-	public UserDTO getByUserName(String username) {
-		final UserDomain userDomain = userDao.getByUsername(username);
-		return convertDomainToDto(userDomain);
-	}
-
 }

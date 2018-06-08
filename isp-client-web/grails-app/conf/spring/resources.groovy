@@ -1,3 +1,4 @@
+import com.sd.isp.rest.buy.BuyResourceImpl
 import login.MyAuthenticationProvider;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
@@ -5,7 +6,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 beans = {
 	myAuthenticationProvider(MyAuthenticationProvider) {
 	}
-	
+
 	localeResolver(SessionLocaleResolver) {
 		defaultLocale= new java.util.Locale('es');
 	}

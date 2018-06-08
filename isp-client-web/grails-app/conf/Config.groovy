@@ -148,7 +148,6 @@ log4j.main = {
 //grails.plugin.springsecurity.authority.className = 'com.sd.isp.login.Role'
 grails.plugin.springsecurity.providerManager.eraseCredentialsAfterAuthentication=false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                ['permitAll'],
 	'/report/**':       ['permitAll'],   //["ROLE_ADMINISTRADOR","ROLE_SECRETARIA"],
 	'/jasper/**':		['permitAll'],   //["ROLE_ADMINISTRADOR","ROLE_SECRETARIA"],
 	'/index':           ['permitAll'],
@@ -158,12 +157,12 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
 	'/**/favicon.ico':  ['permitAll'],
-    '/**': 				['permitAll']
+    '/login/**':        ['permitAll'],
+    '/logout/**':       ['permitAll'],
+        '/**':       ['permitAll'],
+    '/secure/**':       ['ROLE_ADMIN'],
+    '/finance/**':      ['ROLE_FINANCE', 'isFullyAuthenticated()'],
 
 ]
 
-grails.plugin.springsecurity.providerNames = [
-	'myAuthenticationProvider',
-	'anonymousAuthenticationProvider',
-	'rememberMeAuthenticationProvider']
-server.port = 8081
+grails.plugin.springsecurity.providerNames = ['myAuthenticationProvider']
