@@ -19,7 +19,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <g:sortableColumn property="userName" title="Usuario" />
+                <g:sortableColumn property="username" title="Usuario" />
                 <g:sortableColumn property="name" title="Nombre" />
                 <g:sortableColumn property="surName" title="Apellido" />
                 <g:sortableColumn property="role" title="Rol" />
@@ -31,7 +31,7 @@
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
                     <td>
-                        <g:link action="edit" id="${userInstance?.id}"><g:message code="${fieldValue(bean: userInstance, field: "userName")}" default="${fieldValue(bean: userInstance, field: "userName")}" /></g:link>
+                        <g:link action="edit" id="${userInstance?.id}"><g:message code="${fieldValue(bean: userInstance, field: "username")}" default="${fieldValue(bean: userInstance, field: "username")}" /></g:link>
                     </td>
                     <td>${fieldValue(bean: userInstance, field: "name")}</td>
                     <td>${fieldValue(bean: userInstance, field: "surName")}</td>

@@ -1,10 +1,10 @@
 <div class="box-body">
 	<div class="form-group ${hasErrors(bean: userrInstance, field: 'userName', 'error')}">
 		<label for="userName">
-			<g:message code="user.userName.label" default="userName" />
+			<g:message code="user.userName.label" default="Username" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="userName" maxlength="50" required="" value="${userInstance?.userName}"/>
+		<g:textField name="userName" class="form-control" maxlength="50" placeholder="Username" required="" value="${userInstance?.userName}" autofocus="autofocus" />
 	</div>
 	
 	<div class="form-group ${hasErrors(bean: userInstance, field: 'name', 'error')} required">

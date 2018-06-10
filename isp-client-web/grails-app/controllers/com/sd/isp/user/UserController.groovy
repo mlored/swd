@@ -24,9 +24,14 @@ class UserController{
 
   //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def index(){
-	def users = userService.getAll()
-	[userInstanceList: users]
+	params.max = Math.min(max ?: 10, 100)
+        redirect(action: "list", params: params)
   }
+  
+  def list(Integer max) {
+	  def users = userService.getAll()
+		[userInstanceList: users, userInstanceTotal: users?.size()]
+	}
 
   @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def create() {
