@@ -44,6 +44,8 @@
             </div>
         </form>
         <a href="/isp-client-web/">Registrarse</a>
+        <br>
+        <a href="/isp-client-web/support/create">Contactar con soporte</a>
     </div>
     <!-- /.login-box-body -->
 </div>

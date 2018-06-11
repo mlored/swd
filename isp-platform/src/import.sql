@@ -51,7 +51,6 @@ insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'Caja Mec
 insert into items (DTYPE, name, price, quantity) values ('ServiceDomain', 'Cambio de Motor','4000000',0);
 insert into items (DTYPE, name, price, quantity) values ('PartDomain', 'Motor','2000000',4);
 
-insert into roles (authority) values ('ROLE_SUPER');
 insert into roles (authority) values ('ROLE_ADMIN');
 insert into roles (authority) values ('ROLE_MECANICO');
 insert into roles (authority) values ('ROLE_SECRETARIO');
@@ -72,7 +71,7 @@ insert into users_roles (user_id, role_id) values ('1','1');
 insert into users_roles (user_id, role_id) values ('2','2');
 insert into users_roles (user_id, role_id) values ('3','3');
 insert into users_roles (user_id, role_id) values ('4','4');
-insert into users_roles (user_id, role_id) values ('5','5');
+
 
 
 

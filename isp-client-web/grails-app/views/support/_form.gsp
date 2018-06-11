@@ -1,10 +1,9 @@
-<div class="col-md-6">
-
+<div class="col-md-12">
     <div>
         <label>Nombre y Apellido</label>
         <div class="form-group">
             <input class="form-control letter" type="text" maxlength="50"
-                   id="userName" name="userName" placeholder="Ingrese un Nombre"/>
+                   id="userName" name="userName" placeholder="Ingrese un Nombre" autofocus/>
         </div>
     </div>
 

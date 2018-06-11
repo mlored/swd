@@ -6,7 +6,7 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http pattern="/securityNone" security="none"/>
+    <http pattern="/rest/support" security="none"/>
     <http pattern="/**" use-expressions="true">
      <intercept-url pattern="/**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
         <intercept-url pattern="/users**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
