@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.role.RoleDomain;
 
@@ -98,7 +100,7 @@ public class UserDomain extends BaseDomain {
 	}
 
 	public void setPassword(String _password/*, Integer userId*/) {
-	/*	if(userId==null){
+		if(null == id){
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(_password);
 			
@@ -106,8 +108,6 @@ public class UserDomain extends BaseDomain {
 		}else{
 			this.password = _password;
 		}
-		*/
-		this.password = _password;
 	}
 
 

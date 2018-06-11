@@ -38,8 +38,7 @@ class MyAuthenticationProvider implements AuthenticationProvider {
 		String password = String.valueOf(auth.getCredentials());			
 		UserB user = _userService.getByUsername(username, password);
 		if(user!=null){
-			//passwordEncoder.matches(password, user.getPassword())
-			if (password.equals(user.getPassword())) {
+			if (passwordEncoder.matches(password, user.getPassword())) {
 				List<GrantedAuthority> authorities = getUserRoles(user);
 				if(authorities != null){
 					Boolean enabled=Boolean.valueOf(user.getAccountLocked());

@@ -57,12 +57,16 @@ insert into roles (authority) values ('ROLE_MECANICO');
 insert into roles (authority) values ('ROLE_SECRETARIO');
 insert into roles (authority) values ('ROLE_SUPERSECRE');
 
-
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('admin','admin','admin', 'Admin123', true, true, true);
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('mlored','lorena','del puerto', '12345678', true, false, false);
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('ksanabria','karina','sanabria', 'karina123', true, false, false);
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('aaguero','adrian','aguero', 'adrian123', true, false, false);
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('gzarza','guillermo','zarza', 'guille123', true, false, false);
+-- password Admin123
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('admin','admin','admin', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, true, true);
+-- password 12345678
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('mlored','lorena','del puerto', '$2a$04$bvcZVwBYaR2P2jt3mMUKqeQHKLL6dqXXtK57RWkG8FsTMiT26cECa', true, false, false);
+-- password Karina123
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('ksanabria','karina','sanabria', '$2a$04$e4tZ1qSwdDu65dUx6NTbSea5PnJjaz3LPhoOmyzyOEJG0Nexup1aG', true, false, false);
+-- password adrian123
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('aaguero','adrian','aguero', '$2a$04$6LDPp2g6Hb90KQfNMfpoCOjPML79aE98HlrVAB3F.6MHmnBibWTtu', true, false, false);
+-- password guillermo123
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('gzarza','guillermo','zarza', '$2a$04$WhBzMnOtVkshD.4ElnrVTeH5.kDfg9F9qcd3Be0j81rzbin9d16N.', true, false, false);
 
 insert into users_roles (user_id, role_id) values ('1','1');
 insert into users_roles (user_id, role_id) values ('2','2');
