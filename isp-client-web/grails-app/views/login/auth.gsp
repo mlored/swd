@@ -36,25 +36,17 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-
-                        </label>
-                    </div>
-                </div>
                 <!-- /.col -->
-                <div class="col-xs-5">
+                <div class="col-xs-12">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar sesión</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-
-
-
+        <a href="/isp-client-web/">Registrarse</a>
     </div>
     <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
-</body></html>
+</body>
+</html>

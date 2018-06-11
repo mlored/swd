@@ -44,7 +44,5 @@
     <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'adminlte.js')}"></script>
-    <h1>Instancia : ${grailsApplication.config.app.instance} </h1>
-    </div>
 </body>
 </html>

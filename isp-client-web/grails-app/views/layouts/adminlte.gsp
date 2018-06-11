@@ -92,7 +92,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/isp-client-web/secure/logout" class="btn btn-default btn-flat"/>Salir</a>
+                                    <a href="/isp-client-web/j_spring_security_logout"  class="btn btn-default btn-flat"/>Salir</a>
                                 </div>
                             </li>
                         </ul>
