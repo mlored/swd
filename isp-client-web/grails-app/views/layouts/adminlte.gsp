@@ -181,8 +181,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/isp-client-web/stock">
-                        <i class="fa fa-cubes"></i> <span>Stock (NO funciona)</span>
+                    <a href="/isp-client-web/stock/list">
+                        <i class="fa fa-cubes"></i> <span>Stock</span>
 
                     </a>
                 </li>
