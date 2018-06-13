@@ -110,7 +110,6 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-        grails.serverURL = "http://localhost:${grails.server.port.http}/${appName}"
     }
     production {
         grails.logging.jul.usebridge = false
