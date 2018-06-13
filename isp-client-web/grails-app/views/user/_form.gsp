@@ -1,42 +1,36 @@
 <div class="box-body">
-	<div class="form-group ${hasErrors(bean: userrInstance, field: 'userName', 'error')}">
-		<label for="userName">
-			<g:message code="user.userName.label" default="Username" />
+	<div class="form-group ${hasErrors(bean: userrInstance, field: 'username', 'error')}">
+		<label for="username">
+			<g:message code="user.username.label" default="Usuario" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="userName" class="form-control" maxlength="50" placeholder="Username" required="" value="${userInstance?.userName}" autofocus="autofocus" />
+		<g:textField name="username" class="form-control" maxlength="50" placeholder="username" required="" value="${userInstance?.username}" autofocus="autofocus" />
 	</div>
 	
 	<div class="form-group ${hasErrors(bean: userInstance, field: 'name', 'error')} required">
 		<label for="name">
-			<g:message code="user.name.label" default="Name" />
+			<g:message code="user.name.label" default="Nombre" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="name" maxlength="50" required="" value="${userInstance?.name}"/>	
+		<g:textField name="name" class="form-control" maxlength="50" placeholder="nombre" required="" value="${userInstance?.name}"/>	
 	</div>
 	
 	<div class="form-group ${hasErrors(bean: userInstance, field: 'surName', 'error')} required">
 		<label for="surName">
-			<g:message code="user.surName.label" default="Sur Name" />
+			<g:message code="user.surName.label" default="Apellido" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="surName" maxlength="50" required="" value="${userInstance?.surName}"/>
+		<g:textField name="surName" class="form-control" maxlength="50" placeholder="apellido" required="" value="${userInstance?.surName}"/>
 	</div>
 	
 	<div class="from-group ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 		<label for="password">
-			<g:message code="user.password.label" default="Password" />
+			<g:message code="user.password.label" default="Contraseña" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:textField name="password" maxlength="10" required="" value="${userInstance?.password}"/>
+		<g:textField name="password" class="form-control" maxlength="10" placeholder="contraseña" required="" value="${userInstance?.password}"/>
 	</div>
 	
-	<div class="form-group ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
-		<label for="role">
-			<g:message code="user.role.label" default="Role" />
-			<span class="required-indicator">*</span>
-		</label>
-		<g:select id="role" name="role.id" from="${com.sd.isp.role.Role.list()}" optionKey="id" required="" value="${userInstance?.role?.id}" class="many-to-one"/>
-	</div>
+
 </div>
 <!-- /.box-body -->
