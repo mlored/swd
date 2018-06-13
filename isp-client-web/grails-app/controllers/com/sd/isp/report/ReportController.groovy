@@ -11,6 +11,7 @@ import com.sd.isp.beans.report.ReportB
 import com.sd.isp.service.auth.IAuthService
 import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.client.IClientService
+import com.sd.isp.service.employee.IEmployeeService
 import com.sd.isp.service.entry.IEntryService
 import com.sd.isp.service.report.IReportService
 //import com.sd.uni.isp.service.client.IClientService
@@ -27,10 +28,10 @@ class ReportController {
 
 	//service
 	def IReportService reportService;
-	def IEntryService  entryService;
-	def IClientService clientService;
+	def IEmployeeService  employeeService;
+	/*def IClientService clientService;
 	def ICarService    carService;
-	
+	*/
 	
 	//def ILaboratoryService laboratoryService;
 	//def IStatisticService statisticService;
@@ -52,7 +53,7 @@ class ReportController {
 	])*/
 	def show() {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
-		[reportInstance: reportInstance,entryInstanceList: entryService.getAll(),
+		[reportInstance: reportInstance,employeeInstanceList: employeeService.getAll(),
 			user:authService.getName(), reportShow:params.get("reportShow")]
 	}
 
@@ -72,10 +73,10 @@ class ReportController {
 		String textToFind ="";
 		System.out.println("asdasd" + textToFind)
 		System.out.println("asdasd" + params)
-			if(null!=params.get("carSearch") && !""
-				 		   .equals(params.get("carSearch")) && !"null"
-						   .equals(params.get("carSearch"))){textToFind+="car="+
-						   		   params.get("carSearch")+'&'
+			if(null!=params.get("empleSearch") && !""
+				 		   .equals(params.get("empleSearch")) && !"null"
+						   .equals(params.get("empleSearch"))){textToFind+="emple="+
+						   		   params.get("empleSearch")+'&'
 			}
 			if((!"".equals(params.get("startSearc h")) && !""
 								 .equals(params.get("endSearch"))) && 
@@ -101,7 +102,7 @@ class ReportController {
 		 reportInstanceTotal: reports?.size(), 
 		 page: page, 
 		 siguiente: siguiente?.size(),
-		 entryInstanceList: entryService.getAll(), text: text ] /*text: params.get("entySearch"),
+		 entryInstanceList: employeeService.getAll(), text: text ] /*text: params.get("entySearch"),
 			user:authService.getName()]*/
 	}
 	/*@Secured([
@@ -111,11 +112,11 @@ class ReportController {
 	def create(Integer id) {
 		def action = "save"
 		def reportInstance = new ReportB(params)
-		reportInstance.setEntry(entryService.getById(id))
+		reportInstance.setEmployee(employeeService.getById(id))
 		/*if((null!=reportInstance.request.patient._birthDate)){
 			reportInstance.setAge(calculateAge(reportInstance.request.patient._birthDate));
 		}*/
-		[reportInstance: reportInstance,entryInstanceList: entryService.getAll(),
+		[reportInstance: reportInstance,employeeInstanceList: employeeService.getAll(),
 			user:authService.getName(), action:action] //, requests:requestService.getAll()]
 	}
 	/*@Secured([
@@ -201,18 +202,18 @@ class ReportController {
 
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		
-		params.client = reportInstance?.entry?.client?.name +" "+ reportInstance?.entry?.client?.lastName
+		params.employee = reportInstance?.employee?.name +" "+ reportInstance?.employee?.lastName
 		//params.age = reportInstance.getAge()
 		params.date = "ENCARNACION, "+ new Date().getDate() + " de " 
 									 + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())
 									 + " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
-		params.code = reportInstance?.entry?.code
+		params.code = reportInstance?.employee?.code
 		/*if(reportInstance?.request.doctor?.sex == SexEnum.MASCULINO){
 			params.doctor = "Dr. " + reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
 		}else{
 			params.doctor = "Dra. " + reportInstance?.request?.doctor?.name +" "+ reportInstance?.request?.doctor?.lastName
 		}*/
-		params.number = reportInstance?.entry?.client?.name
+		params.number = reportInstance?.employee?.name
 		
 		/*params.specimen = reportInstance?.request?.specimen
 		params.signature = "DR. SERGIO ARIEL MEDINA S."

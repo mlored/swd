@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 import com.sd.isp.dto.report.ReportDTO;
 import com.sd.isp.dto.report.ReportResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
+import com.sun.jersey.api.client.UniformInterface;
 
 @Repository("reportResource")
 public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult> implements
 		IReportResource {
 
 	public ReportResourceImpl() {
-		super(ReportDTO.class, "/report", ReportResult.class);
+		super(ReportDTO.class, "/report" , ReportResult.class);
 	}
 
 	@Override
@@ -47,9 +48,9 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult>
 	@Override
 	public ReportResult find(String textToFind, int maxItems, int page) {
 		//setWebResourceBasicAuthFilter();
-		//final ReportResult result = findWR(textToFind, maxItems, page).get(ReportResult.class);
-		//return result;
-		return null;
+		final ReportResult result = findWR(textToFind, maxItems, page);/*.get(ReportResult.class);*/
+		return result;
+		//return null;
 	}
 	
 

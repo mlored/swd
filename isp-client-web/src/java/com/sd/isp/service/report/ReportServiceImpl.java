@@ -13,6 +13,7 @@ import com.sd.isp.dto.report.ReportDTO;
 import com.sd.isp.dto.report.ReportResult;
 import com.sd.isp.rest.report.IReportResource;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.employee.IEmployeeService;
 import com.sd.isp.service.entry.IEntryService;
 import com.sd.isp.service.entry_details.IEntryDetailsService;
 /*import com.sd.isp.service.request.IRequestService;
@@ -25,13 +26,13 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	@Autowired
 	private IReportResource _reportResource;
 	@Autowired
-	private IEntryService   _entryService;
+	private IEmployeeService   _employeeService;
 	/*@Autowired 
 	private IEntryService   _diagnosticService;*/
-	@Autowired
+	/*@Autowired
 	private IEntryService   _clientDomain;
 	@Autowired
-	private IEntryService   _carDomain;
+	private IEntryService   _carDomain;*/
 	/*@Autowired
 	private IEntryDetailsService _entryDetailsService;*/
 
@@ -73,12 +74,12 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		params.put("id", String.valueOf(dto.getId()));
 		//params.put("observations", dto.getObservations());
 		final ReportB reportB = new ReportB(params);
-		reportB.setEntry(_entryService.getById(dto.getEntryId()));
+		reportB.setEmployee(_employeeService.getById(dto.getEmployeeId()));
 		reportB.setDate(dto.getDate());	
+		reportB.setIsActived(dto.getIsActived());
 		//reportB.setEntryDetails(_entryDetailsService.getById(dto.getEntryDetailsId()));
 		//reportB.setIsFinished(dto.getIsFinished());
 		//reportB.setAge(dto.getAge());
-		//reportB.setIsProcessed(dto.getIsProcessed());
 		//reportB.setDiagnosticDetail(dto.getDiagnosticDetail());
 		/*if(null!=dto.getStatisticId()){
 			reportB.setStatistic(_statisticService.getById(dto.getStatisticId()));
@@ -91,12 +92,12 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(bean.getId());
 		dto.setDate(bean.getDate());
+		dto.setIsActived(bean.getIsActived());
+		dto.setEmployeeId(bean.getEmployee().getId());
 		//dto.setEntryDetailsId(bean.getEntry().getId());
-		dto.setIsFinished(bean.getIsFinished());
 		//dto.setObservations(bean.getObservations());
 		//dto.setRequestId(bean.getRequest().getId());
 		//dto.setAge(bean.getAge());
-		//dto.setEntryId(bean.getEntry().getId());
 		/*if(null!=bean.getStatistic()){
 			dto.setStatisticId(bean.getStatistic().getId());
 		}*/

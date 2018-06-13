@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
+import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
@@ -20,18 +21,14 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
-	
-	/*@ManyToOne
-	private EntryDetailsDomain _entrydetails;
-	*/
 	@ManyToOne
-	private EntryDomain _entry;
+	private EmployeeDomain _employee;
 
 	@Column(name = "date", nullable = false)
 	private Date _date;
 	
-	@Column(name = "isFinished")
-	private Boolean _isFinished;
+	@Column(name = "isActived")
+	private Boolean _isActived;
 
 
 	public Integer getId() {
@@ -42,12 +39,12 @@ public class ReportDomain extends BaseDomain {
 		_id = id;
 	}
 
-	public EntryDomain getEntry() {
-		return _entry;
+	public EmployeeDomain getEmployee() {
+		return _employee;
 	}
 
-	public void setEntry(EntryDomain entry) {
-		_entry = entry;
+	public void setEmployee(EmployeeDomain employee) {
+		_employee = employee;
 	}
 
 	public Date getDate() {
@@ -58,12 +55,12 @@ public class ReportDomain extends BaseDomain {
 		_date = date;
 	}
 	
-	public Boolean getIsFinished() {
-		return _isFinished;
+	public Boolean getIsActived() {
+		return _isActived;
 	}
 
-	public void setIsFinished(Boolean isFinished) {
-		_isFinished = isFinished;
+	public void setIsActived(Boolean isActived) {
+		_isActived = isActived;
 	}
 
 	/*public EntryDetailsDomain getEntryDetails() {

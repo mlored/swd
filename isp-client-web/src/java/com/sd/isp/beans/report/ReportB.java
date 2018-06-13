@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.isp.beans.base.BaseBean;
+import com.sd.isp.beans.employee.EmployeeB;
 import com.sd.isp.beans.entry.EntryB;
 import com.sd.isp.beans.report.ReportB;
 import com.sd.isp.beans.entry_details.EntryDetailsB;
@@ -13,14 +14,8 @@ import com.sd.isp.beans.entry_details.EntryDetailsB;
 public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Date 		  _date;
-	private EntryB		  _entry;
-	private EntryDetailsB _entryDetail;
-	private Boolean 	  _isFinished;
-	
-	//private DiagnosticB _diagnostic;
-	//private String _entryDetail;
-	//private String _observations;
-	//private Integer _age;
+	private EmployeeB	  _employee;
+	private Boolean 	  _isActived;
 
 	public ReportB(Map<String, String> params) {
 		super(params);
@@ -42,59 +37,21 @@ public class ReportB extends BaseBean {
 		_date = date;
 	}
 
-	public EntryB getEntry() {
-		return _entry;
+	public EmployeeB getEmployee() {
+		return _employee;
 	}
 
-	public void setEntry(EntryB entry) {
-		_entry = entry;
+	public void setEmployee(EmployeeB employee) {
+		_employee = employee;
 	}
 	
-	public EntryDetailsB getEntryDetails() {
-		return _entryDetail;
+	public Boolean getIsActived() {
+		return _isActived;
 	}
 
-	public void setEntryDetails(EntryDetailsB entryDetail) {
-		_entryDetail = entryDetail;
+	public void setIsActived(Boolean isActived) {
+		_isActived = isActived;
 	}
 	
-	public Boolean getIsFinished() {
-		return _isFinished;
-	}
-
-	public void setIsFinished(Boolean isFinished) {
-		_isFinished = isFinished;
-	}
-	
-	/*public String getEntryDetail(){
-		return _entryDetail;
-	}
-	
-	public void setEntryDetail(String entryDetail){
-		_entryDetail = entryDetail;
-	}
-
-	public String getObservations() {
-		return _observations;
-	}
-
-	public void setObservations(String observations) {
-		_observations = observations;
-	}
-
-	public Integer getAge() {
-		return _age;
-	}
-
-	public void setAge(Integer age) {
-		_age = age;
-	}
-
-	public StatisticB getStatistic() {
-		return _statistic;
-	}
-
-	public void setStatistic(StatisticB statistic) {
-		_statistic = statistic;
-	}*/
+  
 }

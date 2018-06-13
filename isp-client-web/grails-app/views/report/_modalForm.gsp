@@ -38,10 +38,10 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<label> Car <span class="required-indicator">*</span>
+							<label> Emple <span class="required-indicator">*</span>
 							</label>
-							<g:textField class="form-control" name="diagnostic" required=""
-								maxlength="100" value="${reportInstance?.entry.car.mark}" />
+							<g:textField class="form-control" name="emple" required=""
+								maxlength="100" value="${reportInstance?.employee.name}" />
 						</div>
 					</div>
 					<%--<div class="row">

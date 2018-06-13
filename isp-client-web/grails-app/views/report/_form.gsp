@@ -18,13 +18,13 @@
 	<div class="col-md-6">
 		<label> Código:</label> 
 
-		${reportInstance?.entry?.code}
-		<g:hiddenField class="form-control" name="entryId"
-			value="${reportInstance?.entry?.id}" /><%--
+		${reportInstance?.employee?.code}
+		<g:hiddenField class="form-control" name="employeeId"
+			value="${reportInstance?.employee?.id}" /><%--
 		<g:hiddenField class="form-control" name="entryDetailsId"
 			value="${reportInstance?.entryDetails?.id}" />
-		--%><g:hiddenField class="form-control" name="isFinished"
-			value="${reportInstance?.isFinished}" />
+		--%><g:hiddenField class="form-control" name="isActived"
+			value="${reportInstance?.isActived}" />
 	</div>
 	<div class="col-md-6">
 		<label>Fecha de Solicitud:</label>
@@ -36,57 +36,57 @@
 </fieldset>
 <br>
 <fieldset>
-	<legend>Datos del Cliente</legend>
+	<legend>Datos del Empleado</legend>
 
 	<div class="col-md-6">
 		<label> Nombre y Apellido:</label>
-		${reportInstance?.entry?.client?.name +" "+ reportInstance?.entry?.client?.lastName}
+		${reportInstance?.employee?.name +" "+ reportInstance?.employee?.lastName}
 	</div>
 	<%--<g:if test="${!reportInstance?.entry?.client?.ruc.isEmpty()}">
 		--%><div class="col-md-6">
 			<label> Ruc:</label>
-			${reportInstance?.entry?.client?.ruc}
+			${reportInstance?.employee?.ruc}
 		</div>
 	<%--</g:if>
 	<g:if test="${!reportInstance?.entry?.client?.cellphone.isEmpty()}">
 		--%><div class="col-md-6">
 			<label> Teléfono:</label>
-			${reportInstance?.entry?.client?.cellphone}
+			${reportInstance?.employee?.cellphone}
 		</div>
 	<%--</g:if>
 
 --%></fieldset>
 <br>
-<fieldset>
+<%--<fieldset>
 	<Legend>Datos del Vehiculo</Legend>
 	<div class="col-md-6">
 		<label> Número de Chapa:</label>
 		${reportInstance?.entry?.car?.number}
 	</div>
-	<%--<g:if test="${reportInstance?.entry?.car?.mark}">
-		--%><div class="col-md-6">
+	<g:if test="${reportInstance?.entry?.car?.mark}">
+		<div class="col-md-6">
 			<label> Marca::</label>
 			${reportInstance?.entry?.car?.mark}
 
 		</div>
-	<%--</g:if>
+	</g:if>
 	<g:if test="${reportInstance?.entry?.car?.model}">
-		--%><div class="col-md-6">
+		<div class="col-md-6">
 			<label> Modelo:</label>
 			${reportInstance?.model}
 			<g:hiddenField class="form-control" name="age" required=""
 				value="${reportInstance?.model}" />
 
 		</div>
-	<%--</g:if>
+	</g:if>
 	<g:if test="${reportInstance?.entry?.car?.color}">
-		--%><div class="col-md-6">
+		<div class="col-md-6">
 			<label> Color:</label>
 			${reportInstance?.entry?.car?.color}
 		</div>
-	<%--</g:if>
---%></fieldset>
-<br>
+	</g:if>
+</fieldset>
+--%><br>
 <fieldset>
 	<legend>Datos del Informe</legend>
 	<div class="col-md-4">
@@ -97,26 +97,26 @@
 
 
 	<div class="col-md-4">
-		<label>Automóvil <span class="required-indicator">*</span></label>
+		<label>Empleado <span class="required-indicator">*</span></label>
 		<div class="form-group">
-			<div class="input-group" id="data-car">
+			<div class="input-group" id="data-emple">
 				<g:if test="${action == 'save'}">
-					<select class="select-car form-control" name="carId"
-						id="entryId">
+					<select class="select-emple form-control" name="empleId"
+						id="empleId">
 						<option value="${reportInstance?.entry?.car.id}">Selecciona
-							un automovil</option>
+							un empleado</option>
 					</select>
 				</g:if>
 				<g:else>
-					<select class="select-car form-control" name="carId"
+					<select class="select-car form-control" name="empleId"
 						id="entryId">
-						<option value="${reportInstance?.entry?.car.id}">
-							${reportInstance?.entry?.car.mark}
+						<option value="${reportInstance?.employee?.id}">
+							${reportInstance?.employee?.name}
 						</option>
 					</select>
 				</g:else>
 				<label type="button" class="btn btn-primary input-group-addon"
-					data-toggle="modal" data-target="#createCar"> <i
+					data-toggle="modal" data-target="#createEmple"> <i
 					class="fa fa-plus"></i>
 				</label>
 			</div>
@@ -155,10 +155,10 @@ MACROSCOPÍA
 							<g:if test="${action == 'save'}">
  	  <div class="col-xs-12" align="center">
 									<button type="submit" class="btn btn-primary" name="create"
-										value="${reportInstance?.entry?.id}">
+										value="${reportInstance?.employee?.id}">
 										<i class="fa fa-floppy-o"></i> Guardar
 									</button>
-									<a class="btn btn-default" href="/isp-client-web/entry/list"
+									<a class="btn btn-default" href="/isp-client-web/employee/list"
 											role="button"><i class="fa fa-times"></i> Cancelar</a>
 								</div>
  	</g:if><g:else>
@@ -168,8 +168,8 @@ MACROSCOPÍA
 										value="${reportInstance?.id}">
 										<i class="fa fa-save"></i> Guardar
 									</button>
-									<g:if test="${reportEdit.equals("entry")}">
-										<a class="btn btn-default" href="/isp-client-web/entry/list"
+									<g:if test="${reportEdit.equals("employee")}">
+										<a class="btn btn-default" href="/isp-client-web/employee/list"
 											role="button"><i class="fa fa-times"></i> Cancelar</a>
 									</g:if>
 									<g:else>
@@ -198,7 +198,7 @@ MACROSCOPÍA
 			<div class="modal-body">
 			<form id="myFormCar" onsubmit="return callCar();">
 			
-				<g:render template="/car/form"/>
+				<g:render template="/employee/form"/>
 			
 					<fieldset class="buttons">
 						<br><br><div class="col-xs-10">

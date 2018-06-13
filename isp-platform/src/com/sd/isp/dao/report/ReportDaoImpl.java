@@ -20,7 +20,7 @@ import org.hibernate.criterion.Restrictions;
 import com.sd.isp.dao.base.BaseDaoImpl;
 //import com.sd.isp.exception.AutomotiveException;
 import com.sd.isp.domain.report.ReportDomain;
-import java.text.ParseException;
+//import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Repository
@@ -62,20 +62,20 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind, int page, int maxItems) throws Exception {
 		Date minDate, maxDate;
 		Session session   = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._entry", "entry");
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._employee", "employee");
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map    = obtenerQuery(textToFind);
 
-			if (map.containsKey("entry")) { // si quiere filtrar por diagnostico
+			/*if (map.containsKey("entry")) { // si quiere filtrar por diagnostico
 				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.eq("entry._id", Integer.parseInt(map.get("entry"))));
 				criteria.add(Restrictions.or(propertyCriterion));
-			}
-			if (map.containsKey("isFinished")) { //si quiere filtrar por estado
-				criteria.add(Restrictions.eq("_isFinished", map.get("isFinished")));
+			}*/
+			if (map.containsKey("isActived")) { //si quiere filtrar por estado
+				criteria.add(Restrictions.eq("_isActived", map.get("isActived")));
 			}
 
-			if (map.containsKey("start") && map.containsKey("end")) { // si
+			/*if (map.containsKey("start") && map.containsKey("end")) { // si
 																		// quiere
 																		// buscar
 																		// entre
@@ -102,7 +102,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 					//throw new PatologyException("Formato de ruta invalido", e);
 					System.out.println("Formato de ruta invalido");
 				}
-			}
+			}*/
 		}
 		criteria.addOrder(Order.desc("_id"));
 		criteria.setFirstResult(page * maxItems);
@@ -117,21 +117,21 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind)/* throws AutomotiveException*/ {
 		Date minDate, maxDate;
 		Session session   = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._entry", "entry");
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._employee", "employee");
 
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map = obtenerQuery(textToFind);
 
-			if (map.containsKey("entry")) { // si quiere filtrar por
+			/*if (map.containsKey("entry")) { // si quiere filtrar por
 													// diagnostico
 				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("entry._id", "%"+map.get("entry")+"%"));
-			}
-			if (map.containsKey("isFinished")) { //si quiere filtrar por estado
-				criteria.add(Restrictions.eq("_isFinished", Boolean.parseBoolean(map.get("isFinished"))));
+			}*/
+			if (map.containsKey("isActived")) { //si quiere filtrar por estado
+				criteria.add(Restrictions.eq("_isActived", Boolean.parseBoolean(map.get("isActived"))));
 			}
 
-			if (map.containsKey("start") && map.containsKey("end")) { // si
+			/*if (map.containsKey("start") && map.containsKey("end")) { // si
 																		// quiere
 																		// buscar
 																		// entre
@@ -157,7 +157,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 					//throw new AutomotiveException("Formato de ruta invalido", e);
 					System.out.println("Formato de ruta invalido");
 				}
-			}
+			}*/
 		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<ReportDomain> reports = criteria.list();
@@ -182,8 +182,6 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 		}
 		return map;
 	}
-
-
 
 	@Override
 	public ReportDomain updateById(Integer domainId, ReportDomain domain) {

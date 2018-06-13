@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.sd.isp.dto.base.BaseResult;
 
 @XmlRootElement(name = "reportResult")
+
 public class ReportResult extends BaseResult<ReportDTO>{
 
 	private static final long serialVersionUID = 1L;

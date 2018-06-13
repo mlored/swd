@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.isp.dao.employee.IEmployeeDao;
 import com.sd.isp.dao.entry.IEntryDao;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
 import com.sd.isp.dao.report.IReportDao;
@@ -26,13 +27,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	private IReportDao _reportDao;
 
 	@Autowired
-	private IEntryDao _entryDao;
-
-	/*@Autowired
-	private IEntryDetailsDao _entrydetailsDao;*/
-	/*
-	@Autowired
-	private IStatisticDao _statisticDao;*/
+	private IEmployeeDao _employeeDao;
 
 	//private static Logger logger = Logger.getLogger(ReportServiceImpl.class);
 
@@ -83,9 +78,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDTO convertDomainToDto(ReportDomain domain) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
-		dto.setEntryId(domain.getEntry().getId());
+		dto.setEmployeeId(domain.getEmployee().getId());
 		dto.setDate(domain.getDate());
-		dto.setIsFinished(domain.getIsFinished());
+		dto.setIsActived(domain.getIsActived());
 		//dto.setEntryDetailsId(domain.getEntryDetails().getId());
 		//dto.setObservations(domain.getObservations());
 		//dto.setAge(domain.getAge());
@@ -100,9 +95,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	protected ReportDomain convertDtoToDomain(ReportDTO dto){
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		domain.setEntry(_entryDao.getById(dto.getEntryId()));
+		domain.setEmployee(_employeeDao.getById(dto.getEmployeeId()));
 		domain.setDate(dto.getDate());
-		domain.setIsFinished(dto.getIsFinished());
+		domain.setIsActived(dto.getIsActived());
 		//domain.setEntryDetails(_entrydetailsDao.getById(dto.getEntryDetailsId()));
 		//domain.setObservations(dto.getObservations());
 		//domain.setAge(dto.getAge());

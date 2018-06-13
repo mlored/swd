@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="template">
+<meta name="layout" content="adminlte">
 <g:set var="entityName"
 	value="${message(code: 'report.label', default: 'Report')}" />
 <title><g:message code="default.create.label"
@@ -15,9 +15,9 @@
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>
-						<strong>Lista de Informes </strong>
-					</h4>
+					<h1>
+						Lista de Informes
+					</h1>
 
 				</div>
 				<div class="panel-body">
@@ -30,21 +30,21 @@
 						<div class="panel-body">
 							<g:form action="list">
 								<div class="col-md-4">
-									<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'car', 'error')} required">
-											<label class="col-sm-3" for="car"> <g:message code="Car" />
+									<div class="fieldcontain ${hasErrors(bean: reportInstance, field: 'emple', 'error')} required">
+											<label class="col-sm-3" for="employee"> <g:message code="Empleado" />
 											</label>
 											<div class="col-md-9">
-											<g:if test="${null == diagnosticSearch}">
+											<g:if test="${null == empleSearch}">
 										
-											<select class="select-car form-control" name="carSearch" id="carSearch">
-												<option value="${requestInstance?.diagnostic?.id}">Selecciona un automovil</option>
+											<select class="select-emple form-control" name="empleSearch" id="empleSearch">
+												<option value="${employeeInstance?.employee?.id}">Selecciona un empleado</option>
 											</select>
 											
 											
 									</g:if>
 									<g:else>
-									<select class="select-car form-control" name="carSearch" id="carSearch">
-										<option value="${carSearch}">"asd"</option>
+									<select class="select-emple form-control" name="empleSearch" id="empleSearch">
+										<option value="${empleSearch}">"asd"</option>
 									</select>
 									</g:else>
 									</div>
@@ -142,8 +142,8 @@
 													${formatDate(format: 'dd-MM-yyyy', date:reportInstance.getDate())}
 												</td>
 												<td>
-													${fieldValue(bean: reportInstance, field: "entry.client.name")}
-													${fieldValue(bean: reportInstance, field: "entry.client.lastName")}
+													${fieldValue(bean: reportInstance, field: "employee.name")}
+													${fieldValue(bean: reportInstance, field: "employee.lastName")}
 												</td>
 												<td>
 													${fieldValue(bean: reportInstance, field: "entry.car.number")}
