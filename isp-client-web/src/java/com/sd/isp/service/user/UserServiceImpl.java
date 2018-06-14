@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
@@ -35,6 +38,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
+    @CacheEvict(value="${cache.name}",key = "'users'")
+    @CachePut(value="${cache.name}", key="'users#{bean.id}'")
     public UserB save(UserB bean) {
         final UserDTO user = convertBeanToDto(bean);
         final UserDTO dto = _userResource.save(user);
@@ -43,7 +48,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'user_getAll'")
+    @Cacheable(value="${cache.name}", key="'users'")
     public List<UserB> getAll() {
         final UserResult result = _userResource.getAll();
         final List<UserDTO> uList = null == result.getUsers() ? new ArrayList<UserDTO>()
@@ -58,6 +63,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
+    @Cacheable(value="${cache.name}", key="'users#id'")
     public UserB getById(Integer id) {
         final UserDTO dto = _userResource.getById(id);
         final UserB bean = convertDtoToBean(dto);
@@ -65,6 +71,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value="${cache.name}", key = "'users'"),
+            @CacheEvict(value="${cache.name}", key = "'users#id'")})
     public UserB delete(Integer id) {
         final UserDTO dto = _userResource.destroy(id);
         final UserB bean = convertDtoToBean(dto);
@@ -119,6 +128,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
+    @CacheEvict(value="${cache.name}", key = "'users'")
+    @CachePut(value="${cache.name}", key="'users#id'")
 	public UserB update(Integer id,  UserB userB) {
     	final UserDTO user   = convertBeanToDto(userB);
         final UserDTO dto     = _userResource.update(id, user);

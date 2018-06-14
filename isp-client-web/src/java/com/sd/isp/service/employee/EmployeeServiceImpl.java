@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.employee.EmployeeB;
@@ -27,7 +30,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache")
+	@CacheEvict(value="${cache.name}",key = "'employees'")
+	@CachePut(value="${cache.name}", key="'employees#{bean.id}'")
 	public EmployeeB save(EmployeeB bean) {
 		final EmployeeDTO employee = convertBeanToDto(bean);
 		final EmployeeDTO dto = _employeeResource.save(employee);
@@ -36,7 +40,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache")
+	@Cacheable(value="${cache.name}", key="'employees'")
 	public List<EmployeeB> getAll() {
 		final EmployeeResult result = _employeeResource.getAll();
 		final List<EmployeeDTO> cList = null == result.getEmployees() ? new ArrayList<EmployeeDTO>()
@@ -51,7 +55,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache")
+	@Cacheable(value="${cache.name}", key="'employees#id'")
 	public EmployeeB getById(Integer id) {
 		final EmployeeDTO dto = _employeeResource.getById(id);
 		final EmployeeB bean = convertDtoToBean(dto);
@@ -60,6 +64,9 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value="${cache.name}", key = "'employees'"),
+			@CacheEvict(value="${cache.name}", key = "'employees#id'")})
 	public EmployeeB delete(Integer id) {
 		final EmployeeDTO dto = _employeeResource.destroy(id);
         final EmployeeB bean = convertDtoToBean(dto);
@@ -94,6 +101,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
+	@CacheEvict(value="${cache.name}", key = "'employees'")
+	@CachePut(value="${cache.name}", key="'employees#id'")
     public EmployeeB update(Integer id, EmployeeB employeeB) {
         final EmployeeDTO employee = convertBeanToDto(employeeB);
         final EmployeeDTO dto 	   = _employeeResource.update(id, employee);

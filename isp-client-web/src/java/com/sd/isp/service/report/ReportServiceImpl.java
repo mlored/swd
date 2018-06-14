@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.report.ReportB;
@@ -40,6 +43,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
+	@CacheEvict(value="${cache.name}",key = "'reports'")
+	@CachePut(value="${cache.name}", key="'reports#{bean.id}'")
 	public ReportB save(ReportB bean) {
 		final ReportDTO report = convertBeanToDto(bean);
 		final ReportDTO dto = _reportResource.save(report);
@@ -48,6 +53,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
+	@Cacheable(value="${cache.name}", key="'reports'")
 	public List<ReportB> getAll() {
 		final ReportResult result = _reportResource.getAll();
 		final List<ReportDTO> rList = null == result.getReports() ? new ArrayList<ReportDTO>()
@@ -62,6 +68,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
+	@Cacheable(value="${cache.name}", key="'reports#id'")
 	public ReportB getById(Integer id) {
 		final ReportDTO dto = _reportResource.getById(id);
 		final ReportB bean  = convertDtoToBean(dto);

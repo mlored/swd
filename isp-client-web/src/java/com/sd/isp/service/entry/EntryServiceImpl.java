@@ -15,7 +15,10 @@ import com.sd.isp.service.client.IClientService;
 import com.sd.isp.service.car.ICarService;
 import com.sd.isp.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -42,6 +45,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
+    @CacheEvict(value="${cache.name}",key = "'entries'")
+    @CachePut(value="${cache.name}", key="'entries#{bean.id}'")
     public EntryB save(EntryB bean) {
         final EntryDTO entry = convertBeanToDto(bean);
         final EntryDTO dto = entryResource.save(entry);
@@ -50,7 +55,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
-    //@Cacheable(value="isp-client-web-cache", key="'entry_getAll'")
+    @Cacheable(value="${cache.name}", key="'entries'")
     public List<EntryB> getAll() {
         final EntryResult result = entryResource.getAll();
         final List<EntryDTO> cList = null == result.getEntry() ? new ArrayList<EntryDTO>()
@@ -67,6 +72,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
+    @Cacheable(value="${cache.name}", key="'entries#id'")
     public EntryB getById(Integer id) {
         final EntryDTO dto = entryResource.getById(id);
         final EntryB bean = convertDtoToBean(dto);
@@ -77,6 +83,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
+    @CacheEvict(value="${cache.name}", key = "'entries'")
+    @CachePut(value="${cache.name}", key="'entries#id'")
 	public EntryB update(Integer id,  EntryB entryB) {
     	final EntryDTO entry   = convertBeanToDto(entryB);
         final EntryDTO dto     = entryResource.update(id, entry);
@@ -86,7 +94,9 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
-
+    @Caching(evict = {
+            @CacheEvict(value="${cache.name}", key = "'entries'"),
+            @CacheEvict(value="${cache.name}", key = "'entries#id'")})
     public EntryB delete(Integer id) {
         final EntryDTO dto = entryResource.destroy(id);
         final EntryB bean = convertDtoToBean(dto);

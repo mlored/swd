@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.service.ServiceB;
@@ -29,7 +31,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value="${cache.name}",key = "'suppliers'")
+	@CachePut(value="${cache.name}", key="'suppliers#{bean.id}'")
 	public SupplierB save(SupplierB bean) {
 		final SupplierDTO supplier = convertBeanToDto(bean);
 		final SupplierDTO dto = _supplierResource.save(supplier);
@@ -38,7 +41,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value="${cache.name}", key="'suppliers'")
 	public List<SupplierB> getAll() {
 		final SupplierResult result = _supplierResource.getAll();
 		final List<SupplierDTO> cList = null == result.getSuppliers() ? new ArrayList<SupplierDTO>()
@@ -53,7 +56,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value="${cache.name}", key="'suppliers#id'")
 	public SupplierB getById(Integer id) {
 		final SupplierDTO dto = _supplierResource.getById(id);
 		final SupplierB bean = convertDtoToBean(dto);
@@ -62,6 +65,9 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value="${cache.name}", key = "'suppliers'"),
+			@CacheEvict(value="${cache.name}", key = "'suppliers#id'")})
 	public SupplierB delete(Integer id) {
 		_supplierResource.destroy(id);
 		return null;
@@ -98,7 +104,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	//@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value="${cache.name}", key = "'suppliers'")
+	@CachePut(value="${cache.name}", key="'suppliers#id'")
 	public SupplierB update(Integer id,  SupplierB supplierB) {
         final SupplierDTO supplier = convertBeanToDto(supplierB);
         final SupplierDTO dto  = _supplierResource.update(id, supplier);

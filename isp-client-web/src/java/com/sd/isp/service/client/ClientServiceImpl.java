@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.client.ClientB;
@@ -28,6 +31,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
+	@CacheEvict(value="${cache.name}",key = "'clients'")
+	@CachePut(value="${cache.name}", key="'clients#{bean.id}'")
 	public ClientB save(ClientB bean) {
 		final ClientDTO client = convertBeanToDto(bean);
 		final ClientDTO dto = _clientResource.save(client);
@@ -36,7 +41,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	//@Cacheable(value="isp-client-web-cache", key="'client_getAll'")
+	@Cacheable(value="${cache.name}", key="'clients'")
 	public List<ClientB> getAll() {
 		final ClientResult result = _clientResource.getAll();
 		final List<ClientDTO> cList = null == result.getClients() ? new ArrayList<ClientDTO>()
@@ -51,6 +56,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
+	@Cacheable(value="${cache.name}", key="'clients#id'")
 	public ClientB getById(Integer id) {
 		final ClientDTO dto = _clientResource.getById(id);
 		final ClientB bean = convertDtoToBean(dto);
@@ -59,6 +65,9 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value="${cache.name}", key = "'clients'"),
+			@CacheEvict(value="${cache.name}", key = "'clients#id'")})
 	public ClientB delete(Integer id) {
         final ClientDTO dto = _clientResource.destroy(id);
         final ClientB bean = convertDtoToBean(dto);
@@ -96,6 +105,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
+	@CacheEvict(value="${cache.name}", key = "'clients'")
+	@CachePut(value="${cache.name}", key="'clients#id'")
 	public ClientB update(Integer id,  ClientB clientB) {
         final ClientDTO client   = convertBeanToDto(clientB);
         final ClientDTO dto  	 = _clientResource.update(id, client);

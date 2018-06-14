@@ -12,6 +12,10 @@ import com.sd.isp.service.part.IPartService;
 import com.sd.isp.service.part.PartServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.entry_details.EntryDetailsB;
@@ -38,13 +42,8 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     }
 
     @Override
-    public EntryDetailsB delete(Integer id) {
-        final EntryDetailsDTO dto = _entryDetailsResource.getById(id);
-        _entryDetailsResource.destroy(id);
-        return convertDtoToBean(dto);
-    }
-
-    @Override
+    @CacheEvict(value="${cache.name}",key = "'entry_details'")
+    @CachePut(value="${cache.name}", key="'entry_details#{bean.id}'")
     public EntryDetailsB save(EntryDetailsB bean) {
         final EntryDetailsDTO dto = convertBeanToDto(bean);
         final EntryDetailsDTO entryDetailsDTO = _entryDetailsResource.save(dto);
@@ -52,6 +51,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     }
 
     @Override
+    @Cacheable(value="${cache.name}", key="'entry_details'")
     public List<EntryDetailsB> getAll() {
         final EntryDetailsResult result = _entryDetailsResource.getAll();
         final List<EntryDetailsDTO> cList = null == result.getEntryDetails() ? new ArrayList<EntryDetailsDTO>()
@@ -65,14 +65,27 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     }
 
     @Override
+    @Cacheable(value="${cache.name}", key="'entry_details#id'")
     public EntryDetailsB getById(Integer id) {
         final EntryDetailsDTO dto = _entryDetailsResource.getById(id);
         return convertDtoToBean(dto);
     }
 
     @Override
+    @CacheEvict(value="${cache.name}", key = "'entry_details'")
+    @CachePut(value="${cache.name}", key="'entry_details#id'")
     public EntryDetailsB update(Integer id, EntryDetailsB bean) {
         return null;
+    }
+
+    @Override
+    @Caching(evict = {
+            @CacheEvict(value="${cache.name}", key = "'entry_details'"),
+            @CacheEvict(value="${cache.name}", key = "'entry_details#id'")})
+    public EntryDetailsB delete(Integer id) {
+        final EntryDetailsDTO dto = _entryDetailsResource.getById(id);
+        _entryDetailsResource.destroy(id);
+        return convertDtoToBean(dto);
     }
 
     @Override

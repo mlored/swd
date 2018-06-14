@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.car.CarB;
@@ -32,8 +33,8 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
 
     @Override
     @Transactional
-    @CacheEvict(value="isp-client-web-cache",key = "'cars'")
-    @CachePut(value="isp-client-web-cache", key="'cars#{carB.id}'")
+    @CacheEvict(value="${cache.name}",key = "'cars'")
+    @CachePut(value="${cache.name}", key="'cars#{carB.id}'")
     public CarB save(CarB carB) {
         final CarDTO car = convertBeanToDto(carB);
         final CarDTO dto = carResource.save(car);
@@ -42,7 +43,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'cars'")
+    @Cacheable(value="${cache.name}", key="'cars'")
     public List<CarB> getAll() {
         final CarResult result = carResource.getAll();
         final List<CarDTO> cList = null == result.getCars() ? new ArrayList<CarDTO>()
@@ -57,15 +58,15 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'cars#id'")
+    @Cacheable(value="${cache.name}", key="'cars' + #id ")
     public CarB getById(Integer id) {
         final CarDTO dto = carResource.getById(id);
         return convertDtoToBean(dto);
     }
 
     @Override
-    @CacheEvict(value="isp-client-web-cache", key = "'cars'")
-    @CachePut(value="isp-client-web-cache", key="'cars#id'")
+    @CacheEvict(value="${cache.name}", key = "'cars'")
+    @CachePut(value="${cache.name}", key="'cars#id'")
     public CarB update(Integer id, CarB carB) {
         final CarDTO car = convertBeanToDto(carB);
         final CarDTO dto = carResource.update(id, car);
@@ -75,7 +76,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    @CacheEvict(value="isp-client-web-cache", key = "'cars'")
+    @Caching(evict = {
+            @CacheEvict(value="${cache.name}", key = "'cars'"),
+            @CacheEvict(value="${cache.name}", key = "'cars#id'")})
     public CarB delete(Integer id) {
         final CarDTO dto = carResource.destroy(id);
         final CarB bean = convertDtoToBean(dto);

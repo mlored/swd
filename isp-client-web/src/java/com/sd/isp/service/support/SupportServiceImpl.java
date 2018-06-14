@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.service.ServiceB;
@@ -23,6 +25,8 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportB, SupportDTO> im
 
     }
 
+    @CacheEvict(value="${cache.name}",key = "'supports'")
+    @CachePut(value="${cache.name}", key="'supports#{bean.id}'")
     public SupportB save(SupportB bean) {
         final SupportDTO support = convertBeanToDto(bean);
         final SupportDTO dto = _supportResource.save(support);
@@ -69,20 +73,13 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportB, SupportDTO> im
     }
 
     @Override
-    public SupportB update(Integer id, SupportB carB) {
-        final SupportDTO car = convertBeanToDto(carB);
-        final SupportDTO dto = _supportResource.update(id, car);
-        final SupportB bean = convertDtoToBean(dto);
-
-        return bean;
+    public SupportB update(Integer id, SupportB bean) {
+        return null;
     }
 
     @Override
     public SupportB delete(Integer id) {
-        final SupportDTO dto = _supportResource.destroy(id);
-        final SupportB bean = convertDtoToBean(dto);
-
-        return bean;
+        return null;
     }
     
     public List<SupportB> find (String textToFind, int maxItems, int page) {

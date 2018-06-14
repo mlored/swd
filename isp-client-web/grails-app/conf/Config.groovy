@@ -158,10 +158,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':  ['permitAll'],
     '/login/**':        ['permitAll'],
     '/logout/**':       ['permitAll'],
-        '/**':       ['permitAll'],
+    '/**':              ['permitAll'],
     '/secure/**':       ['ROLE_ADMIN'],
     '/finance/**':      ['ROLE_FINANCE', 'isFullyAuthenticated()'],
 
 ]
-
 grails.plugin.springsecurity.providerNames = ['myAuthenticationProvider']
