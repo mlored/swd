@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.buy.BuyB;
@@ -28,15 +31,17 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
-    public BuyB save(BuyB bean) {
-        final BuyDTO service = convertBeanToDto(bean);
+    @CacheEvict(value="${cache.name}",key = "'buys'")
+    @CachePut(value="${cache.name}", key="'buys#{buyB.id}'")
+    public BuyB save(BuyB buyB) {
+        final BuyDTO service = convertBeanToDto(buyB);
         final BuyDTO dto     = _buyResource.save(service);
-        final BuyB   buyB    = convertDtoToBean(dto);
-        return buyB;
+        final BuyB   newBuyB    = convertDtoToBean(dto);
+        return newBuyB;
     }
 
     @Override
-    @Cacheable(value="isp-client-web-cache", key="'buy_getAll'")
+    @Cacheable(value="${cache.name}", key="'buys'")
 	public List<BuyB> getAll() {
 		final BuyResult result = _buyResource.getAll();
 		final List<BuyDTO> cList = null == result.getBuys() ? new ArrayList<BuyDTO>()
@@ -51,6 +56,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
 	}
 
     @Override
+    @Cacheable(value="${cache.name}", key="'buys#id'")
     public BuyB getById(Integer id) {
         final BuyDTO dto = _buyResource.getById(id);
         final BuyB bean = convertDtoToBean(dto);
@@ -59,6 +65,20 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
+    @CacheEvict(value="${cache.name}", key = "'buys'")
+    @CachePut(value="${cache.name}", key="'buys#id'")
+    public BuyB update(Integer id,  BuyB buyB) {
+        final BuyDTO buy   = convertBeanToDto(buyB);
+        final BuyDTO dto   = _buyResource.update(id, buy);
+        final BuyB bean    = convertDtoToBean(dto);
+
+        return bean;
+    }
+
+    @Override
+    @Caching(evict = {
+            @CacheEvict(value="${cache.name}", key = "'buys'"),
+            @CacheEvict(value="${cache.name}", key = "'buys#id'")})
     public BuyB delete(Integer id) {
         return null;
     }
@@ -84,15 +104,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
         dto.setNumber(bean.getNumber());
         dto.setTotal(bean.getTotal());
         return dto;
-    }
-
-    @Override
-	public BuyB update(Integer id,  BuyB buyB) {
-    	final BuyDTO buy   = convertBeanToDto(buyB);
-        final BuyDTO dto   = _buyResource.update(id, buy);
-        final BuyB bean    = convertDtoToBean(dto);
-
-        return bean;
     }
     
     public List<BuyB> find (String textToFind, int maxItems, int page) {
