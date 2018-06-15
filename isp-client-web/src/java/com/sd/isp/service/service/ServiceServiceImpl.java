@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.service.ServiceB;
@@ -29,8 +30,8 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}",key = "'services'")
-    @CachePut(value="${cache.name}", key="'services#{bean.id}'")
+    @CacheEvict(value=CACHE_REGION,key = "'services'")
+    @CachePut(value=CACHE_REGION, key="'services' + #bean.id")
     public ServiceB save(ServiceB bean) {
         final ServiceDTO service = convertBeanToDto(bean);
         final ServiceDTO dto = _serviceResource.save(service);
@@ -39,7 +40,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'services'")
+    @Cacheable(value=CACHE_REGION, key="'services'")
     public List<ServiceB> getAll() {
         final ServiceResult result = _serviceResource.getAll();
         final List<ServiceDTO> cList = null == result.getServices() ? new ArrayList<ServiceDTO>()
@@ -54,7 +55,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'services#id'")
+    @Cacheable(value=CACHE_REGION, key="'services' + #id")
     public ServiceB getById(Integer id) {
         final ServiceDTO dto = _serviceResource.getById(id);
         final ServiceB bean = convertDtoToBean(dto);
@@ -63,6 +64,9 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'services'"),
+            @CacheEvict(value=CACHE_REGION, key = "'services' + #id")})
     public ServiceB delete(Integer id) {
         final ServiceDTO dto = _serviceResource.destroy(id);
         final ServiceB bean = convertDtoToBean(dto);
@@ -96,8 +100,8 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}", key = "'services'")
-    @CachePut(value="${cache.name}", key="'services#id'")
+    @CacheEvict(value=CACHE_REGION, key = "'services'")
+    @CachePut(value=CACHE_REGION, key="'services' + #id")
 	public ServiceB update(Integer id,  ServiceB serviceB) {
         final ServiceDTO service = convertBeanToDto(serviceB);
         final ServiceDTO dto  	  = _serviceResource.update(id, service);

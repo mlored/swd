@@ -45,8 +45,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}",key = "'entries'")
-    @CachePut(value="${cache.name}", key="'entries#{bean.id}'")
+    @CacheEvict(value=CACHE_REGION,key = "'entries'")
+    @CachePut(value=CACHE_REGION, key="'entries' + #bean.id")
     public EntryB save(EntryB bean) {
         final EntryDTO entry = convertBeanToDto(bean);
         final EntryDTO dto = entryResource.save(entry);
@@ -55,7 +55,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'entries'")
+    @Cacheable(value=CACHE_REGION, key="'entries'")
     public List<EntryB> getAll() {
         final EntryResult result = entryResource.getAll();
         final List<EntryDTO> cList = null == result.getEntry() ? new ArrayList<EntryDTO>()
@@ -72,7 +72,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'entries#id'")
+    @Cacheable(value=CACHE_REGION, key="'entries' + #id")
     public EntryB getById(Integer id) {
         final EntryDTO dto = entryResource.getById(id);
         final EntryB bean = convertDtoToBean(dto);
@@ -83,8 +83,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}", key = "'entries'")
-    @CachePut(value="${cache.name}", key="'entries#id'")
+    @CacheEvict(value=CACHE_REGION, key = "'entries'")
+    @CachePut(value=CACHE_REGION, key="'entries' + #id")
 	public EntryB update(Integer id,  EntryB entryB) {
     	final EntryDTO entry   = convertBeanToDto(entryB);
         final EntryDTO dto     = entryResource.update(id, entry);
@@ -95,8 +95,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value="${cache.name}", key = "'entries'"),
-            @CacheEvict(value="${cache.name}", key = "'entries#id'")})
+            @CacheEvict(value=CACHE_REGION, key = "'entries'"),
+            @CacheEvict(value=CACHE_REGION, key = "'entries' + #id")})
     public EntryB delete(Integer id) {
         final EntryDTO dto = entryResource.destroy(id);
         final EntryB bean = convertDtoToBean(dto);

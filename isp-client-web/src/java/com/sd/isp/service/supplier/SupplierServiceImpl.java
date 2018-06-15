@@ -31,8 +31,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}",key = "'suppliers'")
-	@CachePut(value="${cache.name}", key="'suppliers#{bean.id}'")
+	@CacheEvict(value=CACHE_REGION,key = "'suppliers'")
+	@CachePut(value=CACHE_REGION, key="'suppliers' + #bean.id")
 	public SupplierB save(SupplierB bean) {
 		final SupplierDTO supplier = convertBeanToDto(bean);
 		final SupplierDTO dto = _supplierResource.save(supplier);
@@ -41,7 +41,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'suppliers'")
+	@Cacheable(value=CACHE_REGION, key="'suppliers'")
 	public List<SupplierB> getAll() {
 		final SupplierResult result = _supplierResource.getAll();
 		final List<SupplierDTO> cList = null == result.getSuppliers() ? new ArrayList<SupplierDTO>()
@@ -56,7 +56,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'suppliers#id'")
+	@Cacheable(value=CACHE_REGION, key="'suppliers' + #id")
 	public SupplierB getById(Integer id) {
 		final SupplierDTO dto = _supplierResource.getById(id);
 		final SupplierB bean = convertDtoToBean(dto);
@@ -66,8 +66,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 
 	@Override
 	@Caching(evict = {
-			@CacheEvict(value="${cache.name}", key = "'suppliers'"),
-			@CacheEvict(value="${cache.name}", key = "'suppliers#id'")})
+			@CacheEvict(value=CACHE_REGION, key = "'suppliers'"),
+			@CacheEvict(value=CACHE_REGION, key = "'suppliers' + #id")})
 	public SupplierB delete(Integer id) {
 		_supplierResource.destroy(id);
 		return null;
@@ -104,8 +104,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}", key = "'suppliers'")
-	@CachePut(value="${cache.name}", key="'suppliers#id'")
+	@CacheEvict(value=CACHE_REGION, key = "'suppliers'")
+	@CachePut(value=CACHE_REGION, key="'suppliers' + #id")
 	public SupplierB update(Integer id,  SupplierB supplierB) {
         final SupplierDTO supplier = convertBeanToDto(supplierB);
         final SupplierDTO dto  = _supplierResource.update(id, supplier);

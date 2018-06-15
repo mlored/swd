@@ -25,8 +25,8 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportB, SupportDTO> im
 
     }
 
-    @CacheEvict(value="${cache.name}",key = "'supports'")
-    @CachePut(value="${cache.name}", key="'supports#{bean.id}'")
+    @CacheEvict(value=CACHE_REGION,key = "'supports'")
+    @CachePut(value=CACHE_REGION, key="'supports' + #bean.id")
     public SupportB save(SupportB bean) {
         final SupportDTO support = convertBeanToDto(bean);
         final SupportDTO dto = _supportResource.save(support);

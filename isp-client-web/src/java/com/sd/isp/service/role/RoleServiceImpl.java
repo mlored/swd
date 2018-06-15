@@ -32,8 +32,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}",key = "'roles'")
-    @CachePut(value="${cache.name}", key="'roles#{bean.id}'")
+    @CacheEvict(value=CACHE_REGION,key = "'roles'")
+    @CachePut(value=CACHE_REGION, key="'roles' + #bean.id")
     public RoleB save(RoleB bean) {
         final RoleDTO role = convertBeanToDto(bean);
         final RoleDTO dto = _roleResource.save(role);
@@ -42,7 +42,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'roles'")
+    @Cacheable(value=CACHE_REGION, key="'roles'")
     public List<RoleB> getAll() {
         final RoleResult result = _roleResource.getAll();
         final List<RoleDTO> rList = null == result.getRoles() ? new ArrayList<RoleDTO>()
@@ -57,7 +57,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'roles#id'")
+    @Cacheable(value=CACHE_REGION, key="'roles' + #id")
     public RoleB getById(Integer id) {
         final RoleDTO dto = _roleResource.getById(id);
         final RoleB bean = convertDtoToBean(dto);
@@ -67,8 +67,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value="${cache.name}", key = "'roles'"),
-            @CacheEvict(value="${cache.name}", key = "'roles#id'")})
+            @CacheEvict(value=CACHE_REGION, key = "'roles'"),
+            @CacheEvict(value=CACHE_REGION, key = "'roles' + #id")})
     public RoleB delete(Integer id) {
         final RoleDTO dto = _roleResource.destroy(id);
         final RoleB bean = convertDtoToBean(dto);
@@ -97,8 +97,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}", key = "'roles'")
-    @CachePut(value="${cache.name}", key="'roles#id'")
+    @CacheEvict(value=CACHE_REGION, key = "'roles'")
+    @CachePut(value=CACHE_REGION, key="'roles' + #id")
 	public RoleB update(Integer id,  RoleB roleB) {
     	final RoleDTO role   = convertBeanToDto(roleB);
         final RoleDTO dto     = _roleResource.update(id, role);

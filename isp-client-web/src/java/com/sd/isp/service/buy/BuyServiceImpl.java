@@ -31,8 +31,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}",key = "'buys'")
-    @CachePut(value="${cache.name}", key="'buys#{buyB.id}'")
+    @CacheEvict(value=CACHE_REGION,key = "'buys'")
+    @CachePut(value=CACHE_REGION, key="'buys' + #buyB.id")
     public BuyB save(BuyB buyB) {
         final BuyDTO service = convertBeanToDto(buyB);
         final BuyDTO dto     = _buyResource.save(service);
@@ -41,7 +41,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'buys'")
+    @Cacheable(value=CACHE_REGION, key="'buys'")
 	public List<BuyB> getAll() {
 		final BuyResult result = _buyResource.getAll();
 		final List<BuyDTO> cList = null == result.getBuys() ? new ArrayList<BuyDTO>()
@@ -56,7 +56,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
 	}
 
     @Override
-    @Cacheable(value="${cache.name}", key="'buys#id'")
+    @Cacheable(value=CACHE_REGION, key="'buys' + #id")
     public BuyB getById(Integer id) {
         final BuyDTO dto = _buyResource.getById(id);
         final BuyB bean = convertDtoToBean(dto);
@@ -65,8 +65,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}", key = "'buys'")
-    @CachePut(value="${cache.name}", key="'buys#id'")
+    @CacheEvict(value=CACHE_REGION, key = "'buys'")
+    @CachePut(value=CACHE_REGION, key="'buys' + #id")
     public BuyB update(Integer id,  BuyB buyB) {
         final BuyDTO buy   = convertBeanToDto(buyB);
         final BuyDTO dto   = _buyResource.update(id, buy);
@@ -77,8 +77,8 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value="${cache.name}", key = "'buys'"),
-            @CacheEvict(value="${cache.name}", key = "'buys#id'")})
+            @CacheEvict(value=CACHE_REGION, key = "'buys'"),
+            @CacheEvict(value=CACHE_REGION, key = "'buys' + #id")})
     public BuyB delete(Integer id) {
         return null;
     }

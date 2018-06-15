@@ -68,19 +68,19 @@ grails {
     }
 }
 
-grails.cache.enabled=true
-grails.cache.clearAtStartup=false
-grails.cache.keyGenerator="customCacheKeyGenerator"
-grails.cache.config = {
-	cache {
-	   name 'countryCache'
+//grails.cache.enabled=true
+//grails.cache.clearAtStartup=false
+//grails.cache.keyGenerator="customCacheKeyGenerator"
+//grails.cache.config = {
+//	cache {
+//	   name 'countryCache'
 	   /*eternal false
 	   overflowToDisk true
 	   maxElementsInMemory 10000
 	   maxElementsOnDisk 10000000*/
-	}
+//	}
 	
- }
+ //}
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration

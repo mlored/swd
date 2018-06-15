@@ -33,8 +33,8 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
 
     @Override
     @Transactional
-    @CacheEvict(value="${cache.name}",key = "'cars'")
-    @CachePut(value="${cache.name}", key="'cars#{carB.id}'")
+    @CacheEvict(value= CACHE_REGION,key = "'cars'")
+    @CachePut(value= CACHE_REGION, key="'cars' + #carB.id")
     public CarB save(CarB carB) {
         final CarDTO car = convertBeanToDto(carB);
         final CarDTO dto = carResource.save(car);
@@ -43,8 +43,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'cars'")
+    @Cacheable(value= CACHE_REGION, key="'cars'")
     public List<CarB> getAll() {
+        System.out.println(myBean.foo());
         final CarResult result = carResource.getAll();
         final List<CarDTO> cList = null == result.getCars() ? new ArrayList<CarDTO>()
                 : result.getCars();
@@ -58,15 +59,15 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'cars' + #id ")
+    @Cacheable(value= CACHE_REGION, key="'cars' + #id ")
     public CarB getById(Integer id) {
         final CarDTO dto = carResource.getById(id);
         return convertDtoToBean(dto);
     }
 
     @Override
-    @CacheEvict(value="${cache.name}", key = "'cars'")
-    @CachePut(value="${cache.name}", key="'cars#id'")
+    @CacheEvict(value= CACHE_REGION, key = "'cars'")
+    @CachePut(value= CACHE_REGION, key="'cars' + #id ")
     public CarB update(Integer id, CarB carB) {
         final CarDTO car = convertBeanToDto(carB);
         final CarDTO dto = carResource.update(id, car);
@@ -77,8 +78,8 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
 
     @Override
     @Caching(evict = {
-            @CacheEvict(value="${cache.name}", key = "'cars'"),
-            @CacheEvict(value="${cache.name}", key = "'cars#id'")})
+            @CacheEvict(value=CACHE_REGION, key = "'cars'"),
+            @CacheEvict(value=CACHE_REGION, key = "'cars' + #id ")})
     public CarB delete(Integer id) {
         final CarDTO dto = carResource.destroy(id);
         final CarB bean = convertDtoToBean(dto);

@@ -31,8 +31,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}",key = "'clients'")
-	@CachePut(value="${cache.name}", key="'clients#{bean.id}'")
+	@CacheEvict(value=CACHE_REGION,key = "'clients'")
+	@CachePut(value=CACHE_REGION, key="'clients' + #bean.id")
 	public ClientB save(ClientB bean) {
 		final ClientDTO client = convertBeanToDto(bean);
 		final ClientDTO dto = _clientResource.save(client);
@@ -41,7 +41,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'clients'")
+	@Cacheable(value=CACHE_REGION, key="'clients'")
 	public List<ClientB> getAll() {
 		final ClientResult result = _clientResource.getAll();
 		final List<ClientDTO> cList = null == result.getClients() ? new ArrayList<ClientDTO>()
@@ -56,7 +56,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'clients#id'")
+	@Cacheable(value=CACHE_REGION, key="'clients' + #id")
 	public ClientB getById(Integer id) {
 		final ClientDTO dto = _clientResource.getById(id);
 		final ClientB bean = convertDtoToBean(dto);
@@ -66,8 +66,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 
 	@Override
 	@Caching(evict = {
-			@CacheEvict(value="${cache.name}", key = "'clients'"),
-			@CacheEvict(value="${cache.name}", key = "'clients#id'")})
+			@CacheEvict(value=CACHE_REGION, key = "'clients'"),
+			@CacheEvict(value=CACHE_REGION, key = "'clients' + #id")})
 	public ClientB delete(Integer id) {
         final ClientDTO dto = _clientResource.destroy(id);
         final ClientB bean = convertDtoToBean(dto);
@@ -105,8 +105,8 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}", key = "'clients'")
-	@CachePut(value="${cache.name}", key="'clients#id'")
+	@CacheEvict(value=CACHE_REGION, key = "'clients'")
+	@CachePut(value=CACHE_REGION, key="'clients' + #id")
 	public ClientB update(Integer id,  ClientB clientB) {
         final ClientDTO client   = convertBeanToDto(clientB);
         final ClientDTO dto  	 = _clientResource.update(id, client);

@@ -31,8 +31,8 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    @CacheEvict(value="${cache.name}",key = "'parts'")
-    @CachePut(value="${cache.name}", key="'parts#{bean.id}'")
+    @CacheEvict(value=CACHE_REGION,key = "'parts'")
+    @CachePut(value=CACHE_REGION, key="'parts' + #bean.id")
     public PartB save(PartB bean) {
         final PartDTO part = convertBeanToDto(bean);
         final PartDTO dto = _partResource.save(part);
@@ -41,7 +41,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'parts'")
+    @Cacheable(value=CACHE_REGION, key="'parts'")
     public List<PartB> getAll() {
         final PartResult result = _partResource.getAll();
         final List<PartDTO> pList = null == result.getParts() ? new ArrayList<PartDTO>()
@@ -56,7 +56,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    @Cacheable(value="${cache.name}", key="'parts#id'")
+    @Cacheable(value=CACHE_REGION, key="'parts' + #id")
     public PartB getById(Integer id) {
         final PartDTO dto = _partResource.getById(id);
         final PartB bean = convertDtoToBean(dto);
@@ -65,8 +65,8 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
 	@Override
-    @CacheEvict(value="${cache.name}", key = "'parts'")
-    @CachePut(value="${cache.name}", key="'parts#id'")
+    @CacheEvict(value=CACHE_REGION, key = "'parts'")
+    @CachePut(value=CACHE_REGION, key="'parts' + #id")
 	public PartB update(Integer id,  PartB partB) {
         final PartDTO part = convertBeanToDto(partB);
         final PartDTO dto  = _partResource.update(id, part);
@@ -77,8 +77,8 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     
     @Override
     @Caching(evict = {
-            @CacheEvict(value="${cache.name}", key = "'parts'"),
-            @CacheEvict(value="${cache.name}", key = "'parts#id'")})
+            @CacheEvict(value=CACHE_REGION, key = "'parts'"),
+            @CacheEvict(value=CACHE_REGION, key = "'parts' + #id")})
     public PartB delete(Integer id) {
         final PartDTO dto = _partResource.destroy(id);
         final PartB bean = convertDtoToBean(dto);

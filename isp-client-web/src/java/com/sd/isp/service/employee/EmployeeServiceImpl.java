@@ -30,8 +30,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}",key = "'employees'")
-	@CachePut(value="${cache.name}", key="'employees#{bean.id}'")
+	@CacheEvict(value=CACHE_REGION,key = "'employees'")
+	@CachePut(value=CACHE_REGION, key="'employees' + #bean.id")
 	public EmployeeB save(EmployeeB bean) {
 		final EmployeeDTO employee = convertBeanToDto(bean);
 		final EmployeeDTO dto = _employeeResource.save(employee);
@@ -40,7 +40,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'employees'")
+	@Cacheable(value=CACHE_REGION, key="'employees'")
 	public List<EmployeeB> getAll() {
 		final EmployeeResult result = _employeeResource.getAll();
 		final List<EmployeeDTO> cList = null == result.getEmployees() ? new ArrayList<EmployeeDTO>()
@@ -55,7 +55,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'employees#id'")
+	@Cacheable(value=CACHE_REGION, key="'employees' + #id")
 	public EmployeeB getById(Integer id) {
 		final EmployeeDTO dto = _employeeResource.getById(id);
 		final EmployeeB bean = convertDtoToBean(dto);
@@ -65,8 +65,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 
 	@Override
 	@Caching(evict = {
-			@CacheEvict(value="${cache.name}", key = "'employees'"),
-			@CacheEvict(value="${cache.name}", key = "'employees#id'")})
+			@CacheEvict(value=CACHE_REGION, key = "'employees'"),
+			@CacheEvict(value=CACHE_REGION, key = "'employees' + #id")})
 	public EmployeeB delete(Integer id) {
 		final EmployeeDTO dto = _employeeResource.destroy(id);
         final EmployeeB bean = convertDtoToBean(dto);
@@ -101,8 +101,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}", key = "'employees'")
-	@CachePut(value="${cache.name}", key="'employees#id'")
+	@CacheEvict(value=CACHE_REGION, key = "'employees'")
+	@CachePut(value=CACHE_REGION, key="'employees' + #id")
     public EmployeeB update(Integer id, EmployeeB employeeB) {
         final EmployeeDTO employee = convertBeanToDto(employeeB);
         final EmployeeDTO dto 	   = _employeeResource.update(id, employee);

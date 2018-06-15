@@ -43,8 +43,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
-	@CacheEvict(value="${cache.name}",key = "'reports'")
-	@CachePut(value="${cache.name}", key="'reports#{bean.id}'")
+	@CacheEvict(value=CACHE_REGION,key = "'reports'")
+	@CachePut(value=CACHE_REGION, key="'reports#{bean.id}'")
 	public ReportB save(ReportB bean) {
 		final ReportDTO report = convertBeanToDto(bean);
 		final ReportDTO dto = _reportResource.save(report);
@@ -53,7 +53,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'reports'")
+	@Cacheable(value=CACHE_REGION, key="'reports'")
 	public List<ReportB> getAll() {
 		final ReportResult result = _reportResource.getAll();
 		final List<ReportDTO> rList = null == result.getReports() ? new ArrayList<ReportDTO>()
@@ -68,7 +68,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
-	@Cacheable(value="${cache.name}", key="'reports#id'")
+	@Cacheable(value=CACHE_REGION, key="'reports' + #id")
 	public ReportB getById(Integer id) {
 		final ReportDTO dto = _reportResource.getById(id);
 		final ReportB bean  = convertDtoToBean(dto);
