@@ -36,7 +36,7 @@ class ServiceController {
 	}*/
 
     def create() {
-        respond new Service(params)
+        respond new ServiceB(params)
     }
 
     @Transactional

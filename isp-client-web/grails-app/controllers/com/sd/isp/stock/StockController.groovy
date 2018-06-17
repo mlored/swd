@@ -2,7 +2,7 @@ package com.sd.isp.stock
 
 import static org.springframework.http.HttpStatus.*
 
-import com.sd.isp.part.Part;
+import com.sd.isp.beans.part.PartB
 import com.sd.isp.service.part.IPartService;
 
 import grails.transaction.Transactional
@@ -26,7 +26,7 @@ class StockController {
 		[partInstanceList: parts, partInstanceTotal: parts?.size()]
 	}
 	
-	def show(Part partInstance) {
+	def show(PartB partInstance) {
 		respond partInstance
 	}
 

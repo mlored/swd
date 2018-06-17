@@ -15,7 +15,7 @@ class PartController {
 	IPartService partService
 	
 	def create() {
-		respond new Part(params)
+		respond new PartB(params)
 	}
 
     def index(Integer max) {

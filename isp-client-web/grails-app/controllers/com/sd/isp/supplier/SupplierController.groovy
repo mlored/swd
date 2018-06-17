@@ -2,7 +2,7 @@ package com.sd.isp.supplier
 import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.supplier.SupplierB
-import com.sd.isp.supplier.Supplier;
+//import com.sd.isp.supplier.Supplier;
 import com.sd.isp.service.supplier.ISupplierService;
 import com.sd.isp.service.supplier.ISupplierService
 

@@ -22,12 +22,12 @@ class ClientController {
 		respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
 	}
 
-	def show(Client clientInstance) {
+	def show(ClientB clientInstance) {
 		respond clientInstance
 	}
 
 	def create() {
-		respond new Client(params)
+		respond new ClientB(params)
 	}
 
 	//@Transactional

@@ -3,8 +3,7 @@ package com.sd.isp.entry
 import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.part.IPartService
 import com.sd.isp.beans.entry.EntryB
-import com.sd.isp.entry.Entry;
-import com.sd.isp.entry_details.EntryDetails
+//import com.sd.isp.entry_details.EntryDetails
 import com.sd.isp.service.client.IClientService
 import com.sd.isp.service.entry.IEntryService
 import com.sd.isp.service.entry_details.IEntryDetailsService
@@ -33,7 +32,7 @@ class EntryController {
     }
 
     def create() {
-        [entryInstance: new Entry(params)]
+        [entryInstance: new EntryB(params)]
         return
 
     }
