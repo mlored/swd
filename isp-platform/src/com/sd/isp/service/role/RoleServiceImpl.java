@@ -28,10 +28,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'role_getAll'"),
-	                   @CacheEvict(value="isp-platform-cache", key="'role_getById_'+#dto.getId()")})*/
-   // @CachePut(value = "isp-platform-cache",key="'role_getById_'+#dto.getId()", condition="#dto.getId() != null")
-	@CachePut(value = "isp-platform-cache",key="'role_save'")
+	@CacheEvict(value=CACHE_REGION,key = "'api_roles'")
+    @CachePut(value=CACHE_REGION, key="'api_roles' + #dto.id")
 	public RoleDTO save(RoleDTO dto) {
 		final RoleDomain roleDomain = convertDtoToDomain(dto);
 		final RoleDomain role = roleDao.save(roleDomain);
@@ -40,8 +38,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache", key = "'role_' + #id'")
-  //@Cacheable(value="isp-platform-cache", key="'role_'+#root.methodName+'_'+#id")
+	@Cacheable(value=CACHE_REGION, key="'api_roles' + #id")
 	public RoleDTO getById(Integer id) {
 		final RoleDomain roleDomain = roleDao.getById(id);
 		return convertDomainToDto(roleDomain);
@@ -49,7 +46,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache", key = "'role_getAll'")
+	@Cacheable(value=CACHE_REGION, key="'api_roles'")
 	public RoleResult getAll() {
 		final List<RoleDTO> roles = new ArrayList<>();
 		for (RoleDomain domain : roleDao.findAll()) {
@@ -63,7 +60,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	}
 	
 	@Override
-	@Cacheable(value="isp-platform-cache", key="'role_'+#root.methodName+'_'+#args")
 	@Transactional(readOnly = true)
 	public RoleResult getAllBy(Map<String, String> args) {
 		final List<RoleDTO> roles = new ArrayList<>();
@@ -76,7 +72,10 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 		return roleResult;
 	}
 	
+	
 	@Override
+	@CacheEvict(value=CACHE_REGION, key = "'api_roles'")
+    @CachePut(value=CACHE_REGION, key="'api_roles' + #id")
 	public RoleDTO updateById(Integer id, RoleDTO dto) {
 		final RoleDomain newDomain = convertDtoToDomain(dto);
 		final RoleDomain domain    = roleDao.getById(id);
@@ -86,8 +85,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	}
 
 	@Override
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'role_getAll'"),
-                       @CacheEvict(value="isp-platform-cache", key="'role_getById_'+#dto.getId()")})*/
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_roles'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_roles' + #id")})
 	public RoleDTO delete(Integer id) {
 		final RoleDomain domain = roleDao.delete(id);
 		return convertDomainToDto(domain);

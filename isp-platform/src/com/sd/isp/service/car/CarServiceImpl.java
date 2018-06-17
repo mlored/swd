@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +24,12 @@ import com.sd.isp.service.base.BaseServiceImpl;
 public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImpl, CarResult> implements ICarService {
 	@Autowired
 	private ICarDao carDao;
+	@Autowired
+    CacheManager cacheManager;
 	
 	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache")
+	@Transactional
+    @Cacheable(value = CACHE_REGION,key = "'api_cars'")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();
 		for (CarDomain domain : carDao.findAll()) {
@@ -40,7 +44,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache", key = "new Integer(#id).toString().concat('.car')")
+	@Cacheable(value= CACHE_REGION, key="'api_cars' + #id ")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);
 		return convertDomainToDto(domain);
@@ -48,7 +52,8 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value= CACHE_REGION,key = "'api_cars'")
+    @CachePut(value= CACHE_REGION, key="'api_cars' + #dto.id")
 	public CarDTO save(CarDTO dto) {
 		final CarDomain domain = convertDtoToDomain(dto);
 		final CarDomain carDomain = carDao.save(domain);
@@ -57,7 +62,8 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value= CACHE_REGION, key = "'api_cars'")
+    @CachePut(value= CACHE_REGION, key="'api_cars' + #id ")
 	public CarDTO updateById(Integer id, CarDTO dto) {
 		final CarDomain newDomain = convertDtoToDomain(dto);
 		final CarDomain domain = carDao.getById(id);
@@ -71,7 +77,9 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_cars'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_cars' + #id ")})
 	public CarDTO delete(Integer id) {
 		final CarDomain domain = carDao.delete(id);
 		return convertDomainToDto(domain);

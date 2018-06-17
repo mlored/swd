@@ -42,7 +42,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 			final ReportDomain report = _reportDao.save(domain);
 			final ReportDTO newDto    = convertDomainToDto(report);
 			if (dto.getId() == null) {
-				getCacheManager().getCache("isp-platform-cache").put("report_" + report.getId(), newDto);
+				//getCacheManager().getCache("isp-platform-cache").put("report_" + report.getId(), newDto);
 			}
 			return newDto;
 		} catch (Exception ex) {

@@ -43,10 +43,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'entry_getAll'"),
-                       @CacheEvict(value="isp-platform-cache", key="'entry_getById_'+#dto.getId()")})*/
-  //  @CachePut(value = "isp-platform-cache",key="'entry_getById_'+#dto.getId()", condition="#dto.getId() != null")
-	@CachePut(value = "isp-platform-cache",key="'entry_save'")
+	@CacheEvict(value=CACHE_REGION,key = "'api_entries'")
+    @CachePut(value=CACHE_REGION, key="'api_entries' + #dto.id")
 	public EntryDTO save(EntryDTO dto) {
 		final EntryDomain entryDomain = convertDtoToDomain(dto);
 		final EntryDomain entry = entryDao.save(entryDomain);
@@ -55,7 +53,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache", key = "new Integer(#id).toString().concat('.entry')")
+	@Cacheable(value=CACHE_REGION, key="'api_entries' + #id")
 	public EntryDTO getById(Integer id) {
 		final EntryDomain entryDomain = entryDao.getById(id);
 		final EntryDTO entryDTO = convertDomainToDto(entryDomain);
@@ -64,7 +62,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache", key = "'entry_getAll'")
+	@Cacheable(value=CACHE_REGION, key="'api_entries'")
 	public EntryResult getAll() {
 		final List<EntryDTO> entries = new ArrayList<>();
 		for (EntryDomain domain : entryDao.findAll()) {
@@ -80,7 +78,8 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	
 	@Override
 	@Transactional
-	@CachePut(value = "isp-platform-cache", key = "new Integer(#id).toString().concat('.entry')")
+	@CacheEvict(value=CACHE_REGION, key = "'api_entries'")
+    @CachePut(value=CACHE_REGION, key="'api_entries' + #id")
 	public EntryDTO updateById(Integer id, EntryDTO dto) {
 		final EntryDomain newDomain = convertDtoToDomain(dto);
 		final EntryDomain domain = entryDao.getById(id);
@@ -93,8 +92,9 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
-	/*@Caching(evict = { @CacheEvict(value="isp-platform-cache", key="'entry_getAll'"),
-	   		           @CacheEvict(value="isp-platform-cache", key="'entry_getById_'+#dto.getId()")})*/
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_entries'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_entries' + #id")})
 	public EntryDTO delete(Integer id) {
 		final EntryDomain domain = entryDao.delete(id);
 		return convertDomainToDto(domain);

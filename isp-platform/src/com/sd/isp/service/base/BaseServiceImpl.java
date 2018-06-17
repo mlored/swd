@@ -10,11 +10,12 @@ import com.sd.isp.dto.base.BaseResult;
 
 public abstract class BaseServiceImpl<DTO extends BaseDTO, DOMAIN extends BaseDomain, DAO extends BaseDaoImpl<DOMAIN>, RESULT extends BaseResult<DTO>> implements IBaseService<DTO, DOMAIN, DAO, RESULT> {
 
+	protected static final String CACHE_REGION = "isp-platform-cache";
 	@Autowired
-	private CacheManager _cacheManager;
+	private CacheManager cacheManager;
 
 	protected CacheManager getCacheManager() {
-		return _cacheManager;
+		return cacheManager;
 	}
 	
 	protected abstract DTO convertDomainToDto(DOMAIN domain);

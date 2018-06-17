@@ -35,6 +35,7 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportDTO, SupportDomai
 			final SupportDomain supportDomain = convertDtoToDomain(dto);
 			final SupportDomain support = supportDao.save(supportDomain);
 			final SupportDTO newDto = convertDomainToDto(support);
+			//mailMail.sendMail(to, dear, content);
 			return newDto;
 		
 	}

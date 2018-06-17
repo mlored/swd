@@ -32,7 +32,7 @@ class BuyController {
     }
 
     @Transactional
-    def save(Buy buyInstance) {
+    def save(BuyB buyInstance) {
         if (buyInstance == null) {
             notFound()
             return
@@ -54,12 +54,12 @@ class BuyController {
         }
     }
 
-    def edit(Buy buyInstance) {
+    def edit(BuyB buyInstance) {
         respond buyInstance
     }
 
     @Transactional
-    def update(Buy buyInstance) {
+    def update(BuyB buyInstance) {
         if (buyInstance == null) {
             notFound()
             return
@@ -82,7 +82,7 @@ class BuyController {
     }
 
     @Transactional
-    def delete(Buy buyInstance) {
+    def delete(BuyB buyInstance) {
 
         if (buyInstance == null) {
             notFound()

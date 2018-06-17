@@ -26,8 +26,9 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	private IEmployeeDao employeeDao;
 
 	@Override
-	@CacheEvict(value="isp-platform-cache", allEntries=true)
 	@Transactional
+	@CacheEvict(value=CACHE_REGION,key = "'api_employees'")
+	@CachePut(value=CACHE_REGION, key="'api_employees' + #dto.id")
 	public EmployeeDTO save(EmployeeDTO dto) {
 		final EmployeeDomain employeeDomain = convertDtoToDomain(dto);
 		final EmployeeDomain employee = employeeDao.save(employeeDomain);
@@ -35,8 +36,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 
 	@Override
-	@Cacheable(value="isp-platform-cache")
 	@Transactional(readOnly = true)
+	@Cacheable(value=CACHE_REGION, key="'api_employees' + #id")
 	public EmployeeDTO getById(Integer id) {
 		final EmployeeDomain employeeDomain = employeeDao.getById(id);
 		return convertDomainToDto(employeeDomain);
@@ -44,7 +45,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value=CACHE_REGION, key="'api_employees'")
 	public EmployeeResult getAll() {
 		final List<EmployeeDTO> employees = new ArrayList<>();
 		for (EmployeeDomain domain : employeeDao.findAll()) {			//findAll
@@ -59,7 +60,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	
 	@Override
 	@Transactional
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value=CACHE_REGION, key = "'api_employees'")
+	@CachePut(value=CACHE_REGION, key="'api_employees' + #id")
 	public EmployeeDTO updateById(Integer id, EmployeeDTO dto) {
 		final EmployeeDomain newDomain = convertDtoToDomain(dto);
 		final EmployeeDomain domain = employeeDao.getById(id);
@@ -73,8 +75,10 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 
 	@Override
-	@CacheEvict(value="isp-platform-cache", allEntries=true)
 	@Transactional
+	@Caching(evict = {
+			@CacheEvict(value=CACHE_REGION, key = "'api_employees'"),
+			@CacheEvict(value=CACHE_REGION, key = "'api_employees' + #id")})
 	public EmployeeDTO delete(Integer id) {
 		final EmployeeDomain domain = employeeDao.delete(id);
 		return convertDomainToDto(domain);

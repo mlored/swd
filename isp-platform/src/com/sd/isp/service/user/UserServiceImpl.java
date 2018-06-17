@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +37,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	
 	@Override
 	@Transactional
+	@CacheEvict(value=CACHE_REGION,key = "'api_users'")
+    @CachePut(value=CACHE_REGION, key="'api_users' + #bean.id")
 	public UserDTO save(UserDTO dto) {
 		final UserDomain userDomain = convertDtoToDomain(dto);
 		final UserDomain user = userDao.save(userDomain);
@@ -41,22 +47,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional(readOnly = true)
+	@Cacheable(value=CACHE_REGION, key="'api_users' + #id")
 	public UserDTO getById(Integer id) {
 		final UserDomain userDomain = userDao.getById(id);
 		final UserDTO userDTO = convertDomainToDto(userDomain);
 		
-		String to = "iceberg.04@gmail.com";
-        String dear = "Adrian";
-        String content = "Que tal?";
-		
-		try {
-			mailMail.sendMail(to, dear, content);
-		}catch( Exception e ){
-			e.printStackTrace();
-			System.out.println("Error");
-			//logger.info("Error Sending Email: " + e.getMessage());
-		}
-		// FIN EJEMPLO ENVIO DE MAIL
 		return userDTO;
 	}
 
@@ -68,6 +63,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	
 	@Override
 	@Transactional(readOnly = true)
+	@Cacheable(value=CACHE_REGION, key="'api_users'")
 	public UserResult getAll() {
 		final List<UserDTO> users = new ArrayList<>();
 		for (UserDomain domain : userDao.findAll()) {
@@ -81,6 +77,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 	
 	@Override
+	@CacheEvict(value=CACHE_REGION, key = "'api_users'")
+    @CachePut(value=CACHE_REGION, key="'api_users' + #id")
 	public UserDTO updateById(Integer id, UserDTO dto) {
 		final UserDomain newDomain = convertDtoToDomain(dto);
 		final UserDomain domain = userDao.getById(id);
@@ -93,6 +91,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 	
 	@Transactional
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_users'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_users' + #id")})
 	public UserDTO delete(Integer id){
 		final UserDomain domain = userDao.delete(id);
 		return convertDomainToDto(domain);

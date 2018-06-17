@@ -27,7 +27,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 
 	@Override
 	@Transactional
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value=CACHE_REGION,key = "'api_suppliers'")
+	@CachePut(value=CACHE_REGION, key="'api_suppliers' + #dto.id")
 	public SupplierDTO save(SupplierDTO dto) {
 		final SupplierDomain supplierDomain = convertDtoToDomain(dto);
 		final SupplierDomain supplier = supplierDao.save(supplierDomain);
@@ -36,7 +37,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 
 	@Override
 	@Transactional
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value=CACHE_REGION, key="'api_suppliers' + #id")
 	public SupplierDTO getById(Integer id) {
 		final SupplierDomain supplierDomain = supplierDao.getById(id);
 		//final SupplierDTO supplierDTO = convertDomainToDto(supplierDomain);
@@ -45,7 +46,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value = "isp-platform-cache")
+	@Cacheable(value=CACHE_REGION, key="'api_suppliers'")
 	public SupplierResult getAll() {
 		final List<SupplierDTO> suppliers = new ArrayList<>();
 		for (SupplierDomain domain : supplierDao.findAll()) {
@@ -59,7 +60,8 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 	
 	@Override
-	@CacheEvict(value= "isp-platform-cache", allEntries=true)
+	@CacheEvict(value=CACHE_REGION, key = "'suppliers'")
+	@CachePut(value=CACHE_REGION, key="'suppliers' + #id")
 	public SupplierDTO updateById(Integer id, SupplierDTO dto) {
 		final SupplierDomain newDomain = convertDtoToDomain(dto);
 		final SupplierDomain domain = supplierDao.getById(id);
@@ -72,6 +74,9 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers'"),
+			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers' + #id")})
 	public SupplierDTO delete(Integer id) {
 		final SupplierDomain domain = supplierDao.delete(id);
 		return convertDomainToDto(domain);
