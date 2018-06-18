@@ -1,9 +1,17 @@
 package login
 
+import org.springframework.beans.factory.annotation.Value
+
 class MyBean {
-    //def grailsApplication
+
+
+    public String myValue;
 
     def foo() {
-        def bar = 'isp-client-web-cache'
+        return myValue;
+    }
+
+    def setMyValue(newValue){
+        myValue = newValue
     }
 }

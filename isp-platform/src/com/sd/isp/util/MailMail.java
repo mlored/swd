@@ -3,6 +3,7 @@ package com.sd.isp.util;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,11 @@ public class MailMail
 {
 	@Autowired
 	private MailSender mailSender;
+	@Autowired
 	private SimpleMailMessage simpleMailMessage;
+	
+	@Value("email.incoming.sms.from.address")
+	private String userMail;
 
 	public void setSimpleMailMessage(SimpleMailMessage simpleMailMessage) {
 		this.simpleMailMessage = simpleMailMessage;
@@ -26,17 +31,22 @@ public class MailMail
 		this.mailSender = mailSender;
 	}
 
+	@Async
 	public void sendMail(String to, String dear, String content) {
+	   
+		try {
+			Thread.sleep(60000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		simpleMailMessage.setFrom(userMail);
+		simpleMailMessage.setTo(to);
 
-	
-	   SimpleMailMessage message = new SimpleMailMessage(simpleMailMessage);
-	   message.setFrom("prometeo875@gmail.com");
-	   message.setTo(to);
-
-	   message.setText(String.format(
-			simpleMailMessage.getText(), dear, content));
-
-	   mailSender.send(message);
-
+		 simpleMailMessage.setText(String.format(
+				simpleMailMessage.getText(), dear, content));
+		
+		mailSender.send(simpleMailMessage);
+		System.out.println("Email enviado");
 	}
 }

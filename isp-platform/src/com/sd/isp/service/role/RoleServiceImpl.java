@@ -45,7 +45,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value=CACHE_REGION, key="'api_roles'")
 	public RoleResult getAll() {
 		final List<RoleDTO> roles = new ArrayList<>();
@@ -74,6 +74,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	
 	
 	@Override
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'api_roles'")
     @CachePut(value=CACHE_REGION, key="'api_roles' + #id")
 	public RoleDTO updateById(Integer id, RoleDTO dto) {
@@ -85,6 +86,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	}
 
 	@Override
+	@Transactional
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_roles'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_roles' + #id")})

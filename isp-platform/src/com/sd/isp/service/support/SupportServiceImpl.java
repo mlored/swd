@@ -3,6 +3,7 @@ package com.sd.isp.service.support;
 import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import com.sd.isp.domain.support.SupportDomain;
 import com.sd.isp.dto.support.SupportDTO;
 import com.sd.isp.dto.support.SupportResult;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.util.MailMail;
 
 
 @Service
@@ -19,25 +21,18 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportDTO, SupportDomai
 	@Autowired
 	private ISupportDao supportDao;
 	
-	
-	
-	@Value("${mail.username:lpatologico@gmail.com}")
-	private String username;
-	
-	@Value("${mail.password:lpatologico}")
-	private String password;
+	@Autowired
+	private MailMail mailMail;
 
 	
 	@Override
 	@Transactional
 	public SupportDTO save(SupportDTO dto) {
-		
-			final SupportDomain supportDomain = convertDtoToDomain(dto);
-			final SupportDomain support = supportDao.save(supportDomain);
-			final SupportDTO newDto = convertDomainToDto(support);
-			//mailMail.sendMail(to, dear, content);
-			return newDto;
-		
+		final SupportDomain supportDomain = convertDtoToDomain(dto);
+		final SupportDomain support = supportDao.save(supportDomain);
+		final SupportDTO newDto = convertDomainToDto(support);
+		mailMail.sendMail(dto.getEmail(), dto.getName(), dto.getMessage());
+		return newDto;
 	}
 
 	@Override

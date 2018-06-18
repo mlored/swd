@@ -28,7 +28,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
     CacheManager cacheManager;
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
     @Cacheable(value = CACHE_REGION,key = "'api_cars'")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();

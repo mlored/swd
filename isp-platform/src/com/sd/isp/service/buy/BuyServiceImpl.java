@@ -36,7 +36,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value=CACHE_REGION, key="'buys' + #id")
 	public BuyDTO getById(Integer id) {
 		final BuyDomain buyDomain = buyDao.getById(id);
@@ -45,7 +45,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value=CACHE_REGION, key="'api_buys'")
 	public BuyResult getAll() {
 		final List<BuyDTO> buys = new ArrayList<>();
@@ -60,6 +60,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 	
 	@Override
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'api_buys'")
     @CachePut(value=CACHE_REGION, key="'api_buys' + #id")
 	public BuyDTO updateById(Integer id, BuyDTO dto) {
@@ -74,6 +75,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
+	@Transactional
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_buys'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_buys' + #id")})

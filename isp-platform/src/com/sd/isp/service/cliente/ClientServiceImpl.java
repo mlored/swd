@@ -28,7 +28,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	private IClientDao clientDao;
 	private Scheduler scheduler;
 
-
 	@Override
 	@Transactional
 	@CacheEvict(value=CACHE_REGION,key = "'api_clients'")

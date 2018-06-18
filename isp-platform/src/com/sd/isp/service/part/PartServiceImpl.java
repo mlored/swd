@@ -59,7 +59,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'api_parts'")
     @CachePut(value=CACHE_REGION, key="'api_parts' + #id")
 	public PartDTO updateById(Integer id, PartDTO dto) {
@@ -74,6 +74,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
+	@Transactional
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_parts'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_parts' + #id")})

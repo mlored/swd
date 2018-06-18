@@ -77,6 +77,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 	
 	@Override
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'api_users'")
     @CachePut(value=CACHE_REGION, key="'api_users' + #id")
 	public UserDTO updateById(Integer id, UserDTO dto) {

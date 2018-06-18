@@ -72,6 +72,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 	}
 	
 	@Override
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'api_entry_details'")
     @CachePut(value=CACHE_REGION, key="'api_entry_details' + #id")
 	public EntryDetailsDTO updateById(Integer id, EntryDetailsDTO dto) {
@@ -83,6 +84,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 	}
 
 	@Override
+	@Transactional
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_entry_details'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_entry_details' + #id")})

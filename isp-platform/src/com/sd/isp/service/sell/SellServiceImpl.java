@@ -34,7 +34,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public SellDTO getById(Integer id) {
 		final SellDomain sellDomain = sellDao.getById(id);
 		final SellDTO sellDTO = convertDomainToDto(sellDomain);
@@ -42,7 +42,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public SellResult getAll() {
 		final List<SellDTO> sells = new ArrayList<>();
 		for (SellDomain domain : sellDao.findAll()) {
@@ -56,6 +56,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 	
 	@Override
+	@Transactional
 	public SellDTO updateById(Integer id, SellDTO dto) {
 		final SellDomain newDomain = convertDtoToDomain(dto);
 		final SellDomain domain = sellDao.getById(id);
@@ -68,6 +69,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 
 	@Override
+	@Transactional
 	public SellDTO delete(Integer id) {
 		final SellDomain domain = sellDao.delete(id);
 		return convertDomainToDto(domain);

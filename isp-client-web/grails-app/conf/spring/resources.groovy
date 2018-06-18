@@ -21,7 +21,7 @@ beans = {
 
 	cacheConfiguration(CacheConfiguration){ consistentHashing=true }
 
-	addressProvider(DefaultAddressProvider){ address="127.0.0.1:11211" }
+	addressProvider(DefaultAddressProvider){ address=grailsApplication.config.cache.address }
 
 	memcachedClientFactory(MemcacheClientFactoryImpl)
 

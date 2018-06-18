@@ -28,7 +28,7 @@
 
         <form action="/isp-client-web/j_spring_security_check" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Usuario" name="j_username">
+                <input type="text" class="form-control" placeholder="Usuario" name="j_username" autofocus="autofocus">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

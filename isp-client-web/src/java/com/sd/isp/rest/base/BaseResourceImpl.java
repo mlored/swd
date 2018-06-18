@@ -1,5 +1,6 @@
 package com.sd.isp.rest.base;
 
+import com.sd.isp.Configurator;
 import com.sd.isp.dto.base.BaseDTO;
 import com.sd.isp.dto.base.BaseResult;
 import com.sd.isp.service.auth.IAuthService;
@@ -7,7 +8,9 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseResult> implements IBaseResource<DTO, Result> {
 	private final String _resourcePath;
@@ -18,9 +21,10 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
 	@Autowired
 	IAuthService authService;
 
+	private final static String BASE_URL = Configurator.getUrl();
+
 	public BaseResourceImpl(Class<DTO> dtoClass, String resourcePath, Class<Result> resultClass) {
 		_dtoClass = dtoClass;
-		String BASE_URL = "http://localhost:8080/isp-platform/rest";
 		_resourcePath = BASE_URL + resourcePath;
 		_resultClass = resultClass;
 

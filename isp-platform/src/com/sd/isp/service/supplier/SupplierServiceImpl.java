@@ -36,7 +36,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	@Cacheable(value=CACHE_REGION, key="'api_suppliers' + #id")
 	public SupplierDTO getById(Integer id) {
 		final SupplierDomain supplierDomain = supplierDao.getById(id);
@@ -60,6 +60,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 	
 	@Override
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'suppliers'")
 	@CachePut(value=CACHE_REGION, key="'suppliers' + #id")
 	public SupplierDTO updateById(Integer id, SupplierDTO dto) {
@@ -74,6 +75,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
+	@Transactional
 	@Caching(evict = {
 			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers'"),
 			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers' + #id")})

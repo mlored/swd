@@ -92,6 +92,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
+	@Transactional
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_entries'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_entries' + #id")})

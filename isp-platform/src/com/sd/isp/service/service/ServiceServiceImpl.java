@@ -59,7 +59,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 	
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	@CacheEvict(value=CACHE_REGION, key = "'api_services'")
     @CachePut(value=CACHE_REGION, key="'api_services' + #id")
 	public ServiceDTO updateById(Integer id, ServiceDTO dto) {
@@ -74,7 +74,8 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 
 	@Override
-	 @Caching(evict = {
+	@Transactional
+	@Caching(evict = {
 	            @CacheEvict(value=CACHE_REGION, key = "'api_services'"),
 	            @CacheEvict(value=CACHE_REGION, key = "'api_services' + #id")})
 	public ServiceDTO delete(Integer id) {
