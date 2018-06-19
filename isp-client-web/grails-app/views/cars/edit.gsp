@@ -26,17 +26,24 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-					<g:form action="update" method="PUT" id="${carInstance?.id}"	>
+					<g:form action="update" method="PUT" id="${carInstance?.id}" novalidate="true" name="form_cars">
 							<g:hiddenField name="id" value="${carInstance?.id}" />
 
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit  class="btn btn-primary" value="Update" />
+								<g:actionSubmit  class="btn btn-primary" value="Actualizar" action="update" />
 							</fieldset>
 						</g:form>
 					</div>
+					<script>
+                        $( document ).ready(function() {
+                            $("#form_cars").validate({
+
+                            });
+                        });
+					</script>
 					<!-- /.box -->
 				</div>
 			</div>
