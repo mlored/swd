@@ -21,9 +21,44 @@ class SupplierController {
     }
 	
 	def list(Integer max) {
-		def suppliers = supplierService.getAll()
+		//def suppliers = supplierService.getAll()
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
+		def text = params.text
 
-		[supplierInstanceList: suppliers, supplierInstanceTotal: suppliers?.size()]
+		def search = ""
+		def suppliers = null
+		
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
+		
+		if(null != search && !"".equals(search)){
+			suppliers = supplierService.find(search,10,page)
+			siguiente = supplierService.find(search,10,page+1)
+		}else{
+			suppliers = supplierService.find(null,10,page)
+			siguiente = supplierService.find(null,10,page+1)
+		}
+
+
+		[supplierInstanceList: suppliers, supplierInstanceTotal: suppliers?.size(),
+										  page: page,
+										  siguiente: siguiente?.size(),
+										  ssupplierInstanceList: supplierService.getAll(),
+										  text: text/*,
+										  user:authService.getName()*/]
+
+		//[supplierInstanceList: suppliers, supplierInstanceTotal: suppliers?.size()]
 	}
 
    /* def show(Supplier supplierInstance) {

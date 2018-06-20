@@ -16,5 +16,12 @@ public class SupplierResourceImpl extends BaseResourceImpl<SupplierDTO, Supplier
 	public SupplierResult getAll() {
 		return super.getAll();
 	}
+	
+	@Override
+	public SupplierResult find(String textToFind, int maxItems, int page) {
+		//setWebResourceBasicAuthFilter();
+		final SupplierResult result = findWR(textToFind, maxItems, page);
+		return result;
+	}
 
 }

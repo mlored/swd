@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.isp.dao.supplier.SupplierDaoImpl;
 import com.sd.isp.dao.supplier.ISupplierDao;
+import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.domain.supplier.SupplierDomain;
+import com.sd.isp.dto.client.ClientDTO;
+import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.dto.supplier.SupplierResult;
@@ -111,15 +114,14 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	@Override
 	@Transactional(readOnly = true)
 	public SupplierResult find(String textToFind, int page, int maxItems) throws Exception {
-		/*final List<EmployeeDTO> employees = new ArrayList<>();
-		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
-			final EmployeeDTO dto = convertDomainToDto(domain);
-			employees.add(dto);
+		final List<SupplierDTO> suppliers = new ArrayList<>();
+		for (SupplierDomain domain : supplierDao.find(textToFind, page, maxItems)) {
+			final SupplierDTO dto = convertDomainToDto(domain);
+			suppliers.add(dto);
 		}
-		final EmployeeResult employeeResult = new EmployeeResult();
-		employeeResult.setEmployees(employees);
-		return employeeResult;*/
-		return null;
+		final SupplierResult supplierResult = new SupplierResult();
+		supplierResult.setSuppliers(suppliers);
+		return supplierResult;
 	}
 
 }

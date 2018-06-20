@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.dto.supplier.SupplierResult;
 import com.sd.isp.service.supplier.ISupplierService;
@@ -52,5 +53,23 @@ public class SupplierResource {
 	@Produces("application/json")
 	public SupplierDTO delete(@PathParam("id") Integer supplierId) {
 		return supplierService.delete(supplierId);
+	}
+
+
+	// http://localhost:8080/isp-platform/rest/client/search/textToFind 
+	@GET
+	@Path("/search/{max}/{page}/{textToFind}")
+	@Produces("application/xml")
+	//@Secured({"ROLE_ADMINISTRADOR"})
+	public SupplierResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
+		return supplierService.find(textToFind, page, maxItems);
+	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	//@Secured({"ROLE_ADMINISTRADOR"})
+	public SupplierResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
+		return supplierService.find(null, page, maxItems);
 	}
 }

@@ -17,9 +17,44 @@ class ClientController {
 	}
 
 	def list(Integer max) {
-		def clients = clientService.getAll()
+		//def clients = clientService.getAll()
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
+		def text = params.text
 
-		respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
+		def search = ""
+		def clients = null
+		
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
+		
+		if(null != search && !"".equals(search)){
+			clients = clientService.find(search,10,page)
+			siguiente = clientService.find(search,10,page+1)
+		}else{
+			clients = clientService.find(null,10,page)
+			siguiente = clientService.find(null,10,page+1)
+		}
+
+
+		[clientInstanceList: clients, clientsInstanceTotal: clients?.size(),
+										  page: page,
+										  siguiente: siguiente?.size(),
+										  cclientInstanceList: clientService.getAll(),
+										  text: text/*,
+										  user:authService.getName()*/]
+
+		//respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
 	}
 
 	def show(ClientB clientInstance) {

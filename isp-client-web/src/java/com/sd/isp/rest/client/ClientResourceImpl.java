@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
+import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("clientResource")
 public class ClientResourceImpl extends BaseResourceImpl<ClientDTO, ClientResult> implements IClientResource {
@@ -25,5 +26,12 @@ public class ClientResourceImpl extends BaseResourceImpl<ClientDTO, ClientResult
 	public ClientDTO getById(Integer id) {
 		return super.getById(id);
 	}
+	@Override
+	public ClientResult find(String textToFind, int maxItems, int page) {
+		//setWebResourceBasicAuthFilter();
+		final ClientResult result = findWR(textToFind, maxItems, page);
+		return result;
+	}
+
 
 }

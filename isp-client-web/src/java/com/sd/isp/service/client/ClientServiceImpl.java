@@ -13,9 +13,12 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.client.ClientB;
+import com.sd.isp.beans.employee.EmployeeB;
 import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
+import com.sd.isp.dto.employee.EmployeeDTO;
+import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.client.IClientResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 
@@ -115,16 +118,17 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
         return bean;
     }
 	
-	public List<ClientB> find (String textToFind, int maxItems, int page) {
-		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
-		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
-				: result.getServices();
+	@Override
+	public List<ClientB> find(String textToFind, int maxItems, int page) {
+		final ClientResult result = _clientResource.find(textToFind, maxItems, page);
+		final List<ClientDTO> rList = null == result.getClients() ? new ArrayList<ClientDTO>()
+				: result.getClients();
 
-		final List<ServiceB> services = new ArrayList<ServiceB>();
-		for (ServicetDTO dto : rList) {
-			final ServiceB bean = convertDtoToBean(dto);
-			services.add(bean);
-		}*/
-		return null;
+		final List<ClientB> clients = new ArrayList<ClientB>();
+		for (ClientDTO dto : rList) {
+			final ClientB bean = convertDtoToBean(dto);
+			clients.add(bean);
+		}
+		return clients;
 	}
 }

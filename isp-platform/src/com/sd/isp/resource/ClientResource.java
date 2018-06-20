@@ -53,4 +53,22 @@ public class ClientResource {
 	public ClientDTO delete(@PathParam("id") Integer clientId) {
 		return clientService.delete(clientId);
 	}
+	
+
+	// http://localhost:8080/isp-platform/rest/client/search/textToFind 
+	@GET
+	@Path("/search/{max}/{page}/{textToFind}")
+	@Produces("application/xml")
+	//@Secured({"ROLE_ADMINISTRADOR"})
+	public ClientResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
+		return clientService.find(textToFind, page, maxItems);
+	}
+	
+	@GET
+	@Path("/search/{max}/{page}")
+	@Produces("application/xml")
+	//@Secured({"ROLE_ADMINISTRADOR"})
+	public ClientResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
+		return clientService.find(null, page, maxItems);
+	}
 }

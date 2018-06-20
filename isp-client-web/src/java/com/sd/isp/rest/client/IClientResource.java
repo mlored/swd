@@ -7,5 +7,6 @@ import com.sd.isp.rest.base.IBaseResource;
 public interface IClientResource extends IBaseResource<ClientDTO, ClientResult> {
 
 	public ClientResult getAll();
+	public ClientResult find(String textToFind, int maxItems, int page);
 
 }
