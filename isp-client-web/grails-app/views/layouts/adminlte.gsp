@@ -17,13 +17,12 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-
+    <![endif]-->
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'adminlte.js')}"></script>
-
-    <![endif]-->
-
-
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.validate.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'localization/messages_es.js')}"></script>
 </head>
 <body class="skin-blue sidebar-mini">
 
@@ -222,30 +221,78 @@
     </div>
 </div><!-- ./wrapper -->
 
-<script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'js', file: 'adminlte.js')}"></script>
 <h1>Instancia : ${grailsApplication.config.app.instance} </h1>
 </body>
 
 <script>
-
-        $('a[data-method="delete"]').click(function(){
-            $.ajax(
-                {
-                    url: this.getAttribute('href'),
-                    type: 'DELETE',
-                    async: false,
-                    complete: function(response, status) {
-                        if (status == 'success')
-                        //alert('success!')
-                            location.reload();
-                        else
-                        alert('Error: the service responded with: ' + response.status + '\n' + response.responseText)
+    // Set jQuery.validate settings for bootstrap integration
+    jQuery.validator.setDefaults({
+        highlight: function(element, errorClass, validClass) {
+            if ($(element).closest('.input-group').length > 0) {
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-error');
+            } else {
+                if (element.type === "radio") {
+                    this.findByName(element.name).addClass(errorClass).removeClass(validClass);
+                } else {
+                    $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    if ($(element).closest('form').hasClass('form-horizontal')) {
+                        $(element).closest('.form-group > div[class^="col"]').find('i.fa').remove();
+                        $(element).closest('.form-group > div[class^="col"]').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+                    } else {
+                        $(element).closest('.form-group').find('i.fa').remove();
+                        $(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
                     }
                 }
-            )
-            return false
-        });
+            }
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            if ($(element).closest('.input-group').length > 0) {
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+            } else {
+                if (element.type === "radio") {
+                    this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+                } else {
+                    if ($(element).closest('form').hasClass('form-horizontal')) {
+                        $(element).closest('.form-group > div[class^="col"]').find('i.fa').remove();
+                        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+                    } else {
+                        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+                        $(element).closest('.form-group').find('i.fa').remove();
+                        $(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+                    }
+                }
+            }
+        },
+        errorPlacement: function(error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else if (element.parent('.radio-inline').length) {
+                error.insertAfter(element.parent().parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        ignore: ''
+    });
+
+    $('a[data-method="delete"]').click(function(){
+        $.ajax(
+            {
+                url: this.getAttribute('href'),
+                type: 'DELETE',
+                async: false,
+                complete: function(response, status) {
+                    if (status == 'success')
+                    //alert('success!')
+                        location.reload();
+                    else
+                    alert('Error: the service responded with: ' + response.status + '\n' + response.responseText)
+                }
+            }
+        )
+        return false
+    });
 </script>
 </html>
