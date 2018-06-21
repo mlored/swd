@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
@@ -33,6 +34,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     
     @Autowired
 	private IRoleService _roleService;
+
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserServiceImpl() {
     }
@@ -112,7 +115,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
         dto.setUsername(bean.getUsername());
         dto.setName(bean.getName());
         dto.setSurName(bean.getSurName());
-        dto.setPassword(bean.getPassword());
+        dto.setPassword(passwordEncoder.encode(bean.getPassword()));
         dto.setAccountLocked(bean.getAccountLocked());
 		final List<Integer> rolesIds = new ArrayList<Integer>();
 		Set<RoleB> roles = bean.getRoles();
@@ -150,15 +153,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     public List<UserB> find (String textToFind, int maxItems, int page) {
-		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
-		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
-				: result.getServices();
+        final UserResult result = _userResource.findWR(textToFind, maxItems, page);
+        final List<UserDTO> rList = null == result.getUsers() ? new ArrayList<UserDTO>()
+                : result.getUsers();
 
-		final List<ServiceB> services = new ArrayList<ServiceB>();
-		for (ServicetDTO dto : rList) {
-			final ServiceB bean = convertDtoToBean(dto);
-			services.add(bean);
-		}*/
-		return null;
+        final List<UserB> clients = new ArrayList<UserB>();
+        for (UserDTO dto : rList) {
+            final UserB bean = convertDtoToBean(dto);
+            clients.add(bean);
+        }
+        return clients;
 	}
 }

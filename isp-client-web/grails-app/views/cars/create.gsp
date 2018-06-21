@@ -26,7 +26,7 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form id="form_cars" url="[action:'save', method:'post']" novalidate="true">
+						<g:form name="form_cars" url="[action:'save', method:'post']" novalidate="true">
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
@@ -38,19 +38,6 @@
 					<script>
                         $( document ).ready(function() {
                             $("#form_cars").validate({
-                                rules: {
-                                    mark: {
-                                        remote: {
-                                            url: "find",
-                                            type: "get",
-                                            data: {
-                                                mark: function() {
-                                                    return $( "#mark" ).val();
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
 							});
                         });
 					</script>

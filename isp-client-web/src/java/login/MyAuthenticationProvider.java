@@ -1,6 +1,5 @@
 package login;
 
-import com.sd.isp.service.auth.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -27,9 +26,6 @@ class MyAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
 	private IUserService _userService;
-
-	@Autowired
-	private IAuthService authService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

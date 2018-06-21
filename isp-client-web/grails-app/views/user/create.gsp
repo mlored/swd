@@ -26,15 +26,39 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form url="[action:'save', method:'post']" >
+						<g:form url="[action:'save', method:'post']" novalidate="true" name="form_users">
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+								<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 							</fieldset>
 						</g:form>
 					</div>
+					<script>
+                        $( document ).ready(function() {
+                            $("#form_users").validate({
+                                rules: {
+                                    username: {
+                                        remote: {
+                                            url: "/isp-client-web/user/getByUsername/",
+                                            type: "get",
+                                            data: {
+                                                username: function() {
+                                                    return $( "#username" ).val();
+                                                }
+                                            },
+                                            messages: {
+                                                'username': {
+                                                    remote: "Nombre de usuario ya registrado."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+					</script>
 					<!-- /.box -->
 				</div>
 			</div>
