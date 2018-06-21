@@ -138,7 +138,7 @@ class EmployeeController {
 		try {
 			employeeService.delete(id.intValue())
             flash.message = message(code: 'default.deleted.message', args: [
-                    message(code: 'part.label', default: 'Part'),
+                    message(code: 'employee.label', default: 'Employee'),
                     id
             ])
             redirect(action: "list")

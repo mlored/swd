@@ -1,8 +1,11 @@
 package com.sd.isp.client
 import static org.springframework.http.HttpStatus.*
+
 import com.sd.isp.beans.client.ClientB
 import com.sd.isp.service.client.IClientService;
+
 import grails.transaction.Transactional
+
 import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
@@ -173,46 +176,23 @@ class ClientController {
 
 	@Transactional
 	def delete(Long id) {
-		def clientInstance = clientService.getById(id.intValue())
-		if (!clientInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
-					message(code: 'client.label', default: 'Client'),
-					id
-			])
-			redirect(action: "list")
-			return
-		}
-
+		
 		try {
-			clientService.delete(clientInstance?.id)
-			clientInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [
-					message(code: 'client.label', default: 'Client'),
-					id
-			])
-			redirect(action: "list")
+			clientService.delete(id.intValue())
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'client.label', default: 'Client'),
+                    id
+            ])
+            redirect(action: "list")
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [
-					message(code: 'client.label', default: 'Client'),
-					id
+				  message(code: 'client.label', default: 'Client'),
+				id
 			])
 			redirect(action: "show", id: id)
 		}
-		/*if (clientInstance == null) {
-			notFound()
-			return
-		}
-
-		clientInstance.delete flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.deleted.message', args: [message(code: 'Client.label', default: 'Client'), clientInstance.id])
-				redirect action:"index", method:"GET"
-			}
-			'*'{ render status: NO_CONTENT }
-		}*/
+		
 	}
 
 	protected void notFound() {

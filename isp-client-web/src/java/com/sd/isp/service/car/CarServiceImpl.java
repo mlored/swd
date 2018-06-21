@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import grails.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -15,8 +16,11 @@ import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.car.CarB;
 import com.sd.isp.beans.client.ClientB;
+import com.sd.isp.beans.employee.EmployeeB;
 import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.car.CarResult;
+import com.sd.isp.dto.employee.EmployeeDTO;
+import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.car.ICarResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 
@@ -113,16 +117,17 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         return dto;
     }
     
-    public List<CarB> find (String textToFind, int maxItems, int page) {
-		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
-		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
-				: result.getServices();
+    @Override
+	public List<CarB> find(String textToFind, int maxItems, int page) {
+		final CarResult result = carResource.find(textToFind, maxItems, page);
+		final List<CarDTO> rList = null == result.getCars() ? new ArrayList<CarDTO>()
+				: result.getCars();
 
-		final List<ServiceB> services = new ArrayList<ServiceB>();
-		for (ServicetDTO dto : rList) {
-			final ServiceB bean = convertDtoToBean(dto);
-			services.add(bean);
-		}*/
-		return null;
+		final List<CarB> cars = new ArrayList<CarB>();
+		for (CarDTO dto : rList) {
+			final CarB bean = convertDtoToBean(dto);
+			cars.add(bean);
+		}
+		return cars;
 	}
 }

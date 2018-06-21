@@ -39,19 +39,21 @@
             </tr>
             </thead>
             <tbody>
-            <g:each in="${clientInstanceList}" status="i" var="clientInstance">
-                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                    <td>${i+1}</td>
-                    <td><g:link action="show" id="${clientInstance.id}">${fieldValue(bean: clientInstance, field: "name")}</g:link></td>
-                    <td>${fieldValue(bean: clientInstance, field: "surName")}</td>
-                    <td>${fieldValue(bean: clientInstance, field: "ruc")}</td>
-                    <td>${fieldValue(bean: clientInstance, field: "address")}</td>
-                    <td>${fieldValue(bean: clientInstance, field: "cellphone")}</td>
-                    <td>
-                        <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
-                    </td>
-                </tr>
-            </g:each>
+	            <g:each in="${clientInstanceList}" status="i" var="clientInstance">
+	                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+	                    <td>${i+1}</td>
+	                    <td><g:link action="show" id="${clientInstance.id}">${fieldValue(bean: clientInstance, field: "name")}</g:link></td>
+	                    <td>${fieldValue(bean: clientInstance, field: "surName")}</td>
+	                    <td>${fieldValue(bean: clientInstance, field: "ruc")}</td>
+	                    <td>${fieldValue(bean: clientInstance, field: "address")}</td>
+	                    <td>${fieldValue(bean: clientInstance, field: "cellphone")}</td>
+	                    <td><a class="btn btn-sm btn-danger"
+	                    	   data-confirm="Estas Seguro?" 
+	                    	   data-method="delete" 
+	                    	   href="/isp-client-web/client/delete/${clientInstance.id}">Eliminar</a>
+	                    </td>
+	                </tr>
+	            </g:each>
             </tbody>
         </table>
     </div>

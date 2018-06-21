@@ -40,9 +40,44 @@ class CarsController {
     }
 
     def list(Integer max) {
-        def cars = carService.getAll()
-        respond cars, [model: [carInstanceList: cars, carInstanceTotal: cars?.size()]]
-    }
+		//def employees = employeeService.getAll()
+		
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
+		def text = params.text
+
+		def search = ""
+		def cars = null
+		
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
+		
+		if(null != search && !"".equals(search)){
+			cars = carService.find(search,10,page)
+			siguiente = carService.find(search,10,page+1)
+		}else{
+			cars = carService.find(null,10,page)
+			siguiente = carService.find(null,10,page+1)
+		}
+
+
+		[carInstanceList: cars, carInstanceTotal: cars?.size(), 
+										  page: page, 
+										  siguiente: siguiente?.size(),
+										  ccarInstanceList: carService.getAll(), 
+										  text: text/*,
+										  user:authService.getName()*/]
+	}
 
     /*def show(Long id) {
         def carInstance = carService.getById(id.intValue())

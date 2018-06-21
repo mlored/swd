@@ -48,10 +48,10 @@
                 <td>${fieldValue(bean: supplierInstance, field: "ruc")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "address")}</td>
                 <td>${fieldValue(bean: supplierInstance, field: "cellphone")}</td>
-                <td>
-                  <g:form controller="supplier" method="DELETE">
-                    <td><a data-confirm="Estas Seguro?" method="delete" href="/isp-client-web/supplier/delete/${supplierInstance.id}" rel="nofollow">Borrar</a></td>
-                  </g:form>
+                <td><a class="btn btn-sm btn-danger"
+                    	   data-confirm="Estas Seguro?" 
+                    	   data-method="delete" 
+                    	   href="/isp-client-web/supplier/delete/${supplierInstance.id}">Eliminar</a>
                 </td>
             </tr>
         </g:each>

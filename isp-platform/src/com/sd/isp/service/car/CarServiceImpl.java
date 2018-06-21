@@ -15,8 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.car.CarDaoImpl;
 import com.sd.isp.dao.car.ICarDao;
 import com.sd.isp.domain.car.CarDomain;
+import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.car.CarResult;
+import com.sd.isp.dto.employee.EmployeeDTO;
+import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.service.base.BaseServiceImpl;
 
@@ -110,15 +113,14 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	@Override
 	@Transactional(readOnly = true)
 	public CarResult find(String textToFind, int page, int maxItems) throws Exception {
-		/*final List<EmployeeDTO> employees = new ArrayList<>();
-		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
-			final EmployeeDTO dto = convertDomainToDto(domain);
-			employees.add(dto);
+		final List<CarDTO> cars = new ArrayList<>();
+		for (CarDomain domain : carDao.find(textToFind, page, maxItems)) {
+			final CarDTO dto = convertDomainToDto(domain);
+			cars.add(dto);
 		}
-		final EmployeeResult employeeResult = new EmployeeResult();
-		employeeResult.setEmployees(employees);
-		return employeeResult;*/
-		return null;
+		final CarResult carResult = new CarResult();
+		carResult.setCars(cars);
+		return carResult;
 	}
 
 }

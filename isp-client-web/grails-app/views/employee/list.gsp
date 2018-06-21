@@ -50,14 +50,11 @@
 	                <td>${fieldValue(bean: employeeInstance, field: "ruc")}</td>
 	                <td>${fieldValue(bean: employeeInstance, field: "address")}</td>
 	                <td>${fieldValue(bean: employeeInstance, field: "cellphone")}</td>
-	                <td>
-	                  <g:form controller="employee" method="DELETE">
-	                    <td><a data-confirm="Estas Seguro?" 
-	                    	   method="delete" 
-	                    	   href="/isp-client-web/employee/delete/${employeeInstance.id}" 
-	                    	   rel="nofollow">Borrar</a></td>
-	                  </g:form>
-	                </td>
+	                <td><a class="btn btn-sm btn-danger"
+                    	   data-confirm="Estas Seguro?" 
+                    	   data-method="delete" 
+                    	   href="/isp-client-web/employee/delete/${employeeInstance.id}">Eliminar</a>
+                    </td>
 	            </tr>
 	        </g:each>
 	        </tbody>

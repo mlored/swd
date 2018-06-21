@@ -8,6 +8,19 @@
 </head>
 <body>
 <div id="list-car" class="content scaffold-list" role="main">
+    <div class="col-sm-12" align="center">
+		<g:form action="list" class="form-search">
+			<div class="input-group col-md-5">
+				        <input type="text" name="text" class="form-control" maxlength="50" value="${text}"
+						   placeholder="Ingrese un texto para buscar" />
+						<span class="input-group-btn">
+							<button class="btn btn-primary" name="list" value="Buscar">
+								<span class=" glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+			</div>
+	    </g:form>
+     </div>
     <h1>
          Automóviles
         <g:link class="btn btn-primary" action="create">Nuevo</g:link>
@@ -37,16 +50,17 @@
                     <td>${fieldValue(bean: carInstance, field: "mark")}</td>
                     <td>${fieldValue(bean: carInstance, field: "model")}</td>
                     <td>${fieldValue(bean: carInstance, field: "color")}</td>
-                    <td><a data-confirm="Estas Seguro?" data-method="delete" href="/isp-client-web/cars/delete/${carInstance.id}">Borrar</a></td>
+                    <td><a class="btn btn-sm btn-danger"
+                    	   data-confirm="Estas Seguro?" 
+                    	   data-method="delete" 
+                    	   href="/isp-client-web/cars/delete/${carInstance.id}">Eliminar</a>
+                    </td>
                 </tr>
             </g:each>
             </tbody>
         </table>
     </div>
-
-    <div class="pagination">
-        <g:paginate total="${carInstanceTotal}" />
-    </div>
+ 	<g:render template="/layouts/paginate"/>
 </div>
 </body>
 </html>
