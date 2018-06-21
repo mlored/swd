@@ -1,21 +1,18 @@
-package com.sd.isp.user;
+package com.sd.isp.user
 
 import com.sd.isp.beans.user.UserB
 import com.sd.isp.beans.role.RoleB
 import com.sd.isp.service.role.IRoleService
 import com.sd.isp.service.user.IUserService
 import com.sd.isp.service.auth.IAuthService;
-import com.sd.isp.service.auth.AuthServiceImpl;
 
 import grails.plugin.springsecurity.annotation.Secured
 
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.beans.factory.annotation.Autowired;
-
-import login.Util
+import org.springframework.beans.factory.annotation.Autowired
 
 class UserController{
-  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+  static allowedMethods = [save: "POST", update: "PUT", delete: "POST"]
 
   def IUserService userService
   def IRoleService roleService
@@ -38,7 +35,7 @@ class UserController{
 	  [userInstance: new UserB(params)]
   }
 
-  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def save() {
 	final Set<RoleB> roles = new HashSet<RoleB>();
 	for (String roleId : params.list('rolesIds')) {
@@ -64,7 +61,7 @@ class UserController{
 	  redirect(action: "index")
   }
 
-  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def edit(Long id) {
 	def userInstance = userService.getById(id.intValue())
 	if (!userInstance) {
@@ -93,45 +90,54 @@ class UserController{
 
 	   [userInstance: userInstance]
   }
+
+   def getByUsername(String username){
+	   def userInstance =  userService.find(username,10,0) //userService.getByUsername(username)
+	   if (!userInstance) {
+		   flash.message = message(code: 'default.not.found.message', args: [
+				   message(code: 'user.label', default: 'Usuario'),
+				   id
+		   ])
+		   redirect(action: "list")
+		   return
+	   }
+
+	   def userMatch = null
+	   userInstance.each {
+		   if (it.username == username){
+			   userMatch = it
+		   }
+	   }
+	   String result = "false"
+	   if (!userMatch) {
+		   result = "true"
+	   }
+	   response.setContentType("text/json;charset=UTF-8");
+	   render result
+   }
+
   
-  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
-  def update(Long id, Long version) {
-	def userInstance = userService.getById(id.intValue())
-	if (!userInstance) {
-	  flash.message = message(code: 'default.not.found.message', args: [
-		message(code: 'user.label', default: 'User'),
-		id
-	  ])
-	  redirect(action: "index")
-	  return
+  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+	def update(Long id) {
+		def userB= new UserB(params)
+		def userInstance = userService.update(id.intValue(), userB)
+		if (userInstance == null) {
+			flash.message = message(code: 'default.not.found.message', args: [
+					message(code: 'user.label', default: 'User'),
+					id
+			])
+			redirect(action: "list")
+			return
+		}
+
+		flash.message = message(code: 'default.updated.message', args: [
+				message(code: 'user.label', default: 'User'),
+				userInstance.id
+		])
+		redirect(action: "list")
 	}
 
-	if (userInstance.getUsername()==authService.getUsername()) {
-	  flash.message = "No puedes editar tu registro de usuario"
-	  redirect(action: "index")
-	  return
-	}
-
-	final Set<RoleB> roles = new HashSet<RoleB>();
-	for (String roleId : params.list('rolesIds')) {
-	  roles.add(roleService.getById(Integer.valueOf(roleId)));
-	}
-	def username=userInstance.getUsername()
-	def password=userInstance.getPassword()
-	userInstance.create(params)
-	userInstance.setRoles(roles)
-	userInstance.setUsername(username)
-	userInstance.setPassword(password)
-
-	userService.save(userInstance)
-	flash.message = message(code: 'default.updated.message', args: [
-	  message(code: 'user.label', default: 'User'),
-	  userInstance.getId()
-	])
-	redirect(action: "index")
-  }
-
-  @Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
+  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def delete(Long id) {
 	def userInstance = userService.getById(id.intValue())
 

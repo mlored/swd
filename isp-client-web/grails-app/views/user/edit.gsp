@@ -27,17 +27,41 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form action="update" method="PUT" id="${userrInstance?.id}"	>
+						<g:form action="update" method="PUT" id="${userrInstance?.id}" novalidate="true" name="form_users"	>
 							<g:hiddenField name="id" value="${userInstance?.id}" />
 							
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+								<g:actionSubmit  class="btn btn-primary" value="Actualizar" action="update" />
 							</fieldset>
 						</g:form>
 					</div>
+					<script>
+                        $( document ).ready(function() {
+                            $("#form_users").validate({
+                                rules: {
+                                    username: {
+                                        remote: {
+                                            url: "/isp-client-web/user/getByUsername/",
+                                            type: "get",
+                                            data: {
+                                                username: function() {
+                                                    return $( "#username" ).val();
+                                                }
+                                            },
+                                            messages: {
+                                                'username': {
+                                                    remote: "Nombre de usuario ya registrado."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+					</script>
 					<!-- /.box -->
 				</div>
 			</div>

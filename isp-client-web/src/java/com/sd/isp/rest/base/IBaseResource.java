@@ -15,4 +15,6 @@ public interface IBaseResource<DTO extends BaseDTO, Result extends BaseResult> {
 
 	public DTO destroy(Integer id);
 
-}
+	public Result findWR(String textToFind, int maxItems, int page);
+
+	}

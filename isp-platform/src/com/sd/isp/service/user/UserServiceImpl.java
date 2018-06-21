@@ -16,8 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.role.IRoleDao;
 import com.sd.isp.dao.user.IUserDao;
 import com.sd.isp.dao.user.UserDaoImpl;
+import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.domain.role.RoleDomain;
 import com.sd.isp.domain.user.UserDomain;
+import com.sd.isp.dto.client.ClientDTO;
+import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
@@ -143,15 +146,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	@Override
 	@Transactional(readOnly = true)
 	public UserResult find(String textToFind, int page, int maxItems) throws Exception {
-		/*final List<EmployeeDTO> employees = new ArrayList<>();
-		for (EmployeeDomain domain : employeeDao.find(textToFind, page, maxItems)) {
-			final EmployeeDTO dto = convertDomainToDto(domain);
-			employees.add(dto);
+		final List<UserDTO> users = new ArrayList<>();
+		for (UserDomain domain : userDao.find(textToFind, page, maxItems)) {
+			final UserDTO dto = convertDomainToDto(domain);
+			users.add(dto);
 		}
-		final EmployeeResult employeeResult = new EmployeeResult();
-		employeeResult.setEmployees(employees);
-		return employeeResult;*/
-		return null;
+		final UserResult userResult = new UserResult();
+		userResult.setUsers(users);
+		return userResult;
 	}
 
 }

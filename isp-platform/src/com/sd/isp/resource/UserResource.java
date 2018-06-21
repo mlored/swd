@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.user.IUserService;
@@ -63,6 +64,15 @@ public class UserResource {
 	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public UserDTO delete(@PathParam("id") Integer userId) {
 		return userService.delete(userId);
+	}
+	
+	// http://localhost:8080/isp-platform/rest/user/search/textToFind 
+	@GET
+	@Path("/search/{max}/{page}/{textToFind}")
+	@Produces("application/xml")
+	//@Secured({"ROLE_ADMINISTRADOR"})
+	public UserResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
+		return userService.find(textToFind, page, maxItems);
 	}
 	
 }

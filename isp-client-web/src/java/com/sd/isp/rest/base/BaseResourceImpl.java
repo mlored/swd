@@ -86,6 +86,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
 		return getWebResource().path("/" + id).delete(getDtoClass());
 	}
 
+	@Override
 	public Result findWR(String textToFind, int maxItems, int page) {
 		Result result;
 		setWebResourceBasicAuthFilter();
