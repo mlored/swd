@@ -21,10 +21,44 @@ class StockController {
     }
 	
 	def list(Integer max) {
-		def parts = partService.getAll()
-
-		[partInstanceList: parts, partInstanceTotal: parts?.size()]
-	}
+		//def parts = partService.getAll()
+		//[partInstanceList: parts, partInstanceTotal: parts?.size()]
+			def page = 0
+			def siguiente
+			if(null != params.get("page")){
+				page = Integer.parseInt(params.get("page"))
+			}
+			def text = params.text
+	
+			def search = ""
+			def parts = null
+			
+			if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+				search += "text="+params.text+'&'
+			}
+			if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+				search +="sort="+params.get("sort")+'&'
+			}
+			if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+				search +="order="+params.get("order")+'&'
+			}
+			
+			if(null != search && !"".equals(search)){
+				parts 	  = partService.find(search,10,page)
+				siguiente = partService.find(search,10,page+1)
+			}else{
+				parts     = partService.find(null,10,page)
+				siguiente = partService.find(null,10,page+1)
+			}
+	
+	
+			[partInstanceList: parts, partInstanceTotal: parts?.size(),
+											  page: page,
+											  siguiente: siguiente?.size(),
+											  ppartInstanceList: partService.getAll(),
+											  text: text/*,
+											  user:authService.getName()*/]
+		}
 	
 	def show(PartB partInstance) {
 		respond partInstance

@@ -54,9 +54,6 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${clientInstanceCount ?: 0}" />
-			</div>
 		</div>
 	</body>
 </html>

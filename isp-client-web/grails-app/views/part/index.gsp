@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -50,9 +48,6 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${partInstanceCount ?: 0}" />
-			</div>
 		</div>
 	</body>
 </html>

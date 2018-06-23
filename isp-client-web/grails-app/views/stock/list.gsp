@@ -8,6 +8,19 @@
 </head>
 <body>
 <div id="list-part" class="content scaffold-list" role="main">
+<div class="col-sm-12" align="right">
+		<g:form action="list" class="form-search">
+			<div class="input-group col-md-5" >
+				        <input type="text" name="text" class="form-control" maxlength="50" value="${text}"
+						   placeholder="Ingrese un texto para buscar" />
+						<span class="input-group-btn">
+							<button class="btn btn-primary" name="list" value="Buscar">
+								<span class="fa fa-search" style="font-size:20px"></span>
+							</button>
+						</span>
+			</div>
+	    </g:form>
+     </div>
     <h1>Stock</h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -35,10 +48,7 @@
             </tbody>
         </table>
     </div>
-
-    <div class="pagination">
-        <g:paginate total="${partInstanceTotal}" />
-    </div>
+		<g:render template="/layouts/paginate"/>
 </div>
 </body>
 </html>

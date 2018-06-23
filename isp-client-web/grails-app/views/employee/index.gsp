@@ -50,7 +50,6 @@
 				</g:each>
 				</tbody>
 			</table>
-			<%--<g:render template="/layouts/paginate"/>
-		--%></div>
+		</div>
 	</body>
 </html>

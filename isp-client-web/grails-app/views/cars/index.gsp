@@ -49,9 +49,6 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${carsInstanceCount ?: 0}" />
-			</div>
 		</div>
 	</body>
 </html>

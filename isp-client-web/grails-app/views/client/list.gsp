@@ -7,14 +7,14 @@
 </head>
 <body>
 <div id="list-client" class="content scaffold-list" role="main">
-<div class="col-sm-12" align="center">
+<div class="col-sm-12" align="right">
 		<g:form action="list" class="form-search">
 			<div class="input-group col-md-5">
 				        <input type="text" name="text" class="form-control" maxlength="50" value="${text}"
 						   placeholder="Ingrese un texto para buscar" />
 						<span class="input-group-btn">
 							<button class="btn btn-primary" name="list" value="Buscar">
-								<span class=" glyphicon glyphicon-search"></span>
+								<span class="fa fa-search" style="font-size:20px"></span>
 							</button>
 						</span>
 			</div>
