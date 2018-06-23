@@ -6,4 +6,5 @@ import com.sd.isp.rest.base.IBaseResource;
 
 public interface IServiceResource extends IBaseResource<ServiceDTO, ServiceResult>{
     public ServiceResult getAll();
+    public ServiceResult find(String textToFind, int maxItems, int page);
 }

@@ -7,6 +7,19 @@
 </head>
 <body>
 <div id="list-service" class="content scaffold-list" role="main">
+<div class="col-sm-12" align="center">
+		<g:form action="list" class="form-search">
+			<div class="input-group col-md-5">
+				        <input type="text" name="text" class="form-control" maxlength="50" value="${text}"
+						   placeholder="Ingrese un texto para buscar" />
+						<span class="input-group-btn">
+							<button class="btn btn-primary" name="list" value="Buscar">
+								<span class=" glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+			</div>
+	    </g:form>
+     </div>
     <h1>Servicios
         <g:link class="btn btn-primary" action="create">Nuevo</g:link>
     </h1>
@@ -31,19 +44,17 @@
                     <td><g:link action="edit" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: serviceInstance, field: "description")}</td>
                     <td>${fieldValue(bean: serviceInstance, field: "price")}</td>
-
-                    <td>
-                        <g:actionSubmit class="btn btn-sm btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Está usted seguro?')}');" />
+					<td><a class="btn btn-sm btn-danger"
+                    	   data-confirm="Estas Seguro?" 
+                    	   data-method="delete" 
+                    	   href="/isp-client-web/service/delete/${serviceInstance.id}">Eliminar</a>
                     </td>
                 </tr>
             </g:each>
             </tbody>
         </table>
     </div>
-
-    <div class="pagination">
-        <g:paginate total="${serviceInstanceTotal}" />
-    </div>
+		<g:render template="/layouts/paginate"/>
 </div>
 </body>
 </html>

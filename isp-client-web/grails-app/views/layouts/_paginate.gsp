@@ -28,3 +28,4 @@
         </g:else>
     </fieldset>
 </g:form>
+</div>

@@ -12,7 +12,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
+import com.sd.isp.beans.part.PartB;
 import com.sd.isp.beans.service.ServiceB;
+import com.sd.isp.dto.part.PartDTO;
+import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.dto.service.ServiceDTO;
 import com.sd.isp.dto.service.ServiceResult;
 import com.sd.isp.rest.service.IServiceResource;
@@ -110,16 +113,17 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
         return bean;
     }
     
-    public List<ServiceB> find (String textToFind, int maxItems, int page) {
-		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
-		final List<ServiceDTO> rList = null == result.getPatients() ? new ArrayList<PatientDTO>()
-				: result.getPatients();
+    @Override
+   	public List<ServiceB> find(String textToFind, int maxItems, int page) {
+   		final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
+   		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
+   				: result.getServices();
 
-		final List<PatientB> patients = new ArrayList<PatientB>();
-		for (PatientDTO dto : rList) {
-			final PatientB bean = convertDtoToBean(dto);
-			patients.add(bean);
-		}*/
-		return null;
-	}
+   		final List<ServiceB> services = new ArrayList<ServiceB>();
+   		for (ServiceDTO dto : rList) {
+   			final ServiceB bean = convertDtoToBean(dto);
+   			services.add(bean);
+   		}
+   		return services;
+   	}
 }

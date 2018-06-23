@@ -1,8 +1,11 @@
 package com.sd.isp.service
 import static org.springframework.http.HttpStatus.*
+
 import com.sd.isp.beans.service.ServiceB
 import com.sd.isp.service.service.IServiceService;
+
 import grails.transaction.Transactional
+
 import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
@@ -17,9 +20,44 @@ class ServiceController {
     }
 
     def list(Integer max) {
-        def services = serviceService.getAll()
-        [serviceInstanceList: services, serviceInstanceTotal: services?.size()]
-    }
+		//def service = serviceService.getAll()
+		
+		def page = 0
+		def siguiente
+		if(null != params.get("page")){
+			page = Integer.parseInt(params.get("page"))
+		}
+		def text = params.text
+
+		def search = ""
+		def services = null
+		
+		if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+			search += "text="+params.text+'&'
+		}
+		if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+			search +="sort="+params.get("sort")+'&'
+		}
+		if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+			search +="order="+params.get("order")+'&'
+		}
+		
+		if(null != search && !"".equals(search)){
+			services  = serviceService.find(search,10,page)
+			siguiente = serviceService.find(search,10,page+1)
+		}else{
+			services  = serviceService.find(null,10,page)
+			siguiente = serviceService.find(null,10,page+1)
+		}
+
+
+		[serviceInstanceList: services, serviceInstanceTotal: services?.size(), 
+										  page: page, 
+										  siguiente: siguiente?.size(),
+										  sserviceInstanceList: serviceService.getAll(), 
+										  text: text/*,
+										  user:authService.getName()*/]
+	}
 	
 	/*def show(Long id) {
 		 def serviceInstance = serviceService.getById(id.intValue())
@@ -94,21 +132,10 @@ class ServiceController {
         redirect(action: "list")
     }
 
-    @Transactional
     def delete(Long id) {
-        def serviceInstance = serviceService.getById(id.intValue())
-        if (!serviceInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'service.label', default: 'Service'),
-                    id
-            ])
-            redirect(action: "list")
-            return
-        }
 
         try {
-            serviceService.delete(serviceInstance?.id)
-            serviceInstance.delete(flush: true)
+            serviceService.delete(id.intValue())
             flash.message = message(code: 'default.deleted.message', args: [
                     message(code: 'service.label', default: 'Service'),
                     id
@@ -122,20 +149,6 @@ class ServiceController {
             ])
             redirect(action: "show", id: id)
         }
-        /*if (serviceInstance == null) {
-            notFound()
-            return
-        }
-
-        serviceInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Service.label', default: 'Service'), serviceInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }*/
     }
 
     protected void notFound() {
