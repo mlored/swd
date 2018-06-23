@@ -8,6 +8,19 @@
 </head>
 <body>
 <div id="list-part" class="content scaffold-list" role="main">
+    <div class="col-sm-12" align="center">
+		<g:form action="list" class="form-search">
+			<div class="input-group col-md-5">
+				        <input type="text" name="text" class="form-control" maxlength="50" value="${text}"
+						   placeholder="Ingrese un texto para buscar" />
+						<span class="input-group-btn">
+							<button class="btn btn-primary" name="list" value="Buscar">
+								<span class=" glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+			</div>
+	    </g:form>
+     </div>
     <h1>
     	Repuestos
     	<g:link class="btn btn-primary" action="create">Nuevo</g:link>
@@ -33,20 +46,17 @@
                     <td><g:link action="edit" id="${partInstance?.id}"><g:message code="${fieldValue(bean: partInstance, field: "name")}" default="${fieldValue(bean: partInstance, field: "name")}" /></g:link></td>
                     <td>${fieldValue(bean: partInstance, field: "description")}</td>
                     <td>${fieldValue(bean: partInstance, field: "price")}</td>
-                	<td>
-                        <g:form controller="part" method="DELETE">
-                            <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
-                        </g:form>
+                	<td><a class="btn btn-sm btn-danger"
+                    	   data-confirm="Estas Seguro?" 
+                    	   data-method="delete" 
+                    	   href="/isp-client-web/part/delete/${partInstance.id}">Eliminar</a>
                     </td>
                 </tr>
             </g:each>
             </tbody>
         </table>
     </div>
-
-    <div class="pagination">
-        <g:paginate total="${partInstanceTotal}" />
-    </div>
+		<g:render template="/layouts/paginate"/>
 </div>
 </body>
 </html>

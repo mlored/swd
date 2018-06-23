@@ -12,8 +12,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
+import com.sd.isp.beans.employee.EmployeeB;
 import com.sd.isp.beans.part.PartB;
 import com.sd.isp.beans.service.ServiceB;
+import com.sd.isp.dto.employee.EmployeeDTO;
+import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.dto.part.PartDTO;
 import com.sd.isp.dto.part.PartResult;
 import com.sd.isp.rest.part.IPartResource;
@@ -111,17 +114,18 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
         return dto;
     }
     
-    public List<PartB> find (String textToFind, int maxItems, int page) {
-		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
-		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()
-				: result.getServices();
+    @Override
+	public List<PartB> find(String textToFind, int maxItems, int page) {
+		final PartResult result = _partResource.find(textToFind, maxItems, page);
+		final List<PartDTO> rList = null == result.getParts() ? new ArrayList<PartDTO>()
+				: result.getParts();
 
-		final List<ServiceB> services = new ArrayList<ServiceB>();
-		for (ServicetDTO dto : rList) {
-			final ServiceB bean = convertDtoToBean(dto);
-			services.add(bean);
-		}*/
-		return null;
+		final List<PartB> parts = new ArrayList<PartB>();
+		for (PartDTO dto : rList) {
+			final PartB bean = convertDtoToBean(dto);
+			parts.add(bean);
+		}
+		return parts;
 	}
     
 }
