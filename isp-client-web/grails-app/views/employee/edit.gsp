@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="adminlte">
-		<g:set var="entityName" value="${message(code: 'employee.label', default: 'Employee')}" />
+		<g:set var="entityName" value="${message(code: 'employee.label', default: 'Empleado')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -12,7 +12,7 @@
 					<!-- general form elements -->
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title"><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3 class="box-title"><g:message code="default.edit.label" args="[entityName]" /></h3>
 						</div>
 						<!-- /.box-header -->
 						<!-- form start -->
@@ -26,14 +26,14 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-					<g:form action="update" method="PUT" id="${employeeInstance?.id}"	>
+						<g:form action="update" method="PUT" id="${employeeInstance?.id}" name="form" novalidate="true">
 							<g:hiddenField name="id" value="${employeeInstance?.id}" />
 
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit  class="btn btn-primary" value="Update" />
+								<g:actionSubmit  class="btn btn-primary" value="Actualizar" action="update" />
 							</fieldset>
 						</g:form>
 					</div>

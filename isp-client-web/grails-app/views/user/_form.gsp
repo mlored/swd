@@ -28,7 +28,7 @@
 			<g:message code="user.password.label" default="Contraseña" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:passwordField name="password" class="form-control" required="true" maxlength="20" minlength="6" placeholder="contraseña" value="${userInstance?.password}"/>
+		<g:passwordField name="password" class="form-control" required="true" maxlength="60" minlength="6" placeholder="contraseña" value="${userInstance?.password}"/>
 	</div>
 </div>
 <!-- /.box-body -->

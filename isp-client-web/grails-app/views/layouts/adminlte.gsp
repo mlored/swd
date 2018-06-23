@@ -294,5 +294,8 @@
         )
         return false
     });
+    $( document ).ready(function() {
+        $("#form").validate({});
+    });
 </script>
 </html>

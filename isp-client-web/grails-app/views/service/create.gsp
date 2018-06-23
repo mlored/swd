@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta name="layout" content="adminlte">
-	<g:set var="entityName" value="${message(code: 'service.label', default: 'Service')}" />
+	<g:set var="entityName" value="${message(code: 'service.label', default: 'Servicio')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -27,7 +27,7 @@
 						</g:eachError>
 					</ul>
 				</g:hasErrors>
-				<g:form url="[action:'save', method:'post']" >
+				<g:form url="[action:'save', method:'post']" name="form" novalidate="true">
 					<fieldset class="form">
 						<g:render template="form"/>
 					</fieldset>

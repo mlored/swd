@@ -7,7 +7,7 @@
 		<g:message code="client.name.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="name" class="form-control" maxlength="15"  placeholder="Nombre" required="" value="${clientInstance?.name}"/>
+	<g:textField name="name" class="form-control" maxlength="60"  placeholder="Nombre" required="" value="${clientInstance?.name}"/>
 
 </div>
 
@@ -16,7 +16,7 @@
 		<g:message code="client.surName.label" default="Apellido" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="surName" class="form-control" maxlength="15"  placeholder="Apellido" required="" value="${clientInstance?.surName}"/>
+	<g:textField name="surName" class="form-control" maxlength="50"  placeholder="Apellido" required="" value="${clientInstance?.surName}"/>
 
 </div>
 
@@ -34,7 +34,7 @@
 		<g:message code="client.address.label" default="Direccion" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="address" class="form-control" maxlength="50"  placeholder="Direccion" required="" value="${clientInstance?.address}"/>
+	<g:textField name="address" class="form-control" maxlength="50"  placeholder="Direccion" value="${clientInstance?.address}"/>
 
 </div>
 
@@ -43,7 +43,7 @@
 		<g:message code="client.cellphone.label" default="Telefono" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="cellphone" type="number" class="form-control" maxlength="15"  placeholder="Telefono" value="${clientInstance.cellphone}" required=""/>
+	<g:field name="cellphone" type="number" class="form-control" maxlength="50"  placeholder="Telefono" value="${clientInstance?.cellphone}" />
 
 </div>
 </div>

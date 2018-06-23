@@ -1,13 +1,10 @@
-
-
-
 <div class="box-body">
 <div class="form-group ${hasErrors(bean: serviceInstance, field: 'name', 'error')} required">
 	<label for="name">
 		<g:message code="service.name.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="name" class="form-control" maxlength="15"  placeholder="Nombre" required="" value="${serviceInstance?.name}"/>
+	<g:textField name="name" class="form-control"  maxlength="50" minlength="2" placeholder="Nombre" required="" value="${serviceInstance?.name}"/>
 
 </div>
 
@@ -16,7 +13,7 @@
 		<g:message code="service.description.label" default="Descripcion" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="description" class="form-control" maxlength="15"  placeholder="Descripcion" required="" value="${serviceInstance?.description}"/>
+	<g:textField name="description" class="form-control" maxlength="50" minlength="2" placeholder="Descripcion" value="${serviceInstance?.description}"/>
 
 </div>
 
@@ -25,16 +22,7 @@
 		<g:message code="service.price.label" default="Precio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="price" type="number" class="form-control" maxlength="15"  placeholder="Precio" value="${serviceInstance?.price}" required=""/>
-
+	<g:field name="price" type="number" class="form-control" min="0"  placeholder="Precio" value="${serviceInstance?.price}" required=""/>
 </div>
-	<div class="form-group ${hasErrors(bean: serviceInstance, field: 'quantity', 'error')} required">
-		<label for="quantity">
-			<g:message code="service.quantity.label" default="Cantidad" />
-			<span class="required-indicator">*</span>
-		</label>
-		<g:field name="quantity" type="number" class="form-control"  placeholder="Cantidad" maxlength="10" value="${serviceInstance?.quantity}" required=""/>
-	</div>
-
 
 </div>

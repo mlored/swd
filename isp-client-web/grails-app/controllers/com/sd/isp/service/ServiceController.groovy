@@ -36,10 +36,9 @@ class ServiceController {
 	}*/
 
     def create() {
-        respond new ServiceB(params)
+        [serviceInstance: new ServiceB(params)]
     }
 
-    @Transactional
     def save(){
         def serviceInstance = new ServiceB(params)
         def newService = serviceService.save(serviceInstance)
@@ -68,7 +67,6 @@ class ServiceController {
         }
 
         [serviceInstance: serviceInstance]
-        //respond serviceInstance
     }
 
     @Transactional

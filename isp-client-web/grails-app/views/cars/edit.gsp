@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="adminlte">
-		<g:set var="entityName" value="${message(code: 'car.label', default: 'Cars')}" />
+		<g:set var="entityName" value="${message(code: 'car.label', default: 'Automovil')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -12,7 +12,7 @@
 					<!-- general form elements -->
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title"><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3 class="box-title"><g:message code="default.edit.label" args="[entityName]" /></h3>
 						</div>
 						<!-- /.box-header -->
 						<!-- form start -->

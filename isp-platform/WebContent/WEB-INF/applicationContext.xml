@@ -30,6 +30,7 @@
 	<context:component-scan base-package="com.sd.isp.service"/>
 	<context:component-scan base-package="com.sd.isp.resource" />
 	<context:component-scan base-package="com.sd.isp.service.util" />
+	<context:component-scan base-package="com.sd.isp.util" />
 	<context:property-placeholder location="classpath:foo.properties"/>
 	
 	<bean id="scheduler" class="com.sd.isp.util.Scheduler"></bean>

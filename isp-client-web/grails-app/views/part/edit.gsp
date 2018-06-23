@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="adminlte">
-		<g:set var="entityName" value="${message(code: 'part.label', default: 'Part')}" />
+		<g:set var="entityName" value="${message(code: 'part.label', default: 'Repuesto')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -12,7 +12,7 @@
 					<!-- general form elements -->
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title"><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3 class="box-title"><g:message code="default.edit.label" args="[entityName]" /></h3>
 						</div>
 						<!-- /.box-header -->
 						<!-- form start -->
@@ -33,7 +33,7 @@
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit  class="btn btn-primary" value="Update" />
+								<g:actionSubmit class="save" class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 							</fieldset>
 						</g:form>
 					</div>
