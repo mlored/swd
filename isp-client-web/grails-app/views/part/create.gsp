@@ -26,7 +26,7 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form url="[action:'save', method:'post']" >
+						<g:form url="[action:'save', method:'post']"  name="form" novalidate="true" >
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
