@@ -10,16 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.isp.dao.client.IClientDao;
-import com.sd.isp.domain.client.ClientDomain;
-import com.sd.isp.dto.client.ClientDTO;
-import com.sd.isp.dto.client.ClientResult;
-import com.sd.isp.service.cliente.IClientService;
+import com.sd.isp.dao.user.IUserDao;
+import com.sd.isp.domain.user.UserDomain;
+import com.sd.isp.util.MailMail;
 
 @Service
 public class Scheduler {
 	
 	@Autowired
-	private IClientDao clientDao;
+	private IUserDao userDao;
+	@Autowired
+	private MailMail mailMail;
 	
 	@Value("${cron.enabled}")
     private boolean enabled;
@@ -31,12 +32,15 @@ public class Scheduler {
 	@Async
     public void execute()
     {
+		
 		if (enabled) {
-			for (ClientDomain domain : clientDao.findAll()) {
-				domain.setName("Adrian");
-				clientDao.save(domain);
+			for (UserDomain domain : userDao.findAll()) {
+				if(domain.getAccountLocked() == "true"){
+					domain.setAccountLocked("false");
+					mailMail.sendMail(domain.getUsername(), domain.getName(), "Usuario desbloqueado");
+				}
+				userDao.save(domain);
 			}
-	        //System.out.println("Method executed at every 5 seconds. Current time is :: "+ new Date());
 		}
     }
 }
