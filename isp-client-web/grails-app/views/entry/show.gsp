@@ -1,5 +1,3 @@
-
-<%@ page import="com.sd.isp.entry.Entry" %>
 <!DOCTYPE html>
 <html>
 	<head>

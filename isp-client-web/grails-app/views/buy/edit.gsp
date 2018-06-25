@@ -1,4 +1,3 @@
-<%@ page import="com.sd.isp.buy.Buy" %>
 <!DOCTYPE html>
 <html>
 	<head>

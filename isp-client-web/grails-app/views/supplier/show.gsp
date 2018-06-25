@@ -1,5 +1,3 @@
-
-<%@ page import="com.sd.isp.supplier.Supplier" %>
 <!DOCTYPE html>
 <html>
 	<head>
