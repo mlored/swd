@@ -30,7 +30,7 @@
             <g:each in="${entryInstanceList}" status="i" var="entryInstance">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>
-                        ${entryInstance.getDate()}
+                        <g:formatDate format="dd-MM-yyyy" date="${entryInstance?.date}"/>
                     <td>
                         <g:link action="edit" id="${entryInstance?.id}"><g:message code="${fieldValue(bean: entryInstance, field: "number")}" default="${fieldValue(bean: entryInstance, field: "number")}" /></g:link>
                     </td>

@@ -26,14 +26,14 @@
 						</g:eachError>
 					</ul>
 				</g:hasErrors>
-				<g:form action="update" method="PUT" id="${entryInstance?.id}"	>
+				<g:form action="update" method="PUT" id="${entryInstance?.id}"  name="form" novalidate="true">
 					<g:hiddenField name="id" value="${entryInstance?.id}" />
 
 					<fieldset class="form">
 						<g:render template="form"/>
 					</fieldset>
 					<fieldset class="box-footer">
-						<g:actionSubmit  class="btn btn-primary" value="Update" />
+						<g:actionSubmit  class="btn btn-primary" value="Actualizar" action="update" />
 					</fieldset>
 				</g:form>
 			</div>

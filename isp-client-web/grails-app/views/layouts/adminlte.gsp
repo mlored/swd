@@ -302,8 +302,10 @@
         )
         return false
     });
+    var date;
     $( document ).ready(function() {
         $("#form").validate({});
+        date = moment($('#date').val());
         $('#date').datetimepicker({
             locale: 'es'
         });
