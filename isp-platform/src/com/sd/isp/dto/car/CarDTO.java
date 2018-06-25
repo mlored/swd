@@ -18,7 +18,7 @@ public class CarDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private String _mark;
 	private String _model;
-	private String _number;
+	private Integer _year;
 	private String _color;
     private List<EntryDTO> _entries;
 
@@ -41,12 +41,12 @@ public class CarDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public String getNumber() {
-		return _number;
+	public Integer getYear() {
+		return _year;
 	}
 
-	public void setNumber(String number) {
-		_number = number;
+	public void setYear(Integer year) {
+		_year = year;
 	}
 	
 	@XmlElement

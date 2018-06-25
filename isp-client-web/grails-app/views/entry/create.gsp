@@ -13,7 +13,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title"><g:message code="default.show.label" args="[entityName]" /></h3>
+					<h3 class="box-title"><g:message code="default.new.label" args="[entityName]" /></h3>
 				</div>
 			<!-- /.box-header -->
 			<!-- form start -->
@@ -27,13 +27,10 @@
 						</g:eachError>
 					</ul>
 				</g:hasErrors>
-				<g:form  url="[action:'save', method:'post']" >
+				<g:form  url="[action:'save', method:'post']" name="form" novalidate="true">
 					<fieldset class="form">
 						<g:render template="form"/>
 					</fieldset>
-
-
-
                     <fieldset  class="box-footer">
                         <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                     </fieldset>

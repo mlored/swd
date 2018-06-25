@@ -18,8 +18,8 @@ import com.sd.isp.beans.base.BaseBean;
 public class EntryB extends BaseBean{
 
     private static final long serialVersionUID = 4680476902664047494L;
-    private String date;
-    private Integer number;
+    private Date date;
+    private String number;
     private String diagnostic;
     private ClientB cliente;
     private CarB car;
@@ -47,19 +47,19 @@ public class EntryB extends BaseBean{
         super(params);
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String _date) {
+    public void setDate(Date _date) {
         date = _date;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer _number) {
+    public void setNumber(String _number) {
         number = _number;
     }
 
@@ -94,10 +94,19 @@ public class EntryB extends BaseBean{
         if (!StringUtils.isBlank(params.get("id"))) {
             setId(Integer.valueOf(params.get("id")));
         }
-        setDate(params.get("date"));
-        setNumber(Integer.valueOf(params.get("number")));
-        setCarId(Integer.valueOf(params.get("carId")));
-        setClientId(Integer.valueOf(params.get("clientId")));
+        if (!StringUtils.isBlank(params.get("date")))
+            try {
+                setDate(new SimpleDateFormat("dd/MM/yyyy").parse(params.get("date")));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        if (!StringUtils.isBlank(params.get("number")))
+            setNumber(params.get("number"));
+        if (!StringUtils.isBlank(params.get("carId")))
+            setCarId(Integer.valueOf(params.get("carId")));
+        if (!StringUtils.isBlank(params.get("clientId")))
+            setClientId(Integer.valueOf(params.get("clientId")));
         setDiagnostic(params.get("diagnostic"));
     }
 

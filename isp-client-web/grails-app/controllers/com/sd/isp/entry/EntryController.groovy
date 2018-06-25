@@ -19,9 +19,6 @@ class EntryController {
 
 
     def index(Integer max){
-        //def entries = entryService.getAll()
-        //[entryList: entries, entryInstanceTotal: entries.size()]
-
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
@@ -33,15 +30,11 @@ class EntryController {
 
     def create() {
         [entryInstance: new EntryB(params)]
-        return
-
     }
-
 
     def save() {
         def newEntry = new EntryB(params)
         def entryInstance = entryService.save(newEntry)
-
 
         if (!entryInstance.getId()) {
             render(view: "create", model: [entryInstance: entryInstance])

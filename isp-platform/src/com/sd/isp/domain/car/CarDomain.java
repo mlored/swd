@@ -23,14 +23,14 @@ public class CarDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
 
-	@Column(name = "mark")
+	@Column(name = "mark", nullable = false)
 	private String mark;
 
 	@Column(name = "model")
 	private String model;
 
-	@Column(name = "number", unique = true)
-	private String number;
+	@Column(name = "year")
+	private Integer year;
 
 	@Column(name = "color")
 	private String color;
@@ -70,12 +70,12 @@ public class CarDomain extends BaseDomain {
 		this.model = model;
 	}
 
-	public String getNumber() {
-		return number;
+	public Integer getYear() {
+		return year;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 	
 	public String getColor() {

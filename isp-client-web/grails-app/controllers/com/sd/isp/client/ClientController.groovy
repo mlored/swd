@@ -49,13 +49,16 @@ class ClientController {
 			siguiente = clientService.find(null,10,page+1)
 		}
 
-
-		[clientInstanceList: clients, clientsInstanceTotal: clients?.size(),
-										  page: page,
-										  siguiente: siguiente?.size(),
-										  cclientInstanceList: clientService.getAll(),
-										  text: text/*,
+		if (request.getHeader('X-Requested-With')) {
+			respond clients, formats: ['json']
+		} else {
+			[clientInstanceList: clients, clientsInstanceTotal: clients?.size(),
+			 page: page,
+			 siguiente: siguiente?.size(),
+			 cclientInstanceList: clientService.getAll(),
+			 text: text/*,
 										  user:authService.getName()*/]
+		}
 
 		//respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
 	}

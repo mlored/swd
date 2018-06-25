@@ -62,7 +62,6 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
                 : result.getEntry();
         final List<EntryB> entries = new ArrayList<EntryB>();
         for (EntryDTO dto : cList) {
-
             final EntryB bean = convertDtoToBean(dto);
             bean.setCar(carResource.getById(dto.getCarId()));
             bean.setCliente(clientResource.getById(dto.getClientId()));
@@ -115,10 +114,9 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         params.put("clientId", String.valueOf(dto.getClientId()));
 
         final EntryB entryB = new EntryB(params);
-
         entryB.setCarId(dto.getCarId());
         entryB.setClientId(dto.getClientId());
-        //entryB.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(dto.getDate()));
+        entryB.setDate(dto.getDate());
         return entryB;
     }
 
@@ -126,15 +124,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
     protected EntryDTO convertBeanToDto(EntryB bean) {
         final EntryDTO dto = new EntryDTO();
         dto.setId(bean.getId());
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        String dateInString = "7-Jun-2013";
-
-        try {
-            dto.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(bean.getDate()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        dto.setDate(bean.getDate());
         dto.setNumber(bean.getNumber());
         dto.setDiagnostic(bean.getDiagnostic());
         dto.setCarId(bean.getCarId());

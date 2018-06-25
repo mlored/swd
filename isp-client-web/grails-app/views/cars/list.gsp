@@ -33,9 +33,9 @@
             <thead>
             <tr>
                 <th>#</th>
-                <g:sortableColumn property="number" title="Nº de Chapa" />
                 <g:sortableColumn property="mark" title="Marca" />
                 <g:sortableColumn property="model" title="Modelo" />
+                <g:sortableColumn property="year" title="Año" />
                 <g:sortableColumn property="color" title="Color" />
                 <th></th>
             </tr>
@@ -45,10 +45,10 @@
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td>${i+1}</td>
                     <td>
-                        <g:link action="edit" id="${carInstance?.id}"><g:message code="${fieldValue(bean: carInstance, field: "number")}" default="${fieldValue(bean: carInstance, field: "number")}" /></g:link>
+                        <g:link action="edit" id="${carInstance?.id}"><g:message code="${fieldValue(bean: carInstance, field: "mark")}" default="${fieldValue(bean: carInstance, field: "mark")}" /></g:link>
                     </td>
-                    <td>${fieldValue(bean: carInstance, field: "mark")}</td>
                     <td>${fieldValue(bean: carInstance, field: "model")}</td>
+                    <td>${fieldValue(bean: carInstance, field: "year")}</td>
                     <td>${fieldValue(bean: carInstance, field: "color")}</td>
                     <td><a class="btn btn-sm btn-danger"
                     	   data-confirm="Estas Seguro?" 

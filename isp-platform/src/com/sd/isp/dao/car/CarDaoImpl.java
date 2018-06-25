@@ -47,7 +47,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 		CarDomain carDomain = (CarDomain) sessionFactory.getCurrentSession().get(CarDomain.class, domainId);
 		carDomain.setMark(domain.getMark());
 		carDomain.setModel(domain.getModel());
-		carDomain.setNumber(domain.getNumber());
+		carDomain.setYear(domain.getYear());
 		carDomain.setColor(domain.getColor());
 		carDomain.setEntryDomains(domain.getEntryDomains());
 		sessionFactory.getCurrentSession().saveOrUpdate(carDomain);
@@ -69,7 +69,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 			Map<String, String> map = obtenerQuery(textToFind);
 			if (map.containsKey("text")) {
 				String text = map.get("text");
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("number", "%"+text+"%"))
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("year", "%"+text+"%"))
 						.add(Restrictions.ilike("mark", "%"+text+"%"))
 						.add(Restrictions.ilike("model", "%"+text+"%"))
 						.add(Restrictions.ilike("color", "%"+text+"%"));
@@ -85,7 +85,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 			}
 				if (map.containsKey("sort")) {
 					String sort = (map.get("sort"));
-					if(sort.equals("number") || sort.equals("mark") 
+					if(sort.equals("year") || sort.equals("mark") 
 										     || sort.equals("model") 
 										     || sort.equals("color")){
 						if (map.containsKey("order")){
@@ -101,11 +101,11 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 						}
 					}
 				}else{
-					criteria.addOrder(Order.asc("number").ignoreCase());
+					criteria.addOrder(Order.asc("year").ignoreCase());
 					criteria.addOrder(Order.asc("mark").ignoreCase());
 				}
 			}else{
-				criteria.addOrder(Order.asc("number").ignoreCase());
+				criteria.addOrder(Order.asc("year").ignoreCase());
 				criteria.addOrder(Order.asc("mark").ignoreCase());
 			}
 				criteria.setFirstResult(page * maxItems);

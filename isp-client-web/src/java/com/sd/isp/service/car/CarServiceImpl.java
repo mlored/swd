@@ -98,7 +98,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         params.put("mark", dto.getMark());
         params.put("model", dto.getModel());
         params.put("color", dto.getColor());
-        params.put("number", dto.getNumber());
+        params.put("year", String.valueOf(dto.getYear()));
 
         final CarB carB = new CarB(params);
 
@@ -112,7 +112,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         dto.setMark(bean.getMark());
         dto.setModel(bean.getModel());
         dto.setColor(bean.getColor());
-        dto.setNumber(bean.getNumber());
+        dto.setYear(bean.getYear());
 
         return dto;
     }

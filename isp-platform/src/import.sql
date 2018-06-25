@@ -1,14 +1,26 @@
-insert into cars (color, mark, model, number) values ('Rojo','Ferrari','Deportivo', 121);
-insert into cars (color, mark, model, number) values ('Negro','Lamborghini','Deportivo', 122);
-insert into cars (color, mark, model, number) values ('Azul','Audi','Deportivo', 123);
-insert into cars (color, mark, model, number) values ('Gris','Mercedes Benz','Deportivo', 124);
-insert into cars (color, mark, model, number) values ('Negro','BMW','Deportivo', 125);
+insert into cars (color, mark, model, year) values ('Rojo','Ferrari','Deportivo', 2000);
+insert into cars (color, mark, model, year) values ('Negro','Lamborghini','Deportivo', 20001);
+insert into cars (color, mark, model, year) values ('Azul','Audi','Deportivo', 2002);
+insert into cars (color, mark, model, year) values ('Gris','Mercedes Benz','Deportivo', 2018);
+insert into cars (color, mark, model, year) values ('Negro','BMW','Deportivo', 2018);
 
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Adrian','Aguero','4925875', 'Centro', '0985124789');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Guillermo','Zarza','123457', 'Centro', '0995123478');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Mario','Arce','4751233', 'Irrazabal', '0975412366');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Carolina','Ocampos','4963658', 'Artigas', '0985741478');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Elena','Ocampos','4785963214', 'Artigas', '0985412477');
+
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Diana','Fretes','0000001', 'Centro', '0985124789');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Andrea','Caballero','0000002', 'Centro', '0995123478');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Hugo','Martinez','00000003', 'Irrazabal', '0975412366');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Claudia','Cabral','00000004', 'Artigas', '0985741478');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Veronica','Balbuena','00000005', 'Artigas', '0985412477');
+
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Leslie','Lopez','0000006', 'Centro', '0985124789');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Deisy','Melgarejo','0000007', 'Centro', '0995123478');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Mauricio','Cristaldo','00000008', 'Irrazabal', '0975412366');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Mirta','Schmalko','00000009', 'Artigas', '0985741478');
+insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('ClientDomain','Lorena','Raugetti','00000010', 'Artigas', '0985412477');
 
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('SupplierDomain','Axel','Morel','4785123', 'Villarrica', '0985741235');
 insert into person (DTYPE, name, surname, RUC, address, cellphone) values ('SupplierDomain','Karina','Sanabria','123456', 'Centro', '0875412369');
@@ -57,7 +69,7 @@ insert into roles (authority) values ('ROLE_SECRETARIO');
 insert into roles (authority) values ('ROLE_SUPERSECRE');
 
 -- password Admin123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('admin@example.com','admin','admin', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, true, true);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('admin@example.com','admin','admin', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false);
 -- password 12345678
 insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('loredelpuerto@gmail.com','lorena','del puerto', '$2a$04$bvcZVwBYaR2P2jt3mMUKqeQHKLL6dqXXtK57RWkG8FsTMiT26cECa', true, false, false);
 -- password Karina123
@@ -65,7 +77,7 @@ insert into users (username, name, surName, password, enabled, account_locked, p
 -- password adrian123
 insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('iceberg.04@gmail.com','adrian','aguero', '$2a$04$6LDPp2g6Hb90KQfNMfpoCOjPML79aE98HlrVAB3F.6MHmnBibWTtu', true, false, false);
 -- password guillermo123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('guillermo.zarza@gmail.com','guillermo','zarza', '$2a$04$WhBzMnOtVkshD.4ElnrVTeH5.kDfg9F9qcd3Be0j81rzbin9d16N.', true, true, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('guillermo.zarza@gmail.com','guillermo','zarza', '$2a$04$WhBzMnOtVkshD.4ElnrVTeH5.kDfg9F9qcd3Be0j81rzbin9d16N.', true, false, false);
 
 
 insert into users_roles (user_id, role_id) values ('1','1');

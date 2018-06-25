@@ -36,14 +36,14 @@ public class EntryDomain extends BaseDomain {
 	private String diagnostic;
 
 	@Column(name = "number", unique = true, nullable = false)
-	private Integer number;
+	private String number;
 	
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CarDomain carDomain;
 	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
     private ClientDomain clientDomain;
-
 	
 	@OneToMany(mappedBy = "entryDomain")
     private List<EntryDetailsDomain> entryDetailsDomains;
@@ -91,11 +91,11 @@ public class EntryDomain extends BaseDomain {
 		this.date = date;
 	}
 
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	
@@ -106,6 +106,5 @@ public class EntryDomain extends BaseDomain {
 	public void setDiagnostic(String diagnostic) {
 		this.diagnostic = diagnostic;
 	}
-	
 	
 }

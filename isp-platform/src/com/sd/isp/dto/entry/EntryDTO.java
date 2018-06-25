@@ -23,7 +23,7 @@ public class EntryDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	
 	private Date _date;
-	private Integer _number;
+	private String _number;
 	private String _diagnostic;
     private CarDTO _car;
     private ClientDTO _client;
@@ -88,11 +88,11 @@ public class EntryDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public Integer getNumber() {
+	public String getNumber() {
 		return _number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		_number = number;
 	}
 	

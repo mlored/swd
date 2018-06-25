@@ -70,13 +70,16 @@ class CarsController {
 			siguiente = carService.find(null,10,page+1)
 		}
 
-
-		[carInstanceList: cars, carInstanceTotal: cars?.size(), 
-										  page: page, 
-										  siguiente: siguiente?.size(),
-										  ccarInstanceList: carService.getAll(), 
-										  text: text/*,
+        if (request.getHeader('X-Requested-With')) {
+            respond cars, formats: ['json']
+        } else {
+            [carInstanceList: cars, carInstanceTotal: cars?.size(),
+             page: page,
+             siguiente: siguiente?.size(),
+             ccarInstanceList: carService.getAll(),
+             text: text/*,
 										  user:authService.getName()*/]
+        }
 	}
 
     /*def show(Long id) {

@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'skins/_all-skins.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'AdminLTE.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2.css')}" type="text/css">
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-datetimepicker.css')}" type="text/css">
+
+
 
     <title>Sistema</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,7 +26,11 @@
     <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'adminlte.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.validate.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'select2.min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'i18n/es.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'localization/messages_es.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'moment-with-locales.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'bootstrap-datetimepicker.min.js')}"></script>
 </head>
 <body class="skin-blue sidebar-mini">
 
@@ -296,6 +304,9 @@
     });
     $( document ).ready(function() {
         $("#form").validate({});
+        $('#date').datetimepicker({
+            locale: 'es'
+        });
     });
 </script>
 </html>
