@@ -55,13 +55,16 @@ class PartController {
 			siguiente = partService.find(null,10,page+1)
 		}
 
-
-		[partInstanceList: parts, partInstanceTotal: parts?.size(), 
-										  page: page, 
-										  siguiente: siguiente?.size(),
-										  ppartInstanceList: partService.getAll(), 
-										  text: text/*,
+        if (request.getHeader('X-Requested-With')) {
+            respond parts, formats: ['json']
+        } else {
+            [partInstanceList: parts, partInstanceTotal: parts?.size(),
+             page: page,
+             siguiente: siguiente?.size(),
+             ppartInstanceList: partService.getAll(),
+             text: text/*,
 										  user:authService.getName()*/]
+        }
 	}
 
     /*def show(Long id) {

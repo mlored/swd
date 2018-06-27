@@ -305,8 +305,8 @@
     var date;
     $( document ).ready(function() {
         $("#form").validate({});
-        date = moment($('#date').val());
-        $('#date').datetimepicker({
+        date = moment($('#date').val(), "DD-MM-YYYY");
+        $('.mydate').datetimepicker({
             locale: 'es'
         });
     });

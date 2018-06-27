@@ -1,53 +1,51 @@
-package com.sd.isp.beans.service;
+package com.sd.isp.beans.item;
+
+import com.sd.isp.beans.base.BaseBean;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
 
-import com.sd.isp.beans.item.ItemB;
-import org.apache.commons.lang.StringUtils;
-
-import com.sd.isp.beans.base.BaseBean;
-
-public class ServiceB extends ItemB {
+public class ItemB  extends BaseBean {
     private static final long serialVersionUID = 1L;
     private String _name;
     private String _description;
-    private Integer _price ;
-    private Integer _quantity = 0;
+    private Integer _price;
+    private Integer _quantity;
 
-    public ServiceB(Map<String, String> params) {
+    public ItemB(Map<String, String> params) {
         super(params);
     }
-    
+
     public String getName() {
         return _name;
     }
-    
-    public void setName(String name) {
-        _name = name;
+
+    public void setName(String _name) {
+        this._name = _name;
     }
-    
+
     public String getDescription() {
         return _description;
     }
-    
-    public void setDescription(String description) {
-        _description = description;
+
+    public void setDescription(String _description) {
+        this._description = _description;
     }
-    
+
     public Integer getPrice() {
         return _price;
     }
-    
-    public void setPrice(Integer price) {
-        _price = price;
+
+    public void setPrice(Integer _price) {
+        this._price = _price;
     }
-    
+
     public Integer getQuantity() {
         return _quantity;
     }
-    
-    public void setQuantity(Integer quantity) {
-        _quantity = quantity;
+
+    public void setQuantity(Integer _quantity) {
+        this._quantity = _quantity;
     }
 
     @Override
@@ -59,9 +57,7 @@ public class ServiceB extends ItemB {
         setDescription(params.get("description"));
         if (!StringUtils.isBlank(params.get("price")))
             setPrice(Integer.valueOf(params.get("price")));
-        if (!StringUtils.isBlank(params.get("quantity")))
+        if (!StringUtils.isBlank(params.get("price")))
             setQuantity(Integer.valueOf(params.get("quantity")));
     }
-
 }
-

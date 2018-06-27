@@ -17,7 +17,7 @@ class UserController{
   def IUserService userService
   def IRoleService roleService
   
-  @Autowired def IAuthService authService
+  //@Autowired def IAuthService authService
 
   //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def index(){
@@ -139,13 +139,13 @@ class UserController{
 
   //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def delete(Long id) {
-	def userInstance = userService.getById(id.intValue())
+	  def userInstance = userService.getById(id.intValue())
 
-	  if (userInstance.getUsername()==authService.getUsername()) {
-	  flash.message = "No puedes eliminar tu registro de usuario"
+	  //if (userInstance.getUsername()==authService.getUsername()) {
+	  //	flash.message = "No puedes eliminar tu registro de usuario"
 	  redirect(action: "index")
 	  return
-	}
+  //}
 
 	if (!userInstance) {
 	  flash.message = message(code: 'default.not.found.message', args: [

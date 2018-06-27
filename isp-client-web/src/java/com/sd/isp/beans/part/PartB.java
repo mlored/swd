@@ -2,11 +2,12 @@ package com.sd.isp.beans.part;
 
 import java.util.Map;
 
+import com.sd.isp.beans.item.ItemB;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.isp.beans.base.BaseBean;
 
-public class PartB extends BaseBean{
+public class PartB extends ItemB {
 	private static final long serialVersionUID = 1L;
 	private String _name;
 	private String _description;

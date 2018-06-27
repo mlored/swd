@@ -1,5 +1,6 @@
 package com.sd.isp.dto.entry;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class EntryDTO extends BaseDTO {
     private ClientDTO _client;
     private Integer _carId;
     private Integer _clientId;
+	private List<EntryDetailsDTO> _entryDetails = new ArrayList<EntryDetailsDTO>();
+
 	
 	@XmlElement
 	public Integer getCarId() {
@@ -48,7 +51,6 @@ public class EntryDTO extends BaseDTO {
 		this._clientId = _clientId;
 	}
 
-	private List<EntryDetailsDTO> _entryDetails;
 
     @XmlElement
 	public CarDTO getCar() {

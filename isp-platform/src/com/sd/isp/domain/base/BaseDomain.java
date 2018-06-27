@@ -1,5 +1,7 @@
 package com.sd.isp.domain.base;
 
-public class BaseDomain {
+import java.io.Serializable;
+
+public class BaseDomain implements Serializable {
 
 }

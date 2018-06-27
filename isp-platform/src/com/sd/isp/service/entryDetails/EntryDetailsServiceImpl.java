@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.isp.dao.entry_details.EntryDetailsDaoImpl;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
+import com.sd.isp.dao.item.IItemDao;
 import com.sd.isp.dao.part.IPartDao;
 import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
@@ -20,8 +21,9 @@ import com.sd.isp.dto.employee.EmployeeDTO;
 import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
-import com.sd.isp.dto.part.PartDTO;
+import com.sd.isp.dto.item.ItemDTO;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.item.IItemService;
 import com.sd.isp.service.part.IPartService;
 
 @Service
@@ -31,10 +33,10 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 	private IEntryDetailsDao entryDetailsDao;
 	
 	@Autowired
-	private IPartDao partDao;
+	private IItemDao partDao;
 	
 	@Autowired
-	private IPartService partService;
+	private IItemService itemService;
 	
 
 	@Override
@@ -99,9 +101,9 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 		entryDetails.setId(domain.getId());
 		entryDetails.setDate(domain.getDate());
 		if (domain.getItemDomain() != null) {
-			PartDTO part = partService.getById(domain.getItemDomain().getId());
+			ItemDTO part = itemService.getById(domain.getItemDomain().getId());
 			if (part != null)
-				entryDetails.setPart(part);
+				entryDetails.setItem(part);
 		}
 			
 		entryDetails.setEntryId(domain.getEntryDomain().getId());
@@ -114,7 +116,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 		final EntryDetailsDomain entryDetails = new EntryDetailsDomain();
 		entryDetails.setId(dto.getId());
 		entryDetails.setDate(dto.getDate());
-		entryDetails.setItemDomain(partDao.getById(dto.getPart().getId()));
+		entryDetails.setItemDomain(partDao.getById(dto.getItem().getId()));
 		
 		return entryDetails;
 	}

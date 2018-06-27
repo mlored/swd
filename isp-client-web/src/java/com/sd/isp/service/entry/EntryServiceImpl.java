@@ -1,9 +1,13 @@
 package com.sd.isp.service.entry;
 
 import com.sd.isp.beans.entry.EntryB;
+import com.sd.isp.beans.entry_details.EntryDetailsB;
+import com.sd.isp.beans.item.ItemB;
 import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
+import com.sd.isp.dto.entry_details.EntryDetailsDTO;
+import com.sd.isp.dto.item.ItemDTO;
 import com.sd.isp.rest.entry.IEntryResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.car.CarServiceImpl;
@@ -117,7 +121,41 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         entryB.setCarId(dto.getCarId());
         entryB.setClientId(dto.getClientId());
         entryB.setDate(dto.getDate());
+
+        ArrayList<EntryDetailsB> l = new ArrayList<EntryDetailsB>();
+        for (EntryDetailsDTO d : dto.getEntryDetails()){
+            l.add(convertDtoToBean(d));
+        }
+        entryB.setEntryDetails(l);
+
         return entryB;
+    }
+
+    protected EntryDetailsB convertDtoToBean(EntryDetailsDTO dto) {
+        final Map<String, String> params = new HashMap<String, String>();
+        params.put("id", String.valueOf(dto.getId()));
+        params.put("date", String.valueOf(dto.getDate()));
+        params.put("itemId", String.valueOf(dto.getItemId()));
+
+        final EntryDetailsB entryDetailsB = new EntryDetailsB(params);
+        entryDetailsB.setDate(dto.getDate());
+        entryDetailsB.setItem(convertDtoToBean(dto.getItem()));
+        entryDetailsB.setItemId(dto.getItemId());
+
+        return entryDetailsB;
+    }
+
+    protected ItemB convertDtoToBean(ItemDTO dto) {
+        final Map<String, String> params = new HashMap<String, String>();
+        params.put("id", String.valueOf(dto.getId()));
+        params.put("name", dto.getName());
+        params.put("description", dto.getDescription());
+        params.put("price", String.valueOf(dto.getPrice()));
+        params.put("quantity", String.valueOf(dto.getQuantity()));
+
+        final ItemB itemB = new ItemB(params);
+
+        return itemB;
     }
 
     @Override
@@ -130,8 +168,24 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         dto.setCarId(bean.getCarId());
         dto.setClientId(bean.getClientId());
 
+        List<EntryDetailsDTO> l = new ArrayList();
+        for (EntryDetailsB e : bean.getEntryDetails()){
+           l.add(convertBeanToDto(e));
+        }
+        dto.setEntryDetails(l);
+
         return dto;
     }
+
+    protected EntryDetailsDTO convertBeanToDto(EntryDetailsB bean) {
+        final EntryDetailsDTO dto = new EntryDetailsDTO();
+        dto.setId(bean.getId());
+        dto.setDate(bean.getDate());
+        dto.setItemId(bean.getItemId());
+
+        return dto;
+    }
+
     public List<EntryB> find (String textToFind, int maxItems, int page) {
 		/*final ServiceResult result = _serviceResource.find(textToFind, maxItems, page);
 		final List<ServiceDTO> rList = null == result.getServices() ? new ArrayList<ServiceDTO>()

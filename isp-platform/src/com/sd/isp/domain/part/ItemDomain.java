@@ -16,7 +16,7 @@ import com.sd.isp.domain.invoice_details.InvoiceDetailsDomain;
 
 @Entity
 @Table(name = "items")
-public abstract class ItemDomain extends BaseDomain {
+public class ItemDomain extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

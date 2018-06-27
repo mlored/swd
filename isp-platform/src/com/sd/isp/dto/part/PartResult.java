@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseResult;
-import com.sd.isp.dto.part.PartDTO;
+import com.sd.isp.dto.item.ItemDTO;
 
 @XmlRootElement(name = "partResult")
 public class PartResult extends BaseResult<PartDTO> {

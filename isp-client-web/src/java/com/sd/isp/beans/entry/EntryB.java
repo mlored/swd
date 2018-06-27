@@ -2,9 +2,7 @@ package com.sd.isp.beans.entry;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +24,18 @@ public class EntryB extends BaseBean{
     private Integer carId;
     private Integer clientId;
     private List<EntryDetailsB> entryDetails;
+
+    public List<EntryDetailsB> getEntryDetails() {
+        return entryDetails;
+    }
+
+    public void addDetail(EntryDetailsB e){
+        entryDetails.add(e);
+    }
+
+    public void setEntryDetails(List<EntryDetailsB> entryDetails) {
+        this.entryDetails = entryDetails;
+    }
 
     public Integer getCarId() {
         return carId;
@@ -91,6 +101,7 @@ public class EntryB extends BaseBean{
 
     @Override
     protected void create(Map<String, String> params) {
+        entryDetails = new ArrayList<EntryDetailsB>();
         if (!StringUtils.isBlank(params.get("id"))) {
             setId(Integer.valueOf(params.get("id")));
         }
@@ -98,8 +109,7 @@ public class EntryB extends BaseBean{
             try {
                 setDate(new SimpleDateFormat("dd/MM/yyyy").parse(params.get("date")));
             } catch (ParseException e) {
-                e.printStackTrace();
-            }
+                e.printStackTrace(); }
 
         if (!StringUtils.isBlank(params.get("number")))
             setNumber(params.get("number"));
@@ -108,6 +118,17 @@ public class EntryB extends BaseBean{
         if (!StringUtils.isBlank(params.get("clientId")))
             setClientId(Integer.valueOf(params.get("clientId")));
         setDiagnostic(params.get("diagnostic"));
+
+        if (!StringUtils.isBlank(params.get("entry.entryDetails[0].itemId"))){
+            EntryDetailsB e1 = new EntryDetailsB(params);
+            e1.setItemId(Integer.valueOf(params.get("entry.entryDetails[0].itemId")));
+            try {
+                e1.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(params.get("entry.entryDetails[0].date")));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            addDetail(e1);
+        }
     }
 
 }

@@ -95,7 +95,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
         params.put("date", dto.getDate().toString());
 
         final EntryDetailsB entryDetails = new EntryDetailsB(params);
-        entryDetails.setPart(_partService.getById(dto.getPart().getId()));
+        entryDetails.setItem(_partService.getById(dto.getItem().getId()));
         entryDetails.setEntry(_entryService.getById(dto.getEntryId()));
 
 
@@ -107,7 +107,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
         final EntryDetailsDTO dto = new EntryDetailsDTO();
         dto.setId(bean.getId());
         dto.setDate(bean.getDate());
-        dto.getPart().setId(bean.getPart().getId());
+        dto.getItem().setId(bean.getItem().getId());
         dto.setEntryId(bean.getEntry().getId());
 
 

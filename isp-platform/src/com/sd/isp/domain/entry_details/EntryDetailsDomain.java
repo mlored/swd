@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,6 +30,7 @@ public class EntryDetailsDomain extends BaseDomain {
 	    private ItemDomain itemDomain;
 		
 		@ManyToOne
+	    @JoinColumn(name="entryDetail_id")
 	    private EntryDomain entryDomain;
 
 		public Integer getId() {

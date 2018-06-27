@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.sd.isp.dto.part.PartResult;
+import com.sd.isp.dto.item.ItemResult;
 import com.sd.isp.dto.service.ServiceDTO;
 import com.sd.isp.dto.service.ServiceResult;
 import com.sd.isp.service.service.IServiceService;

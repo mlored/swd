@@ -4,9 +4,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseDTO;
+import com.sd.isp.dto.item.ItemDTO;
 
 @XmlRootElement(name = "service")
-public class ServiceDTO extends BaseDTO {
+public class ServiceDTO extends ItemDTO {
 
 	private static final long serialVersionUID = 1L;
 	private String _name;
