@@ -12,7 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.beans.factory.annotation.Autowired
 
 class UserController{
-  static allowedMethods = [save: "POST", update: "PUT", delete: "POST"]
+  static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
   def IUserService userService
   def IRoleService roleService

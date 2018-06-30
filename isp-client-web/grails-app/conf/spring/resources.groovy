@@ -21,7 +21,7 @@ beans = {
 
 	cacheConfiguration(CacheConfiguration){ consistentHashing=true }
 
-	addressProvider(DefaultAddressProvider){ address=grailsApplication.config.cache.address }
+	addressProvider(DefaultAddressProvider){ address= "127.0.0.1:11211" }
 
 	memcachedClientFactory(MemcacheClientFactoryImpl)
 
@@ -29,7 +29,7 @@ beans = {
 		cacheClientFactory=ref("memcachedClientFactory")
 		addressProvider=ref("addressProvider")
 		configuration=ref("cacheConfiguration")
-		cacheName = grailsApplication.config.cache.name
+		cacheName = "isp-client-web-cache"
 	}
 
 	ssmCache(SSMCache,

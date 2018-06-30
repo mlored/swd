@@ -8,10 +8,10 @@ import grails.transaction.Transactional
 
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional(readOnly = true)
+@Transactional
 class ClientController {
 
-	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IClientService clientService
 
 	def index(Integer max) {
@@ -63,15 +63,10 @@ class ClientController {
 		//respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
 	}
 
-	def show(ClientB clientInstance) {
-		respond clientInstance
-	}
-
 	def create() {
 		respond new ClientB(params)
 	}
 
-	//@Transactional
 	def save(){
 		def clientInstance = new ClientB(params)
 		def newClient = clientService.save(clientInstance)
@@ -85,25 +80,6 @@ class ClientController {
 				newClient.getId()
 		])
 		redirect(action: "index")
-		/*if (clientInstance == null) {
-			notFound()
-			return
-		}
-
-		if (clientInstance.hasErrors()) {
-			respond clientInstance.errors, view:'create'
-			return
-		}
-
-		clientInstance.save flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
-				redirect clientInstance
-			}
-			'*' { respond clientInstance, [status: CREATED] }
-		}*/
 	}
 
 	def edit(Long id) {
@@ -118,66 +94,27 @@ class ClientController {
 		}
 
 		[clientInstance: clientInstance]
-		//respond clientInstance
 	}
 
-	@Transactional
 	def update(Long id) {
-		/*if (clientInstance == null) {
-			notFound()
-			return
-		}
-
-		if (clientInstance.hasErrors()) {
-			respond clientInstance.errors, view:'edit'
-			return
-		}
-
-		clientInstance.save flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [message(code: 'Client.label', default: 'Client'), clientInstance.id])
-				redirect clientInstance
-			}
-			'*'{ respond clientInstance, [status: OK] }
-		}*/
-		def clientInstance = clientService.getById(id.intValue())
-		if (!clientInstance) {
+		def clientB = new ClientB(params)
+		def clientInstance = clientService.update(id.intValue(), clientB)
+		if (clientInstance == null) {
 			flash.message = message(code: 'default.not.found.message', args: [
-					message(code: 'client.label', default: 'Client'),
+					message(code: 'client.label', default: 'Car'),
 					id
 			])
 			redirect(action: "list")
 			return
 		}
 
-		if (version != null) {
-			if (clientInstance.version > version) {
-				clientInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-						[
-								message(code: 'client.label', default: 'Client')] as Object[],
-						"Another user has updated this Client while you were editing")
-				render(view: "edit", model: [clientInstance: clientInstance])
-				return
-			}
-		}
-
-		clientInstance.properties = params
-
-		if (!clientInstance.save(flush: true)) {
-			render(view: "edit", model: [clientInstance: clientInstance])
-			return
-		}
-
 		flash.message = message(code: 'default.updated.message', args: [
-				message(code: 'client.label', default: 'Client'),
+				message(code: 'client.label', default: 'Car'),
 				clientInstance.id
 		])
-		redirect(action: "show", id: clientInstance.id)
+		redirect(action: "list")
 	}
 
-	@Transactional
 	def delete(Long id) {
 		
 		try {

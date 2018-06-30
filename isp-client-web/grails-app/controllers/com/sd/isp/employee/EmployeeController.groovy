@@ -8,10 +8,10 @@ import grails.transaction.Transactional
 
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional(readOnly = true)
+@Transactional
 class EmployeeController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IEmployeeService employeeService
 	
     def index(Integer max) {
@@ -78,7 +78,6 @@ class EmployeeController {
 		//respond new Employee(params)
     }
 
-    @Transactional
 	def save() {
 		def employeeInstance = new EmployeeB(params)
 		def newEmployee = employeeService.save(employeeInstance)
@@ -132,7 +131,6 @@ class EmployeeController {
 		 redirect(action: "list")
 	 }
 
-    @Transactional
 	def delete(Long id) {
 		
 		try {

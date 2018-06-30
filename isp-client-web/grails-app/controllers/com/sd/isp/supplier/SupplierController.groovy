@@ -12,7 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Transactional(readOnly = true)
 class SupplierController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	ISupplierService supplierService
 
     def index(Integer max) {

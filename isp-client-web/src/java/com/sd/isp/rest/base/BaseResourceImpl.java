@@ -21,7 +21,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
 	@Autowired
 	IAuthService authService;
 
-	private final static String BASE_URL = Configurator.getUrl();
+	private final static String BASE_URL = "http://localhost:8080/isp-platform/rest";
 
 	public BaseResourceImpl(Class<DTO> dtoClass, String resourcePath, Class<Result> resultClass) {
 		_dtoClass = dtoClass;

@@ -289,11 +289,10 @@
         $.ajax(
             {
                 url: this.getAttribute('href'),
-                type: 'DELETE',
+                type: 'POST',
                 async: false,
                 complete: function(response, status) {
                     if (status == 'success')
-                    //alert('success!')
                         location.reload();
                     else
                     alert('Error: the service responded with: ' + response.status + '\n' + response.responseText)

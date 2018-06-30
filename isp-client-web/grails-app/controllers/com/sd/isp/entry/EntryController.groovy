@@ -10,7 +10,7 @@ import com.sd.isp.service.entry_details.IEntryDetailsService
 
 class EntryController {
 
-    static allowedMethods = [list: "GET",save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     IEntryService entryService
     IEntryDetailsService entryDetailsService

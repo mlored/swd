@@ -11,7 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Transactional(readOnly = true)
 class PartController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	IPartService partService
 	

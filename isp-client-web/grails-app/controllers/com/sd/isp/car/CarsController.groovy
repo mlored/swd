@@ -8,10 +8,10 @@ import com.sd.isp.service.car.ICarService
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional
 class CarsController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     ICarService carService
 
@@ -31,7 +31,7 @@ class CarsController {
                 message(code: 'car.label', default: 'Car'),
                 newCar.getId()
         ])
-        redirect(action: "index")
+        return render(contentType:"text/json") { "ok" }
     }
 
     def index(Integer max) {
@@ -40,8 +40,6 @@ class CarsController {
     }
 
     def list(Integer max) {
-		//def employees = employeeService.getAll()
-		
 		def page = 0
 		def siguiente
 		if(null != params.get("page")){
@@ -81,20 +79,6 @@ class CarsController {
 										  user:authService.getName()*/]
         }
 	}
-
-    /*def show(Long id) {
-        def carInstance = carService.getById(id.intValue())
-        if (!carInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'car.label', default: 'Car'),
-                    id
-            ])
-            redirect(action: "list")
-            return
-        }
-
-        [carInstance: carInstance]
-    }*/
 
     def edit(Long id) {
         def carInstance = carService.getById(id.intValue())
