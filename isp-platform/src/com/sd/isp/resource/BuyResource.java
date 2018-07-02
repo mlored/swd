@@ -19,7 +19,7 @@ import com.sd.isp.service.buy.IBuyService;
 
 @Path("/buy")
 @Component
-@Secured("ROLE_SECRETARIO")
+@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
 public class BuyResource {
 
 	@Autowired

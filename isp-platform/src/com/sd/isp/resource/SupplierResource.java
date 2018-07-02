@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,6 +20,7 @@ import com.sd.isp.service.supplier.ISupplierService;
 
 @Path("/supplier")
 @Component
+@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
 public class SupplierResource {
 
 	@Autowired
@@ -60,7 +62,6 @@ public class SupplierResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
 	public SupplierResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return supplierService.find(textToFind, page, maxItems);
 	}
@@ -68,7 +69,6 @@ public class SupplierResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
 	public SupplierResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return supplierService.find(null, page, maxItems);
 	}

@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,6 +19,7 @@ import com.sd.isp.service.entryDetails.IEntryDetailsService;
 
 @Path("/entryDetails")
 @Component
+@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
 public class EntryDetailsResource {
 
 	@Autowired

@@ -222,7 +222,7 @@
     </div>
 </div><!-- ./wrapper -->
 
-<h1>Instancia : ${grailsApplication.config.app.instance} </h1>
+<h1>Instancia : ${grailsApplication.config.app.instance} 2</h1>
 </body>
 
 <script>

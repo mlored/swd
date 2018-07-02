@@ -19,7 +19,7 @@ import com.sd.isp.service.car.ICarService;
 
 @Path("/car")
 @Component
-@Secured("ROLE_ADMIN")
+@Secured({"ROLE_ADMIN"})
 public class CarResource {
 	@Autowired
 	private ICarService carService;
@@ -33,7 +33,7 @@ public class CarResource {
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public CarResult getAll() {
 		return carService.getAll();
 	}

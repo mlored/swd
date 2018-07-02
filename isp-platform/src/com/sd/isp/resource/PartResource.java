@@ -20,6 +20,7 @@ import com.sd.isp.service.part.IPartService;
 
 @Path("/part")
 @Component
+@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
 public class PartResource {
 
 	@Autowired
@@ -34,7 +35,7 @@ public class PartResource {
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public PartResult getAll() {
 		return partService.getAll();
 	}
@@ -70,7 +71,7 @@ public class PartResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public PartResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return partService.find(null, page, maxItems);
 	}

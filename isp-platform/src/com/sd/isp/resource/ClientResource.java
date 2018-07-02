@@ -19,7 +19,7 @@ import com.sd.isp.service.cliente.IClientService;
 
 @Path("/client")
 @Component
-@Secured("ROLE_SECRETARIO")
+@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
 public class ClientResource {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class ClientResource {
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public ClientResult getAll() {
 		return clientService.getAll();
 	}
@@ -69,7 +69,7 @@ public class ClientResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public ClientResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return clientService.find(null, page, maxItems);
 	}
