@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.dto.supplier.SupplierResult;
 import com.sd.isp.service.supplier.ISupplierService;

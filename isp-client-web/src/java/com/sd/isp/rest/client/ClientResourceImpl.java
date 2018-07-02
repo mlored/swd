@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
-import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("clientResource")
 public class ClientResourceImpl extends BaseResourceImpl<ClientDTO, ClientResult> implements IClientResource {
