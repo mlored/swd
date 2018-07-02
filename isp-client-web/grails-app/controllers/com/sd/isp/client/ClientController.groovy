@@ -12,18 +12,17 @@ import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional
+@Secured(["ROLE_SECRETARIO"])
 class ClientController {
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IClientService clientService
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def index(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
 		redirect(action: "list", params: params)
 	}
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def list(Integer max) {
 		//def clients = clientService.getAll()
 		def page = 0
@@ -68,12 +67,10 @@ class ClientController {
 		//respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
 	}
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def create() {
 		respond new ClientB(params)
 	}
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def save(){
 		def clientInstance = new ClientB(params)
 		def newClient = clientService.save(clientInstance)
@@ -89,7 +86,6 @@ class ClientController {
 		redirect(action: "index")
 	}
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def edit(Long id) {
 		def clientInstance = clientService.getById(id.intValue())
 		if (!clientInstance) {
@@ -104,7 +100,6 @@ class ClientController {
 		[clientInstance: clientInstance]
 	}
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def update(Long id) {
 		def clientB = new ClientB(params)
 		def clientInstance = clientService.update(id.intValue(), clientB)
@@ -124,7 +119,6 @@ class ClientController {
 		redirect(action: "list")
 	}
 
-	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def delete(Long id) {
 		
 		try {

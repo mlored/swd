@@ -10,14 +10,15 @@ import com.sd.isp.service.car.ICarService;
 
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional
+@Secured(["ROLE_SECRETARIO"])
 class BuyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	IBuyService buyService
 
-    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
+
     def list(Integer max) {
 		def buys = buyService.getAll()
 
@@ -29,12 +30,10 @@ class BuyController {
     }*/
 
     @Transactional
-    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def create() {
          [buyInstance: new BuyB(params)]
     }
 
-    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def save(BuyB buyInstance) {
         if (buyInstance == null) {
             notFound()
@@ -57,13 +56,10 @@ class BuyController {
         }
     }
 
-    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def edit(BuyB buyInstance) {
         respond buyInstance
     }
 
-    @Transactional
-    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def update(BuyB buyInstance) {
         if (buyInstance == null) {
             notFound()
@@ -86,8 +82,6 @@ class BuyController {
         }
     }
 
-    @Transactional
-    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def delete(BuyB buyInstance) {
 
         if (buyInstance == null) {

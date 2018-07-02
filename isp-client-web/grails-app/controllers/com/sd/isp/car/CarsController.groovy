@@ -1,5 +1,6 @@
 package com.sd.isp.car
 
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
 import com.sd.isp.beans.car.CarB
@@ -9,6 +10,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional
+@Secured(["ROLE_ADMIN"])
 class CarsController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -39,6 +41,7 @@ class CarsController {
         redirect(action: "list", params: params)
     }
 
+    @Secured(["ROLE_SECRETARIO","ROLE_MECANICO"])
     def list(Integer max) {
 		def page = 0
 		def siguiente

@@ -64,7 +64,11 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                            <span class="hidden-xs">Usuario</span>
+                            <span class="hidden-xs">
+                                <sec:ifLoggedIn>
+                                    <sec:username/>
+                                </sec:ifLoggedIn>
+                            </span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->

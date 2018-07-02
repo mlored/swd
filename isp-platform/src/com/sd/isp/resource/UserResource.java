@@ -21,6 +21,7 @@ import com.sd.isp.service.user.IUserService;
 
 @Path("/user")
 @Component
+@Secured("ROLE_ADMIN")
 public class UserResource {
 
 	@Autowired
@@ -29,7 +30,6 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public UserDTO getById(@PathParam("id") Integer userId) {
 		return userService.getById(userId);
 	}
@@ -37,13 +37,13 @@ public class UserResource {
 	@GET
 	@Path("/username/{username}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN", "ROLE_SECRETARIO", "ROLE_MECANICO"})
 	public UserDTO getByUserName(@PathParam("username") String username) {
 		return userService.getByUsername(username);
 	}
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_ADMIN", "ROLE_SECRETARIO"})
 	public UserResult getAll() {
 		return userService.getAll();
 	}
@@ -61,8 +61,6 @@ public class UserResource {
 	
 	@DELETE
 	@Path("/{id}")
-	//@Produces("application/json")
-	//@Secured({"ROLE_SUPERUSER", "ROLE_ADMIN"})
 	public UserDTO delete(@PathParam("id") Integer userId) {
 		return userService.delete(userId);
 	}
@@ -71,7 +69,6 @@ public class UserResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
 	public UserResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return userService.find(textToFind, page, maxItems);
 	}

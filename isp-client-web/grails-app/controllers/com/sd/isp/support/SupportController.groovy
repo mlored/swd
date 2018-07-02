@@ -3,15 +3,14 @@ package com.sd.isp.support
 
 import com.sd.isp.beans.support.SupportB
 import com.sd.isp.service.support.ISupportService
-
+import grails.plugin.springsecurity.annotation.Secured
 
 class SupportController {
 
     static allowedMethods = [save: "POST"]
-    def ISupportService supportService
+    ISupportService supportService
 
     def create(){}
-
 
     def save() {
         def supportInstance = new SupportB(params)

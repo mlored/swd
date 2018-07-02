@@ -1,6 +1,6 @@
 package com.sd.isp.role
 
-
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 
@@ -10,7 +10,8 @@ import com.sd.isp.service.role.IRoleService
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional(readOnly = true)
+@Transactional
+@Secured(["ROLE_ADMIN"])
 class RoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

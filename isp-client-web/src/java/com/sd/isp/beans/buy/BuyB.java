@@ -51,7 +51,10 @@ public class BuyB extends BaseBean {
 	            setId(Integer.valueOf(params.get("id")));
 	        }
 	      //  setDate(params.get("mark"));
-	        setNumber(Integer.valueOf(params.get("number")));
+			 if (!StringUtils.isBlank(params.get("number"))) {
+				 setNumber(Integer.valueOf(params.get("number")));
+			 }
+
 	        setTotal(Integer.valueOf(params.get("total")));
 
 	    }

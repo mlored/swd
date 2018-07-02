@@ -19,6 +19,7 @@ import com.sd.isp.service.car.ICarService;
 
 @Path("/car")
 @Component
+@Secured("ROLE_ADMIN")
 public class CarResource {
 	@Autowired
 	private ICarService carService;
@@ -26,20 +27,18 @@ public class CarResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	@Secured({"ROLE_SUPER", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public CarDTO getById(@PathParam("id") Integer carId) {
 		return carService.getById(carId);
 	}
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_SUPER", "ROLE_SECRETARIO", "ROLE_ADMIN"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
 	public CarResult getAll() {
 		return carService.getAll();
 	}
 
 	@POST
-	@Secured({"ROLE_SUPER", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	public CarDTO save(CarDTO car) {
 		System.out.println(car.getMark());
 		return carService.save(car);
@@ -47,14 +46,12 @@ public class CarResource {
 	
 	@PUT
 	@Path("/{id}")
-	@Secured({"ROLE_SUPER", "ROLE_SECRETARIO", "ROLE_ADMIN"})
     public CarDTO updateById(@PathParam("id") Integer carId, @RequestBody CarDTO car) {
         return carService.updateById(carId, car);
     }
 	
 	@DELETE
 	@Path("/{id}")
-	@Secured({"ROLE_SUPER", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	@Produces("application/json")
 	public CarDTO delete(@PathParam("id") Integer carId) {
 		return carService.delete(carId);
@@ -65,7 +62,6 @@ public class CarResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
 	public CarResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return carService.find(textToFind, page, maxItems);
 	}
@@ -73,7 +69,7 @@ public class CarResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
+	@Secured({"ROLE_SECRETARIO", "ROLE_MECANICO"})
 	public CarResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return carService.find(null, page, maxItems);
 	}

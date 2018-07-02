@@ -23,6 +23,7 @@ import com.sd.isp.service.statistic.IStatisticService*/
 import com.sd.uni.labpatologia.util.StatusEnum*/
 import com.sun.corba.se.pept.transport.OutboundConnectionCache
 
+@Secured(["ROLE_ADMIN"])
 class ReportController {
 	static allowedMethods = [save: "POST", update: "POST"]
 

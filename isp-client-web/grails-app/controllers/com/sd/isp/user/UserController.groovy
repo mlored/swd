@@ -11,6 +11,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.beans.factory.annotation.Autowired
 
+@Secured(['ROLE_ADMIN'])
 class UserController{
   static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -19,7 +20,6 @@ class UserController{
   
   //@Autowired def IAuthService authService
 
-  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def index(){
 	params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
@@ -35,7 +35,6 @@ class UserController{
 	  [userInstance: new UserB(params)]
   }
 
-  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def save() {
 	final Set<RoleB> roles = new HashSet<RoleB>();
 	for (String roleId : params.list('rolesIds')) {
@@ -61,7 +60,6 @@ class UserController{
 	  redirect(action: "index")
   }
 
-  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def edit(Long id) {
 	def userInstance = userService.getById(id.intValue())
 	if (!userInstance) {
@@ -75,8 +73,7 @@ class UserController{
 	
 	[userInstance: userInstance]
   }
-    
-  //@Secured(['ROLE_SUPERUSER', 'ROLE_ADMIN'])
+
   def show(Long id) {
 	  def userInstance = userService.getById(id.intValue())
 	  if (!userInstance) {
@@ -91,6 +88,7 @@ class UserController{
 	   [userInstance: userInstance]
   }
 
+	@Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_MECANICO'])
    def getByUsername(String username){
 	   def userInstance =  userService.find(username,10,0) //userService.getByUsername(username)
 	   if (!userInstance) {
@@ -116,8 +114,6 @@ class UserController{
 	   render result
    }
 
-  
-  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
 	def update(Long id) {
 		def userB= new UserB(params)
 		def userInstance = userService.update(id.intValue(), userB)
@@ -137,7 +133,6 @@ class UserController{
 		redirect(action: "list")
 	}
 
-  //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
   def delete(Long id) {
 	  def userInstance = userService.getById(id.intValue())
 

@@ -2,6 +2,7 @@ package com.sd.isp.part
 
 import com.sd.isp.beans.part.PartB
 import com.sd.isp.service.part.IPartService
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,6 +10,7 @@ import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional(readOnly = true)
+@Secured(["ROLE_ADMIN"])
 class PartController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -23,7 +25,8 @@ class PartController {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
-	
+
+    @Secured(["ROLE_MECANICO"])
 	def list(Integer max) {
 		//def parts = partService.getAll()
 		

@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,6 +19,7 @@ import com.sd.isp.service.cliente.IClientService;
 
 @Path("/client")
 @Component
+@Secured("ROLE_SECRETARIO")
 public class ClientResource {
 
 	@Autowired
@@ -32,6 +34,7 @@ public class ClientResource {
 
 	@GET
 	@Produces("application/xml")
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
 	public ClientResult getAll() {
 		return clientService.getAll();
 	}
@@ -59,7 +62,6 @@ public class ClientResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
 	public ClientResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return clientService.find(textToFind, page, maxItems);
 	}
@@ -67,7 +69,7 @@ public class ClientResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO"})
 	public ClientResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return clientService.find(null, page, maxItems);
 	}

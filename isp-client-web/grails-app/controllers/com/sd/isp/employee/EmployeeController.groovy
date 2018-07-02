@@ -1,4 +1,7 @@
 package com.sd.isp.employee
+
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.employee.EmployeeB
@@ -9,6 +12,7 @@ import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
 @Transactional
+@Secured(["ROLE_SECRETARIO"])
 class EmployeeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -59,20 +63,6 @@ class EmployeeController {
 										  user:authService.getName()*/]
 	}
 
-    /* def show(Long id) {
-        def employeeInstance = employeeService.getById(id.intValue())
-        if (!employeeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'employee.label', default: 'Country'),
-                    id
-            ])
-            redirect(action: "list")
-            return
-        }
-
-        [employeeInstance: employeeInstance]
-    }*/
-
     def create() {
         [employeeInstance: new EmployeeB(params)]
 		//respond new Employee(params)
@@ -118,11 +108,6 @@ class EmployeeController {
 			 redirect(action: "list")
 			 return
 		 }
-
-		 /*if (!employeeInstance.save(flush: true)) {
-			 render(view: "edit", model: [employeeInstance: employeeInstance])
-			 return
-		 }*/
  
 		 flash.message = message(code: 'default.updated.message', args: [
 				 message(code: 'employee.label', default: 'Employee'),

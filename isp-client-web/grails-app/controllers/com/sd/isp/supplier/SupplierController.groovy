@@ -1,4 +1,7 @@
 package com.sd.isp.supplier
+
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.supplier.SupplierB
@@ -9,7 +12,8 @@ import com.sd.isp.service.supplier.ISupplierService
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional(readOnly = true)
+@Transactional
+@Secured(["ROLE_SECRETARIO"])
 class SupplierController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

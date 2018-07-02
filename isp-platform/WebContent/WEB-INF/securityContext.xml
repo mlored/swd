@@ -2,19 +2,14 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
     xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http pattern="/rest/support" security="none"/>
     <http pattern="/**" use-expressions="true">
-     <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_MECANICO')" />
-        <intercept-url pattern="/user**"   access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
-        <intercept-url pattern="/user/**"  access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
-        <intercept-url pattern="/roles**"  access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
-        <intercept-url pattern="/roles/**" access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
-        <http-basic/>
-        <logout logout-url="/logout"/><logout/>
+      <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_SECRETARIO') or hasRole('ROLE_MECANICO')" />
+      <http-basic/>
     </http>
  
     <!-- Select users and user_roles from database -->
@@ -32,7 +27,5 @@
     
     <!-- Para usar la anotacion @Secured de Spring -->
 	<global-method-security secured-annotations="enabled" />
- 
-    
  
 </beans:beans>

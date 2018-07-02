@@ -141,7 +141,7 @@
                         return car
                     },
                     ajax: {
-                        url: "/isp-client-web/cars/list.json",
+                        url: "/isp-client-web/cars/list",
                         dataType: 'json',
                         data: function (params) {
 
