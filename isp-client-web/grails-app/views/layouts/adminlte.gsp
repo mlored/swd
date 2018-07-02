@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Tell the browser to be responsive to screen width -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'skins/_all-skins.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
@@ -133,78 +133,67 @@
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu tree" data-widget="tree">
-                <li class="header">MENU</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-users"></i> <span>Personas</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                    	<li><a href="/isp-client-web/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
-                        <li><a href="/isp-client-web/employee/list"><i class="fa fa-user"></i> Empleados</a></li>
-                        <li><a href="/isp-client-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
-                        <li><a href="/isp-client-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
-                    </ul>
-                </li>
+                <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO">
+                    <li class="header">MENU</li>
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-gear"></i> <span>Configuracion</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/isp-client-web/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
+                                <li><a href="/isp-client-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
+                                <li><a href="/isp-client-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                                    <li><a href="/isp-client-web/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
+                                    <li><a href="/isp-client-web/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
+                                    <li><a href="/isp-client-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
+                                    <li><a href="/isp-client-web/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
+                                </sec:ifAnyGranted>
+                            </ul>
+                        </li>
+                    </sec:ifAnyGranted>
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
+                        <li>
+                            <a href="/isp-client-web/buy/list">
+                                <i class="fa fa-shopping-cart"></i> <span>Compras</span>
+                            </a>
+                        </li>
+                    </sec:ifAnyGranted>
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
+                        <li>
+                            <a href="/isp-client-web/#">
+                                <i class="fa fa-credit-card"></i> <span>Ventas (No Funciona)</span>
+                            </a>
+                        </li>
+                    </sec:ifAnyGranted>
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
+                        <li>
+                            <a href="/isp-client-web/entry/list"">
+                                <i class="fa fa-file-text-o"></i> <span>Fichas</span>
+                            </a>
+                        </li>
+                    </sec:ifAnyGranted>
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                        <li>
+                            <a href="/isp-client-web/report/list">
+                                <i class="fa fa-pie-chart"></i> <span>Reportes (no funciona) </span>
 
-                <li>
-                    <a href="/isp-client-web/cars/list">
-                        <i class="fa fa-car"></i> <span>Autos</span>
+                            </a>
+                        </li>
+                    </sec:ifAnyGranted>
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
+                        <li>
+                            <a href="/isp-client-web/stock/list">
+                                <i class="fa fa-cubes"></i> <span>Stock</span>
 
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/isp-client-web/buy/list">
-                        <i class="fa fa-shopping-cart"></i> <span>Compras</span>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="/isp-client-web/#">
-                        <i class="fa fa-credit-card"></i> <span>Ventas (No Funciona)</span>
-
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="/isp-client-web/#">
-                        <i class="fa fa-file"></i> <span>Fichas</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/isp-client-web/entry/list"><i class="fa fa-file-text"></i> Entradas de vehiculos</a></li>
-                        <li><a href="/isp-client-web/#"><i class="fa fa-file-text"></i> Servicios realizados (No funciona)</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="/isp-client-web/report/list">
-                        <i class="fa fa-file-text-o"></i> <span>Reportes (no funciona) </span>
-
-                    </a>
-                </li>
-                <li>
-                    <a href="/isp-client-web/stock/list">
-                        <i class="fa fa-cubes"></i> <span>Stock</span>
-
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-gears"></i> <span>Items</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/isp-client-web/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
-                        <li><a href="/isp-client-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                    </ul>
-                </li>
+                            </a>
+                        </li>
+                    </sec:ifAnyGranted>
+                </sec:ifAnyGranted>
             </ul>
         </section>
         <!-- /.sidebar -->

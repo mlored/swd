@@ -74,7 +74,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	protected EmployeeB convertDtoToBean(EmployeeDTO dto) {
+	public EmployeeB convertDtoToBean(EmployeeDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
@@ -89,7 +89,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
 	}
 
 	@Override
-	protected EmployeeDTO convertBeanToDto(EmployeeB bean) {
+	public EmployeeDTO convertBeanToDto(EmployeeB bean) {
 		final EmployeeDTO dto = new EmployeeDTO();
 		dto.setId(bean.getId());
         dto.setName(bean.getName());

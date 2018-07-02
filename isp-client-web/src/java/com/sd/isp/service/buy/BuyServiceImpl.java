@@ -84,7 +84,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
-    protected BuyB convertDtoToBean(BuyDTO dto) {
+    public BuyB convertDtoToBean(BuyDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("date", dto.getDate().toString());
@@ -97,7 +97,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     }
 
     @Override
-    protected BuyDTO convertBeanToDto(BuyB bean) {
+    public BuyDTO convertBeanToDto(BuyB bean) {
         final BuyDTO dto = new BuyDTO();
         dto.setId(bean.getId());
         dto.setDate(bean.getDate());

@@ -85,7 +85,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
-	protected BuyDTO convertDomainToDto(BuyDomain domain) {
+	public BuyDTO convertDomainToDto(BuyDomain domain) {
 		final BuyDTO buy = new BuyDTO();
 		buy.setId(domain.getId());
 		buy.setDate(domain.getDate());
@@ -96,7 +96,7 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	}
 
 	@Override
-	protected BuyDomain convertDtoToDomain(BuyDTO dto) {
+	public BuyDomain convertDtoToDomain(BuyDTO dto) {
 		final BuyDomain buy = new BuyDomain();
 		buy.setId(dto.getId());
 		buy.setDate(dto.getDate());

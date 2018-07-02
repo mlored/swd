@@ -116,7 +116,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
-	protected EntryDTO convertDomainToDto(EntryDomain domain) {
+	public EntryDTO convertDomainToDto(EntryDomain domain) {
 		final EntryDTO entry = new EntryDTO();
 		entry.setId(domain.getId());
 		entry.setDate(domain.getDate());
@@ -156,7 +156,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, Ent
 	}
 
 	@Override
-	protected EntryDomain convertDtoToDomain(EntryDTO dto) {
+	public EntryDomain convertDtoToDomain(EntryDTO dto) {
 		final EntryDomain entry = new EntryDomain();
 		entry.setId(dto.getId());
 		entry.setDate(dto.getDate());

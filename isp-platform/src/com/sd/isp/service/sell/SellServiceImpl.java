@@ -76,7 +76,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 
 	@Override
-	protected SellDTO convertDomainToDto(SellDomain domain) {
+	public SellDTO convertDomainToDto(SellDomain domain) {
 		final SellDTO sell = new SellDTO();
 		sell.setId(domain.getId());
 		sell.setDate(domain.getDate());
@@ -87,7 +87,7 @@ public class SellServiceImpl extends BaseServiceImpl<SellDTO, SellDomain, SellDa
 	}
 
 	@Override
-	protected SellDomain convertDtoToDomain(SellDTO dto) {
+	public SellDomain convertDtoToDomain(SellDTO dto) {
 		final SellDomain sell = new SellDomain();
 		sell.setId(dto.getId());
 		sell.setDate(dto.getDate());

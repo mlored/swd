@@ -7,6 +7,7 @@ import com.sd.isp.beans.entry.EntryB
 import com.sd.isp.service.client.IClientService
 import com.sd.isp.service.entry.IEntryService
 import com.sd.isp.service.entry_details.IEntryDetailsService
+import grails.plugin.springsecurity.annotation.Secured
 
 class EntryController {
 
@@ -17,21 +18,25 @@ class EntryController {
     IPartService partService
     IClientService clientService
 
-
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def index(Integer max){
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
+
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def list(Integer max) {
         def entries = entryService.getAll()
 
         [entryInstanceList: entries, serviceInstanceTotal: entries?.size()]
     }
 
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def create() {
         [entryInstance: new EntryB(params)]
     }
 
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def save() {
         def newEntry = new EntryB(params)
         def entryInstance = entryService.save(newEntry)
@@ -48,7 +53,7 @@ class EntryController {
         redirect(action: "index")
     }
 
-
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def show(Long id) {
         def entryInstance = entryService.getById(id.intValue())
         if (!entryInstance) {
@@ -63,7 +68,7 @@ class EntryController {
         [entryInstance: entryInstance, cars: entryService.getAll()]
     }
 
-
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def edit(Long id) {
         def entryInstance = entryService.getById(id.intValue())
 
@@ -80,7 +85,7 @@ class EntryController {
         [entryInstance: entryInstance]
     }
 
-
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def update(Long id) {
         def entryB = new EntryB(params)
         def entryInstance = entryService.update(id.intValue(), entryB)
@@ -100,7 +105,7 @@ class EntryController {
         redirect(action: "list")
     }
 
-    /*
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def delete(Long id) {
 
         def entryInstance = entryService.getById(id.intValue())
@@ -128,7 +133,7 @@ class EntryController {
             ])
             redirect(action: "index")
         }
-    }*/
+    }
 }
 
 

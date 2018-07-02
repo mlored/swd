@@ -25,6 +25,7 @@ import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.BaseServiceImpl;
+import com.sd.isp.service.role.IRoleService;
 import com.sd.isp.util.MailMail;
 
 @Service
@@ -34,6 +35,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	private IUserDao userDao;
 	@Autowired
 	private MailMail mailMail;
+	@Autowired
+	private IRoleService roleService;
 
 	@Autowired
 	private IRoleDao roleDao;
@@ -103,8 +106,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		return convertDomainToDto(domain);
 	}
 	
-	@Override
-	protected UserDTO convertDomainToDto(UserDomain domain) {
+	public UserDTO convertDomainToDto(UserDomain domain) {
 		final UserDTO user = new UserDTO();
 		user.setId(domain.getId());
 		user.setUsername(domain.getUsername());
@@ -112,19 +114,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		user.setSurName(domain.getSurName());
 		user.setPassword(domain.getPassword());
 		user.setAccountLocked(domain.getAccountLocked());
-		final List<Integer> rolesIds = new ArrayList<>();
-		Set<RoleDomain> roles = domain.getRole();
-		if(roles!=null){
-			for (RoleDomain roleDomain : roles) {
-				rolesIds.add(roleDomain.getId());
-			}
-			user.setRolesIds(rolesIds);
+
+		for (RoleDomain r : domain.getRoles()) {
+			user.getRoles().add(roleService.convertDomainToDto(r));
 		}
+		
 		return user;
 	}
 
 	@Override
-	protected UserDomain convertDtoToDomain(UserDTO dto) {
+	public UserDomain convertDtoToDomain(UserDTO dto) {
 		final UserDomain user = new UserDomain();
 		user.setId(dto.getId());
 		user.setUsername(dto.getUsername());
@@ -132,14 +131,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		user.setSurName(dto.getSurName());
 		user.setPassword(dto.getPassword());
 		user.setAccountLocked(dto.getAccountLocked());
-		final Set<RoleDomain> roles = new HashSet<>();
-		List<Integer> rolesIds = dto.getRoles();
-		if(rolesIds!=null){
-			for (Integer roleId : rolesIds) {
-				roles.add(roleDao.getById(roleId));
-			}
-			user.setRole(roles);
-		}
+		
 		return user;
 	}
 	

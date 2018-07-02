@@ -78,7 +78,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    protected ServiceB convertDtoToBean(ServiceDTO dto) {
+    public ServiceB convertDtoToBean(ServiceDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("name", dto.getName());
@@ -92,7 +92,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceB, ServiceDTO>
     }
 
     @Override
-    protected ServiceDTO convertBeanToDto(ServiceB bean) {
+    public ServiceDTO convertBeanToDto(ServiceB bean) {
         final ServiceDTO dto = new ServiceDTO();
         dto.setId(bean.getId());
         dto.setName(bean.getName());

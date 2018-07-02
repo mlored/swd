@@ -79,7 +79,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	protected ClientB convertDtoToBean(ClientDTO dto) {
+	public ClientB convertDtoToBean(ClientDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
@@ -95,7 +95,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
 	}
 
 	@Override
-	protected ClientDTO convertBeanToDto(ClientB bean) {
+	public ClientDTO convertBeanToDto(ClientB bean) {
 		final ClientDTO dto = new ClientDTO();
 		dto.setId(bean.getId());
 		dto.setName(bean.getName());

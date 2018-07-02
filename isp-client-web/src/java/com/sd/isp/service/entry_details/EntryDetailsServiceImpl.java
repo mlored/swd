@@ -89,7 +89,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     }
 
     @Override
-    protected EntryDetailsB convertDtoToBean(EntryDetailsDTO dto) {
+    public EntryDetailsB convertDtoToBean(EntryDetailsDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("date", dto.getDate().toString());
@@ -103,7 +103,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
     }
 
     @Override
-    protected EntryDetailsDTO convertBeanToDto(EntryDetailsB bean) {
+    public EntryDetailsDTO convertBeanToDto(EntryDetailsB bean) {
         final EntryDetailsDTO dto = new EntryDetailsDTO();
         dto.setId(bean.getId());
         dto.setDate(bean.getDate());

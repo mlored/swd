@@ -95,16 +95,15 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 		return convertDomainToDto(domain);
 	}
 
-	@Override
-	protected RoleDTO convertDomainToDto(RoleDomain domain) {
+	
+	public RoleDTO convertDomainToDto(RoleDomain domain) {
 		final RoleDTO role = new RoleDTO();
 		role.setId(domain.getId());
 		role.setAuthority(domain.getAuthority());
 		return role;
 	}
 
-	@Override
-	protected RoleDomain convertDtoToDomain(RoleDTO dto) {
+	public RoleDomain convertDtoToDomain(RoleDTO dto) {
 		final RoleDomain role = new RoleDomain();
 		role.setId(dto.getId());
 		role.setAuthority(dto.getAuthority());

@@ -92,7 +92,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 
 	@Override
-	protected ClientDTO convertDomainToDto(ClientDomain domain) {
+	public ClientDTO convertDomainToDto(ClientDomain domain) {
 		final ClientDTO client = new ClientDTO();
 		client.setId(domain.getId());
 		client.setName(domain.getName());
@@ -104,7 +104,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	}
 
 	@Override
-	protected ClientDomain convertDtoToDomain(ClientDTO dto) {
+	public ClientDomain convertDtoToDomain(ClientDTO dto) {
 		final ClientDomain client = new ClientDomain();
 		client.setId(dto.getId());
 		client.setName(dto.getName());

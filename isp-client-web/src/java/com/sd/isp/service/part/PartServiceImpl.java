@@ -90,7 +90,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    protected PartB convertDtoToBean(PartDTO dto) {
+    public PartB convertDtoToBean(PartDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("name", dto.getName());
@@ -104,7 +104,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
     }
 
     @Override
-    protected PartDTO convertBeanToDto(PartB bean) {
+    public PartDTO convertBeanToDto(PartB bean) {
         final PartDTO dto = new PartDTO();
         dto.setId(bean.getId());
         dto.setName(bean.getName());

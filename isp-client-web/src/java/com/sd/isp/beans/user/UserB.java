@@ -1,5 +1,7 @@
 package com.sd.isp.beans.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,13 +20,13 @@ public class UserB extends BaseBean {
 	private String _accountExpired;
 	private String _accountLocked;
 	private String _passwordExpired;
-	private Set<RoleB> _roles;
+	private List<RoleB> _roles = new ArrayList<RoleB>();
 
-	public Set<RoleB> getRoles(){
+	public List<RoleB> getRoles(){
 		return _roles;
 	}
 
-	public void setRoles(Set<RoleB> roles){
+	public void setRoles(List<RoleB> roles){
 		_roles = roles;
 	}
 	

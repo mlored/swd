@@ -76,7 +76,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
-	protected ReportB convertDtoToBean(ReportDTO dto) {
+	public ReportB convertDtoToBean(ReportDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		//params.put("observations", dto.getObservations());
@@ -95,7 +95,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	}
 
 	@Override
-	protected ReportDTO convertBeanToDto(ReportB bean) {
+	public ReportDTO convertBeanToDto(ReportB bean) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(bean.getId());
 		dto.setDate(bean.getDate());

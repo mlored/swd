@@ -1,5 +1,6 @@
 package com.sd.isp.service.base;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.sd.isp.beans.base.BaseBean;
@@ -17,4 +18,8 @@ public interface IBaseService<BEAN extends BaseBean, DTO extends BaseDTO> {
 	public List <BEAN> find(String textToFind, int maxItems, int page);
 
 	public BEAN delete(Integer id);
+
+	public abstract BEAN convertDtoToBean(DTO dto);
+
+	public abstract DTO convertBeanToDto(BEAN bean);
 }

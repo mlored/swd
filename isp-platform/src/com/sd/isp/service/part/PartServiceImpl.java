@@ -87,7 +87,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 	
 	@Override
-	protected PartDTO convertDomainToDto(PartDomain domain) {
+	public PartDTO convertDomainToDto(PartDomain domain) {
 		final PartDTO part = new PartDTO();
 		part.setId(domain.getId());
 		part.setName(domain.getName());
@@ -98,7 +98,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 	}
 
 	@Override
-	protected PartDomain convertDtoToDomain(PartDTO dto) {
+	public PartDomain convertDtoToDomain(PartDTO dto) {
 		final PartDomain part = new PartDomain();
 		part.setId(dto.getId());
 		part.setName(dto.getName());

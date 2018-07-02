@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.sd.isp.dto.role.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -84,7 +85,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
-    protected UserB convertDtoToBean(UserDTO dto) {
+    public UserB convertDtoToBean(UserDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("username", dto.getUsername());
@@ -94,14 +95,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
         params.put("accountLocked", dto.getAccountLocked());
 		final UserB user = new UserB(params);
 		final Set<RoleB> roles = new HashSet<RoleB>();
-		List<Integer> rolesIds = dto.getRoles();
-		if(rolesIds!=null){
-			if(rolesIds.size()>0){
-				for (Integer roleId : rolesIds) {
-					roles.add(_roleService.getById(roleId));
-				}
-				user.setRoles(roles);
-			}
+
+		if(roles!=null){
+            for (RoleDTO rol :  dto.getRoles()) {
+                user.getRoles().add(_roleService.convertDtoToBean(rol));
+            }
 		}else{
 			System.out.println("No trae roles desde el web service");
 		}
@@ -109,7 +107,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
     }
 
     @Override
-    protected UserDTO convertBeanToDto(UserB bean) {
+    public UserDTO convertBeanToDto(UserB bean) {
         final UserDTO dto = new UserDTO();
         dto.setId(bean.getId());
         dto.setUsername(bean.getUsername());
@@ -117,16 +115,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
         dto.setSurName(bean.getSurName());
         dto.setPassword(passwordEncoder.encode(bean.getPassword()));
         dto.setAccountLocked(bean.getAccountLocked());
-		final List<Integer> rolesIds = new ArrayList<Integer>();
-		Set<RoleB> roles = bean.getRoles();
-		if(roles!=null){
-			for (RoleB roleB : roles) {
-				rolesIds.add(roleB.getId());
-			}
-			dto.setRolesIds(rolesIds);
-		}else{
-			System.out.println("No se especifico roles en el cliente!!");
-		}
+
+        for (RoleB roleB : bean.getRoles()) {
+            dto.getRoles().add(_roleService.convertBeanToDto(roleB));
+        }
+
 		return dto;
     }
 

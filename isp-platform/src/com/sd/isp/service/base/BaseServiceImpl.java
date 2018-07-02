@@ -18,8 +18,8 @@ public abstract class BaseServiceImpl<DTO extends BaseDTO, DOMAIN extends BaseDo
 		return cacheManager;
 	}
 	
-	protected abstract DTO convertDomainToDto(DOMAIN domain);
+	public abstract DTO convertDomainToDto(DOMAIN domain);
 
-	protected abstract DOMAIN convertDtoToDomain(DTO dto);
+	public abstract DOMAIN convertDtoToDomain(DTO dto);
 
 }

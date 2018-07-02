@@ -1,5 +1,7 @@
 package com.sd.isp.domain.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -53,13 +55,13 @@ public class UserDomain extends BaseDomain {
 		    joinColumns= @JoinColumn(name="user_id", referencedColumnName="id"),
 		    inverseJoinColumns= @JoinColumn(name="role_id", referencedColumnName="id")
     )
-	private Set<RoleDomain> role;
+	private List<RoleDomain> role;
 	
-	public Set<RoleDomain> getRole(){
+	public List<RoleDomain> getRoles(){
 		return role;
 	}
 	
-	public void setRole(Set<RoleDomain> role){
+	public void setRoles(List<RoleDomain> role){
 		this.role = role;
 	}
 	

@@ -75,7 +75,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 	
 	@Override
-	protected ReportDTO convertDomainToDto(ReportDomain domain) {
+	public ReportDTO convertDomainToDto(ReportDomain domain) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
 		dto.setEmployeeId(domain.getEmployee().getId());
@@ -92,7 +92,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	}
 
 	@Override
-	protected ReportDomain convertDtoToDomain(ReportDTO dto){
+	public ReportDomain convertDtoToDomain(ReportDTO dto){
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
 		domain.setEmployee(_employeeDao.getById(dto.getEmployeeId()));

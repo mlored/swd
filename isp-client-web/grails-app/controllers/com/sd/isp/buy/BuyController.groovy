@@ -1,6 +1,6 @@
 package com.sd.isp.buy
 
-
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 
@@ -17,6 +17,7 @@ class BuyController {
 	
 	IBuyService buyService
 
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def list(Integer max) {
 		def buys = buyService.getAll()
 
@@ -27,11 +28,13 @@ class BuyController {
         respond buyInstance
     }*/
 
+    @Transactional
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def create() {
          [buyInstance: new BuyB(params)]
     }
 
-    @Transactional
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def save(BuyB buyInstance) {
         if (buyInstance == null) {
             notFound()
@@ -54,11 +57,13 @@ class BuyController {
         }
     }
 
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def edit(BuyB buyInstance) {
         respond buyInstance
     }
 
     @Transactional
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def update(BuyB buyInstance) {
         if (buyInstance == null) {
             notFound()
@@ -82,6 +87,7 @@ class BuyController {
     }
 
     @Transactional
+    @Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
     def delete(BuyB buyInstance) {
 
         if (buyInstance == null) {

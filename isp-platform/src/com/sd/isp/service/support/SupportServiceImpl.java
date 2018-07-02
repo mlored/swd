@@ -52,7 +52,7 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportDTO, SupportDomai
 	
 	
 	@Override
-	protected SupportDTO convertDomainToDto(SupportDomain domain){
+	public SupportDTO convertDomainToDto(SupportDomain domain){
 		final SupportDTO support = new SupportDTO();
 		support.setId(domain.getId());
 		support.setName(domain.getName());
@@ -64,7 +64,7 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportDTO, SupportDomai
 	}
 
 	@Override
-	protected SupportDomain convertDtoToDomain(SupportDTO dto){
+	public SupportDomain convertDtoToDomain(SupportDTO dto){
 		final SupportDomain support = new SupportDomain();
 		support.setId(dto.getId());
 		support.setName(dto.getName());

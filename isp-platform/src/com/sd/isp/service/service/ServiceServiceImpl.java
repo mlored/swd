@@ -87,7 +87,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 
 	@Override
-	protected ServiceDTO convertDomainToDto(ServiceDomain domain) {
+	public ServiceDTO convertDomainToDto(ServiceDomain domain) {
 		final ServiceDTO service = new ServiceDTO();
 		service.setId(domain.getId());
 		service.setName(domain.getName());
@@ -98,7 +98,7 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	}
 
 	@Override
-	protected ServiceDomain convertDtoToDomain(ServiceDTO dto) {
+	public ServiceDomain convertDtoToDomain(ServiceDTO dto) {
 		final ServiceDomain service = new ServiceDomain();
 		service.setId(dto.getId());
 		service.setName(dto.getName());

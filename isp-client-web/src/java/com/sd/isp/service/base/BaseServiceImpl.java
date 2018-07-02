@@ -20,8 +20,5 @@ public abstract class BaseServiceImpl<BEAN extends BaseBean, DTO extends BaseDTO
 
 	protected static final String CACHE_REGION = "isp-client-web-cache";
 
-	protected abstract BEAN convertDtoToBean(DTO dto);
-
-	protected abstract DTO convertBeanToDto(BEAN bean) throws ParseException;
 
 }

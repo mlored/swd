@@ -31,7 +31,7 @@ class CarsController {
                 message(code: 'car.label', default: 'Car'),
                 newCar.getId()
         ])
-        return render(contentType:"text/json") { "ok" }
+        redirect(action: "index")
     }
 
     def index(Integer max) {

@@ -77,7 +77,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
-    protected RoleB convertDtoToBean(RoleDTO dto) {
+    public RoleB convertDtoToBean(RoleDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("authority", dto.getAuthority());
@@ -88,7 +88,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
     }
 
     @Override
-    protected RoleDTO convertBeanToDto(RoleB bean) {
+    public RoleDTO convertBeanToDto(RoleB bean) {
         final RoleDTO dto = new RoleDTO();
         dto.setId(bean.getId());
         dto.setAuthority(bean.getAuthority());

@@ -80,7 +80,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	protected SupplierB convertDtoToBean(SupplierDTO dto) {
+	public SupplierB convertDtoToBean(SupplierDTO dto) {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		params.put("name", dto.getName());
@@ -95,7 +95,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierB, SupplierDTO>
 	}
 
 	@Override
-	protected SupplierDTO convertBeanToDto(SupplierB bean) {
+	public SupplierDTO convertBeanToDto(SupplierB bean) {
 		final SupplierDTO dto = new SupplierDTO();
 		dto.setId(bean.getId());
         dto.setName(bean.getName());

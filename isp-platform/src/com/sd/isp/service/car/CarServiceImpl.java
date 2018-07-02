@@ -89,7 +89,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	}
 
 	@Override
-	protected CarDTO convertDomainToDto(CarDomain domain) {
+	public CarDTO convertDomainToDto(CarDomain domain) {
 		final CarDTO dto = new CarDTO();
 		dto.setId(domain.getId());
 		dto.setMark(domain.getMark());
@@ -100,7 +100,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	}
 
 	@Override
-	protected CarDomain convertDtoToDomain(CarDTO dto) {
+	public CarDomain convertDtoToDomain(CarDTO dto) {
 		final CarDomain domain = new CarDomain();
 		domain.setId(dto.getId());
 		domain.setMark(dto.getMark());

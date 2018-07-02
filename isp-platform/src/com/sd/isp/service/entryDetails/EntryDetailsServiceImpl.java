@@ -96,7 +96,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 	}
 
 	@Override
-	protected EntryDetailsDTO convertDomainToDto(EntryDetailsDomain domain) {
+	public EntryDetailsDTO convertDomainToDto(EntryDetailsDomain domain) {
 		final EntryDetailsDTO entryDetails = new EntryDetailsDTO();
 		entryDetails.setId(domain.getId());
 		entryDetails.setDate(domain.getDate());
@@ -112,7 +112,7 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, En
 	}
 
 	@Override
-	protected EntryDetailsDomain convertDtoToDomain(EntryDetailsDTO dto) {
+	public EntryDetailsDomain convertDtoToDomain(EntryDetailsDTO dto) {
 		final EntryDetailsDomain entryDetails = new EntryDetailsDomain();
 		entryDetails.setId(dto.getId());
 		entryDetails.setDate(dto.getDate());

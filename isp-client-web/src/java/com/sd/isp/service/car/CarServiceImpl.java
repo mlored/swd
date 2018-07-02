@@ -92,7 +92,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    protected CarB convertDtoToBean(CarDTO dto) {
+    public CarB convertDtoToBean(CarDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("mark", dto.getMark());
@@ -106,7 +106,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
     }
 
     @Override
-    protected CarDTO convertBeanToDto(CarB bean) {
+    public CarDTO convertBeanToDto(CarB bean) {
         final CarDTO dto = new CarDTO();
         dto.setId(bean.getId());
         dto.setMark(bean.getMark());

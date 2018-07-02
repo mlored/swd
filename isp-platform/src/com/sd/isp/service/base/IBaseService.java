@@ -2,6 +2,7 @@ package com.sd.isp.service.base;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
 import com.sd.isp.domain.base.BaseDomain;
+import com.sd.isp.domain.role.RoleDomain;
 import com.sd.isp.dto.base.BaseDTO;
 import com.sd.isp.dto.base.BaseResult;
 
@@ -18,5 +19,7 @@ public interface IBaseService<DTO extends BaseDTO, DOMAIN extends BaseDomain, DA
 	public DTO delete(Integer id);
 	
 	public R find(String textToFind, int page, int maxItems) throws Exception;
+	
+	public DTO convertDomainToDto(DOMAIN r);
 
 }

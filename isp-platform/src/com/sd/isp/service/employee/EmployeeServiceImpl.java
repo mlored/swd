@@ -85,7 +85,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 
 	@Override
-	protected EmployeeDTO convertDomainToDto(EmployeeDomain domain) {
+	public EmployeeDTO convertDomainToDto(EmployeeDomain domain) {
 		final EmployeeDTO employee = new EmployeeDTO();
 		employee.setId(domain.getId());
 		employee.setName(domain.getName());
@@ -97,7 +97,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDo
 	}
 
 	@Override
-	protected EmployeeDomain convertDtoToDomain(EmployeeDTO dto) {
+	public EmployeeDomain convertDtoToDomain(EmployeeDTO dto) {
 		final EmployeeDomain employee = new EmployeeDomain();
 		employee.setId(dto.getId());
 		employee.setName(dto.getName());

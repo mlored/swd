@@ -1,11 +1,14 @@
 package com.sd.isp.dto.user;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sd.isp.dto.base.BaseDTO;
+import com.sd.isp.dto.role.RoleDTO;
 
 @XmlRootElement(name = "user")
 public class UserDTO extends BaseDTO {
@@ -18,14 +21,14 @@ public class UserDTO extends BaseDTO {
 	private String _accountExpired;
 	private String _accountLocked;
 	private String _passwordExpired;
-	private List<Integer> _roles;
+	private List<RoleDTO> _roles = new ArrayList<RoleDTO>();
 	
 	@XmlElement
-	public List<Integer> getRoles() {
+	public List<RoleDTO> getRoles() {
 		return _roles;
 	}
 
-	public void setRolesIds(List<Integer> roles) {
+	public void setRoles(List<RoleDTO> roles) {
 		_roles = roles;
 	}
 	

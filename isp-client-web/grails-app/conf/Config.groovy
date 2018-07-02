@@ -113,7 +113,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://localhost:${grails.server.port.http}/${appName}"
+        //grails.serverURL = "http://localhost:8081}/${appName}"
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
@@ -163,4 +163,12 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/finance/**':      ['ROLE_FINANCE', 'isFullyAuthenticated()'],
 
 ]
-grails.plugin.springsecurity.providerNames = ['myAuthenticationProvider']
+grails.plugin.springsecurity.providerNames = [
+        'myAuthenticationProvider',
+        'anonymousAuthenticationProvider',
+        'rememberMeAuthenticationProvider']
+
+grails.plugin.springsecurity.roleHierarchy = '''
+   ROLE_ADMIN > ROLE_SECRETARIO
+   ROLE_SECRETARIO > ROLE_MECANICO
+'''

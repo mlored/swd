@@ -1,5 +1,7 @@
 package com.sd.isp.stock
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.part.PartB
@@ -14,12 +16,14 @@ class StockController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IPartService partService
 
-    def index(Integer max) {
+	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
+	def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         //respond Part.list(params), model:[partInstanceCount: Part.count()]
 		redirect(action: "list", params: params)
     }
-	
+
+	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def list(Integer max) {
 		//def parts = partService.getAll()
 		//[partInstanceList: parts, partInstanceTotal: parts?.size()]
@@ -59,7 +63,8 @@ class StockController {
 											  text: text/*,
 											  user:authService.getName()*/]
 		}
-	
+
+	@Secured(["ROLE_ADMIN", "ROLE_SECRETARIO"])
 	def show(PartB partInstance) {
 		respond partInstance
 	}

@@ -50,14 +50,13 @@ class MyAuthenticationProvider implements AuthenticationProvider {
 	
 	private List getUserRoles(UserB user) {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();		
-		final Set<RoleB> roles = user.getRoles();
-		if(roles!=null){
-			System.out.print("Roles del usuario "+user.getUsername()+" ");
-			for (RoleB roleB : roles) {
-				list.add(new GrantedAuthorityImpl(roleB.getAuthority()));
-				System.out.print(roleB.getAuthority()+" ");
-			}
+
+		System.out.print("Roles del usuario "+ user.getUsername()+ " ");
+		for (RoleB roleB : user.getRoles()) {
+			list.add(new GrantedAuthorityImpl(roleB.getAuthority()));
+			System.out.print(roleB.getAuthority() + " ");
 		}
+
 		return list;
 	}
 

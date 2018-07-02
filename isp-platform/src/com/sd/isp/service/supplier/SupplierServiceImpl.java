@@ -88,7 +88,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
-	protected SupplierDTO convertDomainToDto(SupplierDomain domain) {
+	public SupplierDTO convertDomainToDto(SupplierDomain domain) {
 		final SupplierDTO supplier = new SupplierDTO();
 		supplier.setId(domain.getId());
 		supplier.setName(domain.getName());
@@ -100,7 +100,7 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDTO, SupplierDo
 	}
 
 	@Override
-	protected SupplierDomain convertDtoToDomain(SupplierDTO dto) {
+	public SupplierDomain convertDtoToDomain(SupplierDTO dto) {
 		final SupplierDomain supplier = new SupplierDomain();
 		supplier.setId(dto.getId());
 		supplier.setName(dto.getName());

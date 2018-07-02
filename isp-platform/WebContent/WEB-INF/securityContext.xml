@@ -8,11 +8,11 @@
 
     <http pattern="/rest/support" security="none"/>
     <http pattern="/**" use-expressions="true">
-     <intercept-url pattern="/**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
-        <intercept-url pattern="/users**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
-        <intercept-url pattern="/users/**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
-        <intercept-url pattern="/roles**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
-        <intercept-url pattern="/roles/**" access="hasAnyRole('ROLE_SUPER','ROLE_ADMIN')" />
+     <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_MECANICO')" />
+        <intercept-url pattern="/user**"   access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
+        <intercept-url pattern="/user/**"  access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
+        <intercept-url pattern="/roles**"  access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
+        <intercept-url pattern="/roles/**" access="hasAnyRole('ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO')" />
         <http-basic/>
         <logout logout-url="/logout"/><logout/>
     </http>

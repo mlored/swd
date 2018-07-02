@@ -36,7 +36,7 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportB, SupportDTO> im
 
 
 
-    protected SupportB convertDtoToBean(SupportDTO dto) {
+    public SupportB convertDtoToBean(SupportDTO dto) {
         final Map<String, String> params = new HashMap<String, String>();
         params.put("id", String.valueOf(dto.getId()));
         params.put("userName", dto.getName());
@@ -48,7 +48,7 @@ public class SupportServiceImpl extends BaseServiceImpl<SupportB, SupportDTO> im
         return supportB;
     }
 
-    protected SupportDTO convertBeanToDto(SupportB bean) {
+    public SupportDTO convertBeanToDto(SupportB bean) {
         final SupportDTO dto = new SupportDTO();
         dto.setId(bean.getId());
         dto.setName(bean.getUserName());

@@ -86,7 +86,7 @@ public class ItemServiceImpl extends BaseServiceImpl<ItemDTO, ItemDomain, ItemDa
 	}
 	
 	@Override
-	protected ItemDTO convertDomainToDto(ItemDomain domain) {
+	public ItemDTO convertDomainToDto(ItemDomain domain) {
 		final ItemDTO part = new ItemDTO();
 		part.setId(domain.getId());
 		part.setName(domain.getName());
@@ -97,7 +97,7 @@ public class ItemServiceImpl extends BaseServiceImpl<ItemDTO, ItemDomain, ItemDa
 	}
 
 	@Override
-	protected ItemDomain convertDtoToDomain(ItemDTO dto) {
+	public ItemDomain convertDtoToDomain(ItemDTO dto) {
 		final ItemDomain item = new ItemDomain();
 		item.setId(dto.getId());
 		item.setName(dto.getName());
