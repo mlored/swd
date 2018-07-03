@@ -116,9 +116,6 @@ public class ClientDaoImpl extends BaseDaoImpl<ClientDomain> implements IClientD
 				return clients;
 	   }
 	
-	/**
-	 * Diccionario: clave=columna de la bd y valor=valor a buscar
-	 */
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");
 		Map<String, String> map = new HashMap<String, String>();
