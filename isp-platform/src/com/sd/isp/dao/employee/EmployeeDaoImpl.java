@@ -115,11 +115,7 @@ public class EmployeeDaoImpl extends BaseDaoImpl<EmployeeDomain> implements IEmp
 				List<EmployeeDomain> employees = criteria.list();
 				return employees;
 	   }
-	
-	/**
-	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
-	 * valor=valor a buscar
-	 */
+
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");
 		Map<String, String> map = new HashMap<String, String>();

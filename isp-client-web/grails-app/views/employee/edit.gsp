@@ -26,7 +26,7 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form action="update" method="PUT" id="${employeeInstance?.id}" name="form" novalidate="true">
+						<g:form action="update" method="POST" id="${employeeInstance?.id}" novalidate="true" name="form_employees">
 							<g:hiddenField name="id" value="${employeeInstance?.id}" />
 
 							<fieldset class="form">
