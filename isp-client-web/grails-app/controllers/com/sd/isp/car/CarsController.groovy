@@ -41,7 +41,7 @@ class CarsController {
         redirect(action: "list", params: params)
     }
 
-    @Secured(["ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_SECRETARIO","ROLE_MECANICO", "ROLE_ADMIN"])
     def list(Integer max) {
 		def page = 0
 		def siguiente
