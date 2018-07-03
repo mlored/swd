@@ -37,6 +37,12 @@
 							</fieldset>
 						</g:form>
 					</div>
+					<script>
+                        $( document ).ready(function() {
+                            $("#form_employees").validate({
+                            });
+                        });
+					</script>
 					<!-- /.box -->
 				</div>
 			</div>
