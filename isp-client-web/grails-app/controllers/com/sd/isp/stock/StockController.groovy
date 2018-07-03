@@ -9,7 +9,6 @@ import com.sd.isp.service.part.IPartService;
 
 import grails.transaction.Transactional
 
-@Transactional
 @Secured(["ROLE_MECANICO"])
 class StockController {
 

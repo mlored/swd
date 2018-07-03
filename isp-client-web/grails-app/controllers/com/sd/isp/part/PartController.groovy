@@ -9,7 +9,6 @@ import grails.transaction.Transactional
 
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional(readOnly = true)
 @Secured(["ROLE_ADMIN"])
 class PartController {
 
@@ -84,7 +83,6 @@ class PartController {
         [partInstance: partInstance]
     }*/
 
-    @Transactional
     def save(){
         def partInstance = new PartB(params)
         def newPart = partService.save(partInstance)
@@ -115,7 +113,6 @@ class PartController {
         [partInstance: partInstance]
     }
 
-    @Transactional
     def update(Long id) {
         def partB= new PartB(params)
         def partInstance = partService.update(id.intValue(), partB)

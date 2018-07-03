@@ -28,7 +28,6 @@ class BuyController {
         respond buyInstance
     }*/
 
-    @Transactional
     def create() {
          [buyInstance: new BuyB(params)]
     }

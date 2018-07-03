@@ -12,7 +12,6 @@ import com.sd.isp.service.supplier.ISupplierService
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional
 @Secured(["ROLE_SECRETARIO"])
 class SupplierController {
 
@@ -73,7 +72,6 @@ class SupplierController {
         [supplierInstance: new SupplierB(params)]
     }
 
-    @Transactional
 	def save() {
 		def supplierInstance = new SupplierB(params)
 		def newSupplier = supplierService.save(supplierInstance)
@@ -104,7 +102,6 @@ class SupplierController {
         [supplierInstance: supplierInstance]
     }
 
-    @Transactional
 	def update(Long id) {
 		def supplierB= new SupplierB(params)
 		def supplierInstance = supplierService.update(id.intValue(), supplierB)
@@ -128,7 +125,7 @@ class SupplierController {
 		])
 		redirect(action: "list")
 	}
-    @Transactional
+
 	def delete(Long id) {
 		
 		try {

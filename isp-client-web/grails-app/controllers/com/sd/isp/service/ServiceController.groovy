@@ -10,7 +10,6 @@ import grails.transaction.Transactional
 
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional
 @Secured(["ROLE_ADMIN"])
 class ServiceController {
 

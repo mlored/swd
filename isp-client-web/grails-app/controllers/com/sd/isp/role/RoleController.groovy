@@ -10,7 +10,6 @@ import com.sd.isp.service.role.IRoleService
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
-@Transactional
 @Secured(["ROLE_ADMIN"])
 class RoleController {
 
@@ -22,7 +21,6 @@ class RoleController {
 		[roleInstance: new RoleB(params)]
 	}
 	
-	@Transactional
 	def save() {
 		def rolerInstance = new RoleB(params)
 		def newRole = roleService.save(roleInstance)
@@ -66,7 +64,6 @@ class RoleController {
 		[roleInstance: roleInstance]
 	}
 
- @Transactional
     def update(Long id) {
         def roleInstance = roleService.getById(id.intValue())
         if (!roleInstance) {
@@ -103,7 +100,6 @@ class RoleController {
         redirect(action: "show", id: roleInstance.id)
     }
 	
-    @Transactional
     def delete(Long id) {
         def roleInstance = roleService.getById(id.intValue())
         if (!roleInstance) {
