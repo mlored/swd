@@ -15,11 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.client.ClientDaoImpl;
 import com.sd.isp.dao.client.IClientDao;
 import com.sd.isp.domain.client.ClientDomain;
-import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
-import com.sd.isp.dto.employee.EmployeeDTO;
-import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.util.Scheduler;
 
