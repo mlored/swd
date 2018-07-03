@@ -27,8 +27,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION,key = "'api_buys'")
-    @CachePut(value=CACHE_REGION, key="'api_buys' + #dto.id")
 	public BuyDTO save(BuyDTO dto) {
 		final BuyDomain buyDomain = convertDtoToDomain(dto);
 		final BuyDomain buy = buyDao.save(buyDomain);
@@ -37,7 +35,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'buys' + #id")
 	public BuyDTO getById(Integer id) {
 		final BuyDomain buyDomain = buyDao.getById(id);
 		final BuyDTO buyDTO = convertDomainToDto(buyDomain);
@@ -46,7 +43,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_buys'")
 	public BuyResult getAll() {
 		final List<BuyDTO> buys = new ArrayList<>();
 		for (BuyDomain domain : buyDao.findAll()) {
@@ -61,8 +57,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 	
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION, key = "'api_buys'")
-    @CachePut(value=CACHE_REGION, key="'api_buys' + #id")
 	public BuyDTO updateById(Integer id, BuyDTO dto) {
 		final BuyDomain newDomain = convertDtoToDomain(dto);
 		final BuyDomain domain = buyDao.getById(id);
@@ -76,9 +70,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyDTO, BuyDomain, BuyDaoImp
 
 	@Override
 	@Transactional
-	@Caching(evict = {
-            @CacheEvict(value=CACHE_REGION, key = "'api_buys'"),
-            @CacheEvict(value=CACHE_REGION, key = "'api_buys' + #id")})
 	public BuyDTO delete(Integer id) {
 		final BuyDomain domain = buyDao.delete(id);
 		return convertDomainToDto(domain);

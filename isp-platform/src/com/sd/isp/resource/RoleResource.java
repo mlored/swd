@@ -12,6 +12,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 //import org.springframework.security.access.annotation.Secured;
@@ -24,7 +28,7 @@ import com.sd.isp.service.role.IRoleService;
 @Path("/role")
 @Component
 @Secured({"ROLE_ADMIN"})
-public class RoleResource {
+public class RoleResource extends BaseResource {
 
 	@Autowired
 	private IRoleService roleService;
@@ -32,6 +36,7 @@ public class RoleResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_roles' + #roleId")
 	public RoleDTO getById(@PathParam("id") Integer roleId) {
 		return roleService.getById(roleId);
 	}
@@ -48,17 +53,22 @@ public class RoleResource {
 	@GET
 	@Produces("application/xml")
 	@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN", "ROLE_MECANICO"})
+	@Cacheable(value=CACHE_REGION, key="'api_roles'")
 	public RoleResult getAll() {
 		return roleService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_roles'")
+    @CachePut(value=CACHE_REGION, key="'api_roles' + #role.id")
 	public RoleDTO save(RoleDTO role) {
 		return roleService.save(role);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_roles'")
+    @CachePut(value=CACHE_REGION, key="'api_roles' + #id")
     public RoleDTO updateById(@PathParam("id") Integer roleId, @RequestBody RoleDTO role) {
         return roleService.updateById(roleId, role);
     }
@@ -66,6 +76,9 @@ public class RoleResource {
 	@DELETE
 	@Path("/{id}")
 	//@Produces("application/json")
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_roles'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_roles' + #id")})
 	public RoleDTO delete(@PathParam("id") Integer roleId) {
 		return roleService.delete(roleId);
 	}

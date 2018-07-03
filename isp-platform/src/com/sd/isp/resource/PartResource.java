@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import com.sd.isp.service.part.IPartService;
 @Path("/part")
 @Component
 @Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
-public class PartResource {
+public class PartResource extends BaseResource {
 
 	@Autowired
 	private IPartService partService;
@@ -28,6 +32,7 @@ public class PartResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_parts' + #partId")
 	public PartDTO getById(@PathParam("id") Integer partId) {
 		return partService.getById(partId);
 	}
@@ -35,17 +40,22 @@ public class PartResource {
 	@GET
 	@Produces("application/xml")
 	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
+	@Cacheable(value=CACHE_REGION, key="'api_parts'")
 	public PartResult getAll() {
 		return partService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_parts'")
+    @CachePut(value=CACHE_REGION, key="'api_parts' + #part.id")
 	public PartDTO save(PartDTO part) {
 		return partService.save(part);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_parts'")
+    @CachePut(value=CACHE_REGION, key="'api_parts' + #id")
     public PartDTO updateById(@PathParam("id") Integer partId, @RequestBody PartDTO part) {
         return partService.updateById(partId, part);
     }
@@ -53,6 +63,9 @@ public class PartResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_parts'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_parts' + #id")})
 	public PartDTO delete(@PathParam("id") Integer partId) {
 		return partService.delete(partId);
 	}

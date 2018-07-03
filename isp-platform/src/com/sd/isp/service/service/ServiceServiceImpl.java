@@ -26,8 +26,6 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION,key = "'api_services'")
-    @CachePut(value=CACHE_REGION, key="'api_services' + #dto.id")
 	public ServiceDTO save(ServiceDTO dto) {
 		final ServiceDomain serviceDomain = convertDtoToDomain(dto);
 		final ServiceDomain service = serviceDao.save(serviceDomain);
@@ -36,7 +34,6 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_services' + #id")
 	public ServiceDTO getById(Integer id) {
 		final ServiceDomain domain = serviceDao.getById(id);
 		return convertDomainToDto(domain);
@@ -44,7 +41,6 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_services'")
 	public ServiceResult getAll() {
 		final List<ServiceDTO> services = new ArrayList<>();
 		for (ServiceDomain domain : serviceDao.findAll()) {
@@ -59,8 +55,6 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 	
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION, key = "'api_services'")
-    @CachePut(value=CACHE_REGION, key="'api_services' + #id")
 	public ServiceDTO updateById(Integer id, ServiceDTO dto) {
 		final ServiceDomain newDomain = convertDtoToDomain(dto);
 		final ServiceDomain domain = serviceDao.getById(id);
@@ -74,9 +68,6 @@ public class ServiceServiceImpl extends BaseServiceImpl<ServiceDTO, ServiceDomai
 
 	@Override
 	@Transactional
-	@Caching(evict = {
-	            @CacheEvict(value=CACHE_REGION, key = "'api_services'"),
-	            @CacheEvict(value=CACHE_REGION, key = "'api_services' + #id")})
 	public ServiceDTO delete(Integer id) {
 		final ServiceDomain domain = serviceDao.delete(id);
 		return convertDomainToDto(domain);

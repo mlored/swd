@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,30 +24,36 @@ import com.sd.isp.service.item.IItemService;
 @Path("/item")
 @Component
 @Secured({"ROLE_SECRETARIO", "ROLE_ADMIN", "ROLE_MECANICO"})
-public class ItemResource {
+public class ItemResource extends BaseResource {
 	@Autowired
 	private IItemService itemService;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_parts' + #itemId")
 	public ItemDTO getById(@PathParam("id") Integer itemId) {
 		return itemService.getById(itemId);
 	}
 
 	@GET
 	@Produces("application/xml")
+	@Cacheable(value=CACHE_REGION, key="'api_parts'")
 	public ItemResult getAll() {
 		return itemService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_parts'")
+    @CachePut(value=CACHE_REGION, key="'api_parts' + #item.id")
 	public ItemDTO save(ItemDTO item) {
 		return itemService.save(item);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_parts'")
+    @CachePut(value=CACHE_REGION, key="'api_parts' + #id")
     public ItemDTO updateById(@PathParam("id") Integer itemId, @RequestBody ItemDTO item) {
         return itemService.updateById(itemId, item);
     }
@@ -51,6 +61,9 @@ public class ItemResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_parts'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_parts' + #id")})
 	public ItemDTO delete(@PathParam("id") Integer itemId) {
 		return itemService.delete(itemId);
 	}

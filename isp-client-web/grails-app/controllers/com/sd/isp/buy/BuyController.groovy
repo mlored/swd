@@ -10,7 +10,6 @@ import com.sd.isp.service.car.ICarService;
 
 import grails.transaction.Transactional
 
-@Transactional
 @Secured(["ROLE_SECRETARIO"])
 class BuyController {
 

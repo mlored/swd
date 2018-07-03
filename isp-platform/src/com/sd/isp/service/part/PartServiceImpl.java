@@ -30,8 +30,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION,key = "'api_parts'")
-    @CachePut(value=CACHE_REGION, key="'api_parts' + #dto.id")
 	public PartDTO save(PartDTO dto) {
 		final PartDomain domain = convertDtoToDomain(dto);
 		final PartDomain partDomain =  partDao.save(domain);
@@ -40,7 +38,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_parts' + #id")
 	public PartDTO getById(Integer id) {
 		final PartDomain domain = partDao.getById(id);
 		return convertDomainToDto(domain);
@@ -48,7 +45,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_parts'")
 	public PartResult getAll() {
 		final List<PartDTO> parts = new ArrayList<>();
 		for (PartDomain domain : partDao.findAll()) {
@@ -63,8 +59,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION, key = "'api_parts'")
-    @CachePut(value=CACHE_REGION, key="'api_parts' + #id")
 	public PartDTO updateById(Integer id, PartDTO dto) {
 		final PartDomain newDomain = convertDtoToDomain(dto);
 		final PartDomain domain = partDao.getById(id);
@@ -78,9 +72,6 @@ public class PartServiceImpl extends BaseServiceImpl<PartDTO, PartDomain, PartDa
 
 	@Override
 	@Transactional
-	@Caching(evict = {
-            @CacheEvict(value=CACHE_REGION, key = "'api_parts'"),
-            @CacheEvict(value=CACHE_REGION, key = "'api_parts' + #id")})
 	public PartDTO delete(Integer id) {
 		final PartDomain domain = (PartDomain) partDao.delete(id);
 		return convertDomainToDto(domain);

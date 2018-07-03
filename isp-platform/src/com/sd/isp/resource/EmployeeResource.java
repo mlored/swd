@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import com.sd.isp.service.employee.IEmployeeService;
 @Path("/employee")
 @Component
 @Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
-public class EmployeeResource {
+public class EmployeeResource extends BaseResource {
 
 	@Autowired
 	private IEmployeeService employeeService;
@@ -28,23 +32,29 @@ public class EmployeeResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_employees' + #employeeId")
 	public EmployeeDTO getById(@PathParam("id") Integer employeeId) {
 		return employeeService.getById(employeeId);
 	}
 
 	@GET
 	@Produces("application/xml")
+	@Cacheable(value=CACHE_REGION, key="'api_employees'")
 	public EmployeeResult getAll() {
 		return employeeService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_employees'")
+	@CachePut(value=CACHE_REGION, key="'api_employees' + #employee.id")
 	public EmployeeDTO save(EmployeeDTO employee) {
 		return employeeService.save(employee);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_employees'")
+	@CachePut(value=CACHE_REGION, key="'api_employees' + #id")
     public EmployeeDTO updateById(@PathParam("id") Integer employeeId, @RequestBody EmployeeDTO employee) {
         return employeeService.updateById(employeeId, employee);
     }
@@ -52,6 +62,9 @@ public class EmployeeResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Caching(evict = {
+			@CacheEvict(value=CACHE_REGION, key = "'api_employees'"),
+			@CacheEvict(value=CACHE_REGION, key = "'api_employees' + #id")})
 	public EmployeeDTO delete(@PathParam("id") Integer employeeId) {
 		return employeeService.delete(employeeId);
 	}

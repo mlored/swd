@@ -28,8 +28,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION,key = "'api_roles'")
-    @CachePut(value=CACHE_REGION, key="'api_roles' + #dto.id")
 	public RoleDTO save(RoleDTO dto) {
 		final RoleDomain roleDomain = convertDtoToDomain(dto);
 		final RoleDomain role = roleDao.save(roleDomain);
@@ -38,7 +36,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_roles' + #id")
 	public RoleDTO getById(Integer id) {
 		final RoleDomain roleDomain = roleDao.getById(id);
 		return convertDomainToDto(roleDomain);
@@ -46,7 +43,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_roles'")
 	public RoleResult getAll() {
 		final List<RoleDTO> roles = new ArrayList<>();
 		for (RoleDomain domain : roleDao.findAll()) {
@@ -75,8 +71,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 	
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION, key = "'api_roles'")
-    @CachePut(value=CACHE_REGION, key="'api_roles' + #id")
 	public RoleDTO updateById(Integer id, RoleDTO dto) {
 		final RoleDomain newDomain = convertDtoToDomain(dto);
 		final RoleDomain domain    = roleDao.getById(id);
@@ -87,9 +81,6 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDTO, RoleDomain, RoleDa
 
 	@Override
 	@Transactional
-	@Caching(evict = {
-            @CacheEvict(value=CACHE_REGION, key = "'api_roles'"),
-            @CacheEvict(value=CACHE_REGION, key = "'api_roles' + #id")})
 	public RoleDTO delete(Integer id) {
 		final RoleDomain domain = roleDao.delete(id);
 		return convertDomainToDto(domain);

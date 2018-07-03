@@ -32,7 +32,6 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional(readOnly = true)
-    @Cacheable(value = CACHE_REGION,key = "'api_cars'")
 	public CarResult getAll() {
 		final List<CarDTO> cars = new ArrayList<>();
 		for (CarDomain domain : carDao.findAll()) {
@@ -47,7 +46,6 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value= CACHE_REGION, key="'api_cars' + #id ")
 	public CarDTO getById(Integer id) {
 		final CarDomain domain = carDao.getById(id);
 		return convertDomainToDto(domain);
@@ -55,8 +53,6 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@CacheEvict(value= CACHE_REGION,key = "'api_cars'")
-    @CachePut(value= CACHE_REGION, key="'api_cars' + #dto.id")
 	public CarDTO save(CarDTO dto) {
 		final CarDomain domain = convertDtoToDomain(dto);
 		final CarDomain carDomain = carDao.save(domain);
@@ -65,8 +61,6 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional
-	@CacheEvict(value= CACHE_REGION, key = "'api_cars'")
-    @CachePut(value= CACHE_REGION, key="'api_cars' + #id ")
 	public CarDTO updateById(Integer id, CarDTO dto) {
 		final CarDomain newDomain = convertDtoToDomain(dto);
 		final CarDomain domain = carDao.getById(id);
@@ -80,9 +74,6 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 
 	@Override
 	@Transactional
-	@Caching(evict = {
-            @CacheEvict(value=CACHE_REGION, key = "'api_cars'"),
-            @CacheEvict(value=CACHE_REGION, key = "'api_cars' + #id ")})
 	public CarDTO delete(Integer id) {
 		final CarDomain domain = carDao.delete(id);
 		return convertDomainToDto(domain);
@@ -112,6 +103,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarDTO, CarDomain, CarDaoImp
 	
 	@Override
 	@Transactional(readOnly = true)
+	//@Cacheable(value= CACHE_REGION, key="'api_cars_page' + #page ")
 	public CarResult find(String textToFind, int page, int maxItems) throws Exception {
 		final List<CarDTO> cars = new ArrayList<>();
 		for (CarDomain domain : carDao.find(textToFind, page, maxItems)) {

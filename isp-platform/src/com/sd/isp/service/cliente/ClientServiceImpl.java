@@ -29,8 +29,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION,key = "'api_clients'")
-	@CachePut(value=CACHE_REGION, key="'api_clients' + #dto.id")
 	public ClientDTO save(ClientDTO dto) {
 		final ClientDomain clientDomain = convertDtoToDomain(dto);
 		final ClientDomain client = clientDao.save(clientDomain);
@@ -39,7 +37,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_clients' + #id")
 	public ClientDTO getById(Integer id) {
 		final ClientDomain clientDomain = clientDao.getById(id);
 		final ClientDTO clientDTO = convertDomainToDto(clientDomain);
@@ -49,7 +46,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_clients'")
 	public ClientResult getAll() {
 		final List<ClientDTO> clients = new ArrayList<>();
 		for (ClientDomain domain : clientDao.findAll()) {
@@ -64,8 +60,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 	
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION, key = "'api_clients'")
-	@CachePut(value=CACHE_REGION, key="'api_clients' + #id")
 	public ClientDTO updateById(Integer id, ClientDTO dto) {
 		final ClientDomain newDomain = convertDtoToDomain(dto);
 		final ClientDomain domain = clientDao.getById(id);
@@ -80,9 +74,6 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientDTO, ClientDomain, 
 
 	@Override
 	@Transactional
-	@Caching(evict = {
-			@CacheEvict(value=CACHE_REGION, key = "'api_clients'"),
-			@CacheEvict(value=CACHE_REGION, key = "'api_clients' + #id")})
 	public ClientDTO delete(Integer id) {
 		final ClientDomain domain = clientDao.delete(id);
 		return convertDomainToDto(domain);

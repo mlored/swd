@@ -9,7 +9,6 @@ import com.sd.isp.service.car.ICarService
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional
 @Secured(["ROLE_ADMIN"])
 class CarsController {
 

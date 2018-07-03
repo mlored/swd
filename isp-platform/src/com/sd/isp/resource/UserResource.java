@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import com.sd.isp.service.user.IUserService;
 @Path("/user")
 @Component
 @Secured("ROLE_ADMIN")
-public class UserResource {
+public class UserResource extends BaseResource {
 
 	@Autowired
 	private IUserService userService;
@@ -28,6 +32,7 @@ public class UserResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_users' + #userId")
 	public UserDTO getById(@PathParam("id") Integer userId) {
 		return userService.getById(userId);
 	}
@@ -42,23 +47,31 @@ public class UserResource {
 
 	@GET
 	@Produces("application/xml")
+	@Cacheable(value=CACHE_REGION, key="'api_users'")
 	public UserResult getAll() {
 		return userService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_users'")
+    @CachePut(value=CACHE_REGION, key="'api_users' + #user.id")
 	public UserDTO save(UserDTO user) {
 		return userService.save(user);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_users'")
+    @CachePut(value=CACHE_REGION, key="'api_users' + #id")
     public UserDTO updateById(@PathParam("id") Integer userId, @RequestBody UserDTO user) {
         return userService.updateById(userId, user);
     }
 	
 	@DELETE
 	@Path("/{id}")
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_users'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_users' + #id")})
 	public UserDTO delete(@PathParam("id") Integer userId) {
 		return userService.delete(userId);
 	}

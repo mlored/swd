@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import com.sd.isp.service.cliente.IClientService;
 @Path("/client")
 @Component
 @Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
-public class ClientResource {
+public class ClientResource extends BaseResource{
 
 	@Autowired
 	private IClientService clientService;
@@ -28,6 +32,7 @@ public class ClientResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_clients' + #clientId")
 	public ClientDTO getById(@PathParam("id") Integer clientId) {
 		return clientService.getById(clientId);
 	}
@@ -35,17 +40,22 @@ public class ClientResource {
 	@GET
 	@Produces("application/xml")
 	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
+	@Cacheable(value=CACHE_REGION, key="'api_clients'")
 	public ClientResult getAll() {
 		return clientService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_clients'")
+	@CachePut(value=CACHE_REGION, key="'api_clients' + #client.id")
 	public ClientDTO save(ClientDTO client) {
 		return clientService.save(client);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_clients'")
+	@CachePut(value=CACHE_REGION, key="'api_clients' + #id")
     public ClientDTO updateById(@PathParam("id") Integer clientId, @RequestBody ClientDTO client) {
         return clientService.updateById(clientId, client);
     }
@@ -53,6 +63,9 @@ public class ClientResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Caching(evict = {
+			@CacheEvict(value=CACHE_REGION, key = "'api_clients'"),
+			@CacheEvict(value=CACHE_REGION, key = "'api_clients' + #id")})
 	public ClientDTO delete(@PathParam("id") Integer clientId) {
 		return clientService.delete(clientId);
 	}

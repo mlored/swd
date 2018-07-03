@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import com.sd.isp.service.supplier.ISupplierService;
 @Path("/supplier")
 @Component
 @Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
-public class SupplierResource {
+public class SupplierResource extends BaseResource {
 
 	@Autowired
 	private ISupplierService supplierService;
@@ -28,23 +32,29 @@ public class SupplierResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_suppliers' + #supplierId")
 	public SupplierDTO getById(@PathParam("id") Integer supplierId) {
 		return supplierService.getById(supplierId);
 	}
 
 	@GET
 	@Produces("application/xml")
+	@Cacheable(value=CACHE_REGION, key="'api_suppliers'")
 	public SupplierResult getAll() {
 		return supplierService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_suppliers'")
+	@CachePut(value=CACHE_REGION, key="'api_suppliers' + #supplier.id")
 	public SupplierDTO save(SupplierDTO supplier) {
 		return supplierService.save(supplier);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'suppliers'")
+	@CachePut(value=CACHE_REGION, key="'suppliers' + #id")
     public SupplierDTO updateById(@PathParam("id") Integer supplierId, @RequestBody SupplierDTO supplier) {
         return supplierService.updateById(supplierId, supplier);
     }
@@ -52,6 +62,9 @@ public class SupplierResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Caching(evict = {
+			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers'"),
+			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers' + #id")})
 	public SupplierDTO delete(@PathParam("id") Integer supplierId) {
 		return supplierService.delete(supplierId);
 	}

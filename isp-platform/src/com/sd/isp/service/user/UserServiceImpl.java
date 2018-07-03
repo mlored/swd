@@ -43,8 +43,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION,key = "'api_users'")
-    @CachePut(value=CACHE_REGION, key="'api_users' + #bean.id")
 	public UserDTO save(UserDTO dto) {
 		final UserDomain userDomain = convertDtoToDomain(dto);
 		final UserDomain user = userDao.save(userDomain);
@@ -53,7 +51,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_users' + #id")
 	public UserDTO getById(Integer id) {
 		final UserDomain userDomain = userDao.getById(id);
 		final UserDTO userDTO = convertDomainToDto(userDomain);
@@ -69,7 +66,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable(value=CACHE_REGION, key="'api_users'")
 	public UserResult getAll() {
 		final List<UserDTO> users = new ArrayList<>();
 		for (UserDomain domain : userDao.findAll()) {
@@ -84,8 +80,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	
 	@Override
 	@Transactional
-	@CacheEvict(value=CACHE_REGION, key = "'api_users'")
-    @CachePut(value=CACHE_REGION, key="'api_users' + #id")
 	public UserDTO updateById(Integer id, UserDTO dto) {
 		final UserDomain newDomain = convertDtoToDomain(dto);
 		final UserDomain domain = userDao.getById(id);
@@ -98,9 +92,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 	}
 	
 	@Transactional
-	@Caching(evict = {
-            @CacheEvict(value=CACHE_REGION, key = "'api_users'"),
-            @CacheEvict(value=CACHE_REGION, key = "'api_users' + #id")})
 	public UserDTO delete(Integer id){
 		final UserDomain domain = userDao.delete(id);
 		return convertDomainToDto(domain);

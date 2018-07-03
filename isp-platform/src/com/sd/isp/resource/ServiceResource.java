@@ -9,6 +9,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +24,7 @@ import com.sd.isp.service.service.IServiceService;
 @Path("/service")
 @Component
 @Secured({"ROLE_ADMIN"})
-public class ServiceResource {
+public class ServiceResource extends BaseResource {
 
 	@Autowired
 	private IServiceService serviceService;
@@ -28,6 +32,7 @@ public class ServiceResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Cacheable(value=CACHE_REGION, key="'api_services' + #serviceId")
 	public ServiceDTO getById(@PathParam("id") Integer serviceId) {
 		return serviceService.getById(serviceId);
 	}
@@ -35,17 +40,22 @@ public class ServiceResource {
 	@GET
 	@Produces("application/xml")
 	@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN", "ROLE_MECANICO"})
+	@Cacheable(value=CACHE_REGION, key="'api_services'")
 	public ServiceResult getAll() {
 		return serviceService.getAll();
 	}
 
 	@POST
+	@CacheEvict(value=CACHE_REGION,key = "'api_services'")
+    @CachePut(value=CACHE_REGION, key="'api_services' + #service.id")
 	public ServiceDTO save(ServiceDTO service) {
 		return serviceService.save(service);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@CacheEvict(value=CACHE_REGION, key = "'api_services'")
+    @CachePut(value=CACHE_REGION, key="'api_services' + #id")
     public ServiceDTO updateById(@PathParam("id") Integer serviceId, @RequestBody ServiceDTO service) {
         return serviceService.updateById(serviceId, service);
     }
@@ -53,6 +63,9 @@ public class ServiceResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Caching(evict = {
+            @CacheEvict(value=CACHE_REGION, key = "'api_services'"),
+            @CacheEvict(value=CACHE_REGION, key = "'api_services' + #id")})
 	public ServiceDTO delete(@PathParam("id") Integer serviceId) {
 		return serviceService.delete(serviceId);
 	}
