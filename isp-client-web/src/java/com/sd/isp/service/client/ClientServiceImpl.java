@@ -13,12 +13,8 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.client.ClientB;
-import com.sd.isp.beans.employee.EmployeeB;
-import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.client.ClientDTO;
 import com.sd.isp.dto.client.ClientResult;
-import com.sd.isp.dto.employee.EmployeeDTO;
-import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.client.IClientResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 

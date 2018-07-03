@@ -69,8 +69,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 			Map<String, String> map = obtenerQuery(textToFind);
 			if (map.containsKey("text")) {
 				String text = map.get("text");
-				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("year", "%"+text+"%"))
-						.add(Restrictions.ilike("mark", "%"+text+"%"))
+				Criterion propertyCriterion = Restrictions.disjunction().add(Restrictions.ilike("mark", "%"+text+"%"))
 						.add(Restrictions.ilike("model", "%"+text+"%"))
 						.add(Restrictions.ilike("color", "%"+text+"%"));
 				Criterion idCriterion = null;
@@ -85,8 +84,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 			}
 				if (map.containsKey("sort")) {
 					String sort = (map.get("sort"));
-					if(sort.equals("year") || sort.equals("mark") 
-										     || sort.equals("model") 
+					if(sort.equals("mark") || sort.equals("model") 
 										     || sort.equals("color")){
 						if (map.containsKey("order")){
 							String order = (map.get("order"));
@@ -101,12 +99,12 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 						}
 					}
 				}else{
-					criteria.addOrder(Order.asc("year").ignoreCase());
 					criteria.addOrder(Order.asc("mark").ignoreCase());
+					criteria.addOrder(Order.asc("model").ignoreCase());
 				}
 			}else{
-				criteria.addOrder(Order.asc("year").ignoreCase());
 				criteria.addOrder(Order.asc("mark").ignoreCase());
+				criteria.addOrder(Order.asc("model").ignoreCase());
 			}
 				criteria.setFirstResult(page * maxItems);
 				criteria.setMaxResults(maxItems);
@@ -116,8 +114,7 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 	   }
 
 	/**
-	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
-	 * valor=valor a buscar
+	 * Diccionario: clave=columna de la bd y valor=valor a buscar
 	 */
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");

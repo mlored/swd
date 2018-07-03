@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.client.ClientDomain;
 
 @Repository
@@ -118,8 +117,7 @@ public class ClientDaoImpl extends BaseDaoImpl<ClientDomain> implements IClientD
 	   }
 	
 	/**
-	 * Creo un diccionario con clave valor En donde clave=columna de la bd y
-	 * valor=valor a buscar
+	 * Diccionario: clave=columna de la bd y valor=valor a buscar
 	 */
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");

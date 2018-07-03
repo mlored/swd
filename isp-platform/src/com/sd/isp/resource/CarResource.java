@@ -58,7 +58,7 @@ public class CarResource {
 	}
 	
 
-	// http://localhost:8080/isp-platform/rest/car/search/textToFind 
+   // http://localhost:8080/isp-platform/rest/car/search/textToFind 
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
@@ -69,7 +69,7 @@ public class CarResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	@Secured({"ROLE_SECRETARIO", "ROLE_MECANICO"})
+	@Secured({"ROLE_SECRETARIO", "ROLE_MECANICO","ROLE_ADMIN"})
 	public CarResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return carService.find(null, page, maxItems);
 	}

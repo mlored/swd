@@ -105,7 +105,7 @@ class ClientController {
 		def clientInstance = clientService.update(id.intValue(), clientB)
 		if (clientInstance == null) {
 			flash.message = message(code: 'default.not.found.message', args: [
-					message(code: 'client.label', default: 'Car'),
+					message(code: 'client.label', default: 'Client'),
 					id
 			])
 			redirect(action: "list")
@@ -113,7 +113,7 @@ class ClientController {
 		}
 
 		flash.message = message(code: 'default.updated.message', args: [
-				message(code: 'client.label', default: 'Car'),
+				message(code: 'client.label', default: 'Client'),
 				clientInstance.id
 		])
 		redirect(action: "list")
