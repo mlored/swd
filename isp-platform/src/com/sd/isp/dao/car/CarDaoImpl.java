@@ -113,9 +113,6 @@ public class CarDaoImpl extends BaseDaoImpl<CarDomain> implements ICarDao {
 				return cars;
 	   }
 
-	/**
-	 * Diccionario: clave=columna de la bd y valor=valor a buscar
-	 */
 	private Map<String, String> obtenerQuery(String textToFind) {
 		String[] params = textToFind.split("&");
 		Map<String, String> map = new HashMap<String, String>();

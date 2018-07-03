@@ -57,7 +57,7 @@ public class SupplierResource {
 	}
 
 
-	// http://localhost:8080/isp-platform/rest/client/search/textToFind 
+	// http://localhost:8080/isp-platform/rest/supplier/search/textToFind 
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")

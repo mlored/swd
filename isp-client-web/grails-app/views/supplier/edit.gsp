@@ -26,7 +26,7 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form action="update" method="PUT" id="${supplierInstance?.id}" name="form" novalidate="true">
+					<g:form action="update" method="POST" id="${supplierInstance?.id}" novalidate="true" name="form_suppliers">
 							<g:hiddenField name="id" value="${supplierInstance?.id}" />
 
 							<fieldset class="form">
@@ -37,6 +37,12 @@
 							</fieldset>
 						</g:form>
 					</div>
+					<script>
+                        $( document ).ready(function() {
+                            $("#form_suppliers").validate({
+                            });
+                        });
+					</script>
 					<!-- /.box -->
 				</div>
 			</div>

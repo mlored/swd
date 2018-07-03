@@ -12,11 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
-import com.sd.isp.beans.client.ClientB;
-import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.beans.supplier.SupplierB;
-import com.sd.isp.dto.client.ClientDTO;
-import com.sd.isp.dto.client.ClientResult;
 import com.sd.isp.dto.supplier.SupplierDTO;
 import com.sd.isp.rest.supplier.ISupplierResource;
 import com.sd.isp.dto.supplier.SupplierResult;
