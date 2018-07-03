@@ -7,9 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.sd.isp.beans.base.BaseBean;
 import com.sd.isp.beans.employee.EmployeeB;
-import com.sd.isp.beans.entry.EntryB;
 import com.sd.isp.beans.report.ReportB;
-import com.sd.isp.beans.entry_details.EntryDetailsB;
 
 public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +24,6 @@ public class ReportB extends BaseBean {
 		if (!StringUtils.isBlank(params.get("id"))) {
 			setId(Integer.valueOf(params.get("id")));
 		}
-		//setObservations(params.get("observations"));
 	}
 
 	public Date getDate() {

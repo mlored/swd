@@ -11,8 +11,6 @@ import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.employee.EmployeeDomain;
-import com.sd.isp.domain.entry.EntryDomain;
-import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
 @Entity
 @Table(name = "report")

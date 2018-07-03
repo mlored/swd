@@ -1,15 +1,10 @@
 package com.sd.isp.rest.report;
 
-
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dto.report.ReportDTO;
 import com.sd.isp.dto.report.ReportResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
-import com.sun.jersey.api.client.UniformInterface;
 
 @Repository("reportResource")
 public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult> implements
@@ -20,8 +15,6 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult>
 	}
 
 	@Override
-	//@CacheEvict(value = CACHE_REGION, key = "'reports'")
-	//@CachePut(value = CACHE_REGION, key = "'report_' + #report.id", condition = "#report.id!=null")
 	public ReportDTO save(ReportDTO report) {
 		ReportDTO newDto = super.save(report);
 		/*if (null == report.getId()) {
@@ -32,13 +25,12 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult>
 	}
 
 	@Override
-	//@Cacheable(value = CACHE_REGION, key = "'report_' + #id")
+	
 	public ReportDTO getById(Integer id) {
 		return super.getById(id);
 	}
 
 	@Override
-	//@Cacheable(value = CACHE_REGION, key = "'reports'")
 	public ReportResult getAll() {
 		//setWebResourceBasicAuthFilter();
 		final ReportResult result = getWebResource().get(ReportResult.class);

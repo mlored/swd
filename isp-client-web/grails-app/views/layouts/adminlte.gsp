@@ -170,7 +170,7 @@
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO">
                         <li>
                             <a href="/isp-client-web/#">
-                                <i class="fa fa-credit-card"></i> <span>Ventas (No Funciona)</span>
+                                <i class="fa fa-credit-card"></i> <span>Ventas</span>
                             </a>
                         </li>
                     </sec:ifAnyGranted>
@@ -181,15 +181,15 @@
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <%--<sec:ifAnyGranted roles="ROLE_ADMIN">
                         <li>
                             <a href="/isp-client-web/report/list">
-                                <i class="fa fa-pie-chart"></i> <span>Reportes (no funciona) </span>
+                                <i class="fa fa-pie-chart"></i> <span>Reportes </span>
 
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
+                    --%><sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
                         <li>
                             <a href="/isp-client-web/stock/list">
                                 <i class="fa fa-cubes"></i> <span>Stock</span>

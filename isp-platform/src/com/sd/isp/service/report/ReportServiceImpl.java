@@ -29,15 +29,13 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	@Autowired
 	private IEmployeeDao _employeeDao;
 
-	//private static Logger logger = Logger.getLogger(ReportServiceImpl.class);
 
 	@Override
 	@Transactional
-	//@CacheEvict(value = "isp-platform-cache", key = "'reports'")
-	//@CachePut(value = "isp-platform-cache", key = "'report_' + #dto.id", condition = "#dto.id!=null")
+	
 	public ReportDTO save(ReportDTO dto) {
 		try {
-			// Lanzo exepcion de tipo runtime para realizar rollback
+			
 			final ReportDomain domain = convertDtoToDomain(dto);
 			final ReportDomain report = _reportDao.save(domain);
 			final ReportDTO newDto    = convertDomainToDto(report);
@@ -46,14 +44,13 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 			}
 			return newDto;
 		} catch (Exception ex) {
-			//logger.error(ex);
+		
 			throw new RuntimeException("Error" + ReportServiceImpl.class + "" + ex.getMessage(), ex);
 		}
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	//@Cacheable(value = "isp-platform-cache", key = "'report_' + #id")
 	public ReportDTO getById(Integer id) {
 		final ReportDomain domain = _reportDao.getById(id);
 		final ReportDTO dto 	  = convertDomainToDto(domain);
@@ -62,7 +59,6 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 
 	@Override
 	@Transactional(readOnly = true)
-	//@Cacheable(value = "isp-platform-cache", key = "'reports'")
 	public ReportResult getAll(){
 		final List<ReportDTO> reports = new ArrayList<>();
 		for (ReportDomain domain : _reportDao.findAll()) {
@@ -81,13 +77,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		dto.setEmployeeId(domain.getEmployee().getId());
 		dto.setDate(domain.getDate());
 		dto.setIsActived(domain.getIsActived());
-		//dto.setEntryDetailsId(domain.getEntryDetails().getId());
-		//dto.setObservations(domain.getObservations());
-		//dto.setAge(domain.getAge());
-		/*dto.setDiagnosticDetail(domain.getDiagnosticDetail());
-		if (null != domain.getStatistic()) {
-			dto.setStatisticId(domain.getStatistic().getId());
-		}*/
+		
 		return dto;
 	}
 
@@ -98,13 +88,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 		domain.setEmployee(_employeeDao.getById(dto.getEmployeeId()));
 		domain.setDate(dto.getDate());
 		domain.setIsActived(dto.getIsActived());
-		//domain.setEntryDetails(_entrydetailsDao.getById(dto.getEntryDetailsId()));
-		//domain.setObservations(dto.getObservations());
-		//domain.setAge(dto.getAge());
-		//domain.setDiagnosticDetail(dto.getDiagnosticDetail());
-		/*if(null!=dto.getStatisticId()){
-			domain.setStatistic(_statisticDao.getById(dto.getStatisticId()));	
-		}*/
+		
 		return domain;
 	}
 

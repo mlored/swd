@@ -21,7 +21,6 @@ import com.sd.isp.domain.base.BaseDomain;
 import com.sd.isp.domain.car.CarDomain;
 import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
-import com.sd.isp.domain.report.ReportDomain;
 
 @Entity
 @Table(name = "entries")
@@ -50,9 +49,6 @@ public class EntryDomain extends BaseDomain {
 	
 	@OneToMany(mappedBy = "entryDomain")
     private List<EntryDetailsDomain> entryDetailsDomains;
-	
-	@OneToOne
-	private ReportDomain _report;		//add 
 	
 	
 	public List<EntryDetailsDomain> getEntryDetailsDomains() {
