@@ -1,21 +1,21 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="adminlte">
-		<g:set var="entityName" value="${message(code: 'service.label', default: 'Servicio')}" />
+		<g:set var="entityName" value="${message(code: 'service.label', default: 'Sevicio')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
-	<section class="content">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- general form elements -->
-				<div class="box box-primary">
-					<div class="box-header with-border">
-						<h3 class="box-title">Editar Servicio</h3>
-					</div>
-					<div id="edit-service" class="content scaffold-edit" role="main">
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- general form elements -->
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title"><g:message code="default.edit.label" args="[entityName]" /></h3>
+						</div>
+						<!-- /.box-header -->
+						<!-- form start -->
 						<g:if test="${flash.message}">
 							<div class="message" role="status">${flash.message}</div>
 						</g:if>
@@ -26,16 +26,23 @@
 								</g:eachError>
 							</ul>
 						</g:hasErrors>
-						<g:form action="update" method="PUT" id="${serviceInstance?.id}" name="form" novalidate="true" >
+					<g:form action="update" method="POST" id="${serviceInstance?.id}" novalidate="true" name="form_services">
+							<g:hiddenField name="id" value="${serviceInstance?.id}" />
+
 							<fieldset class="form">
 								<g:render template="form"/>
 							</fieldset>
 							<fieldset class="box-footer">
-								<g:actionSubmit class="save" class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+								<g:actionSubmit  class="btn btn-primary" value="Actualizar" action="update" />
 							</fieldset>
 						</g:form>
 					</div>
-				</div>
+					<script>
+                        $( document ).ready(function() {
+                            $("#form_services").validate({
+                            });
+                        });
+					</script>
 					<!-- /.box -->
 				</div>
 			</div>

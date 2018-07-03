@@ -5,7 +5,6 @@ import java.util.Map;
 import com.sd.isp.beans.item.ItemB;
 import org.apache.commons.lang.StringUtils;
 
-import com.sd.isp.beans.base.BaseBean;
 
 public class ServiceB extends ItemB {
     private static final long serialVersionUID = 1L;

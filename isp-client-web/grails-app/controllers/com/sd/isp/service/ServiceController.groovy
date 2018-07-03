@@ -1,7 +1,6 @@
 package com.sd.isp.service
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.service.ServiceB
@@ -111,7 +110,6 @@ class ServiceController {
         [serviceInstance: serviceInstance]
     }
 
-    @Transactional
     def update(Long id) {
         def serviceB= new ServiceB(params)
         def serviceInstance = serviceService.update(id.intValue(), serviceB)
@@ -123,11 +121,6 @@ class ServiceController {
             redirect(action: "list")
             return
         }
-
-        /*if (!serviceInstance.save(flush: true)) {
-            render(view: "edit", model: [serviceInstance: serviceInstance])
-            return
-        }*/
 
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'service.label', default: 'Service'),
