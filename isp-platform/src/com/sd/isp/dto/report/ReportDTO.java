@@ -12,18 +12,18 @@ public class ReportDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer  _employeeId;
+	private Integer  _entryId;
 	private Date 	 _date;
 	private Boolean  _isActived; 
-  //private Integer  _entryDetailsId;
+    private Integer  _entryDetailsId;
 
 	@XmlElement
 	public Integer getEmployeeId() {
-		return _employeeId;
+		return _entryId;
 	}
 
 	public void setEmployeeId(Integer employeeId) {
-		_employeeId= employeeId;
+		_entryId= employeeId;
 	}
 
 
@@ -45,7 +45,7 @@ public class ReportDTO extends BaseDTO {
 		_isActived = isActived;
 	}
 	
-	/*@XmlElement
+	@XmlElement
 	public Integer getEntryDetailsId() {
 		return _entryDetailsId;
 	}
@@ -53,6 +53,6 @@ public class ReportDTO extends BaseDTO {
 	public void setEntryDetailsId(Integer entryDetails) {
 		_entryDetailsId = entryDetails;
 	}
-	*/
+	
 
 }

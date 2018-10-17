@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.employee.IEmployeeDao;
 import com.sd.isp.dao.entry.IEntryDao;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
+import com.sd.isp.dao.item.IItemDao;
 import com.sd.isp.dao.report.IReportDao;
 import com.sd.isp.dao.report.ReportDaoImpl;
 import com.sd.isp.domain.report.ReportDomain;
@@ -27,7 +28,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	private IReportDao _reportDao;
 
 	@Autowired
-	private IEmployeeDao _employeeDao;
+	private IEntryDao _entryDao;
+	
+	@Autowired
+	private IItemDao _itemDao;
 
 
 	@Override
@@ -74,7 +78,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	public ReportDTO convertDomainToDto(ReportDomain domain) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
-		dto.setEmployeeId(domain.getEmployee().getId());
+		dto.setEntryDetailsId(domain.getEntry().getId());
 		dto.setDate(domain.getDate());
 		dto.setIsActived(domain.getIsActived());
 		
@@ -85,9 +89,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	public ReportDomain convertDtoToDomain(ReportDTO dto){
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		domain.setEmployee(_employeeDao.getById(dto.getEmployeeId()));
+		domain.setEntry(_entryDao.getById(dto.getEntryDetailsId()));
 		domain.setDate(dto.getDate());
 		domain.setIsActived(dto.getIsActived());
+		//domain.setEntryDetails(dto.getEntryDetailsId());
 		
 		return domain;
 	}

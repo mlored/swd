@@ -1,6 +1,7 @@
 package com.sd.isp.dao.report;
 
 import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Criterion;
+//import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,7 +42,6 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 				return (ReportDomain) sessionFactory.getCurrentSession().get(ReportDomain.class, domainId);
 			} catch (Exception e) {
 				System.out.println("No existe el reporte con id ");
-			
 			}
 		} else {
 			System.out.println("El ID no puede ser null");
@@ -61,7 +61,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind, int page, int maxItems) throws Exception {
 		Date minDate, maxDate;
 		Session session   = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._employee", "employee");
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._entry", "entry");
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			Map<String, String> map    = obtenerQuery(textToFind);
@@ -69,6 +69,30 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 			if (map.containsKey("isActived")) {
 				criteria.add(Restrictions.eq("_isActived", map.get("isActived")));
 			}
+			if (map.containsKey("start") && map.containsKey("end")) { // buscar entre fechas
+				
+				try {
+					minDate = formatter.parse(map.get("start"));
+					Calendar c = Calendar.getInstance();
+					c.setTime(formatter.parse(map.get("end")));
+					c.add(Calendar.DATE, 1);
+					maxDate = c.getTime();
+					// System.out.println("desde" + minDate + "hasta " +
+					// maxDate);
+					criteria.add(Restrictions.between("_date", minDate, maxDate));
+				} catch (Exception e) {
+					//throw new AutomotiveException("Formato de ruta invalido", e);
+					  System.out.println("Formato de ruta invalido");
+				}
+			} else if (map.containsKey("date")) { // filtrar por fecha especifica
+				try {
+					criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
+				} catch (Exception e) {
+					//throw new PatologyException("Formato de ruta invalido", e);
+					System.out.println("Formato de ruta invalido");
+				}
+			}
+
 		}
 		criteria.addOrder(Order.desc("_id"));
 		criteria.setFirstResult(page * maxItems);
@@ -83,7 +107,7 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 	public List<ReportDomain> find(String textToFind)/* throws AutomotiveException*/ {
 		Date minDate, maxDate;
 		Session session   = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report._employee", "employee");
+		Criteria criteria = session.createCriteria(ReportDomain.class, "report").createAlias("report.entry", "entry");
 
 		if (textToFind != null) {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -92,7 +116,32 @@ public class ReportDaoImpl extends BaseDaoImpl<ReportDomain> implements IReportD
 			if (map.containsKey("isActived")) { 
 				criteria.add(Restrictions.eq("_isActived", Boolean.parseBoolean(map.get("isActived"))));
 			}
-
+			
+			if (map.containsKey("start") && map.containsKey("end")) { // buscar entre fechas
+				
+				try {
+					minDate = formatter.parse(map.get("start"));
+					Calendar c = Calendar.getInstance();
+					c.setTime(formatter.parse(map.get("end")));
+					c.add(Calendar.DATE, 1);
+					maxDate = c.getTime();
+					// System.out.println("desde" + minDate + "hasta " +
+					// maxDate);
+					criteria.add(Restrictions.between("_date", minDate, maxDate));
+				} catch (Exception e) {
+					//throw new AutomotiveException("Formato de ruta invalido", e);
+					  System.out.println("Formato de ruta invalido");
+				}
+			} else if (map.containsKey("date")) { // filtrar por fecha especifica
+				try {
+					criteria.add(Restrictions.eq("_date", formatter.parse(map.get("date"))));
+				} catch (Exception e) {
+					//throw new PatologyException("Formato de ruta invalido", e);
+					System.out.println("Formato de ruta invalido");
+				}
+			}
+			
+			
 		}
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<ReportDomain> reports = criteria.list();

@@ -11,7 +11,6 @@ import com.sd.isp.beans.report.ReportB
 import com.sd.isp.service.auth.IAuthService
 import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.client.IClientService
-import com.sd.isp.service.employee.IEmployeeService
 import com.sd.isp.service.entry.IEntryService
 import com.sd.isp.service.report.IReportService
 //import com.sd.uni.isp.service.client.IClientService
@@ -29,7 +28,7 @@ class ReportController {
 
 	//service
 	def IReportService reportService;
-	def IEmployeeService  employeeService;
+	def IEntryService  entryService;
 	@Autowired def IAuthService authService
 
 	/*@Secured([
@@ -48,7 +47,7 @@ class ReportController {
 	])*/
 	def show() {
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
-		[reportInstance: reportInstance,employeeInstanceList: employeeService.getAll(),
+		[reportInstance: reportInstance,entryInstanceList: entryService.getAll(),
 			user:authService.getName(), reportShow:params.get("reportShow")]
 	}
 
@@ -67,8 +66,8 @@ class ReportController {
 	def create(Integer id) {
 		def action = "save"
 		def reportInstance = new ReportB(params)
-		reportInstance.setEmployee(employeeService.getById(id))
-		[reportInstance: reportInstance,employeeInstanceList: employeeService.getAll(),
+		reportInstance.setEntry(entryService.getById(id))
+		[reportInstance: reportInstance,entryInstanceList: entryService.getAll(),
 			user:authService.getName(), action:action] 
 	}
 	/*@Secured([
@@ -81,14 +80,14 @@ class ReportController {
 
 		def reportInstance = reportService.getById(Integer.parseInt(params.get("id")))
 		
-		params.employee = reportInstance?.employee?.name +" "+ reportInstance?.employee?.lastName
+		params.entry = reportInstance?.entry?.name +" "+ reportInstance?.entry?.diagnostic
 		//params.age = reportInstance.getAge()
 		params.date = "ENCARNACION, "+ new Date().getDate() + " de " 
 									 + (new SimpleDateFormat("MMMM", new Locale("es", "ES"))).format(new Date())
 									 + " del "+(new SimpleDateFormat("yyyy", new Locale("es", "ES"))).format(new Date())
-		params.code = reportInstance?.employee?.code
+		params.code = reportInstance?.entry?.code
 	
-		params.number = reportInstance?.employee?.name
+		params.number = reportInstance?.entry?.diagnostic
 		
 		
 		
