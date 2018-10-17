@@ -23,13 +23,13 @@ public class EntryDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Date _date;
-	private String _number;
-	private String _diagnostic;
-    private CarDTO _car;
-    private ClientDTO _client;
-    private Integer _carId;
-    private Integer _clientId;
+	private Date 		_date;
+	private String 		_number;
+	private String	 	_diagnostic;
+    private CarDTO 		_car;
+    private ClientDTO 	_client;
+    private Integer		_carId;
+    private Integer 	_clientId;
 	private List<EntryDetailsDTO> _entryDetails = new ArrayList<EntryDetailsDTO>();
 
 	

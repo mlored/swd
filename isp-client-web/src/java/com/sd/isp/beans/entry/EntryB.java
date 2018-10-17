@@ -3,8 +3,6 @@ package com.sd.isp.beans.entry;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.sd.isp.beans.car.CarB;
@@ -16,11 +14,11 @@ import com.sd.isp.beans.base.BaseBean;
 public class EntryB extends BaseBean{
 
     private static final long serialVersionUID = 4680476902664047494L;
-    private Date date;
-    private String number;
-    private String diagnostic;
+    private Date    date;
+    private String  number;
+    private String  diagnostic;
     private ClientB cliente;
-    private CarB car;
+    private CarB 	car;
     private Integer carId;
     private Integer clientId;
     private List<EntryDetailsB> entryDetails;

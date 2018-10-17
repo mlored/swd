@@ -1,13 +1,11 @@
 package com.sd.isp.beans.entry_details;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.Map;
 
 import com.sd.isp.beans.entry.EntryB;
 import com.sd.isp.beans.item.ItemB;
-import com.sd.isp.dto.item.ItemDTO;
 import org.apache.commons.lang.StringUtils;
 import com.sd.isp.beans.base.BaseBean;
 
@@ -15,8 +13,8 @@ public class EntryDetailsB extends BaseBean{
 
     private static final long serialVersionUID = 4680476902664047494L;
 
-    private Date date;
-    private ItemB item;
+    private Date    date;
+    private ItemB   item;
     private Integer itemId;
     private EntryB entry;
 

@@ -36,16 +36,16 @@ import com.sd.isp.service.cliente.IClientService;
 public class EntryServiceImpl extends BaseServiceImpl<EntryDTO, EntryDomain, EntryDaoImpl, EntryResult> implements IEntryService {
 
 	@Autowired
-	private IEntryDao entryDao;
+	private IEntryDao  entryDao;
 	
 	@Autowired
-	private ICarDao carDao;
+	private ICarDao    carDao;
 	
 	@Autowired
 	private IClientDao clientDao;
 	
 	@Autowired
-	private IItemDao itemDao;
+	private IItemDao   itemDao;
 	
 	@Autowired
 	private IEntryDetailsDao entryDetailDao;

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.buy.BuyDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
 @Repository

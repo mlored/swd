@@ -2,6 +2,7 @@ package com.sd.isp.entry
 
 import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.part.IPartService
+import com.sd.isp.service.service.IServiceService
 import com.sd.isp.beans.entry.EntryB
 //import com.sd.isp.entry_details.EntryDetails
 import com.sd.isp.service.client.IClientService
@@ -14,10 +15,11 @@ class EntryController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    IEntryService entryService
+    IEntryService 	     entryService
     IEntryDetailsService entryDetailsService
-    IPartService partService
-    IClientService clientService
+    IPartService 	     partService
+	IServiceService      serviceService
+    IClientService       clientService
 
     def index(Integer max){
         params.max = Math.min(max ?: 10, 100)
