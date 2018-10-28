@@ -4,27 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.isp.dao.entry_details.EntryDetailsDaoImpl;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
 import com.sd.isp.dao.item.IItemDao;
-import com.sd.isp.dao.part.IPartDao;
-import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
-import com.sd.isp.dto.employee.EmployeeDTO;
-import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.item.ItemDTO;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.item.IItemService;
-import com.sd.isp.service.part.IPartService;
 
 @Service
 public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsDTO, EntryDetailsDomain, EntryDetailsDaoImpl, EntryDetailsResult> implements IEntryDetailsService {

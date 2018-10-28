@@ -18,11 +18,11 @@
         <table class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
-                <g:sortableColumn property="date" title="Fecha" />
-                <g:sortableColumn property="number" title="Numero" />
+                <g:sortableColumn property="date"   title="Fecha" />
+                <g:sortableColumn property="number" title="Número" />
                 <g:sortableColumn property="client" title="Cliente" />
-                <g:sortableColumn property="car" title="Automovil" />
-                <g:sortableColumn property="color" title="Color" />
+                <g:sortableColumn property="car"    title="Automóvil" />
+                <g:sortableColumn property="color"  title="Color" />
                 <th></th>
             </tr>
             </thead>

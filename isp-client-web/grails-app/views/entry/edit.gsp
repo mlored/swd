@@ -40,6 +40,17 @@
 			<!-- /.box -->
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$(function() {
+			$('#datetimepicker4').datetimepicker({
+				format : 'DD-MM-YYYY',
+				locale : 'es',
+				maxDate : 'now'
+			});
+		});
+    </script>
 </section>
+
 </body>
 </html>

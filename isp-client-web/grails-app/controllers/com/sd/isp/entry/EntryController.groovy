@@ -4,7 +4,6 @@ import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.part.IPartService
 import com.sd.isp.service.service.IServiceService
 import com.sd.isp.beans.entry.EntryB
-//import com.sd.isp.entry_details.EntryDetails
 import com.sd.isp.service.client.IClientService
 import com.sd.isp.service.entry.IEntryService
 import com.sd.isp.service.entry_details.IEntryDetailsService
@@ -18,7 +17,6 @@ class EntryController {
     IEntryService 	     entryService
     IEntryDetailsService entryDetailsService
     IPartService 	     partService
-	IServiceService      serviceService
     IClientService       clientService
 
     def index(Integer max){

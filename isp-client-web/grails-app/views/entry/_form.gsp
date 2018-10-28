@@ -83,18 +83,6 @@
                           
                           <div class="col-md-4">
                               <div class="form-group ${hasErrors(bean: entryInstance, field: 'client', 'error')} required">
-                                  <label for="service">
-                                      <g:message code="entry.client.label" default="Service" />
-                                      <span class="required-indicator">*</span>
-                                  </label>
-                                  <g:select id="service" name="entry.entryDetails[0].serviceId" from="${entryInstance?.entryDetails[0]?.item}"
-                                            optionKey="id" optionValue="name" required="true"
-                                            value="${entryInstance?.entryDetails[0]?.item?.id}" class="form-control input-sm"
-                                            noSelection="['null':'Selecciona un servicio']" />
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group ${hasErrors(bean: entryInstance, field: 'client', 'error')} required">
                                   <label for="item">
                                       <g:message code="entry.client.label" default="Item" />
                                       <span class="required-indicator">*</span>
@@ -105,15 +93,9 @@
                                             noSelection="['null':'Selecciona repuesto']" />
                               </div>
                           </div>
-                          <div class="col-md-2">
-                            <br><br>
-                            <button type="button" class="btn btn-default btn-sm td">
-                    			<span class="glyphicon glyphicon-plus icon-large" aria-hidden="true"></span>
-                    		</button>
-                          </div>
-						</div>
+                         </div>
 						<div class="row">
-                          <div class="col-md-2">
+                          <div class="col-md-3">
                               <div class="form-group ${hasErrors(bean: entryInstance, field: 'date', 'error')}">
                                   <label for="date">
                                       <g:message code="entry.date.label" default="Fecha" />
@@ -122,18 +104,7 @@
                                   <g:textField name="entry.entryDetails[0].date" class="form-control mydate" placeholder="Fecha" value="${entryInstance?.getEntryDetails()[0]?.date}" required="true"/>
                               </div>
                           </div>
-                          <div class="col-md-4">
-                              <div class="form-group ${hasErrors(bean: entryInstance, field: 'client', 'error')} required">
-                                  <label for="service">
-                                      <g:message code="entry.client.label" default="Service" />
-                                      <span class="required-indicator">*</span>
-                                  </label>
-                                  <g:select id="service" name="entry.entryDetails[0].serviceId" from="${entryInstance?.entryDetails[0]?.item}"
-                                            optionKey="id" optionValue="name" required="true"
-                                            value="${entryInstance?.entryDetails[0]?.item?.id}" class="form-control input-sm"
-                                            noSelection="['null':'Selecciona un servicio']" />
-                              </div>
-                          </div>
+                          
                           <div class="col-md-4">
                               <div class="form-group ${hasErrors(bean: entryInstance, field: 'client', 'error')} required">
                                   <label for="item">
@@ -145,13 +116,7 @@
                                             value="${entryInstance?.entryDetails[0]?.item?.id}" class="form-control input-sm"
                                             noSelection="['null':'Selecciona repuesto']" />
                               </div>
-                          </div>
-                          <div class="col-md-2">
-                            <br><br>
-                            <button type="button" class="btn btn-default pull-right">
-                    			<i class="fa fa-plus"> Agregar Servicio</i>
-                    		</button>
-                          </div>                          
+                          </div>                         
                       </div>
                   </div>
             </div>
@@ -229,39 +194,6 @@
                 });
             });
 
-			$(document).ready(function () {
-                $("#service").select2({
-                    id: function (service) {
-                        return service
-                    },
-                    ajax: {
-                        url: "/isp-client-web/service/list",
-                        dataType: 'json',
-                        data: function (params) {
-
-                            var queryParameters = {
-                                term: params.term
-                            }
-                            return queryParameters;
-                        },
-                        processResults: function (data) {
-                            return {
-                                results: $.map(data, function (item) {
-                                    return {
-                                        text: item.name,
-                                        id: item.id
-                                    }
-                                })
-                            };
-                        }
-                    },
-                    formatResult: formatResult,
-                    formatSelection: formatSelection,
-                    escapeMarkup: function (m) {
-                        return m;
-                    }
-                });
-            });
 
             $(document).ready(function () {
                 $("#item").select2({

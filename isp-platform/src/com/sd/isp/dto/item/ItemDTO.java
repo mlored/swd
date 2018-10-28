@@ -9,8 +9,8 @@ import com.sd.isp.dto.base.BaseDTO;
 public class ItemDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
-	private String _name;
-	private String _description;
+	private String  _name;
+	private String  _description;
 	private Integer _price;
 	private Integer _quantity;
 
