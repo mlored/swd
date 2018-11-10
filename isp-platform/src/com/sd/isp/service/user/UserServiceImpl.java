@@ -2,8 +2,6 @@ package com.sd.isp.service.user;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,12 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sd.isp.dao.role.IRoleDao;
 import com.sd.isp.dao.user.IUserDao;
 import com.sd.isp.dao.user.UserDaoImpl;
-import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.domain.role.RoleDomain;
 import com.sd.isp.domain.user.UserDomain;
-import com.sd.isp.dto.client.ClientDTO;
-import com.sd.isp.dto.client.ClientResult;
-import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.service.base.BaseServiceImpl;
