@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dao.base.BaseDaoImpl;
-import com.sd.isp.domain.buy.BuyDomain;
-import com.sd.isp.domain.client.ClientDomain;
 import com.sd.isp.domain.user.UserDomain;
 
 @Repository

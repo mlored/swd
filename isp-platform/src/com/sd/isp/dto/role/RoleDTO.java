@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.sd.isp.dto.base.BaseDTO;
 
-@XmlRootElement(name = "user")
+@XmlRootElement(name = "role")
 public class RoleDTO extends BaseDTO {
 	
 	private static final long serialVersionUID = 1L;
