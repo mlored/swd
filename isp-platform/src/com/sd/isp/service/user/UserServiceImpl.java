@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -99,6 +95,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		user.setSurName(domain.getSurName());
 		user.setPassword(domain.getPassword());
 		user.setAccountLocked(domain.getAccountLocked());
+		user.setRolId(domain.getRole().getId());
 
 		for (RoleDomain r : domain.getRoles()) {
 			user.getRoles().add(roleService.convertDomainToDto(r));
@@ -116,6 +113,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserDa
 		user.setSurName(dto.getSurName());
 		user.setPassword(dto.getPassword());
 		user.setAccountLocked(dto.getAccountLocked());
+		user.setRole(roleDao.getById(dto.getRolId()));
 		
 		return user;
 	}

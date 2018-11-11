@@ -2,7 +2,6 @@ package com.sd.isp.dto.user;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,6 +20,7 @@ public class UserDTO extends BaseDTO {
 	private String _accountExpired;
 	private String _accountLocked;
 	private String _passwordExpired;
+	private Integer _rolId;
 	private List<RoleDTO> _roles = new ArrayList<RoleDTO>();
 	
 	@XmlElement
@@ -30,6 +30,15 @@ public class UserDTO extends BaseDTO {
 
 	public void setRoles(List<RoleDTO> roles) {
 		_roles = roles;
+	}
+	
+	@XmlElement
+	public Integer getRolId() {
+		return _rolId;
+	}
+	
+	public void setRolId(Integer rolId) {
+		_rolId = rolId;
 	}
 	
 	@XmlElement

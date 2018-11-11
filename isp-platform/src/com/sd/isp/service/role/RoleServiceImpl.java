@@ -5,17 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.isp.dao.role.IRoleDao;
 import com.sd.isp.dao.role.RoleDaoImpl;
 import com.sd.isp.domain.role.RoleDomain;
-import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.dto.role.RoleDTO;
 import com.sd.isp.dto.role.RoleResult;
 import com.sd.isp.service.base.BaseServiceImpl;

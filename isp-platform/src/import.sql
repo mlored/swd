@@ -69,15 +69,15 @@ insert into roles (authority) values ('ROLE_MECANICO');
 
 
 -- password Admin123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('admin@example.com','admin','admin', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired, _role_id) values ('admin@example.com','admin','admin', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false, '1');
 -- password Admin123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('loredelpuerto@gmail.com', 'lorena','Del Puerto', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired, _role_id) values ('loredelpuerto@gmail.com', 'lorena','Del Puerto', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false, '1');
 -- password Admin123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('karina.sanabria75@gmail.com','karina','sanabria', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired, _role_id) values ('karina.sanabria75@gmail.com','karina','sanabria', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false, '2');
 -- password Admin123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('iceberg.04@gmail.com','adrian','aguero', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired, _role_id) values ('iceberg.04@gmail.com','adrian','aguero', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false, '2');
 -- password Admin123
-insert into users (username, name, surName, password, enabled, account_locked, password_expired) values ('guillermo.zarza@gmail.com','guillermo','zarza', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false);
+insert into users (username, name, surName, password, enabled, account_locked, password_expired, _role_id) values ('guillermo.zarza@gmail.com','guillermo','zarza', '$2a$04$tmjvjMsklm.l6ETk3E/e5OTaFqxv7df48w9RM4TF.xbZbll.XbaVS', true, false, false, '3');
 
 
 insert into users_roles (user_id, role_id) values ('1','1');

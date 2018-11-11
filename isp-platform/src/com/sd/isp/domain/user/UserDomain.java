@@ -1,8 +1,6 @@
 package com.sd.isp.domain.user;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,6 +48,9 @@ public class UserDomain extends BaseDomain {
 	@Column(name = "password_expired", nullable = true)
 	private Boolean passwordExpired;
 
+	@ManyToOne
+	private RoleDomain _role;
+	
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
 		    name="users_roles",
@@ -112,7 +114,6 @@ public class UserDomain extends BaseDomain {
 		}
 	}
 
-
 	public String getAccountLocked() {
 		return accountLocked.toString();
 	}
@@ -129,4 +130,12 @@ public class UserDomain extends BaseDomain {
 		this.passwordExpired = Boolean.valueOf(_passwordExpired);
 	}
 	
+	public RoleDomain getRole() {
+		return _role;
+	}
+
+	public void setRole(RoleDomain role) {
+		_role = role;
+	}
+
 }
