@@ -30,5 +30,6 @@
 		</label>
 		<g:passwordField name="password" class="form-control" required="true" maxlength="60" minlength="6" placeholder="contraseña" value="${userInstance?.password}"/>
 	</div>
+	
 </div>
 <!-- /.box-body -->

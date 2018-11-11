@@ -36,8 +36,7 @@ class UserController{
   }
 
   def save() {
-	final Set<RoleB> roles = new HashSet<RoleB>();
-
+	
   	// ESTO ESTA COMENTADO PORQUE ESTA MAL EL FORMULARIO NO TIENE ROLES_IDS
     //for (String roleId : params.list('rolesIds')) {
 	//  roles.add(roleService.getById(Integer.valueOf(roleId)));
@@ -46,7 +45,8 @@ class UserController{
 	def nuevoUser = new UserB(params)
 	//nuevoUser.setPassword(params.username)
 	//  nuevoUser.setRoles(roles);
-
+	nuevoUser.setRole(roleService.getById(Integer.valueOf(params.rolId)))
+	nuevoUser.setPassword(params.get("password"))
 	  def userInstance = userService.save(nuevoUser)
 
 

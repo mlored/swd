@@ -35,8 +35,9 @@
                     </td>
                     <td>${fieldValue(bean: userInstance, field: "name")}</td>
                     <td>${fieldValue(bean: userInstance, field: "surName")}</td>
-                    <td>${fieldValue(bean: userInstance, field: "role")}</td>
+                    <td>${fieldValue(bean: userInstance.getRoles(), field: "authority")}</td>
                     <td>
+                    
                         <g:form controller="user" method="DELETE">
                             <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
                         </g:form>

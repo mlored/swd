@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.role.RoleB
 import com.sd.isp.service.role.IRoleService
+import com.sd.isp.service.role.RoleServiceImpl
 
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
@@ -22,7 +23,7 @@ class RoleController {
 	}
 	
 	def save() {
-		def rolerInstance = new RoleB(params)
+		def roleInstance = new RoleB(params)
 		def newRole = roleService.save(roleInstance)
 		if (!newRole?.getId()) {
 			render(view: "create", model: [roleInstance: roleInstance])
@@ -31,7 +32,7 @@ class RoleController {
 
 		flash.message = message(code: 'default.created.message', args: [
 				message(code: 'role.label', default: 'Role'),
-				newUser.getId()
+				newRole.getId()
 		])
 		redirect(action: "index")
 	}
@@ -42,8 +43,21 @@ class RoleController {
 	}
 
 	def list(Integer max) {
+		def text = params.text
+		roleService=new RoleServiceImpl()
 		def roles = roleService.getAll()
-		[roleInstanceList: users, roleInstanceTotal: roles?.size()]
+
+		if(null != text && !"".equals(text)){
+
+			roles = roleService.find(text)
+
+
+
+		}else{
+			roles = roleService.getAll()
+		}
+
+		[roleInstanceList: roles, roleInstanceTotal: roles?.size()]
 	}
 
 /*    def show(Role roleInstance) {
