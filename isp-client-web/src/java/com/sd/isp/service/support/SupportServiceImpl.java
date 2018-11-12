@@ -9,7 +9,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
-import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.beans.support.SupportB;
 import com.sd.isp.dto.support.SupportDTO;
 import com.sd.isp.rest.support.SupportResourceImpl;

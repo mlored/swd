@@ -17,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
-import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.beans.user.UserB;
 import com.sd.isp.dto.user.UserDTO;
 import com.sd.isp.dto.user.UserResult;

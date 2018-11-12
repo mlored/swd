@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sd.isp.dto.car.CarDTO;
 import com.sd.isp.dto.car.CarResult;
-import com.sd.isp.dto.employee.EmployeeResult;
 import com.sd.isp.rest.base.BaseResourceImpl;
 @Repository("carResource")
 public class CarResourceImpl extends BaseResourceImpl<CarDTO, CarResult> implements ICarResource{

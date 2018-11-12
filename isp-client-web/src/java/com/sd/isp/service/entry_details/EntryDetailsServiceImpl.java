@@ -5,11 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
-import com.sd.isp.service.entry.EntryServiceImpl;
 import com.sd.isp.service.part.IPartService;
-import com.sd.isp.service.part.PartServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -19,7 +15,6 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.entry_details.EntryDetailsB;
-import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.entry_details.EntryDetailsResult;
 import com.sd.isp.rest.entry_details.IEntryDetailsResource;
