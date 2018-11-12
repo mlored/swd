@@ -13,7 +13,6 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.buy.BuyB;
-import com.sd.isp.beans.client.ClientB;
 import com.sd.isp.dto.buy.BuyDTO;
 import com.sd.isp.dto.buy.BuyResult;
 import com.sd.isp.rest.buy.IBuyResource;
