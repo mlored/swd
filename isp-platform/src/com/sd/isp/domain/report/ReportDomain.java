@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.sd.isp.domain.base.BaseDomain;
-import com.sd.isp.domain.employee.EmployeeDomain;
 import com.sd.isp.domain.entry.EntryDomain;
 import com.sd.isp.domain.entry_details.EntryDetailsDomain;
 
@@ -21,8 +20,11 @@ public class ReportDomain extends BaseDomain {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer _id;
 
-	@ManyToOne
+	@ManyToOne       //@OneToOne
 	private EntryDomain _entry;
+	
+	@ManyToOne       //@OneToOne
+	private EntryDetailsDomain _entryDetails;
 
 	@Column(name = "date", nullable = false)
 	private Date _date;
@@ -63,19 +65,12 @@ public class ReportDomain extends BaseDomain {
 		_isActived = isActived;
 	}
 
-	public void setEntryDetails(Integer entryDetailsId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*public EntryDetailsDomain getEntryDetails() {
-		return _entrydetails;
+	public EntryDetailsDomain getEntryDetails() {
+		return _entryDetails;
 	}
 
 	public void setEntryDetails(EntryDetailsDomain details) {
-		_entrydetails= details;
+		_entryDetails = details;
 	}
-
-*/
 	
 }

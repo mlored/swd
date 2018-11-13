@@ -15,15 +15,15 @@ public class ReportDTO extends BaseDTO {
 	private Integer  _entryId;
 	private Date 	 _date;
 	private Boolean  _isActived; 
-    private Integer  _entryDetailsId;
+    private Integer  _entryDetails;
 
 	@XmlElement
-	public Integer getEmployeeId() {
+	public Integer getEntryId() {
 		return _entryId;
 	}
 
-	public void setEmployeeId(Integer employeeId) {
-		_entryId= employeeId;
+	public void setEntryId(Integer entryId) {
+		_entryId= entryId;
 	}
 
 
@@ -46,12 +46,12 @@ public class ReportDTO extends BaseDTO {
 	}
 	
 	@XmlElement
-	public Integer getEntryDetailsId() {
-		return _entryDetailsId;
+	public Integer getEntryDetails() {
+		return _entryDetails;
 	}
 
-	public void setEntryDetailsId(Integer entryDetails) {
-		_entryDetailsId = entryDetails;
+	public void setEntryDetails(Integer entryDetails) {
+		_entryDetails = entryDetails;
 	}
 	
 

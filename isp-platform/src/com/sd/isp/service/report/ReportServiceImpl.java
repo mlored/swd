@@ -5,12 +5,9 @@ import java.util.List;
 
 //import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.sd.isp.dao.employee.IEmployeeDao;
 import com.sd.isp.dao.entry.IEntryDao;
 import com.sd.isp.dao.entry_details.IEntryDetailsDao;
 import com.sd.isp.dao.item.IItemDao;
@@ -31,6 +28,9 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	private IEntryDao _entryDao;
 	
 	@Autowired
+	private IEntryDetailsDao _entryDetailsDao;
+	
+	@Autowired
 	private IItemDao _itemDao;
 
 
@@ -44,7 +44,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 			final ReportDomain report = _reportDao.save(domain);
 			final ReportDTO newDto    = convertDomainToDto(report);
 			if (dto.getId() == null) {
-				//getCacheManager().getCache("isp-platform-cache").put("report_" + report.getId(), newDto);
+				getCacheManager().getCache("isp-platform-cache").put("report_" + report.getId(), newDto);
 			}
 			return newDto;
 		} catch (Exception ex) {
@@ -78,7 +78,8 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	public ReportDTO convertDomainToDto(ReportDomain domain) {
 		final ReportDTO dto = new ReportDTO();
 		dto.setId(domain.getId());
-		dto.setEntryDetailsId(domain.getEntry().getId());
+		dto.setEntryId(domain.getEntry().getId());
+		dto.setEntryDetails(domain.getEntryDetails().getId());
 		dto.setDate(domain.getDate());
 		dto.setIsActived(domain.getIsActived());
 		
@@ -89,10 +90,10 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportDTO, ReportDomain, 
 	public ReportDomain convertDtoToDomain(ReportDTO dto){
 		final ReportDomain domain = new ReportDomain();
 		domain.setId(dto.getId());
-		domain.setEntry(_entryDao.getById(dto.getEntryDetailsId()));
+		domain.setEntry(_entryDao.getById(dto.getEntryId()));
+		domain.setEntryDetails(_entryDetailsDao.getById(dto.getEntryDetails()));
 		domain.setDate(dto.getDate());
 		domain.setIsActived(dto.getIsActived());
-		//domain.setEntryDetails(dto.getEntryDetailsId());
 		
 		return domain;
 	}
