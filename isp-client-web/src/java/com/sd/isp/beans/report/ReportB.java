@@ -6,13 +6,17 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.sd.isp.beans.base.BaseBean;
-import com.sd.isp.beans.employee.EmployeeB;
+import com.sd.isp.beans.entry.EntryB;
+import com.sd.isp.beans.entry_details.EntryDetailsB;
+import com.sd.isp.beans.item.ItemB;
 import com.sd.isp.beans.report.ReportB;
 
 public class ReportB extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private Date 		  _date;
-	private EmployeeB	  _employee;
+	private EntryB	      _entry;
+	private EntryDetailsB _entryDetails;
+	private ItemB	      _item;
 	private Boolean 	  _isActived;
 
 	public ReportB(Map<String, String> params) {
@@ -34,12 +38,29 @@ public class ReportB extends BaseBean {
 		_date = date;
 	}
 
-	public EmployeeB getEmployee() {
-		return _employee;
+	public EntryB getEntry() {
+		return _entry;
 	}
 
-	public void setEmployee(EmployeeB employee) {
-		_employee = employee;
+	public void setEntry(EntryB entry) {
+		_entry = entry;
+	}
+	
+	
+	public EntryDetailsB getEntryDetails() {
+		return _entryDetails;
+	}
+	
+	public ItemB getItem() {
+		return _item;
+	}
+
+	public void setItem(ItemB item) {
+		_item = item;
+	}
+
+	public void setEntryDetails(EntryDetailsB entryDetails) {
+		_entryDetails = entryDetails;
 	}
 	
 	public Boolean getIsActived() {

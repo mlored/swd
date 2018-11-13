@@ -181,7 +181,7 @@
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    <%--<sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
                         <li>
                             <a href="/isp-client-web/report/list">
                                 <i class="fa fa-pie-chart"></i> <span>Reportes </span>
@@ -189,7 +189,7 @@
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    --%><sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
                         <li>
                             <a href="/isp-client-web/stock/list">
                                 <i class="fa fa-cubes"></i> <span>Stock</span>

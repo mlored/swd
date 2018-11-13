@@ -26,7 +26,7 @@
 						</g:eachError>
 					</ul>
 				</g:hasErrors>
-				<g:form action="update" method="PUT" id="${entryInstance?.id}"  name="form" novalidate="true">
+				<g:form action="update" method="POST" id="${entryInstance?.id}"  name="form" novalidate="true">
 					<g:hiddenField name="id" value="${entryInstance?.id}" />
 
 					<fieldset class="form">
@@ -40,7 +40,7 @@
 			<!-- /.box -->
 		</div>
 	</div>
-	
+
 	<script type="text/javascript">
 		$(function() {
 			$('#datetimepicker4').datetimepicker({

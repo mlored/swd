@@ -117,11 +117,11 @@ public class EntryB extends BaseBean{
             setClientId(Integer.valueOf(params.get("clientId")));
         setDiagnostic(params.get("diagnostic"));
 
-        if (!StringUtils.isBlank(params.get("entry.entryDetails[0].itemId"))){
+        if (!StringUtils.isBlank(params.get("entry.entryDetails[1].itemId"))){
             EntryDetailsB e1 = new EntryDetailsB(params);
-            e1.setItemId(Integer.valueOf(params.get("entry.entryDetails[0].itemId")));
+            e1.setItemId(Integer.valueOf(params.get("entry.entryDetails[1].itemId")));
             try {
-                e1.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(params.get("entry.entryDetails[0].date")));
+                e1.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(params.get("entry.entryDetails[1].date")));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

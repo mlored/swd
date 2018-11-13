@@ -17,10 +17,10 @@ public class ReportResourceImpl extends BaseResourceImpl<ReportDTO,ReportResult>
 	@Override
 	public ReportDTO save(ReportDTO report) {
 		ReportDTO newDto = super.save(report);
-		/*if (null == report.getId()) {
-			getCacheManager().getCache(CACHE_REGION).put(
+		if (null == report.getId()) {
+			getCacheManager().getCache(CACHE_REGION).put(   //Add en rest/BaseResourceImpl
 					"report_" + newDto.getId(), newDto);
-		}*/
+		}
 		return newDto;
 	}
 

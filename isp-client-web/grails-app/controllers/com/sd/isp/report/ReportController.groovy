@@ -12,6 +12,7 @@ import com.sd.isp.service.auth.IAuthService
 import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.client.IClientService
 import com.sd.isp.service.entry.IEntryService
+import com.sd.isp.service.part.IPartService
 import com.sd.isp.service.report.IReportService
 //import com.sd.uni.isp.service.client.IClientService
 /*import com.sd.isp.service.patient.IPatientService
@@ -29,6 +30,10 @@ class ReportController {
 	//service
 	def IReportService reportService;
 	def IEntryService  entryService;
+	def IPartService   partService;
+	def ICarService    carService;
+	def IClientService clientService;
+	
 	@Autowired def IAuthService authService
 
 	/*@Secured([

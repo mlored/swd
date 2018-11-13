@@ -13,7 +13,10 @@ import com.sd.isp.dto.report.ReportDTO;
 import com.sd.isp.dto.report.ReportResult;
 import com.sd.isp.rest.report.IReportResource;
 import com.sd.isp.service.base.BaseServiceImpl;
-import com.sd.isp.service.employee.IEmployeeService;
+import com.sd.isp.service.car.ICarService;
+import com.sd.isp.service.client.IClientService;
+import com.sd.isp.service.entry.IEntryService;
+import com.sd.isp.service.part.IPartService;
 
 
 @Service("reportService")
@@ -23,7 +26,14 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 	@Autowired
 	private IReportResource _reportResource;
 	@Autowired
-	private IEmployeeService   _employeeService;
+	private IEntryService   _entryService;
+	@Autowired
+	private IClientService  _clientService;
+	@Autowired
+	private ICarService     _carService;
+	@Autowired
+	private IPartService     _partService;
+	
 
 	public ReportServiceImpl() {
 	}
@@ -64,7 +74,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		final ReportB reportB = new ReportB(params);
-		reportB.setEmployee(_employeeService.getById(dto.getEmployeeId()));
+		reportB.setEntry(_entryService.getById(dto.getEntryDetailsId()));
 		reportB.setDate(dto.getDate());	
 		reportB.setIsActived(dto.getIsActived());
 		
@@ -77,8 +87,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		dto.setId(bean.getId());
 		dto.setDate(bean.getDate());
 		dto.setIsActived(bean.getIsActived());
-		dto.setEmployeeId(bean.getEmployee().getId());
-		
+	
 		return dto;
 	}
 	@Override

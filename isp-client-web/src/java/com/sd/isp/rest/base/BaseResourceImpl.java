@@ -9,8 +9,10 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 
 public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseResult> implements IBaseResource<DTO, Result> {
 	private final String _resourcePath;
@@ -22,6 +24,9 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
 	IAuthService authService;
 
 	private final static String BASE_URL = "http://localhost:8080/isp-platform/rest";
+	protected static final String CACHE_REGION = "isp-client-web-cache";
+	
+	private CacheManager _cacheManager;
 
 	public BaseResourceImpl(Class<DTO> dtoClass, String resourcePath, Class<Result> resultClass) {
 		_dtoClass = dtoClass;
@@ -33,7 +38,6 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
 
 		_webResource = jerseyClient.resource(_resourcePath);
 
-		//setWebResourceBasicAuthFilter();
 	}
 
 	protected WebResource getWebResource() {
@@ -43,6 +47,10 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
 
 	protected Class<DTO> getDtoClass() {
 		return _dtoClass;
+	}
+	
+	protected CacheManager getCacheManager() {
+		return _cacheManager;
 	}
 
 	protected Class<Result> getResultClass() {
