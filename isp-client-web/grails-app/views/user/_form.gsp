@@ -31,5 +31,17 @@
 		<g:passwordField name="password" class="form-control" required="true" maxlength="60" minlength="6" placeholder="contraseña" value="${userInstance?.password}"/>
 	</div>
 	
+	
+	<div class="from-group ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
+		<label for="role">
+			<g:message code="user.role.label" default="Rol" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:select class="form-control" type="text" 
+				id="updater" name="rolId" from="${rolesWithoutAdmin}" value="${userInstance?.role?.id}"
+				optionKey="id" optionValue="name" 
+				noSelection="${['':'Seleccione un rol..']}"/>
+	</div>
+	
 </div>
 <!-- /.box-body -->
