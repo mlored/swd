@@ -74,7 +74,7 @@ public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("id", String.valueOf(dto.getId()));
 		final ReportB reportB = new ReportB(params);
-		reportB.setEntry(_entryService.getById(dto.getEntryDetailsId()));
+		reportB.setEntry(_entryService.getById(dto.getEntryDetails()));
 		reportB.setDate(dto.getDate());	
 		reportB.setIsActived(dto.getIsActived());
 		

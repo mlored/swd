@@ -167,14 +167,14 @@
 															class="btn btn-success" id="${reportInstance.getId()}">
 															<i class="fa fa-pencil"></i>
 														</g:link>
-												</sec:ifAnyGranted>
-												<%--<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
+												<%--</sec:ifAnyGranted>
+												--%><%--<sec:ifAnyGranted roles='ROLE_SECRETARIA'>
 													--%><td class="center"><g:link action="show"
 															class="btn btn-default" id="${reportInstance.getId()}">
 															<i class="fa fa-list-alt"></i>
-														</g:link>
+														</g:link><%--
 												</sec:ifAnyGranted>
-											</tr>
+											--%></tr>
 
 										</g:each>
 
