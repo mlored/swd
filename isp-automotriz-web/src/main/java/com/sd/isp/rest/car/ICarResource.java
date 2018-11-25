@@ -1,4 +1,10 @@
 package com.sd.isp.rest.car;
 
-public interface ICarResource {
+import com.sd.isp.dto.car.CarDTO;
+import com.sd.isp.dto.car.CarResult;
+import com.sd.isp.rest.base.IBaseResource;
+
+public interface ICarResource extends IBaseResource<CarDTO, CarResult>{
+    public CarResult getAll();
+    public CarResult find(String textToFind, int maxItems, int page);
 }
