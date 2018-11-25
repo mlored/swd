@@ -2,6 +2,7 @@ package com.sd.isp.beans.part;
 
 import java.util.Map;
 
+import com.sd.isp.beans.item.ItemB;
 import org.apache.commons.lang.StringUtils;
 
 public class PartB extends ItemB {
