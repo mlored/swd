@@ -23,7 +23,7 @@ beans = {
     clientService(ClientServiceImpl)
     employeeService(EmployeeServiceImpl)
     partService(PartServiceImpl)
-    serviceService(ServiceServiceImpl)
+    serviceResource(ServiceServiceImpl)
 
 
 }

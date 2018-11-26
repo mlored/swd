@@ -3,7 +3,7 @@ package com.sd.isp.rest.base;
 import com.sd.isp.Configurator;
 import com.sd.isp.dto.base.BaseDTO;
 import com.sd.isp.dto.base.BaseResult;
-import com.sd.isp.service.auth.IAuthService;
+//import com.sd.isp.service.auth.IAuthService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
@@ -18,8 +18,8 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
     private Class<Result> _resultClass;
     private final WebResource _webResource;
 
-    @Autowired
-    IAuthService authService;
+//    @Autowired
+//    IAuthService authService;
 
     private final static String BASE_URL = "http://localhost:8080/isp-platform/rest";
     protected static final String CACHE_REGION = "isp-client-web-cache";
@@ -55,47 +55,47 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
         return _resultClass;
     }
 
-    private void setWebResourceBasicAuthFilter(){
-        String u = authService.getUsername();
-        String p = authService.getPassword();
+//    private void setWebResourceBasicAuthFilter(){
+//        String u = authService.getUsername();
+//        String p = authService.getPassword();
 
-        getWebResource().addFilter(new HTTPBasicAuthFilter(u,p));
-    }
+//        getWebResource().addFilter(new HTTPBasicAuthFilter(u,p));
+//    }
 
     @Override
     public Result getAll(){
-        setWebResourceBasicAuthFilter();
+//        setWebResourceBasicAuthFilter();
         return getWebResource().get(getResultClass());
     }
 
     @Override
     public DTO save(DTO dto) {
-        setWebResourceBasicAuthFilter();
+//        setWebResourceBasicAuthFilter();
         return getWebResource().entity(dto).post(getDtoClass());
     }
 
     @Override
     public DTO update(Integer id, DTO dto) {
-        setWebResourceBasicAuthFilter();
+//        setWebResourceBasicAuthFilter();
         return getWebResource().path("/" + id).entity(dto).put(getDtoClass());
     }
 
     @Override
     public DTO getById(Integer id) {
-        setWebResourceBasicAuthFilter();
+//        setWebResourceBasicAuthFilter();
         return getWebResource().path("/" + id).get(getDtoClass());
     }
 
     @Override
     public DTO destroy(Integer id){
-        setWebResourceBasicAuthFilter();
+//        setWebResourceBasicAuthFilter();
         return getWebResource().path("/" + id).delete(getDtoClass());
     }
 
     @Override
     public Result findWR(String textToFind, int maxItems, int page) {
         Result result;
-        setWebResourceBasicAuthFilter();
+//        setWebResourceBasicAuthFilter();
         if (null == textToFind){
             result = getWebResource().path("/search/" + maxItems + "/" + page).get(getResultClass());
         }else{
