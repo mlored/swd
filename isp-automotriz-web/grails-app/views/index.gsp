@@ -144,45 +144,45 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/isp-client-web/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
-                                <li><a href="/isp-client-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
-                                <li><a href="/isp-client-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
+                                <li><a href="/isp-automotriz-web/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
+                                <li><a href="/isp-automotriz-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
+                                <li><a href="/isp-automotriz-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
 
-                                    <li><a href="/isp-client-web/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
-                                    <li><a href="/isp-client-web/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
-                                    <li><a href="/isp-client-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                                    <li><a href="/isp-client-web/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
+                                    <li><a href="/isp-automotriz-web/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
+                                    <li><a href="/isp-automotriz-web/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
+                                    <li><a href="/isp-automotriz-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
+                                    <li><a href="/isp-automotriz-web/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
 
                             </ul>
                         </li>
 
                         <li>
-                            <a href="/isp-client-web/buy/list">
+                            <a href="/isp-automotriz-web/buy/list">
                                 <i class="fa fa-shopping-cart"></i> <span>Compras</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="/isp-client-web/#">
+                            <a href="/isp-automotriz-web/#">
                                 <i class="fa fa-credit-card"></i> <span>Ventas</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="/isp-client-web/entry/list">
+                            <a href="/isp-automotriz-web/entry/list">
                                 <i class="fa fa-file-text-o"></i> <span>Fichas</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="/isp-client-web/report/list">
+                            <a href="/isp-automotriz-web/report/list">
                                 <i class="fa fa-pie-chart"></i> <span>Reportes </span>
 
                             </a>
                         </li>
 
                         <li>
-                            <a href="/isp-client-web/stock/list">
+                            <a href="/isp-automotriz-web/stock/list">
                                 <i class="fa fa-cubes"></i> <span>Stock</span>
 
                             </a>
