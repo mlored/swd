@@ -34,17 +34,17 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <g:render template="/adminlte/common/header"/>
+    %{--<g:render template="/adminlte/common/header"/>--}%
 
-    <g:render template="/adminlte/common/left_side"/>
+    %{--<g:render template="/adminlte/common/left_side"/>--}%
 
     <!-- Content Wrapper. Contains page content -->
     <g:layoutBody/>
     <!-- /.content-wrapper -->
 
-    <g:render template="/adminlte/common/footer"/>
+    %{--<g:render template="/adminlte/common/footer"/>--}%
 
-    <g:render template="/adminlte/common/console_sidebar"/>
+    %{--<g:render template="/adminlte/common/console_sidebar"/>--}%
 
 </div>
 <!-- ./wrapper -->
