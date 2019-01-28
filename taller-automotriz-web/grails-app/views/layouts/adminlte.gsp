@@ -27,8 +27,7 @@
   <![endif]-->
 
     <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -172,7 +171,7 @@
                     </sec:ifAnyGranted>
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO,ROLE_ADMIN">
                         <li>
-                            <a href="/taller-automotriz-web/entry/list"">
+                            <a href="/taller-automotriz-web/entry/list">
                                 <i class="fa fa-file-text-o"></i> <span>Fichas</span>
                             </a>
                         </li>
