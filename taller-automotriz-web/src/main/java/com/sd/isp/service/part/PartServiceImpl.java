@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sd.isp.rest.part.PartResourceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -23,7 +24,7 @@ public class PartServiceImpl extends BaseServiceImpl<PartB, PartDTO>
         implements IPartService {
 
     @Autowired
-    private IPartResource _partResource;
+    private IPartResource _partResource = new PartResourceImpl();
 
 
     public PartServiceImpl() {

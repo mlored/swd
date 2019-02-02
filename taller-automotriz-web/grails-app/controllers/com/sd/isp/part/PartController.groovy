@@ -1,97 +1,159 @@
 package com.sd.isp.part
 
+import com.sd.isp.beans.part.PartB
+import com.sd.isp.service.part.IPartService
+import com.sd.isp.service.part.PartServiceImpl
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+import org.springframework.dao.DataIntegrityViolationException
+
+@Secured(["ROLE_ADMIN"])
 class PartController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    IPartService partService = new PartServiceImpl()
+
+    def create() {
+        respond new PartB(params)
+    }
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Part.list(params), model:[partCount: Part.count()]
+        redirect(action: "list", params: params)
     }
 
-    def show(Part part) {
-        respond part
+    @Secured(["ROLE_MECANICO"])
+    def list(Integer max) {
+        //def parts = partService.getAll()
+
+        def page = 0
+        def siguiente
+        if(null != params.get("page")){
+            page = Integer.parseInt(params.get("page"))
+        }
+        def text = params.text
+
+        def search = ""
+        def parts = null
+
+        if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+            search += "text="+params.text+'&'
+        }
+        if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+            search +="sort="+params.get("sort")+'&'
+        }
+        if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+            search +="order="+params.get("order")+'&'
+        }
+
+        if(null != search && !"".equals(search)){
+            parts 	  = partService.find(search,10,page)
+            siguiente = partService.find(search,10,page+1)
+        }else{
+            parts     = partService.find(null,10,page)
+            siguiente = partService.find(null,10,page+1)
+        }
+
+        if (request.getHeader('X-Requested-With')) {
+            respond parts, formats: ['json']
+        } else {
+            [partInstanceList: parts, partInstanceTotal: parts?.size(),
+             page: page,
+             siguiente: siguiente?.size(),
+             ppartInstanceList: partService.getAll(),
+             text: text/*,
+										  user:authService.getName()*/]
+        }
     }
 
-    def create() {
-        respond new Part(params)
-    }
-
-    @Transactional
-    def save(Part part) {
-        if (part == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+    /*def show(Long id) {
+        def partInstance = partService.getById(id.intValue())
+        if (!partInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        if (part.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond part.errors, view:'create'
+        [partInstance: partInstance]
+    }*/
+
+    def save(){
+        def partInstance = new PartB(params)
+        def newPart = partService.save(partInstance)
+        if (!newPart?.getId()) {
+            render(view: "create", model: [partInstance: partInstance])
             return
         }
 
-        part.save flush:true
+        flash.message = message(code: 'default.created.message', args: [
+                message(code: 'part.label', default: 'Part'),
+                newPart.getId()
+        ])
+        redirect(action: "index")
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'part.label', default: 'Part'), part.id])
-                redirect part
-            }
-            '*' { respond part, [status: CREATED] }
-        }
     }
 
-    def edit(Part part) {
-        respond part
+    def edit(Long id) {
+        def partInstance = partService.getById(id.intValue())
+        if (!partInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        [partInstance: partInstance]
     }
 
-    @Transactional
-    def update(Part part) {
-        if (part == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+    def update(Long id) {
+        def partB= new PartB(params)
+        def partInstance = partService.update(id.intValue(), partB)
+        if (partInstance == null) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        if (part.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond part.errors, view:'edit'
+        /*if (!partInstance.save(flush: true)) {
+            render(view: "edit", model: [partInstance: partInstance])
             return
-        }
+        }*/
 
-        part.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'part.label', default: 'Part'), part.id])
-                redirect part
-            }
-            '*'{ respond part, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [
+                message(code: 'part.label', default: 'Part'),
+                partInstance.id
+        ])
+        redirect(action: "list")
     }
 
-    @Transactional
-    def delete(Part part) {
+    def delete(Long id) {
 
-        if (part == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
+        try {
+            partService.delete(id.intValue())
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "list")
         }
-
-        part.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'part.label', default: 'Part'), part.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [
+                    message(code: 'part.label', default: 'Part'),
+                    id
+            ])
+            redirect(action: "show", id: id)
         }
     }
 
