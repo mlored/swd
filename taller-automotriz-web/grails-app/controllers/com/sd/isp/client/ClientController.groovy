@@ -1,98 +1,142 @@
 package com.sd.isp.client
 
+import com.sd.isp.service.client.ClientServiceImpl
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
+
+import com.sd.isp.beans.client.ClientB
+import com.sd.isp.service.client.IClientService;
+
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+import org.springframework.dao.DataIntegrityViolationException
+
+@Secured(["ROLE_SECRETARIO"])
 class ClientController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    IClientService clientService = new ClientServiceImpl()
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Client.list(params), model:[clientCount: Client.count()]
+        redirect(action: "list", params: params)
     }
 
-    def show(Client client) {
-        respond client
+    def list(Integer max) {
+        //def clients = clientService.getAll()
+        def page = 0
+        def siguiente
+        if(null != params.get("page")){
+            page = Integer.parseInt(params.get("page"))
+        }
+        def text = params.text
+
+        def search = ""
+        def clients = null
+
+        if(null!=params.get("text") && !"".equals(params.get("text")) && !"null".equals(params.get("text"))){
+            search += "text="+params.text+'&'
+        }
+        if(null!=params.get("sort") && !"".equals(params.get("sort")) && !"null".equals(params.get("sort"))){
+            search +="sort="+params.get("sort")+'&'
+        }
+        if(null!=params.get("order") && !"".equals(params.get("order")) && !"null".equals(params.get("order"))){
+            search +="order="+params.get("order")+'&'
+        }
+
+        if(null != search && !"".equals(search)){
+            clients = clientService.find(search,10,page)
+            siguiente = clientService.find(search,10,page+1)
+        }else{
+            clients = clientService.find(null,10,page)
+            siguiente = clientService.find(null,10,page+1)
+        }
+
+        if (request.getHeader('X-Requested-With')) {
+            respond clients, formats: ['json']
+        } else {
+            [clientInstanceList: clients, clientsInstanceTotal: clients?.size(),
+             page: page,
+             siguiente: siguiente?.size(),
+             cclientInstanceList: clientService.getAll(),
+             text: text/*,
+										  user:authService.getName()*/]
+        }
+
+        //respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
     }
 
     def create() {
-        respond new Client(params)
+        respond new ClientB(params)
     }
 
-    @Transactional
-    def save(Client client) {
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+    def save(){
+        def clientInstance = new ClientB(params)
+        def newClient = clientService.save(clientInstance)
+        if (!newClient?.getId()) {
+            render(view: "create", model: [clientInstance: clientInstance])
             return
         }
 
-        if (client.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond client.errors, view:'create'
-            return
-        }
-
-        client.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect client
-            }
-            '*' { respond client, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [
+                message(code: 'client.label', default: 'Client'),
+                newClient.getId()
+        ])
+        redirect(action: "index")
     }
 
-    def edit(Client client) {
-        respond client
+    def edit(Long id) {
+        def clientInstance = clientService.getById(id.intValue())
+        if (!clientInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'client.label', default: 'Client'),
+                    id
+            ])
+            redirect(action: "list")
+            return
+        }
+
+        [clientInstance: clientInstance]
     }
 
-    @Transactional
-    def update(Client client) {
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+    def update(Long id) {
+        def clientB = new ClientB(params)
+        def clientInstance = clientService.update(id.intValue(), clientB)
+        if (clientInstance == null) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'client.label', default: 'Client'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        if (client.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond client.errors, view:'edit'
-            return
-        }
-
-        client.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect client
-            }
-            '*'{ respond client, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [
+                message(code: 'client.label', default: 'Client'),
+                clientInstance.id
+        ])
+        redirect(action: "list")
     }
 
-    @Transactional
-    def delete(Client client) {
+    def delete(Long id) {
 
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
+        try {
+            clientService.delete(id.intValue())
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'client.label', default: 'Client'),
+                    id
+            ])
+            redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [
+                    message(code: 'client.label', default: 'Client'),
+                    id
+            ])
+            redirect(action: "show", id: id)
         }
 
-        client.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
     }
 
     protected void notFound() {

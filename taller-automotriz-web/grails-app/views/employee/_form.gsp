@@ -1,4 +1,3 @@
-
 <div class="box-body">
 	<div class="form-group ${hasErrors(bean: employeeInstance, field: 'number', 'error')}">
 		<label for="name">
