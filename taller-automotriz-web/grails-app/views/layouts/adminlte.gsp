@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
-        <g:layoutTitle default="AdminLTE 2 | Dashboard"/>
+        <g:layoutTitle default="Sistema"/>
     </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -98,7 +98,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/taller-automotriz-web/logoff"  class="btn btn-default btn-flat"/>Salir</a>
+                                    <a href="/logoff"  class="btn btn-default btn-flat"/>Salir</a>
                                 </div>
                             </li>
                         </ul>
@@ -143,42 +143,42 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/taller-automotriz-web/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
-                                <li><a href="/taller-automotriz-web/client/list"><i class="fa fa-user"></i> Clientes</a></li>
-                                <li><a href="/taller-automotriz-web/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
+                                <li><a href="/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
+                                <li><a href="/client/list"><i class="fa fa-user"></i> Clientes</a></li>
+                                <li><a href="/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
                                 <sec:ifAnyGranted roles="ROLE_ADMIN">
-                                    <li><a href="/taller-automotriz-web/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
-                                    <li><a href="/taller-automotriz-web/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
-                                    <li><a href="/taller-automotriz-web/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                                    <li><a href="/taller-automotriz-web/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
+                                    <li><a href="/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
+                                    <li><a href="/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
+                                    <li><a href="/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
+                                    <li><a href="/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
                                 </sec:ifAnyGranted>
                             </ul>
                         </li>
                     </sec:ifAnyGranted>
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO,ROLE_ADMIN">
                         <li>
-                            <a href="/taller-automotriz-web/buy/list">
+                            <a href="/buy/list">
                                 <i class="fa fa-shopping-cart"></i> <span>Compras</span>
                             </a>
                         </li>
                     </sec:ifAnyGranted>
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO,ROLE_ADMIN">
                         <li>
-                            <a href="/taller-automotriz-web/#">
+                            <a href="/#">
                                 <i class="fa fa-credit-card"></i> <span>Ventas</span>
                             </a>
                         </li>
                     </sec:ifAnyGranted>
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO,ROLE_ADMIN">
                         <li>
-                            <a href="/taller-automotriz-web/entry/list">
+                            <a href="/entry/list">
                                 <i class="fa fa-file-text-o"></i> <span>Fichas</span>
                             </a>
                         </li>
                     </sec:ifAnyGranted>
                     <sec:ifAnyGranted roles="ROLE_ADMIN">
                         <li>
-                            <a href="/taller-automotriz/report/list">
+                            <a href="/report/list">
                                 <i class="fa fa-pie-chart"></i> <span>Reportes </span>
 
                             </a>
@@ -186,7 +186,7 @@
                     </sec:ifAnyGranted>
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO,ROLE_ADMIN">
                         <li>
-                            <a href="/taller-automotriz-web/stock/list">
+                            <a href="/stock/list">
                                 <i class="fa fa-cubes"></i> <span>Stock</span>
 
                             </a>
