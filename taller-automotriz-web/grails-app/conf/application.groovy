@@ -17,7 +17,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/jasper/**',      access: ['permitAll']],
-	[pattern: '/jasper/**',      access: ['permitAll']],
 	[pattern: '/login/**',       access: ['permitAll']],
 	[pattern: '/logout/**',      access: ['permitAll']],
 	[pattern: '/**',             access: ['permitAll']],
@@ -38,3 +37,7 @@ grails.plugin.springsecurity.providerNames = [
 		'anonymousAuthenticationProvider',
 		'rememberMeAuthenticationProvider']
 
+grails.plugin.springsecurity.roleHierarchy = '''
+   ROLE_ADMIN > ROLE_SECRETARIO
+   ROLE_SECRETARIO > ROLE_MECANICO
+'''

@@ -26,7 +26,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
         implements IRoleService {
 
     @Autowired
-    private IRoleResource _roleResource =new RoleResourceImpl();
+    private IRoleResource _roleResource = new RoleResourceImpl();
 
 
     public RoleServiceImpl() {
