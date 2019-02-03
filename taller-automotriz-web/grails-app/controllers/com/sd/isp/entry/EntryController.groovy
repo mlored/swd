@@ -1,107 +1,135 @@
 package com.sd.isp.entry
 
-import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
+import com.sd.isp.service.car.ICarService
+import com.sd.isp.service.entry.EntryServiceImpl
+import com.sd.isp.service.part.IPartService
+import com.sd.isp.service.service.IServiceService
+import com.sd.isp.beans.entry.EntryB
+import com.sd.isp.service.client.IClientService
+import com.sd.isp.service.entry.IEntryService
+import com.sd.isp.service.entry_details.IEntryDetailsService
+import grails.plugin.springsecurity.annotation.Secured
 
-@Transactional(readOnly = true)
+@Secured(["ROLE_MECANICO"])
 class EntryController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index(Integer max) {
+    IEntryService 	     entryService = new EntryServiceImpl()
+    IEntryDetailsService entryDetailsService
+    IPartService 	     partService
+    IClientService       clientService
+
+    def index(Integer max){
         params.max = Math.min(max ?: 10, 100)
-        respond Entry.list(params), model:[entryCount: Entry.count()]
+        redirect(action: "list", params: params)
     }
 
-    def show(Entry entry) {
-        respond entry
+    def list(Integer max) {
+        def entries = entryService.getAll()
+
+        [entryInstanceList: entries, serviceInstanceTotal: entries?.size()]
     }
 
     def create() {
-        respond new Entry(params)
+        [entryInstance: new EntryB(params)]
     }
 
-    @Transactional
-    def save(Entry entry) {
-        if (entry == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+    def save() {
+        def newEntry = new EntryB(params)
+        def entryInstance = entryService.save(newEntry)
+
+        if (!entryInstance.getId()) {
+            render(view: "create", model: [entryInstance: entryInstance])
             return
         }
 
-        if (entry.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond entry.errors, view:'create'
+        flash.message = message(code: 'default.created.message', args: [
+                message(code: 'entry.label', default: 'Entry'),
+                entryInstance.getId()
+        ])
+        redirect(action: "index")
+    }
+
+    def show(Long id) {
+        def entryInstance = entryService.getById(id.intValue())
+        if (!entryInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'entry.label', default: 'Entry'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        entry.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'entry.label', default: 'Entry'), entry.id])
-                redirect entry
-            }
-            '*' { respond entry, [status: CREATED] }
-        }
+        [entryInstance: entryInstance, cars: entryService.getAll()]
     }
 
-    def edit(Entry entry) {
-        respond entry
-    }
+    def edit(Long id) {
+        def entryInstance = entryService.getById(id.intValue())
 
-    @Transactional
-    def update(Entry entry) {
-        if (entry == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+        if (!entryInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'entry.label', default: 'Entry'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        if (entry.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond entry.errors, view:'edit'
+
+        [entryInstance: entryInstance]
+    }
+
+    def update(Long id) {
+        def entryB = new EntryB(params)
+        def entryInstance = entryService.update(id.intValue(), entryB)
+        if (entryInstance == null) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'entry.label', default: 'Entrada'),
+                    id
+            ])
+            redirect(action: "list")
             return
         }
 
-        entry.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'entry.label', default: 'Entry'), entry.id])
-                redirect entry
-            }
-            '*'{ respond entry, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [
+                message(code: 'entry.label', default: 'Entrada'),
+                entryInstance.id
+        ])
+        redirect(action: "list")
     }
 
-    @Transactional
-    def delete(Entry entry) {
+    def delete(Long id) {
 
-        if (entry == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
+        def entryInstance = entryService.getById(id.intValue())
+        if (!entryInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [
+                    message(code: 'entry.label', default: 'Entry'),
+                    id
+            ])
+            redirect(action: "index")
             return
         }
 
-        entry.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'entry.label', default: 'Entry'), entry.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        try {
+            entryService.delete(id.intValue())
+            flash.message = message(code: 'default.deleted.message', args: [
+                    message(code: 'entry.label', default: 'Entry'),
+                    id
+            ])
+            redirect(action: "index")
         }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'entry.label', default: 'Entry'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
+        catch (Exception e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [
+                    message(code: 'entry.label', default: 'Entry'),
+                    id
+            ])
+            redirect(action: "index")
         }
     }
 }
+
+
+
+

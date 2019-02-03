@@ -150,7 +150,7 @@
                                     <li><a href="/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
                                     <li><a href="/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
                                     <li><a href="/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                                    <li><a href="/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
+                                    <li><a href="/car/list"><i class="fa fa-car"></i> Automoviles</a></li>
                                 </sec:ifAnyGranted>
                             </ul>
                         </li>

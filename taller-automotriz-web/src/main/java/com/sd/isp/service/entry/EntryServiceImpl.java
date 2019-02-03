@@ -7,6 +7,7 @@ import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.item.ItemDTO;
+import com.sd.isp.rest.entry.EntryResourceImpl;
 import com.sd.isp.rest.entry.IEntryResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.car.ICarService;
@@ -29,7 +30,7 @@ public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         implements IEntryService {
 
     @Autowired
-    private IEntryResource entryResource;
+    private IEntryResource entryResource = new EntryResourceImpl();
     @Autowired
     private ICarService carResource;
     @Autowired

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sd.isp.rest.car.CarResourceImpl;
 import grails.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CarServiceImpl extends BaseServiceImpl<CarB, CarDTO>
         implements ICarService {
 
     @Autowired
-    private ICarResource carResource;
+    private ICarResource carResource = new CarResourceImpl();
 
 
     public CarServiceImpl() {
