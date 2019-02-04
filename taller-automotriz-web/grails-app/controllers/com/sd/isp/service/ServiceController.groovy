@@ -1,6 +1,5 @@
 package com.sd.isp.service
 
-import com.sd.isp.service.service.ServiceServiceImpl
 import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 
@@ -15,7 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class ServiceController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    IServiceService serviceService = new ServiceServiceImpl()
+    IServiceService serviceService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

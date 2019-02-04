@@ -7,7 +7,6 @@ import com.sd.isp.dto.entry.EntryDTO;
 import com.sd.isp.dto.entry.EntryResult;
 import com.sd.isp.dto.entry_details.EntryDetailsDTO;
 import com.sd.isp.dto.item.ItemDTO;
-import com.sd.isp.rest.entry.EntryResourceImpl;
 import com.sd.isp.rest.entry.IEntryResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.car.ICarService;
@@ -23,19 +22,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 @Service("entryService")
 public class EntryServiceImpl extends BaseServiceImpl<EntryB, EntryDTO>
         implements IEntryService {
 
     @Autowired
-    private IEntryResource entryResource = new EntryResourceImpl();
+    private IEntryResource entryResource;
+
     @Autowired
     private ICarService carResource;
+
     @Autowired
     private IClientService clientResource;
-
 
     public EntryServiceImpl() {
     }

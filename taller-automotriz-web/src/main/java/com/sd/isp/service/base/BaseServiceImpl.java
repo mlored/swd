@@ -13,7 +13,6 @@ public abstract class BaseServiceImpl<BEAN extends BaseBean, DTO extends BaseDTO
 
     public BaseServiceImpl() { }
 
-
     private String cacheName;
 
     //protected static MyBean myBean = new MyBean();

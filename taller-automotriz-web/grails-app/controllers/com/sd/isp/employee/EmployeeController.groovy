@@ -1,6 +1,5 @@
 package com.sd.isp.employee
 
-import com.sd.isp.service.employee.EmployeeServiceImpl
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -16,7 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class EmployeeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	IEmployeeService employeeService = new EmployeeServiceImpl()
+	IEmployeeService employeeService
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

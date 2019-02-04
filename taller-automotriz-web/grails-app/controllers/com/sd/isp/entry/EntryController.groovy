@@ -1,7 +1,6 @@
 package com.sd.isp.entry
 
 import com.sd.isp.service.car.ICarService
-import com.sd.isp.service.entry.EntryServiceImpl
 import com.sd.isp.service.part.IPartService
 import com.sd.isp.service.service.IServiceService
 import com.sd.isp.beans.entry.EntryB
@@ -15,7 +14,7 @@ class EntryController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    IEntryService 	     entryService = new EntryServiceImpl()
+    IEntryService 	     entryService
     IEntryDetailsService entryDetailsService
     IPartService 	     partService
     IClientService       clientService

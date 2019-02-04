@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sd.isp.rest.role.RoleResourceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -14,20 +13,17 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.sd.isp.beans.role.RoleB;
-import com.sd.isp.beans.service.ServiceB;
 import com.sd.isp.dto.role.RoleDTO;
 import com.sd.isp.dto.role.RoleResult;
 import com.sd.isp.rest.role.IRoleResource;
 import com.sd.isp.service.base.BaseServiceImpl;
-import com.sd.isp.service.role.IRoleService;
 
 @Service("roleService")
 public class RoleServiceImpl extends BaseServiceImpl<RoleB, RoleDTO>
         implements IRoleService {
 
     @Autowired
-    private IRoleResource _roleResource = new RoleResourceImpl();
-
+    private IRoleResource _roleResource;
 
     public RoleServiceImpl() {
     }

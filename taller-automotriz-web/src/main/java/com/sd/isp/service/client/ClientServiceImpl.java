@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sd.isp.rest.client.ClientResourceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -24,8 +23,7 @@ public class ClientServiceImpl extends BaseServiceImpl<ClientB, ClientDTO>
         implements IClientService {
 
     @Autowired
-    private IClientResource _clientResource = new ClientResourceImpl();
-
+    private IClientResource _clientResource;
 
     public ClientServiceImpl() {
     }

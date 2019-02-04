@@ -5,7 +5,6 @@ import grails.plugin.springsecurity.userdetails.GrailsUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-
 @Service("authService")
 public class AuthServiceImpl implements IAuthService {
 

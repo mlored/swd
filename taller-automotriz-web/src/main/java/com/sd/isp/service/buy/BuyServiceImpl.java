@@ -25,7 +25,6 @@ public class BuyServiceImpl extends BaseServiceImpl<BuyB, BuyDTO>
     @Autowired
     private IBuyResource _buyResource;
 
-
     public BuyServiceImpl() {
     }
 

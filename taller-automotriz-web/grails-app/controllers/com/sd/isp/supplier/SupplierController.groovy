@@ -1,13 +1,10 @@
 package com.sd.isp.supplier
 
-import com.sd.isp.service.supplier.SupplierServiceImpl
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 
 import com.sd.isp.beans.supplier.SupplierB
-//import com.sd.isp.supplier.Supplier;
-import com.sd.isp.service.supplier.ISupplierService;
 import com.sd.isp.service.supplier.ISupplierService
 
 import grails.transaction.Transactional
@@ -17,7 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class SupplierController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    ISupplierService supplierService = new SupplierServiceImpl()
+    ISupplierService supplierService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

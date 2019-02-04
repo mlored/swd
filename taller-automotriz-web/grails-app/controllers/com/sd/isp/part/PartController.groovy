@@ -2,7 +2,6 @@ package com.sd.isp.part
 
 import com.sd.isp.beans.part.PartB
 import com.sd.isp.service.part.IPartService
-import com.sd.isp.service.part.PartServiceImpl
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -15,7 +14,7 @@ class PartController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    IPartService partService = new PartServiceImpl()
+    IPartService partService
 
     def create() {
         respond new PartB(params)

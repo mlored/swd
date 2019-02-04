@@ -1,6 +1,5 @@
 package com.sd.isp.car
 
-import com.sd.isp.service.car.CarServiceImpl
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -15,7 +14,7 @@ class CarController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    ICarService carService = new CarServiceImpl()
+    ICarService carService
 
     def create() {
         [carInstance: new CarB(params)]

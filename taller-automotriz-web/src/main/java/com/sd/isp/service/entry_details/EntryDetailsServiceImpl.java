@@ -28,8 +28,10 @@ public class EntryDetailsServiceImpl extends BaseServiceImpl<EntryDetailsB, Entr
 
     @Autowired
     private IEntryDetailsResource _entryDetailsResource;
+
     @Autowired
     private IPartService _partService;
+
     @Autowired
     private IEntryService _entryService;
 

@@ -18,28 +18,29 @@ import com.sd.isp.service.client.IClientService;
 import com.sd.isp.service.entry.IEntryService;
 import com.sd.isp.service.part.IPartService;
 
-
 @Service("reportService")
 public class ReportServiceImpl extends BaseServiceImpl<ReportB, ReportDTO>
         implements IReportService {
 
     @Autowired
     private IReportResource _reportResource;
+
     @Autowired
     private IEntryService   _entryService;
+
     @Autowired
     private IClientService  _clientService;
+
     @Autowired
     private ICarService     _carService;
+
     @Autowired
     private IPartService     _partService;
-
 
     public ReportServiceImpl() {
     }
 
     @Override
-
     public ReportB save(ReportB bean) {
         final ReportDTO report = convertBeanToDto(bean);
         final ReportDTO dto = _reportResource.save(report);

@@ -1,3 +1,5 @@
+// packages to include in Spring bean scanning
+grails.spring.bean.packages = ['com.sd.isp']
 
 
 // Added by the Spring Security Core plugin:

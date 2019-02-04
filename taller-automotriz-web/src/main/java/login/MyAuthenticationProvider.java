@@ -1,6 +1,7 @@
 package login;
 
 //import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -17,7 +18,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import com.sd.isp.beans.role.RoleB;
 import com.sd.isp.beans.user.UserB;
 import com.sd.isp.service.user.IUserService;
-import com.sd.isp.service.user.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,8 @@ import java.util.Set;
 class MyAuthenticationProvider implements AuthenticationProvider {
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-//	@Autowired
-	private IUserService _userService = new UserServiceImpl();
+	@Autowired
+	private IUserService _userService;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

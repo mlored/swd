@@ -1,6 +1,5 @@
 package com.sd.isp.client
 
-import com.sd.isp.service.client.ClientServiceImpl
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -16,7 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class ClientController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    IClientService clientService = new ClientServiceImpl()
+    IClientService clientService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

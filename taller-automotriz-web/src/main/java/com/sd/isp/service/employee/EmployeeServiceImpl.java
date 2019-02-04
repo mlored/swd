@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sd.isp.rest.employee.EmployeeResourceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -24,8 +23,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeB, EmployeeDTO>
         implements IEmployeeService {
 
     @Autowired
-    private IEmployeeResource _employeeResource =new EmployeeResourceImpl();
-
+    private IEmployeeResource _employeeResource;
 
     public EmployeeServiceImpl() {
     }

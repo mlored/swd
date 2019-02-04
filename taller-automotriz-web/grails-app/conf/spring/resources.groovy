@@ -2,6 +2,12 @@ import com.google.code.ssm.CacheFactory
 import com.google.code.ssm.config.DefaultAddressProvider
 import com.google.code.ssm.providers.CacheConfiguration
 import com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl
+import com.sd.isp.rest.role.RoleResourceImpl
+import com.sd.isp.rest.user.UserResourceImpl
+import com.sd.isp.service.auth.AuthServiceImpl
+import com.sd.isp.service.role.RoleServiceImpl
+import com.sd.isp.service.user.UserServiceImpl
+
 //import com.google.code.ssm.spring.SSMCache
 //import com.google.code.ssm.spring.SSMCacheManager
 import login.MyAuthenticationProvider
@@ -13,11 +19,21 @@ beans = {
     myAuthenticationProvider(MyAuthenticationProvider) {
     }
 
-//    myBean(MyBean) {}
-//
-//    localeResolver(SessionLocaleResolver) {
-//        defaultLocale= new java.util.Locale('es');
-//    }
+    myBean(MyBean) {}
+
+    localeResolver(SessionLocaleResolver) {
+        defaultLocale= new java.util.Locale('es');
+    }
+
+    //resources
+    userResource(UserResourceImpl)
+    roleResource(RoleResourceImpl)
+
+    //services
+    authService(AuthServiceImpl)
+    userService(UserServiceImpl)
+    roleService(RoleServiceImpl)
+
 //
 //    cacheConfiguration(CacheConfiguration){ consistentHashing=true }
 //
@@ -40,16 +56,6 @@ beans = {
 //    sdCacheManager(SSMCacheManager){
 //        caches=[ref("ssmCache")]
 //    }
-    //resources
-    /*clientResource(ClientResourceImpl)
-    countryResource(CountryResourceImpl)
-    stateResource(StateResourceImpl)
-    cityResource(CityResourceImpl)
 
-    //services
-    clientService(ClientServiceImpl, ref("clientResource"), ref("cityService"))
-    countryService(CountryServiceImpl, ref("countryResource"))
-    stateService(StateServiceImpl, ref("stateResource"), ref("countryService"))
-    cityService(CityServiceImpl,ref("cityResource"), ref("stateService"),ref("countryService") )*/
 }
 

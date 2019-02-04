@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.sd.isp.dto.role.RoleDTO;
-import com.sd.isp.rest.user.UserResourceImpl;
-import com.sd.isp.service.role.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -25,17 +23,16 @@ import com.sd.isp.dto.user.UserResult;
 import com.sd.isp.rest.user.IUserResource;
 import com.sd.isp.service.base.BaseServiceImpl;
 import com.sd.isp.service.role.IRoleService;
-import com.sd.isp.service.user.IUserService;
 
 @Service("userService")
 public class UserServiceImpl extends BaseServiceImpl<UserB, UserDTO>
         implements IUserService {
 
     @Autowired
-    private IUserResource _userResource = new UserResourceImpl();
+    private IUserResource _userResource;
 
     @Autowired
-    private IRoleService _roleService = new RoleServiceImpl();
+    private IRoleService _roleService;
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
