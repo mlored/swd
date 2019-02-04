@@ -32,29 +32,29 @@ public class EmployeeResource extends BaseResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	@Cacheable(value=CACHE_REGION, key="'api_employees' + #employeeId")
+	/*@Cacheable(value=CACHE_REGION, key="'api_employees' + #employeeId")*/
 	public EmployeeDTO getById(@PathParam("id") Integer employeeId) {
 		return employeeService.getById(employeeId);
 	}
 
 	@GET
 	@Produces("application/xml")
-	@Cacheable(value=CACHE_REGION, key="'api_employees'")
+	/*@Cacheable(value=CACHE_REGION, key="'api_employees'")*/
 	public EmployeeResult getAll() {
 		return employeeService.getAll();
 	}
 
 	@POST
-	@CacheEvict(value=CACHE_REGION,key = "'api_employees'")
-	@CachePut(value=CACHE_REGION, key="'api_employees' + #employee.id")
+	/*@CacheEvict(value=CACHE_REGION,key = "'api_employees'")
+	@CachePut(value=CACHE_REGION, key="'api_employees' + #employee.id")*/
 	public EmployeeDTO save(EmployeeDTO employee) {
 		return employeeService.save(employee);
 	}
 	
 	@PUT
 	@Path("/{id}")
-	@CacheEvict(value=CACHE_REGION, key = "'api_employees'")
-	@CachePut(value=CACHE_REGION, key="'api_employees' + #id")
+	/*@CacheEvict(value=CACHE_REGION, key = "'api_employees'")
+	@CachePut(value=CACHE_REGION, key="'api_employees' + #id")*/
     public EmployeeDTO updateById(@PathParam("id") Integer employeeId, @RequestBody EmployeeDTO employee) {
         return employeeService.updateById(employeeId, employee);
     }
@@ -62,9 +62,9 @@ public class EmployeeResource extends BaseResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
-	@Caching(evict = {
+/*	@Caching(evict = {
 			@CacheEvict(value=CACHE_REGION, key = "'api_employees'"),
-			@CacheEvict(value=CACHE_REGION, key = "'api_employees' + #id")})
+			@CacheEvict(value=CACHE_REGION, key = "'api_employees' + #id")})*/
 	public EmployeeDTO delete(@PathParam("id") Integer employeeId) {
 		return employeeService.delete(employeeId);
 	}

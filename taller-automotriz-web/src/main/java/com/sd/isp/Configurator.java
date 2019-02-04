@@ -17,7 +17,7 @@ public class Configurator {
         try {
             final Properties config = new Properties();
 
-            InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("isp-client-web-config.properties");
+            InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("gradle.properties");
             config.load(input);
 
             for (Object o : config.keySet()) {
