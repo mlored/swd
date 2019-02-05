@@ -20,7 +20,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="/taller-automotriz-web/"><b>Sistemas</b>Distribuidos</a>
+        <a href="/"><b>Sistemas</b>Distribuidos</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -43,9 +43,9 @@
                 <!-- /.col -->
             </div>
         </form>
-        <a href="/taller-automotriz-web/">Registrarse</a>
+        <a href="/">Registrarse</a>
         <br>
-        <a href="/taller-automotriz-web/support/create">Contactar con soporte</a>
+        <a href="/support/create">Contactar con soporte</a>
     </div>
     <!-- /.login-box-body -->
 </div>

@@ -3,6 +3,7 @@ import com.google.code.ssm.config.DefaultAddressProvider
 import com.google.code.ssm.providers.CacheConfiguration
 import com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl
 import com.sd.isp.rest.role.RoleResourceImpl
+import com.sd.isp.rest.support.SupportResourceImpl
 import com.sd.isp.rest.user.UserResourceImpl
 import com.sd.isp.service.auth.AuthServiceImpl
 import com.sd.isp.service.role.RoleServiceImpl
