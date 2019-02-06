@@ -21,7 +21,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
     private final WebResource _webResource;
 
     @Autowired
-    IAuthService authService = new AuthServiceImpl();
+    IAuthService authService;
 
     private final static String BASE_URL = "http://localhost:8081/isp-platform/rest";
     protected static final String CACHE_REGION = "isp-client-web-cache";
