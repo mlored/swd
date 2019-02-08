@@ -133,7 +133,7 @@
                     return client
                 },
                 ajax: {
-                    url: "/isp-client-web/client/list",
+                    url: "/client/list",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {
@@ -166,7 +166,7 @@
                         return car
                     },
                     ajax: {
-                        url: "/isp-client-web/cars/list",
+                        url: "/cars/list",
                         dataType: 'json',
                         data: function (params) {
 
@@ -201,7 +201,7 @@
                         return client
                     },
                     ajax: {
-                        url: "/isp-client-web/part/list",
+                        url: "/part/list",
                         dataType: 'json',
                         data: function (params) {
 
@@ -235,7 +235,7 @@
                         return client
                     },
                     ajax: {
-                        url: "/isp-client-web/part/list",
+                        url: "/part/list",
                         dataType: 'json',
                         data: function (params) {
 
