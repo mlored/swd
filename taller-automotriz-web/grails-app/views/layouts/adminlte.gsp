@@ -1,37 +1,40 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        <g:layoutTitle default="Sistema"/>
-    </title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/static/bower_components/font-awesome/css/font-awesome.min.css">
-    <g:layoutHead/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="/static/dist/css/skins/_all-skins.min.css">
 
+    <!-- Tell the browser to be responsive to screen width -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/dist/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/AdminLTE.css">
+    <link rel="stylesheet" href="/static/css/select2.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.css">
+
+    <title>Sistema</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- WARNING: Respond.js does nott work if you view the page via file:// -->
     <!--[if lt IE 9]>
-  <script src="/static/https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="/static/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/adminlte.js"></script>
+    <script src="/static/js/jquery.validate.js"></script>
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/i18n/es.js"></script>
+    <script src="/static/js/localization/messages_es.js"></script>
+    <script src="/static/js/moment-with-locales.js"></script>
+    <script src="/static/js/bootstrap-datetimepicker.min.js"></script>
 </head>
+<body class="skin-blue sidebar-mini">
 
-<body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
+
     <header class="main-header">
 
         <!-- Logo -->
@@ -134,7 +137,7 @@
             <ul class="sidebar-menu tree" data-widget="tree">
                 <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO">
                     <li class="header">MENU</li>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO,ROLE_ADMIN">
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-gear"></i> <span>Configuracion</span>
@@ -150,26 +153,26 @@
                                     <li><a href="/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
                                     <li><a href="/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
                                     <li><a href="/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                                    <li><a href="/car/list"><i class="fa fa-car"></i> Automoviles</a></li>
+                                    <li><a href="/cars/list"><i class="fa fa-car"></i> Automoviles</a></li>
                                 </sec:ifAnyGranted>
                             </ul>
                         </li>
                     </sec:ifAnyGranted>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO,ROLE_ADMIN">
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
                         <li>
                             <a href="/buy/list">
                                 <i class="fa fa-shopping-cart"></i> <span>Compras</span>
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO,ROLE_ADMIN">
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
                         <li>
                             <a href="/#">
                                 <i class="fa fa-credit-card"></i> <span>Ventas</span>
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO,ROLE_ADMIN">
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
                         <li>
                             <a href="/entry/list">
                                 <i class="fa fa-file-text-o"></i> <span>Fichas</span>
@@ -184,7 +187,7 @@
                             </a>
                         </li>
                     </sec:ifAnyGranted>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO,ROLE_ADMIN">
+                    <sec:ifAnyGranted roles="ROLE_SECRETARIO, ROLE_MECANICO">
                         <li>
                             <a href="/stock/list">
                                 <i class="fa fa-cubes"></i> <span>Stock</span>
@@ -207,8 +210,6 @@
             <!-- Info boxes -->
             <div class="row">
 
-
-
                 <g:layoutBody/>
 
             </div>
@@ -216,22 +217,86 @@
         </section>
     </div>
 </div><!-- ./wrapper -->
-<!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="/static/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<g:pageProperty name="page.script"/>
-<!-- AdminLTE App -->
-<script src="/static/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/static/dist/js/demo.js"></script>
+<h1>Instancia : ${grailsApplication.config.app.instance} 2</h1>
 </body>
+
+<script>
+    // Set jQuery.validate settings for bootstrap integration
+    jQuery.validator.setDefaults({
+        highlight: function(element, errorClass, validClass) {
+            if ($(element).closest('.input-group').length > 0) {
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-error');
+            } else {
+                if (element.type === "radio") {
+                    this.findByName(element.name).addClass(errorClass).removeClass(validClass);
+                } else {
+                    $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                    if ($(element).closest('form').hasClass('form-horizontal')) {
+                        $(element).closest('.form-group > div[class^="col"]').find('i.fa').remove();
+                        $(element).closest('.form-group > div[class^="col"]').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+                    } else {
+                        $(element).closest('.form-group').find('i.fa').remove();
+                        $(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+                    }
+                }
+            }
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            if ($(element).closest('.input-group').length > 0) {
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+            } else {
+                if (element.type === "radio") {
+                    this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+                } else {
+                    if ($(element).closest('form').hasClass('form-horizontal')) {
+                        $(element).closest('.form-group > div[class^="col"]').find('i.fa').remove();
+                        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+                    } else {
+                        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+                        $(element).closest('.form-group').find('i.fa').remove();
+                        $(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+                    }
+                }
+            }
+        },
+        errorPlacement: function(error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else if (element.parent('.radio-inline').length) {
+                error.insertAfter(element.parent().parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        ignore: ''
+    });
+
+    $('a[data-method="delete"]').click(function(){
+        $.ajax(
+            {
+                url: this.getAttribute('href'),
+                type: 'POST',
+                async: false,
+                complete: function(response, status) {
+                    if (status == 'success')
+                        location.reload();
+                    else
+                        alert('Error: the service responded with: ' + response.status + '\n' + response.responseText)
+                }
+            }
+        )
+        return false
+    });
+    var date;
+    $( document ).ready(function() {
+        $("#form").validate({});
+        date = moment($('#date').val(), "DD-MM-YYYY");
+        $('.mydate').datetimepicker({
+            locale: 'es'
+        });
+    });
+</script>
 </html>

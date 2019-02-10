@@ -166,7 +166,7 @@
                         return car
                     },
                     ajax: {
-                        url: "/cars/list",
+                        url: "/car/list",
                         dataType: 'json',
                         data: function (params) {
 
