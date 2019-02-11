@@ -14,8 +14,7 @@ public class RoleResourceImpl extends BaseResourceImpl<RoleDTO, RoleResult> impl
 
     @Override
     public RoleResult getAll() {
-        final RoleResult result = getWebResource().get(RoleResult.class);
-        return result;
+        return super.getAll();
     }
 
     @Override

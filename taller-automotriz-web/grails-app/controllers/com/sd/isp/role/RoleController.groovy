@@ -43,20 +43,7 @@ class RoleController {
     }
 
     def list(Integer max) {
-        def text = params.text
-        roleService=new RoleServiceImpl()
         def roles = roleService.getAll()
-
-        if(null != text && !"".equals(text)){
-
-            roles = roleService.find(text)
-
-
-
-        }else{
-            roles = roleService.getAll()
-        }
-
         [roleInstanceList: roles, roleInstanceTotal: roles?.size()]
     }
 
