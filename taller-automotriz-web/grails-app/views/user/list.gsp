@@ -6,7 +6,7 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
-<div id="list-car" class="content scaffold-list" role="main">
+<div id="list-user" class="content scaffold-list" role="main">
     <h1>
         Usuarios
         <g:link class="btn btn-primary" action="create">Nuevo</g:link>

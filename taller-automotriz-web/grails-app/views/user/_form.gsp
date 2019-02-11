@@ -1,5 +1,5 @@
 <div class="box-body">
-    <div class="form-group ${hasErrors(bean: userrInstance, field: 'username', 'error')}">
+    <div class="form-group ${hasErrors(bean: userInstance, field: 'username', 'error')}">
         <label for="username">
             <g:message code="user.username.label" default="Usuario" />
             <span class="required-indicator">*</span>
@@ -31,17 +31,60 @@
         <g:passwordField name="password" class="form-control" required="true" maxlength="60" minlength="6" placeholder="contraseña" value="${userInstance?.password}"/>
     </div>
 
-
-    <div class="from-group ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
+    <div class="form-group ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
         <label for="role">
             <g:message code="user.role.label" default="Rol" />
             <span class="required-indicator">*</span>
         </label>
-        <g:select class="form-control" type="text"
-                  id="updater" name="rolId" from="${rolesWithoutAdmin}" value="${userInstance?.role?.id}"
-                  optionKey="id" optionValue="name"
-                  noSelection="${['':'Seleccione un rol..']}"/>
+        <g:select id="role" name="roleId" from="${userInstance?.getRole()}"
+                  optionKey="id" optionValue="authority" required="true"
+                  value="${userInstance?.role?.id}" class="form-control input-sm"
+                  noSelection="['null':'Selecciona un rol']" />
     </div>
 
 </div>
 <!-- /.box-body -->
+<g:javascript>
+    $(function() {
+        $(document).ready(function () {
+            $("#role").select2({
+                id: function (role) {
+                    return role
+                },
+                ajax: {
+                    url: "/role/list",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        var queryParameters = {
+                            term: params.term
+                        }
+                        return queryParameters;
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: item.authority,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                },
+                formatResult: formatResult,
+                formatSelection: formatSelection,
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+
+            function formatResult(data) {
+                return '<div>' + data + '</div>';
+            }
+            function formatSelection(data) {
+                return data;
+            }
+        });
+    });
+</g:javascript>
