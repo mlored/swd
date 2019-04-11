@@ -8,7 +8,7 @@
 <body>
 <div id="list-entry" class="content scaffold-list" role="main">
     <h1>
-         Entrada de Automoviles
+         Entrada de Automóviles
         <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
     </h1>
     <g:if test="${flash.message}">

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4">
             <label for="number">
-                <g:message code="entry.number.label" default="Numero" />
+                <g:message code="entry.number.label" default="Número" />
             </label>
             <g:textField name="id" class="form-control" value="${entryInstance?.id}" readonly="true" disabled=""/>
         </div>
@@ -42,24 +42,24 @@
         <div class="col-md-6">
             <div class="form-group ${hasErrors(bean: entryInstance, field: 'car', 'error')} required">
                 <label for="car">
-                    <g:message code="entry.car.label" default="Automovil" />
+                    <g:message code="entry.car.label" default="Automóvil" />
                     <span class="required-indicator">*</span>
                 </label>
                 <g:hiddenField name="id" value="${entryInstance?.id}" />
                 <g:select id="car" name="carId" from="${entryInstance?.getCar()}"
                           optionKey="id" optionValue="mark" required="true"
                           value="${entryInstance?.car?.id}"  class="form-control input-sm"
-                          noSelection="['null':'Selecciona un Automovil']"/>
+                          noSelection="['null':'Selecciona un Automóvil']"/>
             </div>
         </div>
     </div>
 
     <div class="form-group ${hasErrors(bean: entryInstance, field: 'string', 'error')}">
         <label for="diagnostic">
-            <g:message code="entry.diagnostic.label" default="Diagnostico" />
+            <g:message code="entry.diagnostic.label" default="Diagnóstico" />
             <span class="required-indicator">*</span>
         </label>
-        <g:textField name="diagnostic" class="form-control" placeholder="Diagnostico" maxlength="50" minlength="2" required="true" value="${entryInstance?.diagnostic}" />
+        <g:textField name="diagnostic" class="form-control" placeholder="Diagnóstico" maxlength="50" minlength="2" required="true" value="${entryInstance?.diagnostic}" />
     </div>
 
     <div class="col-md-12">

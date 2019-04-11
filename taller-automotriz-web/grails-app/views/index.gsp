@@ -138,7 +138,7 @@
 
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-gear"></i> <span>Configuracion</span>
+                                <i class="fa fa-gear"></i> <span>Configuración</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -151,7 +151,7 @@
                                     <li><a href="/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
                                     <li><a href="/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
                                     <li><a href="/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                                    <li><a href="/car/list"><i class="fa fa-car"></i> Automoviles</a></li>
+                                    <li><a href="/car/list"><i class="fa fa-car"></i> Automóviles</a></li>
 
                             </ul>
                         </li>
