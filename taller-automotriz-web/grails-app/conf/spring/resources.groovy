@@ -27,13 +27,13 @@ beans = {
     }
 
     //resources
-    userResource(UserResourceImpl)
-    roleResource(RoleResourceImpl)
+    //userResource(UserResourceImpl)
+    //roleResource(RoleResourceImpl)
 
     //services
     authService(AuthServiceImpl)
-    userService(UserServiceImpl)
-    roleService(RoleServiceImpl)
+    //userService(UserServiceImpl)
+    //roleService(RoleServiceImpl)
 
 //
 //    cacheConfiguration(CacheConfiguration){ consistentHashing=true }
