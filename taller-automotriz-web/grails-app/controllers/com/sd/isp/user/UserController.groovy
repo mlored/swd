@@ -31,23 +31,21 @@ class UserController{
 
     //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def create() {
-        [userInstance: new UserB(params)]
+        [userInstance: new UserB(params) , roleInstance:new RoleB(params),  roles:roleService.getAll()]
     }
 
     def save() {
+        def nuevoRole = new RoleB (params)
+        Set<RoleB> roles = new HashSet<>()
 
-        // ESTO ESTA COMENTADO PORQUE ESTA MAL EL FORMULARIO NO TIENE ROLES_IDS
-        //for (String roleId : params.list('rolesIds')) {
-        //  roles.add(roleService.getById(Integer.valueOf(roleId)));
-        //}
+        for (String roleId : params.list('rolesIds')) {
+          roles.add(roleService.getById(Integer.valueOf(params.roleId)));
+        }
 
         def nuevoUser = new UserB(params)
-        //nuevoUser.setPassword(params.username)
-        //  nuevoUser.setRoles(roles);
-        nuevoUser.setRole(roleService.getById(Integer.valueOf(params.rolId)))
+        nuevoUser.setRoles(params.get("authority"))
         nuevoUser.setPassword(params.get("password"))
         def userInstance = userService.save(nuevoUser)
-
 
         if (!userInstance.getId()) {
             render(view: "create", model: [userInstance: userInstance])

@@ -32,59 +32,14 @@
     </div>
 
     <div class="form-group ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
-        <label for="role">
+        <label>
             <g:message code="user.role.label" default="Rol" />
             <span class="required-indicator">*</span>
         </label>
-        <g:select id="role" name="roleId" from="${userInstance?.getRole()}"
+        <g:select name="roleId" from="${roles}"
                   optionKey="id" optionValue="authority" required="true"
-                  value="${userInstance?.role?.id}" class="form-control input-sm"
-                  noSelection="['null':'Selecciona un rol']" />
+                  value="${roleInstance?.id}" class="form-control input-sm" />
     </div>
 
 </div>
 <!-- /.box-body -->
-<g:javascript>
-    $(function() {
-        $(document).ready(function () {
-            $("#role").select2({
-                id: function (role) {
-                    return role
-                },
-                ajax: {
-                    url: "/role/list",
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        var queryParameters = {
-                            term: params.term
-                        }
-                        return queryParameters;
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function (item) {
-                                return {
-                                    text: item.authority,
-                                    id: item.id
-                                }
-                            })
-                        };
-                    }
-                },
-                formatResult: formatResult,
-                formatSelection: formatSelection,
-                escapeMarkup: function (m) {
-                    return m;
-                }
-            });
-
-            function formatResult(data) {
-                return '<div>' + data + '</div>';
-            }
-            function formatSelection(data) {
-                return data;
-            }
-        });
-    });
-</g:javascript>
