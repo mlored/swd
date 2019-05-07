@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="adminlte">
-    <g:set var="entityName" value="${message(code: 'cars.label', default: 'Cars')}" />
+    <g:set var="entityName" value="${message(code: 'car.label', default: 'Cars')}" />
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -201,7 +201,7 @@
     </div>
 </section>
 
-<div id="show-cars" class="content scaffold-show" role="main">
+<div id="show-car" class="content scaffold-show" role="main">
     <h1></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -210,7 +210,7 @@
 
         <g:if test="${carInstance?.mark}">
             <li class="fieldcontain">
-                <span id="mark-label" class="property-label"><g:message code="cars.mark.label" default="Mark" /></span>
+                <span id="mark-label" class="property-label"><g:message code="car.mark.label" default="Mark" /></span>
 
                 <span class="property-value" aria-labelledby="mark-label"><g:fieldValue bean="${carInstance}" field="mark"/></span>
 
@@ -219,7 +219,7 @@
 
         <g:if test="${carInstance?.model}">
             <li class="fieldcontain">
-                <span id="model-label" class="property-label"><g:message code="cars.model.label" default="Model" /></span>
+                <span id="model-label" class="property-label"><g:message code="car.model.label" default="Model" /></span>
 
                 <span class="property-value" aria-labelledby="model-label"><g:fieldValue bean="${carInstance}" field="model"/></span>
 
@@ -228,7 +228,7 @@
 
         <g:if test="${carInstance?.number}">
             <li class="fieldcontain">
-                <span id="number-label" class="property-label"><g:message code="cars.number.label" default="Number" /></span>
+                <span id="number-label" class="property-label"><g:message code="car.number.label" default="Number" /></span>
 
                 <span class="property-value" aria-labelledby="number-label"><g:fieldValue bean="${carInstance}" field="number"/></span>
 
@@ -237,7 +237,7 @@
 
         <g:if test="${carInstance?.color}">
             <li class="fieldcontain">
-                <span id="color-label" class="property-label"><g:message code="cars.color.label" default="Color" /></span>
+                <span id="color-label" class="property-label"><g:message code="car.color.label" default="Color" /></span>
 
                 <span class="property-value" aria-labelledby="color-label"><g:fieldValue bean="${carInstance}" field="color"/></span>
 

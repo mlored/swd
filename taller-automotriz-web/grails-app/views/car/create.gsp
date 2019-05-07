@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="adminlte">
-    <g:set var="entityName" value="${message(code: 'cars.label', default: 'Cars')}" />
+    <g:set var="entityName" value="${message(code: 'car.label', default: 'Cars')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 <body>

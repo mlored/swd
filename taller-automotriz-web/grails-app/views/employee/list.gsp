@@ -60,7 +60,7 @@
 	        </tbody>
 	    </table>
     </div>
-    %{--<g:render template="/layouts/paginate"/>--}%
+    <g:render template="/layouts/paginate"/>
 </div>
 </body>
 </html>
