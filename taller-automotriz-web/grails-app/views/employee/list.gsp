@@ -53,7 +53,7 @@
 	                <td><a class="btn btn-sm btn-danger"
                     	   data-confirm="Estas Seguro?" 
                     	   data-method="delete" 
-                    	   href="/taller-automotriz-web/employee/delete/${employeeInstance.id}">Eliminar</a>
+                    	   href="/employee/delete/${employeeInstance.id}">Eliminar</a>
                     </td>
 	            </tr>
 	        </g:each>

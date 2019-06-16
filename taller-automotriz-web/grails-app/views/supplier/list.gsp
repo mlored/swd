@@ -50,7 +50,7 @@
                     <td><a class="btn btn-sm btn-danger"
                            data-confirm="Estas Seguro?"
                            data-method="delete"
-                           href="/isp-client-web/supplier/delete/${supplierInstance.id}">Eliminar</a>
+                           href="/supplier/delete/${supplierInstance.id}">Eliminar</a>
                     </td>
                 </tr>
             </g:each>
