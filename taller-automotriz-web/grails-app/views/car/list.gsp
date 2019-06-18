@@ -49,10 +49,13 @@
                     <td>${fieldValue(bean: carInstance, field: "model")}</td>
                     <td>${fieldValue(bean: carInstance, field: "year")}</td>
                     <td>${fieldValue(bean: carInstance, field: "color")}</td>
-                    <td><a class="btn btn-sm btn-danger"
+                    <td>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+                        <a class="btn btn-sm btn-danger"
                            data-confirm="Estas Seguro?"
                            data-method="delete"
                            href="/cars/delete/${carInstance.id}">Eliminar</a>
+                        </sec:ifAnyGranted>
                     </td>
                 </tr>
             </g:each>

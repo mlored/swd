@@ -9,7 +9,8 @@
 <div id="list-entry" class="content scaffold-list" role="main">
     <h1>
          Entrada de Automóviles
-        <g:link class="btn btn-primary" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+        
+        <g:link class="btn btn-primary" action="create">Nuevo</g:link>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -19,7 +20,7 @@
             <thead>
             <tr>
                 <g:sortableColumn property="date"   title="Fecha" />
-                <g:sortableColumn property="number" title="Número" />
+                <g:sortableColumn property="number" title="N° chapa" />
                 <g:sortableColumn property="client" title="Cliente" />
                 <g:sortableColumn property="car"    title="Automóvil" />
                 <g:sortableColumn property="color"  title="Color" />
@@ -32,15 +33,17 @@
                     <td>
                         <g:formatDate format="dd-MM-yyyy" date="${entryInstance?.date}"/>
                     <td>
-                        <g:link action="edit" id="${entryInstance?.id}"><g:message code="${fieldValue(bean: entryInstance, field: "number")}" default="${fieldValue(bean: entryInstance, field: "number")}" /></g:link>
+                        <g:link action="edit" id="${entryInstance?.id}">${fieldValue(bean: entryInstance, field: "number")} </g:link>
                     </td>
                     <td>${fieldValue(bean: entryInstance, field: "cliente.name")}</td>
                     <td>${fieldValue(bean: entryInstance, field: "car.mark")}</td>
                     <td>${fieldValue(bean: entryInstance, field: "car.color")}</td>
                     <td>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
                         <g:form controller="entries" method="DELETE">
                             <g:submitButton name="borrar" action="delete" class="btn btn-danger"  />
                         </g:form>
+                        </sec:ifAnyGranted> 
                     </td>
                 </tr>
             </g:each>

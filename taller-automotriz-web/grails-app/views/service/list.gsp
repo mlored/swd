@@ -21,7 +21,9 @@
         </g:form>
     </div>
     <h1>Servicios
-    <g:link class="btn btn-primary" action="create">Nuevo</g:link>
+        <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_SECRETARIO">
+            <g:link class="btn btn-primary" action="create">Nuevo</g:link>
+        </sec:ifAnyGranted>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -44,10 +46,13 @@
                     <td><g:link action="edit" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "name")}</g:link></td>
                     <td>${fieldValue(bean: serviceInstance, field: "description")}</td>
                     <td>${fieldValue(bean: serviceInstance, field: "price")}</td>
-                    <td><a class="btn btn-sm btn-danger"
+                    <td>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+                        <a class="btn btn-sm btn-danger"
                            data-confirm="Estas Seguro?"
                            data-method="delete"
                            href="/service/delete/${serviceInstance.id}">Eliminar</a>
+                        </sec:ifAnyGranted>   
                     </td>
                 </tr>
             </g:each>

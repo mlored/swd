@@ -47,10 +47,13 @@
                     <td>${fieldValue(bean: supplierInstance, field: "ruc")}</td>
                     <td>${fieldValue(bean: supplierInstance, field: "address")}</td>
                     <td>${fieldValue(bean: supplierInstance, field: "cellphone")}</td>
-                    <td><a class="btn btn-sm btn-danger"
+                    <td>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+                        <a class="btn btn-sm btn-danger"
                            data-confirm="Estas Seguro?"
                            data-method="delete"
                            href="/supplier/delete/${supplierInstance.id}">Eliminar</a>
+                           </sec:ifAnyGranted> 
                     </td>
                 </tr>
             </g:each>
