@@ -29,7 +29,6 @@ class UserController{
         [userInstanceList: users, userInstanceTotal: users?.size()]
     }
 
-    //@Secured(['ROLE_SUPERUSER','ROLE_ADMIN'])
     def create() {
         [userInstance: new UserB(params) , roleInstance:new RoleB(params),  roles:roleService.getAll()]
     }

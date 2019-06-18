@@ -9,17 +9,18 @@ import com.sd.isp.service.car.ICarService
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Secured(["ROLE_ADMIN"])
 class CarController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     ICarService carService
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         [carInstance: new CarB(params)]
     }
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save() {
         def carInstance = new CarB(params)
         def newCar = carService.save(carInstance)
@@ -35,6 +36,7 @@ class CarController {
         redirect(action: "index")
     }
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
@@ -78,10 +80,11 @@ class CarController {
              siguiente: siguiente?.size(),
              ccarInstanceList: carService.getAll(),
              text: text/*,
-										  user:authService.getName()*/]
+             user:authService.getName()*/]
         }
     }
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def edit(Long id) {
         def carInstance = carService.getById(id.intValue())
         if (!carInstance) {
@@ -96,6 +99,7 @@ class CarController {
         [carInstance: carInstance]
     }
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def update(Long id) {
         def carB= new CarB(params)
         def carInstance = carService.update(id.intValue(), carB)
@@ -115,6 +119,7 @@ class CarController {
         redirect(action: "list")
     }
 
+    @Secured(["ROLE_ADMIN"])
     def delete(Long id) {
 
         try {
@@ -137,7 +142,7 @@ class CarController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'cars.label', default: 'Cars'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'car.label', default: 'Car'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

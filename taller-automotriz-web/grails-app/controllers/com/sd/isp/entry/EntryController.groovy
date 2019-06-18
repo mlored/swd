@@ -98,7 +98,7 @@ class EntryController {
         ])
         redirect(action: "list")
     }
-
+    @Secured(["ROLE_ADMIN"])
     def delete(Long id) {
 
         def entryInstance = entryService.getById(id.intValue())

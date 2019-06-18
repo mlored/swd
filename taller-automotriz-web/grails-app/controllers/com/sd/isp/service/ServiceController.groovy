@@ -10,17 +10,17 @@ import grails.transaction.Transactional
 
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(["ROLE_ADMIN"])
 class ServiceController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     IServiceService serviceService
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def list(Integer max) {
         //def service = serviceService.getAll()
 
@@ -74,11 +74,11 @@ class ServiceController {
 
          [serviceInstance: serviceInstance]
     }*/
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         [serviceInstance: new ServiceB(params)]
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save(){
         def serviceInstance = new ServiceB(params)
         def newService = serviceService.save(serviceInstance)
@@ -94,7 +94,7 @@ class ServiceController {
         redirect(action: "index")
 
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def edit(Long id) {
         def serviceInstance = serviceService.getById(id.intValue())
         if (!serviceInstance) {
@@ -108,7 +108,7 @@ class ServiceController {
 
         [serviceInstance: serviceInstance]
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def update(Long id) {
         def serviceB= new ServiceB(params)
         def serviceInstance = serviceService.update(id.intValue(), serviceB)
@@ -127,7 +127,7 @@ class ServiceController {
         ])
         redirect(action: "list")
     }
-
+    @Secured(["ROLE_ADMIN"])
     def delete(Long id) {
 
         try {

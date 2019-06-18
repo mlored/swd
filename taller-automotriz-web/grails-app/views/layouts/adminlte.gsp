@@ -137,7 +137,7 @@
             <ul class="sidebar-menu tree" data-widget="tree">
                 <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_SECRETARIO, ROLE_MECANICO">
                     <li class="header">MENU</li>
-                    <sec:ifAnyGranted roles="ROLE_SECRETARIO">
+                   %{-- <sec:ifAnyGranted roles="ROLE_SECRETARIO">--}%
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-gear"></i> <span>Configuración</span>
@@ -146,18 +146,20 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
-                                <li><a href="/client/list"><i class="fa fa-user"></i> Clientes</a></li>
-                                <li><a href="/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_SECRETARIO">
+                                    <li><a href="/client/list"><i class="fa fa-user"></i> Clientes</a></li>
+                                    <li><a href="/supplier/list"><i class="fa fa-user"></i> Proveedores</a></li>
+                                </sec:ifAnyGranted>
+                                <li><a href="/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
+                                <li><a href="/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
+                                <li><a href="/car/list"><i class="fa fa-car"></i> Automóviles</a></li>
                                 <sec:ifAnyGranted roles="ROLE_ADMIN">
+                                    <li><a href="/employee/list"><i class="fa fa-id-card"></i> Empleados</a></li>
                                     <li><a href="/user/list"><i class="fa fa-user"></i> Usuarios</a></li>
-                                    <li><a href="/service/list"><i class="fa fa-wrench"></i> Servicios</a></li>
-                                    <li><a href="/part/list"><i class="fa fa-gear"></i> Repuestos</a></li>
-                                    <li><a href="/car/list"><i class="fa fa-car"></i> Automóviles</a></li>
                                 </sec:ifAnyGranted>
                             </ul>
                         </li>
-                    </sec:ifAnyGranted>
+                    %{--</sec:ifAnyGranted>--}%
                     <sec:ifAnyGranted roles="ROLE_SECRETARIO">
                         <li>
                             <a href="/buy/list">
@@ -218,7 +220,8 @@
     </div>
 </div><!-- ./wrapper -->
 
-<h1>Instancia : ${grailsApplication.config.app.instance} 2</h1>
+%{--<h1>Instancia : ${grailsApplication.config.app.instance} 2</h1>--}%
+<h1>${grailsApplication.config.app.instance}</h1>
 </body>
 
 <script>

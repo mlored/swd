@@ -9,19 +9,18 @@ import com.sd.isp.service.part.IPartService;
 
 import grails.transaction.Transactional
 
-@Secured(["ROLE_MECANICO"])
 class StockController {
-
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IPartService partService
 
+	@Secured(["ROLE_SECRETARIO","ROLE_MECANICO", "ROLE_ADMIN"])
 	def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         //respond Part.list(params), model:[partInstanceCount: Part.count()]
 		redirect(action: "list", params: params)
     }
-
+	@Secured(["ROLE_SECRETARIO","ROLE_MECANICO", "ROLE_ADMIN"])
 	def list(Integer max) {
 		//def parts = partService.getAll()
 		//[partInstanceList: parts, partInstanceTotal: parts?.size()]
@@ -62,9 +61,9 @@ class StockController {
 											  user:authService.getName()*/]
 		}
 
-	def show(PartB partInstance) {
+	/*def show(PartB partInstance) {
 		respond partInstance
-	}
+	}*/
 
     protected void notFound() {
         request.withFormat {

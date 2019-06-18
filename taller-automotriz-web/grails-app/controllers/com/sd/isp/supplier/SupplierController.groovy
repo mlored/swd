@@ -10,17 +10,18 @@ import com.sd.isp.service.supplier.ISupplierService
 import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(["ROLE_SECRETARIO"])
 class SupplierController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     ISupplierService supplierService
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def list(Integer max) {
         //def suppliers = supplierService.getAll()
         def page = 0
@@ -66,10 +67,12 @@ class SupplierController {
          respond supplierInstance
      }*/
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         [supplierInstance: new SupplierB(params)]
     }
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save() {
         def supplierInstance = new SupplierB(params)
         def newSupplier = supplierService.save(supplierInstance)
@@ -85,7 +88,7 @@ class SupplierController {
         redirect(action: "index")
     }
 
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def edit(Long id) {
         def supplierInstance = supplierService.getById(id.intValue())
         if (!supplierInstance) {
@@ -99,7 +102,7 @@ class SupplierController {
 
         [supplierInstance: supplierInstance]
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def update(Long id) {
         def supplierB= new SupplierB(params)
         def supplierInstance = supplierService.update(id.intValue(), supplierB)
@@ -123,7 +126,7 @@ class SupplierController {
         ])
         redirect(action: "list")
     }
-
+    @Secured(["ROLE_ADMIN"])
     def delete(Long id) {
 
         try {

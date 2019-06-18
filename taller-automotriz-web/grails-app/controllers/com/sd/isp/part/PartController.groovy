@@ -9,23 +9,23 @@ import grails.transaction.Transactional
 
 import org.springframework.dao.DataIntegrityViolationException
 
-@Secured(["ROLE_ADMIN"])
 class PartController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     IPartService partService
 
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         respond new PartB(params)
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
 
-    @Secured(["ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def list(Integer max) {
         //def parts = partService.getAll()
 
@@ -82,7 +82,7 @@ class PartController {
 
         [partInstance: partInstance]
     }*/
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save(){
         def partInstance = new PartB(params)
         def newPart = partService.save(partInstance)
@@ -98,7 +98,7 @@ class PartController {
         redirect(action: "index")
 
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def edit(Long id) {
         def partInstance = partService.getById(id.intValue())
         if (!partInstance) {
@@ -112,7 +112,7 @@ class PartController {
 
         [partInstance: partInstance]
     }
-
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def update(Long id) {
         def partB= new PartB(params)
         def partInstance = partService.update(id.intValue(), partB)
@@ -136,7 +136,7 @@ class PartController {
         ])
         redirect(action: "list")
     }
-
+    @Secured(["ROLE_ADMIN"])
     def delete(Long id) {
 
         try {
