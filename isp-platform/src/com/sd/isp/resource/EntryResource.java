@@ -39,6 +39,7 @@ public class EntryResource extends BaseResource {
 
 	@GET
 	@Produces("application/xml")
+	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
 	@Cacheable(value=CACHE_REGION, key="'api_entries'")
 	public EntryResult getAll() {
 		return entryService.getAll();

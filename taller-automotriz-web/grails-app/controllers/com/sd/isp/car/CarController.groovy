@@ -15,12 +15,12 @@ class CarController {
 
     ICarService carService
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def create() {
         [carInstance: new CarB(params)]
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def save() {
         def carInstance = new CarB(params)
         def newCar = carService.save(carInstance)
@@ -36,7 +36,7 @@ class CarController {
         redirect(action: "index")
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)

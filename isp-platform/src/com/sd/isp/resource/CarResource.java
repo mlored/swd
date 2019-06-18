@@ -23,7 +23,7 @@ import com.sd.isp.service.car.ICarService;
 
 @Path("/car")
 @Component
-@Secured({"ROLE_ADMIN"})
+@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 public class CarResource extends BaseResource{
 	@Autowired
 	private ICarService carService;

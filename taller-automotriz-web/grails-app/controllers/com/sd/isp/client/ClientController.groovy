@@ -17,13 +17,13 @@ class ClientController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     IClientService clientService
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def list(Integer max) {
         //def clients = clientService.getAll()
         def page = 0
@@ -68,12 +68,12 @@ class ClientController {
         //respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def create() {
         respond new ClientB(params)
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def save(){
         def clientInstance = new ClientB(params)
         def newClient = clientService.save(clientInstance)
