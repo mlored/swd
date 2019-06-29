@@ -3,6 +3,7 @@ package com.sd.isp.rest.base;
 import com.sd.isp.Configurator;
 import com.sd.isp.dto.base.BaseDTO;
 import com.sd.isp.dto.base.BaseResult;
+//import com.sd.isp.service.auth.IAuthService;
 import com.sd.isp.service.auth.AuthServiceImpl;
 import com.sd.isp.service.auth.IAuthService;
 import com.sun.jersey.api.client.Client;
@@ -22,7 +23,7 @@ public abstract class BaseResourceImpl<DTO extends BaseDTO, Result extends BaseR
     @Autowired
     IAuthService authService;
 
-    private final static String BASE_URL = "http://localhost:8080/isp-platform/rest";
+    private final static String BASE_URL = "http://localhost:8081/isp-platform/rest";
     protected static final String CACHE_REGION = "isp-client-web-cache";
 
     private CacheManager _cacheManager;

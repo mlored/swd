@@ -31,7 +31,7 @@ beans = {
     //roleResource(RoleResourceImpl)
 
     //services
-    //authService(AuthServiceImpl)
+    authService(AuthServiceImpl)
     //userService(UserServiceImpl)
     //roleService(RoleServiceImpl)
 
