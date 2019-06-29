@@ -1,12 +1,10 @@
 package login;
 
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -21,7 +19,6 @@ import com.sd.isp.service.user.IUserService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 class MyAuthenticationProvider implements AuthenticationProvider {
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
