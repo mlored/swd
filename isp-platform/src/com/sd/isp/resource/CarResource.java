@@ -23,7 +23,6 @@ import com.sd.isp.service.car.ICarService;
 
 @Path("/car")
 @Component
-@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 public class CarResource extends BaseResource{
 	@Autowired
 	private ICarService carService;
@@ -31,6 +30,7 @@ public class CarResource extends BaseResource{
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value= CACHE_REGION, key="'api_cars' + #carId ")
 	public CarDTO getById(@PathParam("id") Integer carId) {
 		return carService.getById(carId);
@@ -38,17 +38,16 @@ public class CarResource extends BaseResource{
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value = CACHE_REGION,key = "'api_cars'")
 	public CarResult getAll() {
 		return carService.getAll();
 	}
 
 	@POST
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO"})
 	@CachePut(value= CACHE_REGION, key="'api_cars' + #car.id"/*, condition = "#dto.id!=null"*/)
-	@Caching(evict = {
-			@CacheEvict(value= CACHE_REGION,key = "'api_cars'"),
-			})
+	@Caching(evict = {@CacheEvict(value= CACHE_REGION,key = "'api_cars'"),})
 	public CarDTO save(CarDTO car) {
 		System.out.println(car.getMark());
 		return carService.save(car);
@@ -56,6 +55,7 @@ public class CarResource extends BaseResource{
 	
 	@PUT
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO"})
 	@CacheEvict(value= CACHE_REGION, key = "'api_cars'")
     @CachePut(value= CACHE_REGION, key="'api_cars' + #id ")
     public CarDTO updateById(@PathParam("id") Integer carId, @RequestBody CarDTO car) {
@@ -65,6 +65,7 @@ public class CarResource extends BaseResource{
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN"})
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_cars'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_cars' + #id ")
@@ -74,11 +75,11 @@ public class CarResource extends BaseResource{
 	}
 	
 
-	// http://localhost:8080/isp-platform/rest/car/search/textToFind 
+	// http://localhost:8081/isp-platform/rest/car/search/textToFind 
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	@Secured({"ROLE_SECRETARIO", "ROLE_MECANICO", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public CarResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return carService.find(textToFind, page, maxItems);
 	}
@@ -86,7 +87,7 @@ public class CarResource extends BaseResource{
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	@Secured({"ROLE_SECRETARIO", "ROLE_MECANICO", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public CarResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return carService.find(null, page, maxItems);
 	}

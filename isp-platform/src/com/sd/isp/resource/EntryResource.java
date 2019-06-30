@@ -23,7 +23,6 @@ import com.sd.isp.service.entry.IEntryService;
 
 @Path("/entry")
 @Component
-@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN", "ROLE_MECANICO"})
 public class EntryResource extends BaseResource {
 
 	@Autowired
@@ -32,6 +31,7 @@ public class EntryResource extends BaseResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_entries' + #entry")
 	public EntryDTO getById(@PathParam("id") Integer entry) {
 		return entryService.getById(entry);
@@ -39,13 +39,14 @@ public class EntryResource extends BaseResource {
 
 	@GET
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_entries'")
 	public EntryResult getAll() {
 		return entryService.getAll();
 	}
 
 	@POST
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION,key = "'api_entries'")
     @CachePut(value=CACHE_REGION, key="'api_entries' + #entry.id")
 	public EntryDTO save(EntryDTO entry) {
@@ -54,6 +55,7 @@ public class EntryResource extends BaseResource {
 	
 	@PUT
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION, key = "'api_entries'")
     @CachePut(value=CACHE_REGION, key="'api_entries' + #id")
     public EntryDTO updateById(@PathParam("id") Integer entryId, @RequestBody EntryDTO entry) {
@@ -63,6 +65,7 @@ public class EntryResource extends BaseResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN"})
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_entries'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_entries' + #id")})

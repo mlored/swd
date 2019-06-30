@@ -23,7 +23,6 @@ import com.sd.isp.service.item.IItemService;
 
 @Path("/item")
 @Component
-@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN", "ROLE_MECANICO"})
 public class ItemResource extends BaseResource {
 	@Autowired
 	private IItemService itemService;
@@ -31,6 +30,7 @@ public class ItemResource extends BaseResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_parts' + #itemId")
 	public ItemDTO getById(@PathParam("id") Integer itemId) {
 		return itemService.getById(itemId);
@@ -38,12 +38,14 @@ public class ItemResource extends BaseResource {
 
 	@GET
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_parts'")
 	public ItemResult getAll() {
 		return itemService.getAll();
 	}
 
 	@POST
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION,key = "'api_parts'")
     @CachePut(value=CACHE_REGION, key="'api_parts' + #item.id")
 	public ItemDTO save(ItemDTO item) {
@@ -52,6 +54,7 @@ public class ItemResource extends BaseResource {
 	
 	@PUT
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION, key = "'api_parts'")
     @CachePut(value=CACHE_REGION, key="'api_parts' + #id")
     public ItemDTO updateById(@PathParam("id") Integer itemId, @RequestBody ItemDTO item) {
@@ -60,6 +63,7 @@ public class ItemResource extends BaseResource {
 	
 	@DELETE
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN"})
 	@Produces("application/json")
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_parts'"),
@@ -73,7 +77,7 @@ public class ItemResource extends BaseResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public ItemResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return itemService.find(textToFind, page, maxItems);
 	}
@@ -81,7 +85,7 @@ public class ItemResource extends BaseResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	//@Secured({"ROLE_ADMINISTRADOR"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public ItemResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return itemService.find(null, page, maxItems);
 	}

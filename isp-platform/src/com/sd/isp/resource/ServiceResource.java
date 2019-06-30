@@ -23,7 +23,6 @@ import com.sd.isp.service.service.IServiceService;
 
 @Path("/service")
 @Component
-@Secured({"ROLE_ADMIN"})
 public class ServiceResource extends BaseResource {
 
 	@Autowired
@@ -32,6 +31,7 @@ public class ServiceResource extends BaseResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_services' + #serviceId")
 	public ServiceDTO getById(@PathParam("id") Integer serviceId) {
 		return serviceService.getById(serviceId);
@@ -46,6 +46,7 @@ public class ServiceResource extends BaseResource {
 	}
 
 	@POST
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO"})
 	@CacheEvict(value=CACHE_REGION,key = "'api_services'")
     @CachePut(value=CACHE_REGION, key="'api_services' + #service.id")
 	public ServiceDTO save(ServiceDTO service) {
@@ -54,6 +55,7 @@ public class ServiceResource extends BaseResource {
 	
 	@PUT
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION, key = "'api_services'")
     @CachePut(value=CACHE_REGION, key="'api_services' + #id")
     public ServiceDTO updateById(@PathParam("id") Integer serviceId, @RequestBody ServiceDTO service) {
@@ -62,6 +64,7 @@ public class ServiceResource extends BaseResource {
 	
 	@DELETE
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN"})
 	@Produces("application/json")
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_services'"),

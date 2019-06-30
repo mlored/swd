@@ -62,6 +62,7 @@ public class SupplierResource extends BaseResource {
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN"})
 	@Caching(evict = {
 			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers'"),
 			@CacheEvict(value=CACHE_REGION, key = "'api_suppliers' + #id")})

@@ -27,7 +27,6 @@ import com.sd.isp.service.role.IRoleService;
 
 @Path("/role")
 @Component
-@Secured({"ROLE_ADMIN"})
 public class RoleResource extends BaseResource {
 
 	@Autowired
@@ -44,6 +43,7 @@ public class RoleResource extends BaseResource {
 	@GET
 	@Path("/authority/{authority}")
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public RoleResult getAllBy(@PathParam("authority") String authority){
 		Map<String, String> args = new HashMap<>();
 		args.put("authority", authority);
@@ -75,7 +75,7 @@ public class RoleResource extends BaseResource {
 	
 	@DELETE
 	@Path("/{id}")
-	//@Produces("application/json")
+	@Secured({"ROLE_ADMIN"})
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_roles'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_roles' + #id")})

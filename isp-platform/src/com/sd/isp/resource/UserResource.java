@@ -23,15 +23,14 @@ import com.sd.isp.service.user.IUserService;
 
 @Path("/user")
 @Component
-@Secured("ROLE_ADMIN")
 public class UserResource extends BaseResource {
-
 	@Autowired
 	private IUserService userService;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_users' + #userId")
 	public UserDTO getById(@PathParam("id") Integer userId) {
 		return userService.getById(userId);
@@ -40,13 +39,13 @@ public class UserResource extends BaseResource {
 	@GET
 	@Path("/username/{username}")
 	@Produces("application/json")
-	@Secured({"ROLE_ADMIN", "ROLE_SECRETARIO", "ROLE_MECANICO"})
 	public UserDTO getByUserName(@PathParam("username") String username) {
 		return userService.getByUsername(username);
 	}
 
 	@GET
 	@Produces("application/xml")
+	@Secured({"ROLE_ADMIN"})
 	@Cacheable(value=CACHE_REGION, key="'api_users'")
 	public UserResult getAll() {
 		return userService.getAll();
@@ -69,6 +68,7 @@ public class UserResource extends BaseResource {
 	
 	@DELETE
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN"})
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_users'"),
             @CacheEvict(value=CACHE_REGION, key = "'api_users' + #id")})
@@ -76,7 +76,7 @@ public class UserResource extends BaseResource {
 		return userService.delete(userId);
 	}
 	
-	// http://localhost:8080/isp-platform/rest/user/search/textToFind 
+	// http://localhost:8081/isp-platform/rest/user/search/textToFind 
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")

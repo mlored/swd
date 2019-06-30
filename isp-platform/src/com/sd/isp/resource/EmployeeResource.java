@@ -23,7 +23,7 @@ import com.sd.isp.service.employee.IEmployeeService;
 
 @Path("/employee")
 @Component
-@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
+@Secured({"ROLE_ADMIN"})
 public class EmployeeResource extends BaseResource {
 
 	@Autowired

@@ -23,7 +23,6 @@ import com.sd.isp.service.part.IPartService;
 
 @Path("/part")
 @Component
-@Secured({"ROLE_SECRETARIO", "ROLE_ADMIN"})
 public class PartResource extends BaseResource {
 
 	@Autowired
@@ -32,6 +31,7 @@ public class PartResource extends BaseResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@Cacheable(value=CACHE_REGION, key="'api_parts' + #partId")
 	public PartDTO getById(@PathParam("id") Integer partId) {
 		return partService.getById(partId);
@@ -46,6 +46,7 @@ public class PartResource extends BaseResource {
 	}
 
 	@POST
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION,key = "'api_parts'")
     @CachePut(value=CACHE_REGION, key="'api_parts' + #part.id")
 	public PartDTO save(PartDTO part) {
@@ -54,6 +55,7 @@ public class PartResource extends BaseResource {
 	
 	@PUT
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	@CacheEvict(value=CACHE_REGION, key = "'api_parts'")
     @CachePut(value=CACHE_REGION, key="'api_parts' + #id")
     public PartDTO updateById(@PathParam("id") Integer partId, @RequestBody PartDTO part) {
@@ -62,6 +64,7 @@ public class PartResource extends BaseResource {
 	
 	@DELETE
 	@Path("/{id}")
+	@Secured({"ROLE_ADMIN"})
 	@Produces("application/json")
 	@Caching(evict = {
             @CacheEvict(value=CACHE_REGION, key = "'api_parts'"),
@@ -75,7 +78,7 @@ public class PartResource extends BaseResource {
 	@GET
 	@Path("/search/{max}/{page}/{textToFind}")
 	@Produces("application/xml")
-
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public PartResult search(@PathParam("textToFind") String textToFind, @PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return partService.find(textToFind, page, maxItems);
 	}
@@ -83,7 +86,7 @@ public class PartResource extends BaseResource {
 	@GET
 	@Path("/search/{max}/{page}")
 	@Produces("application/xml")
-	@Secured({"ROLE_MECANICO", "ROLE_SECRETARIO", "ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"})
 	public PartResult search(@PathParam("page") Integer page, @PathParam("max") Integer maxItems) throws Exception {
 		return partService.find(null, page, maxItems);
 	}

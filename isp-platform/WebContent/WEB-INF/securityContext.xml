@@ -7,7 +7,10 @@
     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http pattern="/rest/support" security="none"/>
-    <http pattern="/**" use-expressions="true">
+    <http auto-config="true" pattern="/**" use-expressions="true">
+      <intercept-url pattern="/rest/user/username/**" access="permitAll()"/>
+      <intercept-url pattern="/rest/role/**" access="permitAll()"/>
+      <intercept-url pattern="/rest/user/**" access="permitAll()"/>
       <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_SECRETARIO') or hasRole('ROLE_MECANICO')" />
       <http-basic/>
     </http>
