@@ -1,19 +1,11 @@
 package com.sd.isp.client
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
-
 import com.sd.isp.beans.client.ClientB
 import com.sd.isp.service.client.IClientService;
-
-import grails.transaction.Transactional
-
 import org.springframework.dao.DataIntegrityViolationException
-
-
 class ClientController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     IClientService clientService
 
@@ -61,19 +53,18 @@ class ClientController {
              page: page,
              siguiente: siguiente?.size(),
              cclientInstanceList: clientService.getAll(),
-             text: text/*,
-										  user:authService.getName()*/]
+             text: text/*,user:authService.getName()*/]
         }
 
         //respond clients, [model: [clientInstanceList: clients, clientInstanceTotal: clients?.size()]]
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         respond new ClientB(params)
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save(){
         def clientInstance = new ClientB(params)
         def newClient = clientService.save(clientInstance)

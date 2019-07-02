@@ -22,7 +22,9 @@
     </div>
     <h1>
         Automóviles
+    <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_SECRETARIO">
         <g:link class="btn btn-primary" action="create">Nuevo</g:link>
+    </sec:ifAnyGranted>
     </h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -54,7 +56,7 @@
                         <a class="btn btn-sm btn-danger"
                            data-confirm="Estas Seguro?"
                            data-method="delete"
-                           href="/cars/delete/${carInstance.id}">Eliminar</a>
+                           href="/car/delete/${carInstance.id}">Eliminar</a>
                         </sec:ifAnyGranted>
                     </td>
                 </tr>

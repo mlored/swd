@@ -1,16 +1,9 @@
 package com.sd.isp.stock
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
-
-import com.sd.isp.beans.part.PartB
 import com.sd.isp.service.part.IPartService;
-
-import grails.transaction.Transactional
-
 class StockController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IPartService partService
 
@@ -57,13 +50,8 @@ class StockController {
 											  page: page,
 											  siguiente: siguiente?.size(),
 											  ppartInstanceList: partService.getAll(),
-											  text: text/*,
-											  user:authService.getName()*/]
+											  text: text/*,user:authService.getName()*/]
 		}
-
-	/*def show(PartB partInstance) {
-		respond partInstance
-	}*/
 
     protected void notFound() {
         request.withFormat {

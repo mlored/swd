@@ -2,16 +2,10 @@ package com.sd.isp.service
 
 import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
-
 import com.sd.isp.beans.service.ServiceB
 import com.sd.isp.service.service.IServiceService;
-
-import grails.transaction.Transactional
-
 import org.springframework.dao.DataIntegrityViolationException
-
 class ServiceController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     IServiceService serviceService
 
@@ -57,23 +51,8 @@ class ServiceController {
          page: page,
          siguiente: siguiente?.size(),
          sserviceInstanceList: serviceService.getAll(),
-         text: text/*,
-										  user:authService.getName()*/]
+         text: text/*,user:authService.getName()*/]
     }
-
-    /*def show(Long id) {
-         def serviceInstance = serviceService.getById(id.intValue())
-         if (!serviceInstance) {
-             flash.message = message(code: 'default.not.found.message', args: [
-                     message(code: 'service.label', default: 'Service'),
-                     id
-             ])
-             redirect(action: "list")
-             return
-         }
-
-         [serviceInstance: serviceInstance]
-    }*/
     @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         [serviceInstance: new ServiceB(params)]

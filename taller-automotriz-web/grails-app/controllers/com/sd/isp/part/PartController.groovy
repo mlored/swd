@@ -3,14 +3,9 @@ package com.sd.isp.part
 import com.sd.isp.beans.part.PartB
 import com.sd.isp.service.part.IPartService
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
-
 import org.springframework.dao.DataIntegrityViolationException
-
 class PartController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     IPartService partService
@@ -64,24 +59,9 @@ class PartController {
              page: page,
              siguiente: siguiente?.size(),
              ppartInstanceList: partService.getAll(),
-             text: text/*,
-										  user:authService.getName()*/]
+             text: text/*,user:authService.getName()*/]
         }
     }
-
-    /*def show(Long id) {
-        def partInstance = partService.getById(id.intValue())
-        if (!partInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'part.label', default: 'Part'),
-                    id
-            ])
-            redirect(action: "list")
-            return
-        }
-
-        [partInstance: partInstance]
-    }*/
     @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save(){
         def partInstance = new PartB(params)
@@ -124,11 +104,6 @@ class PartController {
             redirect(action: "list")
             return
         }
-
-        /*if (!partInstance.save(flush: true)) {
-            render(view: "edit", model: [partInstance: partInstance])
-            return
-        }*/
 
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'part.label', default: 'Part'),

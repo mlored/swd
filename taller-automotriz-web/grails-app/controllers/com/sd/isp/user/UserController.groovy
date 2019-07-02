@@ -6,16 +6,14 @@ import com.sd.isp.service.role.IRoleService
 import com.sd.isp.service.user.IUserService
 import com.sd.isp.service.auth.IAuthService
 import grails.plugin.springsecurity.annotation.Secured
-
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.beans.factory.annotation.Autowired
 
 @Secured(['ROLE_ADMIN'])
 class UserController{
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def IUserService userService
-    def IRoleService roleService
+    IUserService userService
+    IRoleService roleService
 
     //@Autowired def IAuthService authService
 

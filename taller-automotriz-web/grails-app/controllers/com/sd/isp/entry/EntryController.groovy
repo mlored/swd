@@ -1,8 +1,6 @@
 package com.sd.isp.entry
 
-import com.sd.isp.service.car.ICarService
 import com.sd.isp.service.part.IPartService
-import com.sd.isp.service.service.IServiceService
 import com.sd.isp.beans.entry.EntryB
 import com.sd.isp.service.client.IClientService
 import com.sd.isp.service.entry.IEntryService
@@ -11,14 +9,13 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
 class EntryController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     IEntryService 	     entryService
     IEntryDetailsService entryDetailsService
     IPartService 	     partService
     IClientService       clientService
-@Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def index(Integer max){
         params.max = Math.min(max ?: 10, 100)
         redirect(action: "list", params: params)
@@ -30,7 +27,7 @@ class EntryController {
         [entryInstanceList: entries, serviceInstanceTotal: entries?.size()]
     }*/
 
-@Secured(["ROLE_SECRETARIO","ROLE_MECANICO", "ROLE_ADMIN"])
+    @Secured(["ROLE_SECRETARIO","ROLE_MECANICO", "ROLE_ADMIN"])
     def list(Integer max) {
         def page = 0
         def siguiente
@@ -71,11 +68,11 @@ class EntryController {
         }
     }
 
-@Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def create() {
         [entryInstance: new EntryB(params)]
     }
-@Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def save() {
         def newEntry = new EntryB(params)
         //SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -98,7 +95,7 @@ class EntryController {
         ])
         redirect(action: "index")
     }
-@Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def show(Long id) {
         def entryInstance = entryService.getById(id.intValue())
         if (!entryInstance) {
@@ -112,7 +109,7 @@ class EntryController {
 
         [entryInstance: entryInstance, cars: entryService.getAll()]
     }
-@Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def edit(Long id) {
         def entryInstance = entryService.getById(id.intValue())
 
@@ -128,7 +125,7 @@ class EntryController {
 
         [entryInstance: entryInstance]
     }
-@Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
     def update(Long id) {
         def entryB = new EntryB(params)
         def entryInstance = entryService.update(id.intValue(), entryB)

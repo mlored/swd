@@ -1,19 +1,12 @@
 package com.sd.isp.role
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
-
 import com.sd.isp.beans.role.RoleB
 import com.sd.isp.service.role.IRoleService
-import com.sd.isp.service.role.RoleServiceImpl
-
-import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
-
 @Secured(["ROLE_ADMIN"])
 class RoleController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     IRoleService roleService
@@ -46,11 +39,6 @@ class RoleController {
         def roles = roleService.getAll()
         [roleInstanceList: roles, roleInstanceTotal: roles?.size()]
     }
-
-/*    def show(Role roleInstance) {
-        respond roleInstance
-    }
-*/
 
     def edit(Long id) {
         def roleInstance = roleService.getById(id.intValue())

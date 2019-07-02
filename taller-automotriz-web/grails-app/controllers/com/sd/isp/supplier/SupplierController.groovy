@@ -1,17 +1,11 @@
 package com.sd.isp.supplier
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
-
 import com.sd.isp.beans.supplier.SupplierB
 import com.sd.isp.service.supplier.ISupplierService
-
-import grails.transaction.Transactional
 import org.springframework.dao.DataIntegrityViolationException
-
 class SupplierController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     ISupplierService supplierService
 
@@ -51,22 +45,14 @@ class SupplierController {
             suppliers = supplierService.find(null,10,page)
             siguiente = supplierService.find(null,10,page+1)
         }
-
-
         [supplierInstanceList: suppliers, supplierInstanceTotal: suppliers?.size(),
          page: page,
          siguiente: siguiente?.size(),
          ssupplierInstanceList: supplierService.getAll(),
-         text: text/*,
-										  user:authService.getName()*/]
+         text: text/*,user:authService.getName()*/]
 
         //[supplierInstanceList: suppliers, supplierInstanceTotal: suppliers?.size()]
     }
-
-    /* def show(Supplier supplierInstance) {
-         respond supplierInstance
-     }*/
-
     @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         [supplierInstance: new SupplierB(params)]
@@ -115,11 +101,6 @@ class SupplierController {
             return
         }
 
-        /*if (!supplierInstance.save(flush: true)) {
-            render(view: "edit", model: [supplierInstance: supplierInstance])
-            return
-        }*/
-
         flash.message = message(code: 'default.updated.message', args: [
                 message(code: 'supplier.label', default: 'Supplier'),
                 supplierInstance.id
@@ -146,7 +127,6 @@ class SupplierController {
         }
 
     }
-
     protected void notFound() {
         request.withFormat {
             form multipartForm {

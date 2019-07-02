@@ -1,19 +1,12 @@
 package com.sd.isp.employee
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
-
 import com.sd.isp.beans.employee.EmployeeB
-import com.sd.isp.service.employee.IEmployeeService;
-
-import grails.transaction.Transactional
-
+import com.sd.isp.service.employee.IEmployeeService
 import org.springframework.dao.DataIntegrityViolationException
-
 @Secured(["ROLE_ADMIN"])
 class EmployeeController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	IEmployeeService employeeService
 	

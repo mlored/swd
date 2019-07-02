@@ -20,18 +20,18 @@ beans = {
     myAuthenticationProvider(MyAuthenticationProvider) {
     }
 
-    myBean(MyBean) {}
+    /*myBean(MyBean) {}
 
     localeResolver(SessionLocaleResolver) {
         defaultLocale= new java.util.Locale('es');
-    }
+    }*/
 
     //resources
     //userResource(UserResourceImpl)
     //roleResource(RoleResourceImpl)
 
     //services
-    authService(AuthServiceImpl)
+    //authService(AuthServiceImpl)
     //userService(UserServiceImpl)
     //roleService(RoleServiceImpl)
 

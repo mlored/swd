@@ -2,25 +2,19 @@ package com.sd.isp.car
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
-
 import com.sd.isp.beans.car.CarB
 import com.sd.isp.service.car.ICarService
-
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
-
 class CarController {
-
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
     ICarService carService
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def create() {
         [carInstance: new CarB(params)]
     }
 
-    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO","ROLE_MECANICO"])
+    @Secured(["ROLE_ADMIN","ROLE_SECRETARIO"])
     def save() {
         def carInstance = new CarB(params)
         def newCar = carService.save(carInstance)
@@ -79,8 +73,7 @@ class CarController {
              page: page,
              siguiente: siguiente?.size(),
              ccarInstanceList: carService.getAll(),
-             text: text/*,
-             user:authService.getName()*/]
+             text: text/*,user:authService.getName()*/]
         }
     }
 
