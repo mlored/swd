@@ -25,9 +25,8 @@ public class Scheduler {
 	@Value("${cron.enabled}")
     private boolean enabled;
 	
-	/* Este metodo se ejecuta automaticamente cada 1 minuto, renombrando todos los cliente a nombre Adrian */
+	/* Este metodo se ejecuta automaticamente cada 59 segundos, cambiando de estado al usuario que se encuentra bloqueado */
 	@Scheduled(cron = "${cron.expression}")
-    //@Scheduled(fixedRate = 5000)
 	@Transactional
 	@Async
     public void execute()
